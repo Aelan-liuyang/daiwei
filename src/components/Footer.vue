@@ -45,9 +45,11 @@
 
 <style scoped>
 .footer {
-  background: #1f1f1f;
-  color: #aaa;
-  padding: 40px;
   text-align: center;
+  color: #888;
+  background: #fff;
+  padding: 16px 0;
+  font-size: 14px;
+  margin-top: 56px;
 }
 </style>

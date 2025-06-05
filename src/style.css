@@ -78,3 +78,25 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* 补充全局基础样式 */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+/* 自定义品牌色变量 */
+:root {
+  --primary-color: #003366;
+  --secondary-color: #f8f9fa;
+}
+
+/* 优化Ant Design组件样式 */
+.ant-btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.ant-btn-primary:hover {
+  background-color: #002952;
+  border-color: #002952;
+}

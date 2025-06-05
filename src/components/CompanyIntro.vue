@@ -1,37 +1,48 @@
 <template>
-  <div class="section">
-    <h2>公司介绍</h2>
+  <!-- <div class="section max-w-screen-xl mx-auto px-4 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-[#003366] mb-8">关于我们</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <img :src="factoryImg" alt="工厂" class="rounded-lg shadow-lg" />
+      </div>
+      <div class="space-y-6">
+        <p class="text-gray-600 text-lg leading-relaxed">
+          山东岱威创新管业有限公司位于济南南园经济开发区，集研发、生产、销售于一体，专注为各行业提供高性能耐磨防腐管道解决方案。公司拥有15年行业经验，200+专业技术团队，服务超1000家企业客户。
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="p-6 bg-white rounded-lg shadow-sm text-center">
+            <span class="text-3xl font-bold text-[#003366]">15+</span>
+            <p class="text-gray-500">年行业经验</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-sm text-center">
+            <span class="text-3xl font-bold text-[#003366]">200+</span>
+            <p class="text-gray-500">专业团队</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-sm text-center">
+            <span class="text-3xl font-bold text-[#003366]">1000+</span>
+            <p class="text-gray-500">合作客户</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <section class="section about">
+    <h2>公司简介</h2>
     <p>
-      岱威金属智能装备致力于提供高效智能的金属加工解决方案，服务各行业客户。
+      管道科技专注于工业管道系统的研发、设计、安装与维护，致力于为各行业客户提供高品质、个性化的管道解决方案。
     </p>
-    <a-row gutter="16">
-      <a-col :span="8"><img :src="imgUrl" width="100%" /></a-col>
-      <a-col :span="16">
-        <a-row>
-          <a-col :span="8"><div>15+ 项目经验</div></a-col>
-          <a-col :span="8"><div>200+ 专业团队</div></a-col>
-          <a-col :span="8"><div>1000+ 合作客户</div></a-col>
-        </a-row>
-      </a-col>
-    </a-row>
-  </div>
+  </section>
 </template>
 
 <script>
-import imgUrl from "@/assets/images/factory.jpg";
+import factoryImg from '@/assets/images/factory.jpg'
 
 export default {
   data() {
     return {
-      imgUrl,
-    };
-  },
-};
-</script>
-
-<style scoped>
-.section {
-  padding: 50px;
-  text-align: center;
+      factoryImg
+    }
+  }
 }
-</style>
+</script>
+<style></style>

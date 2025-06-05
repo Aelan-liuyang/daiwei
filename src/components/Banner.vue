@@ -1,34 +1,57 @@
 <template>
   <div class="banner">
-    <div class="content">
-      <h1>创新科技 引领未来</h1>
-      <p>专注金属加工、焊接、打标设备，以智能技术提升生产效率和品质</p>
-      <div class="buttons">
-        <a-button type="primary">了解更多</a-button>
-        <a-button>联系我们</a-button>
-      </div>
+    <div class="banner-text">
+      <h1>智慧管道设计与解决方案</h1>
+      <p>
+        提供先进的工业管道设计、施工与运维一站式服务，助力企业高效安全生产。
+      </p>
+      <a-button type="primary" size="large">了解更多</a-button>
     </div>
   </div>
 </template>
 
+<script>
+import bgImage from '@/assets/images/banner.jpg'
+
+export default {
+  data() {
+    return {
+      bgImage
+    }
+  }
+}
+</script>
 <style scoped>
 .banner {
   background: url('@/assets/images/banner.jpg') no-repeat center/cover;
-  height: 500px;
+  height: 340px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
+  justify-content: flex-start;
+  color: #fff;
+  position: relative;
 }
-.content h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
+.banner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.35);
 }
-.content p {
-  font-size: 16px;
+.banner-text {
+  position: relative;
+  z-index: 1;
+  margin-left: 80px;
+  max-width: 500px;
 }
-.buttons {
-  margin-top: 20px;
+.banner-text h1 {
+  font-size: 38px;
+  margin-bottom: 16px;
+}
+.banner-text p {
+  font-size: 18px;
+  margin-bottom: 28px;
 }
 </style>
