@@ -80,7 +80,7 @@
 
       <!-- 产品轮播 居中大图 -->
       <section class="carousel-row">
-        <h2 class="section-title">产品展示</h2>
+        <h2 class="section-title">产品聚焦</h2>
         <div class="carousel-center">
           <a-carousel autoplay class="carousel-center-inner animated fadeInUp"
             dots>
