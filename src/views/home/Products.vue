@@ -39,7 +39,8 @@
                 <ul class="product-features">
                   <li v-for="f in item.features" :key="f">• {{ f }}</li>
                 </ul>
-                <div class="card-more">查看详情 &gt;</div>
+                <div class="card-more">查看详情 &gt;
+                </div>
               </div>
             </div>
           </div>
@@ -51,7 +52,7 @@
             :total="filteredProducts.length"
             :page-size="pageSize"
             show-size-changer
-            :page-size-options="['6', '9', '12']"
+            :page-size-options="['4', '8', '12', '16']"
             @change="onPageChange"
             @showSizeChange="onSizeChange"
             :show-total="showTotal" />
@@ -67,6 +68,7 @@ import { ref, computed } from "vue"
 import { useRouter } from "vue-router"
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+
 const router = useRouter()
 
 const products = [
@@ -148,7 +150,7 @@ const products = [
 const categories = Array.from(new Set(products.map(p => p.category)))
 
 const selectedCategory = ref("all")
-const pageSize = ref(6)
+const pageSize = ref(8) // 默认8，适配4列
 const currentPage = ref(1)
 
 const showTotal = total => `共 ${total} 条`
@@ -216,7 +218,7 @@ function goDetail(id) {
 }
 
 .products-banner {
-  background: url('https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&w=1200&q=80')no-repeat center/cover;
+  background: url('@/assets/images/productBg.jpg') no-repeat center/cover;
   color: #fff;
   height: 240px;
   display: flex;
@@ -229,7 +231,6 @@ function goDetail(id) {
 }
 
 .products-banner-text {
-  background: rgba(0, 0, 0, 0.22);
   padding: 36px 48px 18px 0;
   border-radius: 0 0 18px 0;
 }
@@ -256,31 +257,35 @@ function goDetail(id) {
 }
 
 .products-section {
-  max-width: 1320px;
+  max-width: 1720px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 12px;
 }
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-  gap: 36px 32px;
+  grid-template-columns: repeat(4, minmax(320px, 1fr));
+  gap: 36px 36px;
+  /* 优化4列时卡片更宽 */
 }
 
 .product-card-outer {
   cursor: pointer;
   transition: transform 0.18s, box-shadow 0.18s;
-  border-radius: 20px;
+  border-radius: 22px;
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.05);
   background: #fff;
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  max-width: 440px;
+  margin: 0 auto;
 }
 
 .product-card-outer:hover {
   transform: translateY(-6px) scale(1.022);
-  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.16);
   border-color: #1677ff;
 }
 
@@ -293,9 +298,9 @@ function goDetail(id) {
 .product-image-wrap {
   position: relative;
   width: 100%;
-  height: 180px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  height: 200px;
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
   overflow: hidden;
   background: #f3f7fa;
   display: flex;
@@ -329,31 +334,39 @@ function goDetail(id) {
 
 .product-card-content {
   flex: 1;
-  padding: 22px 20px 18px 20px;
+  padding: 22px 22px 18px 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .product-title {
-  font-size: 19px;
+  font-size: 20px;
   color: #222;
   font-weight: bold;
   margin-bottom: 8px;
   letter-spacing: 1px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product-desc {
   font-size: 15px;
   color: #444;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   min-height: 44px;
   line-height: 1.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product-features {
   padding-left: 18px;
-  color: #1677ff;
+  color: #f58200;
   font-size: 14px;
   margin-top: 0;
   margin-bottom: 0;
@@ -389,56 +402,51 @@ function goDetail(id) {
 }
 
 /* 响应式优化 */
-@media (max-width: 1200px) {
+@media (max-width: 1720px) {
   .products-section {
-    padding: 0 6px;
-  }
-
-  .products-banner {
-    padding-left: 24px;
-    height: 170px;
-  }
-}
-
-@media (max-width: 900px) {
-  .products-banner {
-    height: 140px;
-    padding-left: 10px;
-  }
-
-  .products-banner-text {
-    padding: 20px 10px 10px 0;
-  }
-
-  .products-banner h1 {
-    font-size: 26px;
-  }
-
-  .products-banner p {
-    font-size: 12px;
+    max-width: 1540px;
   }
 
   .products-grid {
-    gap: 22px 12px;
+    grid-template-columns: repeat(4, minmax(300px, 1fr));
+    gap: 28px 22px;
   }
 }
 
-@media (max-width: 600px) {
-  .products-banner {
-    height: 90px;
-    padding-left: 0;
-  }
-
-  .products-banner-text {
-    padding: 10px 0 8px 0;
-  }
-
+@media (max-width: 1400px) {
   .products-section {
+    max-width: 1240px;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
+  }
+}
+
+@media (max-width: 1050px) {
+  .products-section {
+    max-width: 900px;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    gap: 22px 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .products-section {
+    max-width: 100vw;
     padding: 0 2px;
   }
 
-  .products-pagination {
-    margin-top: 28px;
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 12px 0;
+  }
+
+  .product-card-outer {
+    max-width: 95vw;
   }
 }
 </style>

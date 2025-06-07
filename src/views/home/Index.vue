@@ -78,22 +78,9 @@
         </div>
       </section>
 
-      <!-- 产品轮播 居中大图 -->
-      <section class="carousel-row">
-        <h2 class="section-title">产品聚焦</h2>
-        <div class="carousel-center">
-          <a-carousel autoplay class="carousel-center-inner animated fadeInUp"
-            dots>
-            <div v-for="item in productCarousel" :key="item.title"
-              class="carousel-slide-center">
-              <img :src="item.src" class="carousel-img-center" />
-              <div class="carousel-caption-center">
-                <h3>{{ item.title }}</h3>
-                <p>{{ item.desc }}</p>
-              </div>
-            </div>
-          </a-carousel>
-        </div>
+      <!-- 产品轮播 居中大图（swiper实现） -->
+      <section>
+        <ProductFocusCarousel />
       </section>
 
       <!-- 工程案例 横向分栏 -->
@@ -125,12 +112,19 @@
 
 <script setup>
 import Header from '@/components/Header.vue'
+
 import Footer from '@/components/Footer.vue'
 import factoryImg from '@/assets/images/factory.jpg'
+import productBg from '@/assets/images/productBg.jpg'
 import adv1 from '@/assets/images/factory1.jpg'
 import adv2 from '@/assets/images/factory2.jpg'
 import adv3 from '@/assets/images/factory3.jpg'
 import adv4 from '@/assets/images/factory4.jpg'
+import ProductFocusCarousel from '@/components/ProductFocusCarousel.vue'
+// Swiper
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+
 
 const products = [
   {
@@ -196,15 +190,15 @@ const cases = [
 const partners = [
   "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/320px-Microsoft_logo.svg.png",
   "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/320px-IBM_logo.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Volkswagen_logo_2019.svg/320px-Volkswagen_logo_2019.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Siemens-logo.svg/320px-Siemens-logo.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Sinopec_logo.svg/320px-Sinopec_logo.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/BASF-Logo_bw.svg/320px-BASF-Logo_bw.svg.png"
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/320px-Microsoft_logo.svg.png",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/320px-IBM_logo.svg.png",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/320px-Microsoft_logo.svg.png",
 ]
 </script>
 
 <style scoped>
 @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css";
+@import "swiper/swiper-bundle.css";
 
 .home-layout {
   min-height: 100vh;
@@ -218,7 +212,7 @@ const partners = [
 
 .banner {
   position: relative;
-  height: 310px;
+  height: 620px;
   background: #131a22;
   overflow: hidden;
   display: flex;
@@ -232,10 +226,20 @@ const partners = [
   top: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(120deg, #1677ff 0%, #43c6ac 100%);
+  /* background: linear-gradient(120deg, #1677ff 0%, #43c6ac 100%);
   opacity: 0.18;
   z-index: 0;
-  animation: bannerBgMove 8s linear infinite alternate;
+  animation: bannerBgMove 8s linear infinite alternate; */
+  /* background-image: url('@/assets/images/productBg.jpg'); */
+  background-image: url(https://www.victaulic.com/wp-content/uploads/2024/09/009V-Homepage.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  background-size: cover;
+  border-top-width: 1px;
+  border-right-width: 0px;
+  border-bottom-width: 1px;
+  border-left-width: 0px;
 }
 
 @keyframes bannerBgMove {
@@ -364,7 +368,7 @@ const partners = [
 }
 
 .about-img.big {
-  width: 510px;
+  width: 550px;
   max-width: 99vw;
 }
 
@@ -424,13 +428,12 @@ const partners = [
 }
 
 .section-title {
-  font-size: 1.28rem;
-  color: #1f2937;
-  font-weight: 700;
-  margin-bottom: 32px;
-  margin-top: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-align: left;
+  margin-left: 6vw;
   letter-spacing: 2px;
-  margin-left: 72px;
 }
 
 .products-features-row {
@@ -492,71 +495,12 @@ const partners = [
   line-height: 1.6;
 }
 
-/* 产品展示轮播 居中 */
-.carousel-row {
-  width: 100vw;
-  margin: 0 auto 32px auto;
-  padding: 0;
-  background: #fff;
-}
-
-.carousel-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 320px;
-}
-
-.carousel-center-inner {
-  width: 660px;
-  max-width: 98vw;
-  margin: 0 auto;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(22, 119, 255, 0.09);
-  background: #fff;
-}
-
-.carousel-slide-center {
-  position: relative;
-  text-align: center;
-  min-height: 320px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-img-center {
-  width: 100%;
-  max-width: 630px;
-  max-height: 280px;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
-  margin-bottom: 16px;
-}
-
-.carousel-caption-center {
-  padding: 12px 0 6px 0;
-}
-
-.carousel-caption-center h3 {
-  margin: 0 0 8px 0;
-  font-size: 20px;
-  font-weight: 700;
-  color: #1677ff;
-}
-
-.carousel-caption-center p {
-  margin: 0;
-  font-size: 15px;
-  color: #444;
-}
 
 /* 案例横向 */
 .cases-row {
   width: 100vw;
   margin: 0 auto 32px auto;
+  padding-top: 10px;
   background: #fafdff;
 }
 
@@ -623,7 +567,7 @@ const partners = [
 .partners-row {
   width: 100vw;
   margin: 0 auto 32px auto;
-  padding: 0;
+  padding-top: 10px;
   background: #fff;
 }
 
@@ -655,26 +599,6 @@ const partners = [
   filter: grayscale(0);
 }
 
-/* 联系我们 */
-.contact-row {
-  background: #fff;
-  border-radius: 0;
-  box-shadow: none;
-  width: 100vw;
-  padding: 30px 0 10px 0;
-  text-align: center;
-  margin: 0 auto 0 auto;
-}
-
-.contact-bar-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  font-size: 18px;
-  margin-top: 18px;
-}
 
 /* 响应式优化 */
 @media (max-width: 1200px) {

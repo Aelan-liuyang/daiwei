@@ -4,7 +4,7 @@ import '@/assets/css/reset.css'
 import App from './App.vue'
 import router from './router'
 import { createPinia } from 'pinia'
-
+import 'swiper/swiper-bundle.css'
 
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/lib/button/style'

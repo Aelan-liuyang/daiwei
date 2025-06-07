@@ -4,13 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "dev": "vite --mode development",
+    "serve": "vite --mode production",
+    "build": "vite build",
+    "build:staging": "vite build --mode staging",
     "preview": "vite preview"
   },
   "dependencies": {
     "ant-design-vue": "^4.2.6",
     "pinia": "^3.0.2",
+    "swiper": "^11.2.8",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
   },

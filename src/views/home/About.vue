@@ -20,8 +20,10 @@
         </div>
         <div class="intro-main">
           <div class="intro-title">
-            <div class="intro-title-name">山东岱威创新管业有限公司<br /><span
-                class="en-sub">SHANDONG DAIWEI INNOVATION PIPE CO., LTD</span>
+            <div class="intro-title-name">
+              山东岱威创新管业有限公司<br />
+              <span class="en-sub">SHANDONG DAIWEI INNOVATION PIPE CO.,
+                LTD</span>
             </div>
           </div>
           <div class="intro-content">
@@ -80,14 +82,30 @@
       <!-- 荣誉资质轮播 -->
       <section class="about-section honors">
         <div class="section-title">荣誉资质</div>
-        <a-carousel arrows dots-class="slick-dots slick-thumb" :autoplay="true"
-          class="honor-carousel">
-          <div v-for="(honor, idx) in honors" :key="idx" class="honor-slide">
-            <img :src="honor.img" alt="荣誉证书" class="honor-img" />
-            <div class="honor-title">{{ honor.title }}</div>
-            <div class="honor-desc">{{ honor.desc }}</div>
-          </div>
-        </a-carousel>
+        <div class="honor-swiper-wrap">
+          <swiper
+            :modules="[Navigation, Pagination]"
+            :loop="true"
+            :slides-per-view="3"
+            :centeredSlides="true"
+            :spaceBetween="0"
+            navigation
+            :pagination="{ clickable: true }"
+            class="honor-swiper honor-swiper-coverflow"
+            effect="coverflow">
+            <swiper-slide v-for="(honor, idx) in honors" :key="idx">
+              <div class="honor-swiper-item">
+                <div class="honor-image-wrapper">
+                  <img :src="honor.img" alt="荣誉证书" class="honor-swiper-img" />
+                </div>
+                <div class="honor-swiper-caption">
+                  <div class="honor-swiper-title">{{ honor.title }}</div>
+                  <div class="honor-swiper-desc">{{ honor.desc }}</div>
+                </div>
+              </div>
+            </swiper-slide>
+          </swiper>
+        </div>
       </section>
 
       <!-- 团队 极简版 -->
@@ -110,8 +128,11 @@
 <script setup>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
-import factory from '@/assets/images/factory.jpg'
-
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Navigation, Pagination } from 'swiper/modules'
+import 'swiper/swiper-bundle.css'
+import rongyu from '@/assets/images/rongyu.jpeg'
+import zhuanli from '@/assets/images/zhunli.jpeg'
 const team = [
   {
     name: "李明",
@@ -136,33 +157,185 @@ const honors = [
   {
     title: "高新技术企业证书",
     desc: "荣获国家高新技术企业认证，彰显技术实力与创新能力。",
-    img: factory
+    img: rongyu
   },
   {
     title: "ISO9001质量体系认证",
     desc: "通过ISO9001国际质量管理体系认证，规范生产流程，保障产品质量。",
-    img: "https://img2.baidu.com/it/u=2206753297,1985836885&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=600"
+    img: rongyu
   },
   {
     title: "行业创新奖",
     desc: "连续三年荣获中国工业管道行业创新成果奖。",
-    img: "https://img2.baidu.com/it/u=4196188451,1466655632&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=600"
+    img: zhuanli
   },
-  // 可继续补充更多荣誉图片
   {
     title: "质量示范单位",
     desc: "被授予省级质量示范单位称号。",
-    img: "https://img2.baidu.com/it/u=1558262690,3371167615&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=480"
+    img: zhuanli
   },
   {
     title: "诚信经营示范企业",
     desc: "坚持诚信为本，荣获工商部门诚信经营示范企业。",
-    img: "https://img2.baidu.com/it/u=1181036776,3831679083&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=600"
+    img: zhuanli
   }
 ]
 </script>
 
 <style scoped>
+.honor-swiper-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  background: transparent;
+}
+
+.honor-swiper {
+  width: 100%;
+  padding-bottom: 38px;
+  overflow: visible !important;
+}
+
+.honor-swiper-coverflow {
+  /* 让coverflow效果更居中更显著 */
+  overflow: visible !important;
+}
+
+.honor-swiper-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(120deg, #fafdff 60%, #eaf5ff 100%);
+  border-radius: 22px;
+  box-shadow: 0 3px 18px rgba(22, 119, 255, 0.09), 0 1.5px 6px rgba(0, 0, 0, 0.09);
+  padding: 20px 10px 18px 10px;
+  margin: 12px 4px;
+  min-height: 420px;
+  border: 1.5px solid #e0e8f8;
+  position: relative;
+  width: 370px;
+  max-width: 100vw;
+  justify-content: flex-start;
+}
+
+.honor-image-wrapper {
+  width: 330px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: #fff; */
+  border-radius: 14px;
+  overflow: hidden;
+  /* box-shadow: 0 4px 24px rgba(22, 119, 255, 0.06); */
+  margin-bottom: 18px;
+}
+
+.honor-swiper-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+  display: block;
+  background: #fafcff;
+  border: none;
+  transition: transform .3s cubic-bezier(.4, 1.5, .45, 1.4);
+  box-shadow: none;
+}
+
+
+.honor-swiper-caption {
+  text-align: center;
+  padding: 0 5px;
+}
+
+.honor-swiper-title {
+  font-size: 19px;
+  color: #1677ff;
+  font-weight: 700;
+  margin-bottom: 7px;
+  letter-spacing: 2px;
+}
+
+.honor-swiper-desc {
+  font-size: 15px;
+  color: #444;
+  min-height: 38px;
+  font-weight: 400;
+}
+
+.honor-swiper :deep(.swiper-button-prev),
+.honor-swiper :deep(.swiper-button-next) {
+  color: #8ab0cb;
+  width: 52px;
+  height: 52px;
+  top: 48%;
+  background: transparent;
+  transition: color .2s;
+  z-index: 10;
+}
+
+.honor-swiper :deep(.swiper-button-prev) {
+  left: 0;
+}
+
+.honor-swiper :deep(.swiper-button-next) {
+  right: 0;
+}
+
+.honor-swiper :deep(.swiper-button-prev:after),
+.honor-swiper :deep(.swiper-button-next:after) {
+  font-size: 52px;
+}
+
+.honor-swiper :deep(.swiper-pagination-bullet) {
+  background: #d8d8d8;
+  opacity: 1;
+}
+
+.honor-swiper :deep(.swiper-pagination-bullet-active) {
+  background: #1677ff;
+}
+
+.honor-swiper :deep(.swiper-slide.swiper-slide-next),
+.honor-swiper :deep(.swiper-slide.swiper-slide-prev) {
+  opacity: 0.85;
+  filter: blur(1px) grayscale(.12);
+  z-index: 10;
+  transform: scale(.93) !important;
+}
+
+/* Swiper coverflow 层叠效果美化 */
+.honor-swiper :deep(.swiper-slide) {
+  pointer-events: auto;
+  opacity: 0.25;
+  transition: all .48s cubic-bezier(.4, 1.5, .45, 1.4);
+  z-index: 1;
+}
+
+.honor-swiper :deep(.swiper-slide.swiper-slide-active) {
+  opacity: 1;
+  filter: none;
+  z-index: 9;
+  transform: scale(1.08) !important;
+}
+
+.honor-swiper :deep(.swiper-slide.swiper-slide-next),
+.honor-swiper :deep(.swiper-slide.swiper-slide-prev) {
+  opacity: 0.8;
+  filter: grayscale(.08);
+  z-index: 5;
+  transform: scale(.98) !important;
+}
+
+.honor-swiper :deep(.swiper-slide) {
+  /* 保证卡片可以压叠出效果 */
+  transition: opacity .4s, filter .4s, z-index .4s, transform .4s;
+  pointer-events: auto;
+}
+
+
 .about-layout {
   min-height: 100vh;
   background: #f7f9fb;
@@ -376,51 +549,6 @@ const honors = [
   padding: 0 44px 32px 44px;
 }
 
-.honors {
-  padding: 0 0 48px 0;
-  background: #fafdff;
-  box-shadow: none;
-}
-
-.honor-carousel {
-  width: 88%;
-  max-width: 780px;
-  margin: 0 auto;
-}
-
-.honor-slide {
-  text-align: center;
-  padding: 20px 12px 34px 12px;
-  min-height: 340px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.honor-img {
-  width: 90%;
-  max-width: 320px;
-  border-radius: 10px;
-  margin: 0 auto 16px auto;
-  display: block;
-  border: 1px solid #e6e6e6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.honor-title {
-  font-size: 16px;
-  color: #1677ff;
-  font-weight: 500;
-  margin-bottom: 6px;
-}
-
-.honor-desc {
-  font-size: 14px;
-  color: #444;
-  min-height: 36px;
-}
-
 .team {
   padding: 0 0 48px 0;
   background: #fff;
@@ -430,7 +558,7 @@ const honors = [
 .team-row {
   display: flex;
   gap: 32px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   margin: 0 44px;
   flex-wrap: wrap;
@@ -444,6 +572,8 @@ const honors = [
   text-align: center;
   min-width: 170px;
   max-width: 210px;
+  min-height: 200px;
+  height: 200px;
   flex: 1 1 180px;
   margin-bottom: 14px;
   display: flex;
@@ -463,7 +593,7 @@ const honors = [
 .team-name {
   color: #1677ff;
   font-weight: 600;
-  margin-bottom: 2px;
+  margin-bottom: 6px;
 }
 
 .team-role {
@@ -476,6 +606,7 @@ const honors = [
   color: #444;
   font-size: 13px;
   margin-top: 2px;
+  line-height: 1.2rem;
 }
 
 /* 响应式优化 */
@@ -499,6 +630,15 @@ const honors = [
 
   .history {
     padding: 0 10px 24px 10px;
+  }
+
+  .honor-swiper-img {
+    width: 140px;
+    height: 100px;
+  }
+
+  .honor-swiper-item {
+    min-height: 210px;
   }
 }
 
@@ -528,6 +668,16 @@ const honors = [
 
   .honor-carousel {
     width: 99%;
+  }
+
+  .honor-swiper-img {
+    width: 90px;
+    height: 68px;
+  }
+
+  .honor-swiper-item {
+    min-height: 120px;
+    padding: 12px 2px 8px 2px;
   }
 }
 </style>
