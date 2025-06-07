@@ -33,43 +33,43 @@
 <script setup>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import anli1 from '@/assets/images/anli1.jpg'
+import anli2 from '@/assets/images/anli2.jpg'
+import anli3 from '@/assets/images/anli3.jpg'
+import anli4 from '@/assets/images/anli4.jpg'
+import anli5 from '@/assets/images/anli5.jpg'
 const cases = [
   {
-    title: '化工厂管道系统项目',
-    desc: '为国内知名化工企业设计并安装高耐腐蚀、高强度的工业管道系统，实现生产自动化与智能监控，有效提升了企业的生产效率与安全水平。',
-    img: 'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=600&q=80',
-    tags: ['化工', '自动化', '智能管道']
+    title: '水泥厂耐磨管道',
+    desc: '为知名水泥厂提供耐磨管道，保障生产安全',
+    img: anli2,
+    tags: ['水泥', '耐磨', '管道']
   },
   {
-    title: '食品级管道改造工程',
-    desc: '为大型食品加工厂提供304/316L不锈钢食品级管道全线升级，严格遵循卫生标准，全过程无尘安装，保障食品安全。',
-    img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80',
-    tags: ['食品', '卫生级', '不锈钢']
+    title: '化工厂耐磨管道',
+    desc: '为省内化工厂提供双金属耐磨管，承受高温高压环境',
+    img: anli1,
+    tags: ['化工', '耐磨', '管道']
   },
   {
-    title: '电厂耐磨管道EPC总包',
-    desc: '承接省内大型电厂输灰系统双金属耐磨管及弯头EPC项目，从设计、制造到安装一体化交付，满足高磨损、高温工况要求。',
-    img: 'https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=600&q=80',
-    tags: ['电力', '耐磨', 'EPC']
+    title: '化工厂智能管网',
+    desc: '为大型化工企业部署智能管网系统，实现数据可视化与远程运维。',
+    img: anli3,
+    tags: ['化工', '智能', '管网']
+  },
+
+  {
+    title: '钢铁厂耐磨管道',
+    desc: '为省内钢铁厂提供双金属耐磨管，承受高温高压环境',
+    img: anli4,
+    tags: ['化工', '耐磨', '管道']
   },
   {
-    title: '智能远程监控管网',
-    desc: '为城市供水公司部署智能远程监控系统，实现管道运行数据实时在线采集与报警，极大提升了供水安全性与管理效率。',
-    img: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80',
-    tags: ['市政', '智能监控', '运维']
+    title: '电子脱销管道',
+    desc: '为电子脱销企业提供耐磨管道，延长设备使用寿命',
+    img: anli5,
+    tags: ['电子', '耐磨', '管道']
   },
-  {
-    title: '矿山高分子管道工程',
-    desc: '为矿山企业量身定制高分子聚乙烯耐磨管道解决方案，显著延长管道使用寿命，降低维护成本。',
-    img: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=600&q=80',
-    tags: ['矿山', '高分子', '耐磨']
-  },
-  {
-    title: '环保行业陶瓷复合管网',
-    desc: '环保领域大型废气处理项目，采用陶瓷内衬复合钢管，确保耐腐蚀、耐磨损，实现环保设施稳定运行。',
-    img: 'https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?auto=format&fit=crop&w=600&q=80',
-    tags: ['环保', '陶瓷复合', '耐腐蚀']
-  }
 ]
 </script>
 

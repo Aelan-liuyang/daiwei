@@ -351,8 +351,8 @@ const honors = [
   width: 100vw;
   min-width: 100vw;
   max-width: 100vw;
-  height: 220px;
-  background: #131a22 url('https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&w=1200&q=80') no-repeat center/cover;
+  height: 420px;
+  background: #131a22 url('@/assets/images/abuoutUs.png') no-repeat center/cover;
   display: flex;
   align-items: center;
   justify-content: flex-start;

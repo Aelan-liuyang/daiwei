@@ -46,23 +46,6 @@
         </div>
       </section>
 
-      <!-- 企业理念/愿景 -->
-      <section class="philosophy-row">
-        <div class="philo-content">
-          <div>
-            <div class="philo-title">企业愿景</div>
-            <div class="philo-desc">成为工业管道系统领域最具创新力和影响力的企业。</div>
-          </div>
-          <div>
-            <div class="philo-title">企业使命</div>
-            <div class="philo-desc">以科技赋能生产，为客户创造更高价值，助力绿色可持续发展。</div>
-          </div>
-          <div>
-            <div class="philo-title">核心价值观</div>
-            <div class="philo-desc">诚信、创新、协作、卓越。</div>
-          </div>
-        </div>
-      </section>
 
       <!-- 产品优势 横向铺满 -->
       <section class="products-row">
@@ -121,6 +104,11 @@ import adv2 from '@/assets/images/factory2.jpg'
 import adv3 from '@/assets/images/factory3.jpg'
 import adv4 from '@/assets/images/factory4.jpg'
 import ProductFocusCarousel from '@/components/ProductFocusCarousel.vue'
+import anli1 from '@/assets/images/anli1.jpg'
+import anli2 from '@/assets/images/anli2.jpg'
+import anli3 from '@/assets/images/anli3.jpg'
+import anli4 from '@/assets/images/anli4.jpg'
+
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
@@ -167,24 +155,25 @@ const productCarousel = [
 ]
 const cases = [
   {
+    title: '水泥厂耐磨管道',
+    desc: '为知名水泥厂提供耐磨管道，保障生产安全。',
+    img: anli2
+  },
+  {
     title: '化工厂智能管网',
     desc: '为大型化工企业部署智能管网系统，实现数据可视化与远程运维。',
-    img: 'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=600&q=80'
+    img: anli1
+  },
+
+  {
+    title: '化工厂耐磨管道',
+    desc: '为省内化工厂提供双金属耐磨管，承受高温高压环境。',
+    img: anli3
   },
   {
-    title: '食品级管道改造',
-    desc: '为知名食品企业全线升级食品级不锈钢管道，保障食品安全。',
-    img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80'
-  },
-  {
-    title: '电厂耐磨管道',
-    desc: '为省内电厂提供双金属耐磨管，承受高温高压环境。',
-    img: 'https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=600&q=80'
-  },
-  {
-    title: '矿山高分子管道',
-    desc: '为矿山企业定制高分子聚乙烯管道，延长设备使用寿命。',
-    img: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=600&q=80'
+    title: '电子脱销管道',
+    desc: '为电子脱销企业提供耐磨管道，延长设备使用寿命。',
+    img: anli4
   }
 ]
 const partners = [
@@ -368,7 +357,7 @@ const partners = [
 }
 
 .about-img.big {
-  width: 550px;
+  width: 480px;
   max-width: 99vw;
 }
 
@@ -386,44 +375,11 @@ const partners = [
   opacity: 0.28;
 }
 
-/* 理念/愿景 */
-.philosophy-row {
-  width: 100vw;
-  padding: 22px 0 10px 0;
-  background: #fafdff;
-}
-
-.philo-content {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 60px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.philo-title {
-  color: #1677ff;
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  letter-spacing: 2px;
-}
-
-.philo-desc {
-  color: #333;
-  font-size: 15px;
-  line-height: 1.7;
-  min-height: 30px;
-  white-space: pre-line;
-  font-weight: 400;
-}
-
 /* 产品优势 */
 .products-row {
   width: 100vw;
   margin: 0 auto 32px auto;
-  padding: 0;
+  padding-top: 10px;
   background: #fafdff;
 }
 

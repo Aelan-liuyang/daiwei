@@ -31,6 +31,7 @@ const menuList = [
   { key: 'home', label: '首页', path: '/' },
   { key: 'products', label: '产品服务', path: '/products' },
   { key: 'cases', label: '工程案例', path: '/cases' },
+  { key: 'news', label: '新闻中心', path: '/news' },
   { key: 'about', label: '关于我们', path: '/about' },
   { key: 'contact', label: '联系我们', path: '/contact' }
 ]
