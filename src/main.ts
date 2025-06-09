@@ -14,4 +14,4 @@ const app = createApp(App);
 
 const pinia = createPinia()
 
-app.use(router).use(pinia).use(pinia).use(Antd).mount('#app')
+app.use(router).use(pinia).use(Antd).mount('#app')

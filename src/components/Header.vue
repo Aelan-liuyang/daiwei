@@ -76,8 +76,11 @@ onMounted(() => {
     '/': 'home',
     '/products': 'products',
     '/cases': 'cases',
+    '/news': 'news',
     '/about': 'about',
-    '/contact': 'contact'
+    '/contact': 'contact',
+    '/productDetail': 'productDetail',
+    '/newsDetail': 'newsDetail'
   }
   selectedMenu.value = pathToKey[route.path] || 'home'
   window.addEventListener('scroll', handleScroll)

@@ -178,8 +178,14 @@ const filteredProductList = computed(() =>
 
 const router = useRouter()
 function goDetail(item) {
-  // 假定 title 可作为路由参数，也可用 id
-  router.push(`/products/${encodeURIComponent(item.title)}`)
+  // 将产品数据作为路由参数传递
+  router.push({
+    path: `/products/${encodeURIComponent(item.title)}`,
+    query: {
+      category: item.category,
+      image: item.img
+    }
+  })
 }
 </script>
 

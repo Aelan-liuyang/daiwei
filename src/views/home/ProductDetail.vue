@@ -1,5 +1,8 @@
 <template>
   <a-layout class="product-detail-layout">
+    <Header />
+    <a-layout-content class="main-content">
+
     <!-- 面包屑 -->
     <div class="breadcrumb">
       <a-breadcrumb>
@@ -14,24 +17,79 @@
     <!-- 产品主图和简介 -->
     <div class="product-main">
       <div class="product-image-block">
-        <img :src="product.mainImage" class="main-img" />
+        <div class="main-image-container"
+             @mouseenter="handleImageZoom"
+             @mousemove="handleImageZoom"
+             @mouseleave="resetZoom"
+             @click="handlePreview(product.mainImage)">
+          <img :src="product.mainImage" class="main-img" />
+          <div class="image-zoom-overlay" v-if="showZoom" :style="zoomStyle"></div>
+          <div class="image-preview-hint">
+            <zoom-in-outlined />
+            <span>点击查看大图</span>
+          </div>
+        </div>
         <div class="thumbs-row">
-          <img
-            v-for="(img, i) in product.images"
-            :key="i"
-            :src="img"
-            :class="['thumb-img', { active: img === product.mainImage }]"
-            @click="setMainImage(img)" />
+          <div v-for="(img, i) in product.images"
+               :key="i"
+               class="thumb-container"
+               @click="setMainImage(img)">
+            <img :src="img"
+                 :class="['thumb-img', { active: img === product.mainImage }]"
+                 @mouseenter="preloadImage(img)" />
+          </div>
+        </div>
+        <!-- 产品动态数据 -->
+        <div class="product-stats">
+          <div class="stat-item">
+            <eye-outlined />
+            <span>浏览量: {{ formatNumber(productStats.views) }}</span>
+          </div>
+          <div class="stat-item">
+            <download-outlined />
+            <span>下载量: {{ formatNumber(productStats.downloads) }}</span>
+          </div>
+          <div class="stat-item">
+            <star-outlined />
+            <span>收藏: {{ formatNumber(productStats.favorites) }}</span>
+          </div>
+          <div class="stat-item">
+            <clock-circle-outlined />
+            <span>更新: {{ formatDate(productStats.lastUpdated) }}</span>
+          </div>
         </div>
       </div>
       <div class="product-info-block">
         <h1 class="product-title">{{ product.name }}</h1>
+        <div class="product-code" v-if="product.code">产品编号：{{ product.code }}</div>
         <ul class="product-features">
-          <li v-for="(item, i) in product.features" :key="i">{{ item }}</li>
+          <li v-for="(item, i) in product.features" :key="i">
+            <check-circle-outlined class="feature-icon" />
+            {{ item }}
+          </li>
         </ul>
+        <div class="product-specs" v-if="product.specs">
+          <h3>产品规格</h3>
+          <div class="specs-grid">
+            <div v-for="(spec, key) in product.specs" :key="key" class="spec-item">
+              <span class="spec-label">{{ key }}：</span>
+              <span class="spec-value">{{ spec }}</span>
+            </div>
+          </div>
+        </div>
         <div class="product-btns">
-          <a-button>常见问题</a-button>
-          <a-button type="primary" style="margin-left:18px;">技术咨询</a-button>
+          <a-button type="primary" @click="handleConsult">
+            <message-outlined />
+            技术咨询
+          </a-button>
+          <a-button @click="handleDownload">
+            <download-outlined />
+            下载资料
+          </a-button>
+          <a-button @click="handleShare">
+            <share-alt-outlined />
+            分享
+          </a-button>
         </div>
       </div>
     </div>
@@ -39,21 +97,33 @@
     <!-- 视频及相关内容推荐 -->
     <div class="product-video-section">
       <div class="video-left">
-        <!-- 假设是YouTube/B站/自有视频，也可以用 img 占位 -->
-        <div class="video-player">
-          <img :src="product.videoCover"
-            style="width:100%;border-radius:12px;" />
-          <div class="video-play-btn"></div>
+        <div class="video-player" @click="playVideo">
+          <img :src="product.videoCover" class="video-cover" />
+          <div class="video-play-btn">
+            <play-circle-outlined />
+          </div>
+          <div class="video-duration" v-if="product.videoDuration">{{ product.videoDuration }}</div>
+        </div>
+        <div class="video-info">
+          <h3>{{ product.videoTitle || '产品演示视频' }}</h3>
+          <p>{{ product.videoDesc }}</p>
         </div>
       </div>
       <div class="video-right">
-        <div class="video-recommend-title">相关安装/演示</div>
+        <div class="video-recommend-title">相关视频</div>
         <ul class="video-recommend-list">
-          <li v-for="(item, i) in product.relatedVideos" :key="i">
-            <a :href="item.link" target="_blank">
+          <li v-for="(item, i) in product.relatedVideos" :key="i" @click="playRelatedVideo(item)">
+            <div class="video-thumb-container">
               <img :src="item.img" class="video-thumb" />
+              <div class="video-play-icon">
+                <play-circle-outlined />
+              </div>
+              <div class="video-duration-small" v-if="item.duration">{{ item.duration }}</div>
+            </div>
+            <div class="video-info-small">
               <div class="video-title">{{ item.title }}</div>
-            </a>
+              <div class="video-desc" v-if="item.desc">{{ item.desc }}</div>
+            </div>
           </li>
         </ul>
       </div>
@@ -61,13 +131,22 @@
 
     <!-- 资料下载区域 -->
     <div class="product-resource-section">
+      <div class="section-header">
+        <h2>产品资料</h2>
+        <div class="section-actions">
+          <a-button type="link" @click="downloadAll">
+            <download-outlined />
+            下载全部
+          </a-button>
+        </div>
+      </div>
       <div class="resource-tabs">
         <a-tabs v-model:activeKey="tabKey">
           <a-tab-pane key="all" tab="所有资源">
-            <ResourceTable :resources="product.resources" />
+            <ResourceTable :resources="product.resources" @download="handleResourceDownload" />
           </a-tab-pane>
           <a-tab-pane key="software" tab="软件">
-            <SoftwareTable :softwares="product.softwares" />
+            <SoftwareTable :softwares="product.softwares" @download="handleSoftwareDownload" />
           </a-tab-pane>
         </a-tabs>
       </div>
@@ -75,10 +154,21 @@
 
     <!-- 相关系统/产品推荐 -->
     <div class="product-systems-section">
-      <div class="systems-title">相关系统</div>
+      <div class="section-header">
+        <h2>相关系统</h2>
+        <a-button type="link" @click="viewAllSystems">
+          查看全部
+          <right-outlined />
+        </a-button>
+      </div>
       <div class="systems-row">
-        <div v-for="(item, i) in product.systems" :key="i" class="system-block">
-          <img :src="item.img" alt="" class="system-img" />
+        <div v-for="(item, i) in product.systems" :key="i" class="system-block" @click="viewSystem(item)">
+          <div class="system-img-container">
+            <img :src="item.img" alt="" class="system-img" />
+            <div class="system-overlay">
+              <eye-outlined />
+            </div>
+          </div>
           <div class="system-caption">
             <div class="system-name">{{ item.name }}</div>
             <div class="system-desc">{{ item.desc }}</div>
@@ -86,72 +176,149 @@
         </div>
       </div>
     </div>
+  </a-layout-content>
+    <Footer />
+
+    <!-- 视频播放弹窗 -->
+    <a-modal
+      v-model:visible="videoModalVisible"
+      :footer="null"
+      :width="800"
+      :destroyOnClose="true"
+      class="video-modal"
+    >
+      <div class="video-container">
+        <video
+          ref="videoPlayer"
+          controls
+          :src="currentVideoUrl"
+          class="video-player-full"
+        ></video>
+      </div>
+    </a-modal>
+
+    <!-- 图片预览弹窗 -->
+    <a-modal
+      v-model:visible="previewVisible"
+      :footer="null"
+      :width="800"
+      :destroyOnClose="true"
+      class="image-preview-modal"
+    >
+      <div class="preview-container">
+        <img :src="previewImage" class="preview-image" />
+      </div>
+    </a-modal>
   </a-layout>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import {
+  CheckCircleOutlined,
+  MessageOutlined,
+  DownloadOutlined,
+  ShareAltOutlined,
+  PlayCircleOutlined,
+  RightOutlined,
+  EyeOutlined,
+  ZoomInOutlined,
+  StarOutlined,
+  ClockCircleOutlined
+} from '@ant-design/icons-vue'
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 import ResourceTable from '@/components/ResourceTable.vue'
 import SoftwareTable from '@/components/SoftwareTable.vue'
 import rongyu from '@/assets/images/rongyu.jpeg'
-import { useRoute } from 'vue-router'
+
 const route = useRoute()
+const router = useRouter()
 const id = Number(route.params.id)
-// 示例数据，可从后端/路由参数获取
-const product = ref({
-  name: 'FIRELOCK™ INSTALLATION-READY™ 沟槽管件',
-  mainImage: rongyu,
+
+// 当前显示的主图
+const currentMainImage = ref(route.query.image)
+
+// 图片预览状态
+const previewVisible = ref(false)
+const previewImage = ref('')
+
+// 产品动态数据
+const productStats = ref({
+  views: Math.floor(Math.random() * 1000) + 500,
+  downloads: Math.floor(Math.random() * 100) + 50,
+  favorites: Math.floor(Math.random() * 200) + 100,
+  lastUpdated: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000)
+})
+
+// 从路由参数获取产品数据
+const productData = computed(() => ({
+  name: decodeURIComponent(route.params.id),
+  category: route.query.category,
+  mainImage: currentMainImage.value,
   images: [
-    rongyu,
-    rongyu,
-    rongyu,
-    rongyu,
-  ],
+    route.query.image,
+    route.query.image.replace('.jpg', '_1.jpg'),
+    route.query.image.replace('.jpg', '_2.jpg'),
+    route.query.image.replace('.jpg', '_3.jpg'),
+    route.query.image.replace('.jpg', '_4.jpg')
+  ].filter(Boolean), // 过滤掉无效的图片路径
   features: [
     '一体式管件，安装更便捷，可靠性高',
     '安装效率比传统方式提升4倍',
     '比螺纹连接快5倍',
-    '适用管径：1”~2½”（32~65 mm, 76.1 mm）',
+    '适用管径：1"~2½"（32~65 mm, 76.1 mm）',
   ],
-  videoCover: rongyu,
+  specs: {
+    '材质': '碳钢',
+    '表面处理': '镀锌',
+    '工作压力': '16 bar',
+    '工作温度': '-10°C ~ +80°C',
+    '认证': 'UL, FM, CE'
+  },
+  videoCover: route.query.image,
+  videoTitle: `${decodeURIComponent(route.params.id)} 产品演示`,
+  videoDesc: `了解${decodeURIComponent(route.params.id)}的安装优势和创新特性`,
+  videoDuration: '3:45',
   relatedVideos: [
     {
-      img: rongyu,
-      title: 'FIRELOCK™ 安装演示',
-      link: '#'
+      img: route.query.image,
+      title: `${decodeURIComponent(route.params.id)} 安装演示`,
+      link: '#',
+      duration: '2:30',
+      desc: '详细安装步骤演示'
     },
     {
-      img: rongyu,
-      title: '沟槽管件对比讲解',
-      link: '#'
+      img: route.query.image,
+      title: '产品对比讲解',
+      link: '#',
+      duration: '4:15',
+      desc: '与传统产品对比分析'
     },
     {
-      img: rongyu,
-      title: '管道系统案例',
-      link: '#'
+      img: route.query.image,
+      title: '系统案例',
+      link: '#',
+      duration: '5:20',
+      desc: '实际工程应用案例'
     },
   ],
   resources: [
     {
-      name: 'FIRELOCK™ INSTALLATION-READY™ 管件产品样本',
+      name: `${decodeURIComponent(route.params.id)} 产品样本`,
       number: '10.06',
       download: '#',
       collection: '#'
     },
     {
-      name: 'FIRELOCK™ 安装说明书 (B-101/103)',
+      name: '安装说明书',
       number: '101,103',
       download: '#',
       collection: '#'
     },
     {
-      name: 'FIRELOCK™ 安装说明书 (B-102-104)',
-      number: '102-104',
-      download: '#',
-      collection: '#'
-    },
-    {
-      name: '类型兼容性及应用指南',
+      name: '应用指南',
       number: 'AN-001',
       download: '#',
       collection: '#'
@@ -160,36 +327,143 @@ const product = ref({
   softwares: [
     { name: 'Revit ELS-GLOBAL - 10.06', download: '#' },
     { name: 'Revit Europe - 10.06', download: '#' },
-    { name: 'Revit UK - 10.06', download: '#' },
-    { name: 'Revit ANZ - 10.06', download: '#' },
     { name: 'AutoCAD 10.06', download: '#' }
   ],
   systems: [
     {
-      img: rongyu,
-      name: 'FIRELOCK™ INSTALLATION-READY™ 管件',
-      desc: ''
+      img: route.query.image,
+      name: `${decodeURIComponent(route.params.id)}`,
+      desc: '创新的一体式设计'
     },
     {
-      img: rongyu,
-      name: 'INSTALLATION-READY™ 技术',
-      desc: ''
+      img: route.query.image,
+      name: '相关系统',
+      desc: '提升效率的解决方案'
     }
   ]
-})
+}))
 
+// 状态管理
+const showZoom = ref(false)
+const zoomStyle = ref({})
+const videoModalVisible = ref(false)
+const currentVideoUrl = ref('')
 const tabKey = ref('all')
 
-function setMainImage(img) {
-  product.value.mainImage = img
+// 使用计算属性获取产品数据
+const product = computed(() => productData.value)
+
+// 图片切换功能
+const setMainImage = (img) => {
+  currentMainImage.value = img
 }
+
+// 图片预加载
+const preloadImage = (src) => {
+  const img = new Image()
+  img.src = src
+}
+
+// 图片缩放功能
+const handleImageZoom = (e) => {
+  const container = e.currentTarget
+  const rect = container.getBoundingClientRect()
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+
+  zoomStyle.value = {
+    backgroundImage: `url(${product.value.mainImage})`,
+    backgroundPosition: `${-x * 2}px ${-y * 2}px`,
+    opacity: '1'
+  }
+  showZoom.value = true
+}
+
+const resetZoom = () => {
+  showZoom.value = false
+}
+
+// 视频播放功能
+const playVideo = () => {
+  currentVideoUrl.value = product.value.videoUrl
+  videoModalVisible.value = true
+}
+
+const playRelatedVideo = (video) => {
+  currentVideoUrl.value = video.link
+  videoModalVisible.value = true
+}
+
+// 下载功能
+const handleDownload = () => {
+  // 实现下载逻辑
+}
+
+const downloadAll = () => {
+  // 实现批量下载逻辑
+}
+
+const handleResourceDownload = (resource) => {
+  // 实现资源下载逻辑
+}
+
+const handleSoftwareDownload = (software) => {
+  // 实现软件下载逻辑
+}
+
+// 咨询功能
+const handleConsult = () => {
+  // 实现咨询逻辑
+}
+
+// 分享功能
+const handleShare = () => {
+  // 实现分享逻辑
+}
+
+// 查看系统详情
+const viewSystem = (system) => {
+  // 实现查看系统详情逻辑
+}
+
+const viewAllSystems = () => {
+  router.push('/systems')
+}
+
+// 图片预览功能
+const handlePreview = (img) => {
+  previewImage.value = img
+  previewVisible.value = true
+}
+
+// 格式化日期
+const formatDate = (date) => {
+  return new Date(date).toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+}
+
+// 格式化数字
+const formatNumber = (num) => {
+  return num >= 1000 ? (num / 1000).toFixed(1) + 'k' : num
+}
+
+// 生命周期钩子
+onMounted(() => {
+  // 初始化逻辑
+})
+
+onBeforeUnmount(() => {
+  // 清理逻辑
+})
 </script>
 
 <style scoped>
 .product-detail-layout {
-  background: #f7f9fb;
   min-height: 100vh;
-  padding: 0 0 40px 0;
+  background: #f7f9fb;
 }
 
 .breadcrumb {
@@ -208,6 +482,12 @@ function setMainImage(img) {
   padding: 32px 44px 28px 44px;
 }
 
+.main-content {
+  background: #f7f9fb;
+  padding-bottom: 40px;
+  min-height: 800px;
+}
+
 .product-image-block {
   flex: 1.05;
   display: flex;
@@ -215,19 +495,50 @@ function setMainImage(img) {
   align-items: center;
 }
 
-.main-img {
+.main-image-container {
+  position: relative;
   width: 330px;
-  max-width: 75vw;
+  height: 330px;
+  cursor: zoom-in;
+}
+
+.main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   border-radius: 18px;
   box-shadow: 0 2px 18px rgba(22, 119, 255, 0.10);
   background: #fff;
-  margin-bottom: 22px;
+}
+
+.image-zoom-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 200%;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
 }
 
 .thumbs-row {
   display: flex;
   gap: 10px;
-  margin-top: 8px;
+  margin-top: 22px;
+}
+
+.thumb-container {
+  position: relative;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.thumb-container:hover {
+  transform: translateY(-2px);
 }
 
 .thumb-img {
@@ -238,12 +549,13 @@ function setMainImage(img) {
   border: 2px solid #eee;
   cursor: pointer;
   background: #fff;
-  transition: border-color 0.18s;
+  transition: all 0.18s;
 }
 
 .thumb-img.active,
 .thumb-img:hover {
   border-color: #1677ff;
+  transform: translateY(-2px);
 }
 
 .product-info-block {
@@ -260,20 +572,65 @@ function setMainImage(img) {
   letter-spacing: 1px;
 }
 
-.product-features {
+.product-code {
+  color: #666;
+  font-size: 14px;
   margin-bottom: 16px;
+}
+
+.product-features {
+  margin-bottom: 24px;
   color: #444;
   font-size: 15.7px;
   line-height: 1.85;
-  list-style: disc inside;
+  list-style: none;
   padding-left: 0;
 }
 
-.product-btns {
-  margin-top: 18px;
+.feature-icon {
+  color: #1677ff;
+  margin-right: 8px;
 }
 
-/* 视频区 */
+.product-specs {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.product-specs h3 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.spec-item {
+  font-size: 14px;
+}
+
+.spec-label {
+  color: #666;
+}
+
+.spec-value {
+  color: #333;
+  font-weight: 500;
+}
+
+.product-btns {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* 视频区样式优化 */
 .product-video-section {
   display: flex;
   max-width: 1080px;
@@ -291,7 +648,17 @@ function setMainImage(img) {
   border-radius: 12px;
   overflow: hidden;
   background: #000;
-  min-height: 236px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.video-player:hover {
+  transform: translateY(-2px);
+}
+
+.video-cover {
+  width: 100%;
+  border-radius: 12px;
 }
 
 .video-play-btn {
@@ -299,25 +666,36 @@ function setMainImage(img) {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  background: rgba(22, 119, 255, 0.93);
-  box-shadow: 0 4px 18px rgba(22, 119, 255, 0.13);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.video-play-btn::before {
-  content: '';
-  display: block;
-  margin-left: 11px;
-  width: 0;
-  height: 0;
-  border-top: 18px solid transparent;
-  border-bottom: 18px solid transparent;
-  border-left: 30px solid #fff;
+.video-duration {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.video-info {
+  margin-top: 16px;
+}
+
+.video-info h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.video-info p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .video-right {
@@ -342,77 +720,157 @@ function setMainImage(img) {
   display: flex;
   align-items: center;
   margin-bottom: 18px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.video-recommend-list li:hover {
+  transform: translateX(4px);
+}
+
+.video-thumb-container {
+  position: relative;
+  width: 120px;
+  height: 68px;
+  margin-right: 12px;
 }
 
 .video-thumb {
-  width: 70px;
-  height: 54px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 7px;
-  margin-right: 13px;
-  box-shadow: 0 2px 8px rgba(22, 119, 255, 0.08);
-  background: #fff;
+  border-radius: 6px;
+}
+
+.video-play-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 24px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.video-duration-small {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-size: 10px;
+}
+
+.video-info-small {
+  flex: 1;
 }
 
 .video-title {
-  color: #222;
+  color: #333;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
+  margin-bottom: 4px;
 }
 
-/* 资源下载区 */
+.video-desc {
+  color: #666;
+  font-size: 12px;
+}
+
+/* 资源下载区样式优化 */
 .product-resource-section {
   background: #fff;
   border-radius: 15px;
   box-shadow: 0 2px 16px rgba(22, 119, 255, 0.06);
-  padding: 16px 18px 18px 18px;
+  padding: 24px;
   max-width: 1080px;
   margin: 0 auto 46px auto;
 }
 
-.resource-tabs {
-  width: 100%;
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
+.section-header h2 {
+  font-size: 18px;
+  color: #1677ff;
+  margin: 0;
+}
+
+/* 相关系统样式优化 */
 .product-systems-section {
   max-width: 1080px;
-  margin: 0 auto;
-  margin-bottom: 36px;
-}
-
-.systems-title {
-  font-size: 1.16rem;
-  font-weight: 700;
-  color: #1677ff;
-  margin: 28px 0 22px 6px;
-  letter-spacing: 2px;
+  margin: 0 auto 36px auto;
 }
 
 .systems-row {
   display: flex;
-  gap: 36px;
+  gap: 24px;
   justify-content: flex-start;
   align-items: stretch;
 }
 
 .system-block {
   background: linear-gradient(120deg, #eaf6ff 0%, #fafdff 100%);
-  border-radius: 11px;
+  border-radius: 12px;
   box-shadow: 0 2px 11px rgba(22, 119, 255, 0.05);
-  padding: 18px 22px 10px 22px;
-  min-width: 200px;
-  max-width: 260px;
-  flex: 1 1 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 20px;
+  flex: 1;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.system-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.1);
+}
+
+.system-img-container {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .system-img {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  margin-bottom: 18px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.system-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.system-overlay .anticon {
+  color: #fff;
+  font-size: 32px;
+}
+
+.system-block:hover .system-img {
+  transform: scale(1.05);
+}
+
+.system-block:hover .system-overlay {
+  opacity: 1;
 }
 
 .system-caption {
@@ -420,50 +878,76 @@ function setMainImage(img) {
 }
 
 .system-name {
-  font-size: 15.2px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   color: #1677ff;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .system-desc {
-  color: #444;
-  font-size: 13px;
-  min-height: 20px;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* 视频弹窗样式 */
+.video-modal :deep(.ant-modal-content) {
+  background: #000;
+  padding: 0;
+}
+
+.video-container {
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 比例 */
+  position: relative;
+}
+
+.video-player-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* 响应式优化 */
 @media (max-width: 1200px) {
-
   .product-main,
   .product-video-section,
   .product-resource-section,
   .product-systems-section {
     max-width: 98vw;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-
-  .system-block {
-    max-width: 48vw;
+    padding: 20px;
   }
 }
 
 @media (max-width: 800px) {
-
   .product-main,
   .product-video-section {
     flex-direction: column;
-    gap: 18px;
-    padding: 16px 8px 12px 8px;
+    gap: 24px;
+  }
+
+  .main-image-container {
+    width: 100%;
+    height: auto;
   }
 
   .main-img {
-    width: 90vw;
+    width: 100%;
+    height: auto;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .systems-row {
+    flex-direction: column;
   }
 
   .system-block {
-    padding: 10px 4px;
+    margin-bottom: 16px;
   }
 }
 
@@ -472,27 +956,141 @@ function setMainImage(img) {
     margin: 12px 0 10px 10px;
   }
 
-  .main-img {
-    width: 92vw;
+  .product-btns {
+    flex-direction: column;
+  }
+
+  .product-btns .ant-btn {
+    margin-left: 0 !important;
+    margin-top: 8px;
+  }
+
+  .video-thumb-container {
+    width: 100px;
+    height: 56px;
+  }
+}
+
+.image-preview-hint {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.main-image-container:hover .image-preview-hint {
+  opacity: 1;
+}
+
+.product-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 24px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #666;
+  font-size: 13px;
+}
+
+.stat-item .anticon {
+  color: #1677ff;
+  font-size: 16px;
+}
+
+.image-preview-modal :deep(.ant-modal-content) {
+  background: #000;
+  padding: 0;
+}
+
+.preview-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+/* 优化缩略图样式 */
+.thumbs-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 4px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #1677ff #f0f0f0;
+}
+
+.thumbs-row::-webkit-scrollbar {
+  height: 6px;
+}
+
+.thumbs-row::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+
+.thumbs-row::-webkit-scrollbar-thumb {
+  background: #1677ff;
+  border-radius: 3px;
+}
+
+.thumb-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.thumb-img.active {
+  border-color: #1677ff;
+  transform: scale(1.05);
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .product-stats {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .stat-item {
+    flex: 1 1 40%;
+    justify-content: center;
+  }
+
+  .thumbs-row {
+    gap: 8px;
   }
 
   .thumb-img {
-    width: 38px;
-    height: 38px;
-  }
-
-  .system-img {
     width: 60px;
     height: 60px;
-  }
-
-  .systems-row {
-    gap: 7px;
-  }
-
-  .system-block {
-    min-width: 90px;
-    max-width: 98vw;
   }
 }
 </style>
