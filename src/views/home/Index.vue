@@ -90,28 +90,28 @@
       </section>
     </a-layout-content>
     <Footer />
+
   </a-layout>
 </template>
 
 <script setup>
+import { onMounted } from "vue"
 import Header from '@/components/Header.vue'
 
 import Footer from '@/components/Footer.vue'
 import factoryImg from '@/assets/images/factory.jpg'
-import productBg from '@/assets/images/productBg.jpg'
+
 import adv1 from '@/assets/images/factory1.jpg'
 import adv2 from '@/assets/images/factory2.jpg'
 import adv3 from '@/assets/images/factory3.jpg'
 import adv4 from '@/assets/images/factory4.jpg'
 import ProductFocusCarousel from '@/components/ProductFocusCarousel.vue'
-import anli1 from '@/assets/images/anli1.jpg'
+
 import anli2 from '@/assets/images/anli2.jpg'
 import anli3 from '@/assets/images/anli3.jpg'
 import anli4 from '@/assets/images/anli4.jpg'
+import dianzi from '@/assets/images/dianzi.jpg'
 
-// Swiper
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 
 
 const products = [
@@ -160,20 +160,19 @@ const cases = [
     img: anli2
   },
   {
-    title: '化工厂智能管网',
-    desc: '为大型化工企业部署智能管网系统，实现数据可视化与远程运维。',
-    img: anli1
-  },
-
-  {
     title: '化工厂耐磨管道',
     desc: '为省内化工厂提供双金属耐磨管，承受高温高压环境。',
     img: anli3
   },
   {
+    title: '钢铁厂管道',
+    desc: '为钢铁厂提供耐磨管道，延长设备使用寿命。',
+    img: anli4
+  },
+  {
     title: '电子脱销管道',
     desc: '为电子脱销企业提供耐磨管道，延长设备使用寿命。',
-    img: anli4
+    img: dianzi
   }
 ]
 const partners = [
@@ -183,6 +182,13 @@ const partners = [
   "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/320px-IBM_logo.svg.png",
   "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/320px-Microsoft_logo.svg.png",
 ]
+onMounted(() => {
+  // 将页面滚动到顶部
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth", // 可以使用 "smooth" 实现平滑滚动效果
+  })
+})
 </script>
 
 <style scoped>

@@ -42,7 +42,9 @@ const routes: Array<RouteRecordRaw> = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  strict: false,
+  scrollBehavior: () => ({ left: 0, top: 0, behavior: "smooth" }), //可以使用 "smooth" 实现平滑滚动效果
 })
 
 export default router

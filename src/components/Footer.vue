@@ -44,6 +44,7 @@
         © 2025 山东岱威创新管业有限公司 版权所有
       </div>
     </footer>
+    <a-back-top />
   </a-layout-footer>
 </template>
 

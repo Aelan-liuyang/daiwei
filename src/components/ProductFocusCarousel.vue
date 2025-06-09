@@ -2,26 +2,29 @@
   <div class="product-focus-carousel">
     <h2 class="carousel-title">产品聚焦</h2>
     <swiper
-      :modules="[Navigation]"
+      ref="swiperRef"
+      :modules="[Autoplay,Navigation]"
       :loop="true"
       :speed="1000"
+      :autoplay="{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }"
       :slides-per-view="3"
       :centeredSlides="true"
       :spaceBetween="60"
-      :parallax="true"
       navigation
-      :pagination="{ clickable: true }"
-      class="focus-swiper">
-      <swiper-slide v-for="(item, idx) in products" :key="idx">
-        <transition name="fade-smooth" mode="out-in">
-          <div class="focus-slide-content">
-            <img :src="item.img" class="focus-img" />
-            <div class="focus-caption">
-              <div class="focus-title" v-html="item.title"></div>
-              <div class="focus-desc" v-html="item.desc"></div>
-            </div>
+      class="focus-swiper"
+    >
+      <swiper-slide
+        v-for="(item, idx) in products"
+        :key="idx"
+        class="slide-wrapper"
+      >
+        <div class="focus-slide-content">
+          <img :src="item.img" class="focus-img" />
+          <div class="focus-caption">
+            <div class="focus-title" v-html="item.title"></div>
+            <div class="focus-desc" v-html="item.desc"></div>
           </div>
-        </transition>
+        </div>
       </swiper-slide>
     </swiper>
   </div>
@@ -29,13 +32,12 @@
 
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation } from 'swiper/modules'
+import { Autoplay,Navigation } from 'swiper/modules'
 import falan from '@/assets/images/falan.jpg'
 import falan1 from '@/assets/images/falan1.jpg'
 import falan2 from '@/assets/images/falan2.jpg'
 import falan3 from '@/assets/images/falan3.jpg'
 
-// 示例数据，实际请替换为真实产品图片及内容
 const products = [
   {
     img: falan,
@@ -56,8 +58,7 @@ const products = [
     img: falan3,
     title: 'FireLock™ Installation-Ready™ 沟槽管件',
     desc: ''
-  },
-  // 可继续添加产品
+  }
 ]
 </script>
 
@@ -67,7 +68,7 @@ const products = [
   margin: 0 auto;
   padding: 40px 0 30px 0;
   background: #fff;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .carousel-title {
@@ -86,6 +87,17 @@ const products = [
   padding-bottom: 24px;
 }
 
+.slide-wrapper {
+  transition: transform 0.5s ease;
+}
+
+/* 主图放大效果 */
+.swiper-slide-active .focus-img {
+  transform: scale(1.15);
+  transition: transform 0.5s ease;
+  z-index: 2;
+}
+
 .focus-slide-content {
   display: flex;
   flex-direction: column;
@@ -101,8 +113,8 @@ const products = [
   height: 300px;
   object-fit: contain;
   margin-bottom: 20px;
+  transition: transform 0.5s ease;
 }
-
 
 .focus-caption {
   text-align: center;
@@ -122,28 +134,6 @@ const products = [
   color: #222;
   margin-top: 3px;
   line-height: 1.5;
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-  color: #8ab0cb;
-  width: 48px;
-  height: 48px;
-  top: 55%;
-  background: transparent;
-}
-
-.swiper-button-prev {
-  left: 10px;
-}
-
-.swiper-button-next {
-  right: 10px;
-}
-
-.swiper-button-prev:after,
-.swiper-button-next:after {
-  font-size: 48px;
 }
 
 .swiper-pagination-bullet {

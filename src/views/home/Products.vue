@@ -90,6 +90,26 @@ import guijia1 from '@/assets/images/guijia1.jpg'
 import guijia2 from '@/assets/images/guijia2.jpg'
 import shuangjin from '@/assets/images/shuangjin.jpg'
 import gaonai from '@/assets/images/gaonai.png'
+import chenjiao from '@/assets/images/chenjiao.jpg'
+import tanhua from '@/assets/images/tanhua.jpg'
+import chenci from '@/assets/images/chenci.jpg'
+import tanhuaduo from '@/assets/images/tanhuaduo.jpg'
+import daituo from '@/assets/images/daituo.jpg'
+import tanhuada from '@/assets/images/tanhuada.jpg'
+import tanhuahe from '@/assets/images/tanhuahe.jpg'
+import tanhuayi from '@/assets/images/tanhuayi.jpg'
+import tanhuaguan from '@/assets/images/tanhuaguan.jpg'
+import tanhuazhi from '@/assets/images/tanhuazhi.jpg'
+
+import taoci from '@/assets/images/taoci.jpg'
+import taociwan from '@/assets/images/taociwan.jpg'
+import taocinai from '@/assets/images/taocinai.jpg'
+import daibeibao from '@/assets/images/daibeibao.jpg'
+import taocifu from '@/assets/images/taocifu.png'
+
+
+
+
 // 分类
 const categories = [
   "碳化硅聚合陶瓷管",
@@ -126,24 +146,27 @@ const allProductList = [
   { category: "碳化硅聚合陶瓷管", img: penzui, title: "烧结碳化硅陶瓷管件.喷嘴" },
   { category: "碳化硅聚合陶瓷管", img: jusi, title: "聚四氟内衬管件" },
   { category: "碳化硅聚合陶瓷管", img: gangsu, title: "钢塑复合管件" },
-  { category: "碳化硅聚合陶瓷管", img: zhenkong, title: "真空皮带脱水机及配件" },
-  { category: "碳化硅聚合陶瓷管", img: duihan, title: "堆焊耐磨衬板管件" },
-  { category: "碳化硅聚合陶瓷管", img: xiangjiao, title: "橡胶膨胀节" },
-  { category: "碳化硅聚合陶瓷管", img: penzui, title: "烧结碳化硅陶瓷管件.喷嘴" },
-  { category: "碳化硅聚合陶瓷管", img: jusi, title: "聚四氟内衬管件" },
-  { category: "碳化硅聚合陶瓷管", img: gangsu, title: "钢塑复合管件" },
-  { category: "碳化硅聚合陶瓷管", img: zhenkong, title: "真空皮带脱水机及配件" },
-  { category: "碳化硅聚合陶瓷管", img: duihan, title: "堆焊耐磨衬板管件" },
-  { category: "碳化硅聚合陶瓷管", img: xiangjiao, title: "橡胶膨胀节" },
-  { category: "碳化硅聚合陶瓷管", img: penzui, title: "烧结碳化硅陶瓷管件.喷嘴" },
-  { category: "碳化硅聚合陶瓷管", img: jusi, title: "聚四氟内衬管件" },
-  { category: "碳化硅聚合陶瓷管", img: gangsu, title: "钢塑复合管件" },
+  { category: "碳化硅聚合陶瓷管", img: chenjiao, title: "衬胶管件" },
+  { category: "碳化硅聚合陶瓷管", img: tanhua, title: " 碳化硅聚合陶瓷直管" },
+  { category: "碳化硅聚合陶瓷管", img: chenci, title: "衬瓷弯管" },
+  { category: "碳化硅聚合陶瓷管", img: tanhuaduo, title: "碳化硅聚合三（多）通" },
+  { category: "碳化硅聚合陶瓷管", img: daituo, title: "带托座衬瓷弯头" },
+  { category: "碳化硅聚合陶瓷管", img: tanhuada, title: "碳化硅聚合陶瓷大小头" },
+  { category: "碳化硅聚合陶瓷管", img: tanhuahe, title: "碳化硅聚合陶瓷管" },
+  { category: "碳化硅聚合陶瓷管", img: tanhuayi, title: "碳化硅聚合陶瓷大小头异型件" },
+  { category: "碳化硅聚合陶瓷管", img: tanhuaguan, title: "碳化硅衬瓷管件" },
+  { category: "碳化硅聚合陶瓷管", img: tanhuazhi, title: "碳化硅直管" },
+
   { category: "反应阻燃型-碳化硅聚合陶瓷涂抹", img: zuran1, title: "阻燃型碳化硅衬瓷材料" },
   { category: "反应阻燃型-碳化硅聚合陶瓷涂抹", img: zuran2, title: "阻燃型碳化硅陶瓷衬材" },
   { category: "双金属耐磨管", img: shuangjin, title: "双金属耐磨管及异形件" },
-  { category: "陶瓷内衬复合钢管", img: "https://oss.sdwcgy.cn/product/11.jpg", title: "碳化硅陶瓷三（S）通" },
-  { category: "陶瓷内衬复合钢管", img: "https://oss.sdwcgy.cn/product/10.jpg", title: "对夹管" },
-  { category: "陶瓷内衬复合钢管", img: "https://oss.sdwcgy.cn/product/7.jpg", title: "聚氨酯内衬管件" },
+
+  { category: "陶瓷内衬复合钢管", img: taoci, title: "陶瓷内衬复合钢管" },
+  { category: "陶瓷内衬复合钢管", img: taociwan, title: "陶瓷耐磨弯管" },
+  { category: "陶瓷内衬复合钢管", img: taocinai, title: "陶瓷耐磨直管" },
+  { category: "陶瓷内衬复合钢管", img: daibeibao, title: "带背包耐磨陶瓷管件" },
+  { category: "陶瓷内衬复合钢管", img: taocifu, title: "陶瓷复合钢管" },
+
   { category: "陶瓷贴片耐磨管", img: gaonai, title: "碳化硅陶瓷耐磨管道" },
   { category: "龟甲网耐磨陶瓷管", img: guijia1, title: "龟甲网耐磨陶瓷管" },
   { category: "龟甲网耐磨陶瓷管", img: guijia2, title: "龟甲网刚玉喷涂耐磨管" }
