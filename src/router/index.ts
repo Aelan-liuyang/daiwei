@@ -24,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/home/Cases.vue')
   },
   {
+    path: '/cases/:id',
+    name: 'CasesDetail',
+    component: () => import('@/views/home/CasesDetail.vue')
+  },
+  {
     path: '/contact',
     name: 'Contact',
     component: () => import('@/views/home/Contact.vue')
@@ -37,6 +42,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/news',
     name: 'News',
     component: () => import('@/views/home/News.vue')
+  },
+  {
+    path: '/news/:id',
+    name: 'NewsDetail',
+    component: () => import('@/views/home/NewsDetail.vue')
   }
 ]
 

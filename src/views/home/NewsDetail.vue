@@ -43,9 +43,11 @@
 
           <!-- 文章底部 -->
           <div class="article-footer">
-            <div class="article-tags" v-if="newsData.tags && newsData.tags.length">
+            <div class="article-tags"
+              v-if="newsData.tags && newsData.tags.length">
               <tag-outlined />
-              <a-tag v-for="tag in newsData.tags" :key="tag" color="blue">{{ tag }}</a-tag>
+              <a-tag v-for="tag in newsData.tags" :key="tag"
+                color="blue">{{ tag }}</a-tag>
             </div>
             <div class="article-share">
               <span class="share-label">分享到：</span>
@@ -65,12 +67,14 @@
           <div class="sidebar-block">
             <h3 class="sidebar-title">相关新闻</h3>
             <ul class="related-news">
-              <li v-for="item in relatedNews" :key="item.id" @click="goToNews(item.id)">
+              <li v-for="item in relatedNews" :key="item.id"
+                @click="goToNews(item.id)">
                 <div class="related-news-item">
                   <img :src="item.coverImage" :alt="item.title" />
                   <div class="related-news-info">
                     <div class="related-news-title">{{ item.title }}</div>
-                    <div class="related-news-date">{{ formatDate(item.date) }}</div>
+                    <div class="related-news-date">{{ formatDate(item.date) }}
+                    </div>
                   </div>
                 </div>
               </li>
@@ -81,9 +85,11 @@
           <div class="sidebar-block">
             <h3 class="sidebar-title">热门新闻</h3>
             <ul class="hot-news">
-              <li v-for="item in hotNews" :key="item.id" @click="goToNews(item.id)">
+              <li v-for="item in hotNews" :key="item.id"
+                @click="goToNews(item.id)">
                 <div class="hot-news-item">
-                  <span class="hot-news-rank" :class="{ 'top-rank': index < 3 }">{{ index + 1 }}</span>
+                  <span class="hot-news-rank"
+                    :class="{ 'top-rank': index < 3 }">{{ index + 1 }}</span>
                   <span class="hot-news-title">{{ item.title }}</span>
                 </div>
               </li>

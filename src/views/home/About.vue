@@ -4,10 +4,12 @@
     <a-layout-content class="main-content">
       <!-- 极简Banner -->
       <div class="about-banner">
-        <div class="about-banner-content">
+        <img src="@/assets/images/aboutUs.jpeg" alt="新闻中心"
+          class="banner-bg-img" />
+        <!-- <div class="about-banner-content">
           <h1>关于我们</h1>
           <p>专注工业管道系统整体解决方案，创新引领行业未来。</p>
-        </div>
+        </div> -->
       </div>
 
       <!-- 公司简介 -->
@@ -348,32 +350,54 @@ const honors = [
 }
 
 .about-banner {
-  width: 100vw;
-  min-width: 100vw;
-  max-width: 100vw;
-  height: 420px;
-  background: #131a22 url('@/assets/images/abuoutUs.png') no-repeat center/cover;
+  position: relative;
+  width: 100%;
+  height: 380px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  position: relative;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.banner-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  /* 动画：初始放大1.12倍，2s内缩小回原大小，ease-out */
+  transform: scale(1.12);
+  animation: bannerZoomIn 2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+@keyframes bannerZoomIn {
+  from {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 .about-banner::after {
   content: '';
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
-  top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.38);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .about-banner-content {
   position: relative;
-  z-index: 2;
-  color: #fff;
-  margin-left: 80px;
+  z-index: 1;
 }
 
 .about-banner-content h1 {

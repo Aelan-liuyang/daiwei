@@ -4,6 +4,8 @@
     <a-layout-content class="main-content">
       <!-- 顶部大Banner -->
       <div class="products-banner">
+        <img src="@/assets/images/product2.jpeg" alt="产品服务"
+          class="banner-bg-img" />
         <div class="products-banner-text">
           <h1>产品服务</h1>
           <p>致力于为客户提供高质量、多样化的管道产品与全方位服务</p>
@@ -202,33 +204,71 @@ function goDetail(item) {
 }
 
 .products-banner {
-  background: url('@/assets/images/productBg.jpg') no-repeat center/cover;
-  color: #fff;
-  height: 240px;
-  display: flex;
-  align-items: flex-end;
-  padding-left: 70px;
-  margin-bottom: 40px;
-  border-radius: 0 0 26px 26px;
   position: relative;
+  width: 100%;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.banner-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  /* 动画：初始放大1.12倍，2s内缩小回原大小，ease-out */
+  transform: scale(1.12);
+  animation: bannerZoomIn 2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+@keyframes bannerZoomIn {
+  from {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.products-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .products-banner-text {
-  padding: 36px 48px 18px 0;
-  border-radius: 0 0 18px 0;
+  position: relative;
+  right: 30%;
+  /* padding: 36px 48px 18px 0; */
+  /* border-radius: 0 0 18px 0; */
+  z-index: 3;
 }
 
 .products-banner h1 {
   font-size: 42px;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 30px;
   letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
 .products-banner p {
   font-size: 17px;
   color: #e5eefa;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
 }
 
 .products-section {

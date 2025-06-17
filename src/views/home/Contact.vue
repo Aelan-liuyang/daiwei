@@ -137,6 +137,18 @@ import Footer from '@/components/Footer.vue'
   max-width: 850px;
   min-width: 320px;
   height: auto;
+  transform: scale(1.12);
+  animation: bannerZoomIn 2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+@keyframes bannerZoomIn {
+  from {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 .banner-content {

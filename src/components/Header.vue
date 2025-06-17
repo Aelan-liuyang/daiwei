@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
@@ -37,7 +37,7 @@ const menuList = [
 ]
 
 // 用于存储每个菜单项的宽度
-const menuRefs = ref([]) // 这里存放元素引用
+const menuRefs = ref([])
 const underlineWidths = ref({})
 
 // 计算下划线样式
@@ -47,6 +47,23 @@ const getUnderlineStyle = key => {
   return {
     width: width + 'px'
   }
+}
+
+// 路径和菜单key的映射，支持详情页高亮
+const pathToKey = [
+  { pattern: /^\/$/, key: 'home' },
+  { pattern: /^\/products(\/.*)?$/, key: 'products' },
+  { pattern: /^\/cases(\/.*)?$/, key: 'cases' },
+  { pattern: /^\/news(\/.*)?$/, key: 'news' },
+  { pattern: /^\/about(\/.*)?$/, key: 'about' },
+  { pattern: /^\/contact(\/.*)?$/, key: 'contact' }
+]
+
+const getMenuKeyByPath = (path) => {
+  for (const item of pathToKey) {
+    if (item.pattern.test(path)) return item.key
+  }
+  return 'home'
 }
 
 const updateUnderlineWidths = () => {
@@ -71,21 +88,20 @@ const handleMenuClick = (key) => {
   }
 }
 
+const syncMenuWithRoute = () => {
+  selectedMenu.value = getMenuKeyByPath(route.path)
+}
+
 onMounted(() => {
-  const pathToKey = {
-    '/': 'home',
-    '/products': 'products',
-    '/cases': 'cases',
-    '/news': 'news',
-    '/about': 'about',
-    '/contact': 'contact',
-    '/productDetail': 'productDetail',
-    '/newsDetail': 'newsDetail'
-  }
-  selectedMenu.value = pathToKey[route.path] || 'home'
+  syncMenuWithRoute()
   window.addEventListener('scroll', handleScroll)
   updateUnderlineWidths()
   window.addEventListener('resize', updateUnderlineWidths)
+})
+
+// 监听路由变化，确保新闻详情页等也高亮新闻中心
+watch(() => route.path, () => {
+  syncMenuWithRoute()
 })
 
 onBeforeUnmount(() => {

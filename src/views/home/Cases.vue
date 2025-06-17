@@ -3,14 +3,21 @@
     <Header />
     <a-layout-content class="main-content">
       <div class="cases-banner">
-        <div class="cases-banner-text">
-          <h1>工程案例</h1>
-          <div class="cases-banner-sub">Project Cases</div>
-        </div>
+        <img src="@/assets/images/gcAnli.jpeg" alt="新闻中心"
+          class="banner-bg-img" />
+
+      </div>
+      <div class="cases-banner-text">
+        <h1>工程案例</h1>
+        <div class="cases-banner-sub">Project Cases</div>
       </div>
       <section class="case-section">
         <div class="case-grid">
-          <div v-for="c in cases" :key="c.title" class="case-card">
+          <div
+            v-for="c in cases"
+            :key="c.title"
+            class="case-card"
+            @click="goDetail(c)">
             <div class="case-img-wrap">
               <img :src="c.img" :alt="c.title" class="case-img" />
             </div>
@@ -31,6 +38,7 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import anli1 from '@/assets/images/anli1.jpg'
@@ -40,37 +48,46 @@ import anli4 from '@/assets/images/anli4.jpg'
 import anli5 from '@/assets/images/anli5.jpg'
 const cases = [
   {
+    id: 1,
     title: '水泥厂耐磨管道',
     desc: '为知名水泥厂提供耐磨管道，保障生产安全',
     img: anli2,
     tags: ['水泥', '耐磨', '管道']
   },
   {
+    id: 2,
     title: '化工厂耐磨管道',
     desc: '为省内化工厂提供双金属耐磨管，承受高温高压环境',
     img: anli1,
     tags: ['化工', '耐磨', '管道']
   },
   {
+    id: 3,
     title: '化工厂智能管网',
     desc: '为大型化工企业部署智能管网系统，实现数据可视化与远程运维。',
     img: anli3,
     tags: ['化工', '智能', '管网']
   },
-
   {
+    id: 4,
     title: '钢铁厂耐磨管道',
     desc: '为省内钢铁厂提供双金属耐磨管，承受高温高压环境',
     img: anli4,
     tags: ['化工', '耐磨', '管道']
   },
   {
+    id: 5,
     title: '电子脱销管道',
     desc: '为电子脱销企业提供耐磨管道，延长设备使用寿命',
     img: anli5,
     tags: ['电子', '耐磨', '管道']
   },
 ]
+const router = useRouter()
+function goDetail(c) {
+  // 路由建议为 /cases/1 这样的形式
+  router.push(`/cases/${c.id}`)
+}
 </script>
 
 <style scoped>
@@ -105,27 +122,56 @@ const cases = [
 }
 
 .cases-banner {
-  width: 100vw;
-  max-width: 100vw;
-  min-height: 180px;
-  height: 18vw;
-  max-height: 270px;
   position: relative;
-  overflow: hidden;
+  width: 100%;
+  height: 380px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  background: #0d1d3a url('https://img2.baidu.com/it/u=2692391962,1108114355&fm=253&fmt=auto&app=138&f=JPEG?w=1200&h=600') no-repeat center 80%/cover;
+  overflow: hidden;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.banner-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  /* 动画：初始放大1.12倍，2s内缩小回原大小，ease-out */
+  transform: scale(1.12);
+  animation: bannerZoomIn 2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+@keyframes bannerZoomIn {
+  from {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.cases-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .cases-banner-text {
-  position: relative;
   z-index: 2;
-  color: #fff;
+  color: #333;
   text-align: center;
   width: 100%;
-  padding-bottom: 30px;
-  background: rgba(0, 0, 0, 0.15);
 }
 
 .cases-banner-text h1 {
@@ -138,7 +184,7 @@ const cases = [
 
 .cases-banner-sub {
   font-size: 1.13rem;
-  color: #d6e5fa;
+  color: #1677ff;
   letter-spacing: 4px;
   margin-top: 10px;
   font-weight: 400;

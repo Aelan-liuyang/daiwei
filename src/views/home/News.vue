@@ -4,10 +4,8 @@
     <a-layout-content class="main-content">
       <!-- 顶部Banner -->
       <div class="news-banner">
-        <div class="banner-content">
-          <h1>新闻中心</h1>
-          <p>了解最新行业动态、技术资讯和企业新闻</p>
-        </div>
+        <img src="@/assets/images/newBanner1.jpeg" alt="新闻中心"
+          class="banner-bg-img" />
       </div>
 
       <!-- 新闻内容区 -->
@@ -16,7 +14,8 @@
         <div class="news-list">
           <!-- 分类标签 -->
           <div class="category-tabs">
-            <a-tabs v-model:activeKey="activeCategory" @change="handleCategoryChange">
+            <a-tabs v-model:activeKey="activeCategory"
+              @change="handleCategoryChange">
               <a-tab-pane key="all" tab="全部"></a-tab-pane>
               <a-tab-pane key="tech" tab="技术动态"></a-tab-pane>
               <a-tab-pane key="industry" tab="行业资讯"></a-tab-pane>
@@ -26,10 +25,10 @@
 
           <!-- 新闻列表 -->
           <div class="news-items">
-            <div v-for="item in filteredNews"
-                 :key="item.id"
-                 class="news-item"
-                 @click="goToDetail(item.id)">
+            <div v-for="item in pagedNews"
+              :key="item.id"
+              class="news-item"
+              @click="goToDetail(item.id)">
               <div class="news-item-image">
                 <img :src="item.coverImage" :alt="item.title" />
                 <div class="news-category">{{ item.category }}</div>
@@ -49,23 +48,23 @@
                   <span class="meta-item">
                     <tag-outlined />
                     <a-tag v-for="tag in item.tags.slice(0, 2)"
-                           :key="tag"
-                           color="blue">{{ tag }}</a-tag>
+                      :key="tag"
+                      color="blue">{{ tag }}</a-tag>
                   </span>
                 </div>
               </div>
             </div>
+            <div v-if="pagedNews.length === 0" class="no-news">暂无新闻</div>
           </div>
 
           <!-- 分页 -->
           <div class="pagination">
             <a-pagination
-              v-model:current="currentPage"
-              :total="totalItems"
+              :current="currentPage"
+              :total="filteredNews.length"
               :pageSize="pageSize"
               show-quick-jumper
-              @change="handlePageChange"
-            />
+              @change="handlePageChange" />
           </div>
         </div>
 
@@ -76,8 +75,7 @@
             <a-input-search
               v-model:value="searchQuery"
               placeholder="搜索新闻..."
-              @search="handleSearch"
-            />
+              @search="handleSearch" />
           </div>
 
           <!-- 热门标签 -->
@@ -85,9 +83,9 @@
             <h3 class="sidebar-title">热门标签</h3>
             <div class="tag-cloud">
               <a-tag v-for="tag in hotTags"
-                     :key="tag.name"
-                     :color="tag.color"
-                     @click="handleTagClick(tag.name)">
+                :key="tag.name"
+                :color="tag.color"
+                @click="handleTagClick(tag.name)">
                 {{ tag.name }}
                 <span class="tag-count">({{ tag.count }})</span>
               </a-tag>
@@ -99,10 +97,11 @@
             <h3 class="sidebar-title">热门新闻</h3>
             <ul class="hot-news">
               <li v-for="(item, index) in hotNews"
-                  :key="item.id"
-                  @click="goToDetail(item.id)">
+                :key="item.id"
+                @click="goToDetail(item.id)">
                 <div class="hot-news-item">
-                  <span class="hot-news-rank" :class="{ 'top-rank': index < 3 }">
+                  <span class="hot-news-rank"
+                    :class="{ 'top-rank': index < 3 }">
                     {{ index + 1 }}
                   </span>
                   <span class="hot-news-title">{{ item.title }}</span>
@@ -131,7 +130,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import {
   CalendarOutlined,
@@ -148,7 +147,6 @@ const activeCategory = ref('all')
 const currentPage = ref(1)
 const pageSize = ref(10)
 const searchQuery = ref('')
-const totalItems = ref(100)
 
 // 模拟新闻数据
 const newsList = ref([
@@ -159,7 +157,7 @@ const newsList = ref([
     date: new Date('2024-03-15'),
     views: 1234,
     category: '技术动态',
-    coverImage: '/src/assets/images/news-1.jpg',
+    coverImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/320px-Microsoft_logo.svg.png",
     tags: ['碳化硅', '陶瓷管', '应用案例']
   },
   {
@@ -169,7 +167,7 @@ const newsList = ref([
     date: new Date('2024-03-12'),
     views: 986,
     category: '行业资讯',
-    coverImage: '/src/assets/images/news-2.jpg',
+    coverImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/320px-Microsoft_logo.svg.png",
     tags: ['行业趋势', '技术发展', '市场分析']
   },
   {
@@ -179,7 +177,7 @@ const newsList = ref([
     date: new Date('2024-03-10'),
     views: 756,
     category: '企业新闻',
-    coverImage: '/src/assets/images/news-3.jpg',
+    coverImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/320px-Microsoft_logo.svg.png",
     tags: ['技术研讨', '企业动态']
   }
   // 可以添加更多新闻数据
@@ -240,6 +238,17 @@ const filteredNews = computed(() => {
   return filtered
 })
 
+// 分页后的新闻列表
+const pagedNews = computed(() => {
+  const start = (currentPage.value - 1) * pageSize.value
+  return filteredNews.value.slice(start, start + pageSize.value)
+})
+
+// 保证切换分类或搜索时回到第一页
+watch([activeCategory, searchQuery], () => {
+  currentPage.value = 1
+})
+
 // 格式化日期
 const formatDate = (date) => {
   return new Date(date).toLocaleDateString('zh-CN', {
@@ -257,22 +266,18 @@ const formatNumber = (num) => {
 // 事件处理函数
 const handleCategoryChange = (key) => {
   activeCategory.value = key
-  currentPage.value = 1
 }
 
 const handlePageChange = (page) => {
   currentPage.value = page
-  // 这里可以添加加载对应页面数据的逻辑
 }
 
 const handleSearch = (value) => {
   searchQuery.value = value
-  currentPage.value = 1
 }
 
 const handleTagClick = (tag) => {
   searchQuery.value = tag
-  currentPage.value = 1
 }
 
 const handleArchiveClick = (date) => {
@@ -296,15 +301,38 @@ const goToDetail = (id) => {
 }
 
 .news-banner {
-  background: url('@/assets/images/news-banner.jpg') no-repeat center/cover;
-  height: 240px;
+  position: relative;
+  width: 100%;
+  height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  text-align: center;
-  position: relative;
+  overflow: hidden;
   margin-bottom: 40px;
+  color: #fff;
+}
+
+.banner-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  transform: scale(1.12);
+  animation: bannerZoomIn 2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+@keyframes bannerZoomIn {
+  from {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 .news-banner::before {
@@ -315,22 +343,6 @@ const goToDetail = (id) => {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.4);
-}
-
-.banner-content {
-  position: relative;
-  z-index: 1;
-}
-
-.banner-content h1 {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.banner-content p {
-  font-size: 16px;
-  opacity: 0.9;
 }
 
 .news-container {
@@ -436,6 +448,13 @@ const goToDetail = (id) => {
   margin-top: 32px;
   display: flex;
   justify-content: center;
+}
+
+.no-news {
+  color: #bbb;
+  text-align: center;
+  padding: 40px 0 20px 0;
+  font-size: 16px;
 }
 
 .news-sidebar {
@@ -563,10 +582,6 @@ const goToDetail = (id) => {
 @media (max-width: 768px) {
   .news-banner {
     height: 180px;
-  }
-
-  .banner-content h1 {
-    font-size: 28px;
   }
 
   .news-item {
