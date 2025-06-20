@@ -3,7 +3,7 @@
     <h2 class="carousel-title">产品聚焦</h2>
     <swiper
       ref="swiperRef"
-      :modules="[Autoplay,Navigation]"
+      :modules="[Autoplay, Navigation]"
       :loop="true"
       :speed="1000"
       :autoplay="{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }"
@@ -13,11 +13,7 @@
       navigation
       class="focus-swiper"
     >
-      <swiper-slide
-        v-for="(item, idx) in products"
-        :key="idx"
-        class="slide-wrapper"
-      >
+      <swiper-slide v-for="(item, idx) in products" :key="idx" class="slide-wrapper">
         <div class="focus-slide-content">
           <img :src="item.img" class="focus-img" />
           <div class="focus-caption">
@@ -31,18 +27,18 @@
 </template>
 
 <script setup>
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Autoplay,Navigation } from 'swiper/modules'
 import falan from '@/assets/images/falan.jpg'
 import falan1 from '@/assets/images/falan1.jpg'
 import falan2 from '@/assets/images/falan2.jpg'
 import falan3 from '@/assets/images/falan3.jpg'
+import { Autoplay, Navigation } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/vue'
 
 const products = [
   {
     img: falan,
-    title: '009V 型 FIRELOCK™ INSTALLATION-READY™',
-    desc: '刚性接头'
+    title: 'INSTALLATION-READY™',
+    desc: ''
   },
   {
     img: falan1,
@@ -51,12 +47,12 @@ const products = [
   },
   {
     img: falan2,
-    title: '用于 CPVC/PVC 管道的<br>INSTALLATION-READY™<br>356 型过滤接头',
+    title: '356 型过滤接头',
     desc: ''
   },
   {
     img: falan3,
-    title: 'FireLock™ Installation-Ready™ 沟槽管件',
+    title: 'FireLock 沟槽管件',
     desc: ''
   }
 ]
@@ -172,7 +168,7 @@ const products = [
   }
 
   .carousel-title {
-    font-size: .98rem;
+    font-size: 0.98rem;
     margin-left: 2vw;
   }
 }

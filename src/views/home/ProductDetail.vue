@@ -2,181 +2,193 @@
   <a-layout class="product-detail-layout">
     <Header />
     <a-layout-content class="main-content">
-
-    <!-- 面包屑 -->
-    <div class="breadcrumb">
-      <a-breadcrumb>
-        <a-breadcrumb-item><a href="/">首页</a></a-breadcrumb-item>
-        <a-breadcrumb-item>
-          <a href="/products">产品服务</a>
-        </a-breadcrumb-item>
-        <a-breadcrumb-item>{{ product.name }}</a-breadcrumb-item>
-      </a-breadcrumb>
-    </div>
-
-    <!-- 产品主图和简介 -->
-    <div class="product-main">
-      <div class="product-image-block">
-        <div class="main-image-container"
-             @mouseenter="handleImageZoom"
-             @mousemove="handleImageZoom"
-             @mouseleave="resetZoom"
-             @click="handlePreview(product.mainImage)">
-          <img :src="product.mainImage" class="main-img" />
-          <div class="image-zoom-overlay" v-if="showZoom" :style="zoomStyle"></div>
-          <div class="image-preview-hint">
-            <zoom-in-outlined />
-            <span>点击查看大图</span>
-          </div>
-        </div>
-        <div class="thumbs-row">
-          <div v-for="(img, i) in product.images"
-               :key="i"
-               class="thumb-container"
-               @click="setMainImage(img)">
-            <img :src="img"
-                 :class="['thumb-img', { active: img === product.mainImage }]"
-                 @mouseenter="preloadImage(img)" />
-          </div>
-        </div>
-        <!-- 产品动态数据 -->
-        <div class="product-stats">
-          <div class="stat-item">
-            <eye-outlined />
-            <span>浏览量: {{ formatNumber(productStats.views) }}</span>
-          </div>
-          <div class="stat-item">
-            <download-outlined />
-            <span>下载量: {{ formatNumber(productStats.downloads) }}</span>
-          </div>
-          <div class="stat-item">
-            <star-outlined />
-            <span>收藏: {{ formatNumber(productStats.favorites) }}</span>
-          </div>
-          <div class="stat-item">
-            <clock-circle-outlined />
-            <span>更新: {{ formatDate(productStats.lastUpdated) }}</span>
-          </div>
-        </div>
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a-breadcrumb>
+          <a-breadcrumb-item><a href="/">首页</a></a-breadcrumb-item>
+          <a-breadcrumb-item>
+            <a href="/products">产品服务</a>
+          </a-breadcrumb-item>
+          <a-breadcrumb-item>{{ product.name }}</a-breadcrumb-item>
+        </a-breadcrumb>
       </div>
-      <div class="product-info-block">
-        <h1 class="product-title">{{ product.name }}</h1>
-        <div class="product-code" v-if="product.code">产品编号：{{ product.code }}</div>
-        <ul class="product-features">
-          <li v-for="(item, i) in product.features" :key="i">
-            <check-circle-outlined class="feature-icon" />
-            {{ item }}
-          </li>
-        </ul>
-        <div class="product-specs" v-if="product.specs">
-          <h3>产品规格</h3>
-          <div class="specs-grid">
-            <div v-for="(spec, key) in product.specs" :key="key" class="spec-item">
-              <span class="spec-label">{{ key }}：</span>
-              <span class="spec-value">{{ spec }}</span>
+
+      <!-- 产品主图和简介 -->
+      <div class="product-main">
+        <div class="product-image-block">
+          <div
+            class="main-image-container"
+            @mouseenter="handleImageZoom"
+            @mousemove="handleImageZoom"
+            @mouseleave="resetZoom"
+            @click="handlePreview(product.mainImage)"
+          >
+            <img :src="product.mainImage" class="main-img" />
+            <div class="image-zoom-overlay" v-if="showZoom" :style="zoomStyle"></div>
+            <div class="image-preview-hint">
+              <zoom-in-outlined />
+              <span>点击查看大图</span>
             </div>
           </div>
-        </div>
-        <div class="product-btns">
-          <a-button type="primary" @click="handleConsult">
-            <message-outlined />
-            技术咨询
-          </a-button>
-          <a-button @click="handleDownload">
-            <download-outlined />
-            下载资料
-          </a-button>
-          <a-button @click="handleShare">
-            <share-alt-outlined />
-            分享
-          </a-button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 视频及相关内容推荐 -->
-    <div class="product-video-section">
-      <div class="video-left">
-        <div class="video-player" @click="playVideo">
-          <img :src="product.videoCover" class="video-cover" />
-          <div class="video-play-btn">
-            <play-circle-outlined />
+          <div class="thumbs-row">
+            <div
+              v-for="(img, i) in product.images"
+              :key="i"
+              class="thumb-container"
+              @click="setMainImage(img)"
+            >
+              <img
+                :src="img"
+                :class="['thumb-img', { active: img === product.mainImage }]"
+                @mouseenter="preloadImage(img)"
+              />
+            </div>
           </div>
-          <div class="video-duration" v-if="product.videoDuration">{{ product.videoDuration }}</div>
-        </div>
-        <div class="video-info">
-          <h3>{{ product.videoTitle || '产品演示视频' }}</h3>
-          <p>{{ product.videoDesc }}</p>
-        </div>
-      </div>
-      <div class="video-right">
-        <div class="video-recommend-title">相关视频</div>
-        <ul class="video-recommend-list">
-          <li v-for="(item, i) in product.relatedVideos" :key="i" @click="playRelatedVideo(item)">
-            <div class="video-thumb-container">
-              <img :src="item.img" class="video-thumb" />
-              <div class="video-play-icon">
-                <play-circle-outlined />
-              </div>
-              <div class="video-duration-small" v-if="item.duration">{{ item.duration }}</div>
-            </div>
-            <div class="video-info-small">
-              <div class="video-title">{{ item.title }}</div>
-              <div class="video-desc" v-if="item.desc">{{ item.desc }}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 资料下载区域 -->
-    <div class="product-resource-section">
-      <div class="section-header">
-        <h2>产品资料</h2>
-        <div class="section-actions">
-          <a-button type="link" @click="downloadAll">
-            <download-outlined />
-            下载全部
-          </a-button>
-        </div>
-      </div>
-      <div class="resource-tabs">
-        <a-tabs v-model:activeKey="tabKey">
-          <a-tab-pane key="all" tab="所有资源">
-            <ResourceTable :resources="product.resources" @download="handleResourceDownload" />
-          </a-tab-pane>
-          <a-tab-pane key="software" tab="软件">
-            <SoftwareTable :softwares="product.softwares" @download="handleSoftwareDownload" />
-          </a-tab-pane>
-        </a-tabs>
-      </div>
-    </div>
-
-    <!-- 相关系统/产品推荐 -->
-    <div class="product-systems-section">
-      <div class="section-header">
-        <h2>相关系统</h2>
-        <a-button type="link" @click="viewAllSystems">
-          查看全部
-          <right-outlined />
-        </a-button>
-      </div>
-      <div class="systems-row">
-        <div v-for="(item, i) in product.systems" :key="i" class="system-block" @click="viewSystem(item)">
-          <div class="system-img-container">
-            <img :src="item.img" alt="" class="system-img" />
-            <div class="system-overlay">
+          <!-- 产品动态数据 -->
+          <div class="product-stats">
+            <div class="stat-item">
               <eye-outlined />
+              <span>浏览量: {{ formatNumber(productStats.views) }}</span>
+            </div>
+            <div class="stat-item">
+              <download-outlined />
+              <span>下载量: {{ formatNumber(productStats.downloads) }}</span>
+            </div>
+            <div class="stat-item">
+              <star-outlined />
+              <span>收藏: {{ formatNumber(productStats.favorites) }}</span>
+            </div>
+            <div class="stat-item">
+              <clock-circle-outlined />
+              <span>更新: {{ formatDate(productStats.lastUpdated) }}</span>
             </div>
           </div>
-          <div class="system-caption">
-            <div class="system-name">{{ item.name }}</div>
-            <div class="system-desc">{{ item.desc }}</div>
+        </div>
+        <div class="product-info-block">
+          <h1 class="product-title">{{ product.name }}</h1>
+          <div class="product-code" v-if="product.code">产品编号：{{ product.code }}</div>
+          <ul class="product-features">
+            <li v-for="(item, i) in product.features" :key="i">
+              <check-circle-outlined class="feature-icon" />
+              {{ item }}
+            </li>
+          </ul>
+          <div class="product-specs" v-if="product.specs">
+            <h3>产品规格</h3>
+            <div class="specs-grid">
+              <div v-for="(spec, key) in product.specs" :key="key" class="spec-item">
+                <span class="spec-label">{{ key }}：</span>
+                <span class="spec-value">{{ spec }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-btns">
+            <a-button type="primary" @click="handleConsult">
+              <message-outlined />
+              技术咨询
+            </a-button>
+            <a-button @click="handleDownload">
+              <download-outlined />
+              下载资料
+            </a-button>
+            <a-button @click="handleShare">
+              <share-alt-outlined />
+              分享
+            </a-button>
           </div>
         </div>
       </div>
-    </div>
-  </a-layout-content>
+
+      <!-- 视频及相关内容推荐 -->
+      <div class="product-video-section">
+        <div class="video-left">
+          <div class="video-player" @click="playVideo">
+            <img :src="product.videoCover" class="video-cover" />
+            <div class="video-play-btn">
+              <play-circle-outlined />
+            </div>
+            <div class="video-duration" v-if="product.videoDuration">
+              {{ product.videoDuration }}
+            </div>
+          </div>
+          <div class="video-info">
+            <h3>{{ product.videoTitle || '产品演示视频' }}</h3>
+            <p>{{ product.videoDesc }}</p>
+          </div>
+        </div>
+        <div class="video-right">
+          <div class="video-recommend-title">相关视频</div>
+          <ul class="video-recommend-list">
+            <li v-for="(item, i) in product.relatedVideos" :key="i" @click="playRelatedVideo(item)">
+              <div class="video-thumb-container">
+                <img :src="item.img" class="video-thumb" />
+                <div class="video-play-icon">
+                  <play-circle-outlined />
+                </div>
+                <div class="video-duration-small" v-if="item.duration">{{ item.duration }}</div>
+              </div>
+              <div class="video-info-small">
+                <div class="video-title">{{ item.title }}</div>
+                <div class="video-desc" v-if="item.desc">{{ item.desc }}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 资料下载区域 -->
+      <div class="product-resource-section">
+        <div class="section-header">
+          <h2>产品资料</h2>
+          <div class="section-actions">
+            <a-button type="link" @click="downloadAll">
+              <download-outlined />
+              下载全部
+            </a-button>
+          </div>
+        </div>
+        <div class="resource-tabs">
+          <a-tabs v-model:activeKey="tabKey">
+            <a-tab-pane key="all" tab="所有资源">
+              <ResourceTable :resources="product.resources" @download="handleResourceDownload" />
+            </a-tab-pane>
+            <a-tab-pane key="software" tab="软件">
+              <SoftwareTable :softwares="product.softwares" @download="handleSoftwareDownload" />
+            </a-tab-pane>
+          </a-tabs>
+        </div>
+      </div>
+
+      <!-- 相关系统/产品推荐 -->
+      <div class="product-systems-section">
+        <div class="section-header">
+          <h2>相关系统</h2>
+          <a-button type="link" @click="viewAllSystems">
+            查看全部
+            <right-outlined />
+          </a-button>
+        </div>
+        <div class="systems-row">
+          <div
+            v-for="(item, i) in product.systems"
+            :key="i"
+            class="system-block"
+            @click="viewSystem(item)"
+          >
+            <div class="system-img-container">
+              <img :src="item.img" alt="" class="system-img" />
+              <div class="system-overlay">
+                <eye-outlined />
+              </div>
+            </div>
+            <div class="system-caption">
+              <div class="system-name">{{ item.name }}</div>
+              <div class="system-desc">{{ item.desc }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a-layout-content>
     <Footer />
 
     <!-- 视频播放弹窗 -->
@@ -188,12 +200,7 @@
       class="video-modal"
     >
       <div class="video-container">
-        <video
-          ref="videoPlayer"
-          controls
-          :src="currentVideoUrl"
-          class="video-player-full"
-        ></video>
+        <video ref="videoPlayer" controls :src="currentVideoUrl" class="video-player-full"></video>
       </div>
     </a-modal>
 
@@ -213,25 +220,24 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import {
-  CheckCircleOutlined,
-  MessageOutlined,
-  DownloadOutlined,
-  ShareAltOutlined,
-  PlayCircleOutlined,
-  RightOutlined,
-  EyeOutlined,
-  ZoomInOutlined,
-  StarOutlined,
-  ClockCircleOutlined
-} from '@ant-design/icons-vue'
-import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import Header from '@/components/Header.vue'
 import ResourceTable from '@/components/ResourceTable.vue'
 import SoftwareTable from '@/components/SoftwareTable.vue'
-import rongyu from '@/assets/images/rongyu.jpeg'
+import {
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  DownloadOutlined,
+  EyeOutlined,
+  MessageOutlined,
+  PlayCircleOutlined,
+  RightOutlined,
+  ShareAltOutlined,
+  StarOutlined,
+  ZoomInOutlined
+} from '@ant-design/icons-vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
@@ -268,14 +274,14 @@ const productData = computed(() => ({
     '一体式管件，安装更便捷，可靠性高',
     '安装效率比传统方式提升4倍',
     '比螺纹连接快5倍',
-    '适用管径：1"~2½"（32~65 mm, 76.1 mm）',
+    '适用管径：1"~2½"（32~65 mm, 76.1 mm）'
   ],
   specs: {
-    '材质': '碳钢',
-    '表面处理': '镀锌',
-    '工作压力': '16 bar',
-    '工作温度': '-10°C ~ +80°C',
-    '认证': 'UL, FM, CE'
+    材质: '碳钢',
+    表面处理: '镀锌',
+    工作压力: '16 bar',
+    工作温度: '-10°C ~ +80°C',
+    认证: 'UL, FM, CE'
   },
   videoCover: route.query.image,
   videoTitle: `${decodeURIComponent(route.params.id)} 产品演示`,
@@ -302,7 +308,7 @@ const productData = computed(() => ({
       link: '#',
       duration: '5:20',
       desc: '实际工程应用案例'
-    },
+    }
   ],
   resources: [
     {
@@ -354,18 +360,18 @@ const tabKey = ref('all')
 const product = computed(() => productData.value)
 
 // 图片切换功能
-const setMainImage = (img) => {
+const setMainImage = img => {
   currentMainImage.value = img
 }
 
 // 图片预加载
-const preloadImage = (src) => {
+const preloadImage = src => {
   const img = new Image()
   img.src = src
 }
 
 // 图片缩放功能
-const handleImageZoom = (e) => {
+const handleImageZoom = e => {
   const container = e.currentTarget
   const rect = container.getBoundingClientRect()
   const x = e.clientX - rect.left
@@ -389,7 +395,7 @@ const playVideo = () => {
   videoModalVisible.value = true
 }
 
-const playRelatedVideo = (video) => {
+const playRelatedVideo = video => {
   currentVideoUrl.value = video.link
   videoModalVisible.value = true
 }
@@ -403,11 +409,11 @@ const downloadAll = () => {
   // 实现批量下载逻辑
 }
 
-const handleResourceDownload = (resource) => {
+const handleResourceDownload = resource => {
   // 实现资源下载逻辑
 }
 
-const handleSoftwareDownload = (software) => {
+const handleSoftwareDownload = software => {
   // 实现软件下载逻辑
 }
 
@@ -422,7 +428,7 @@ const handleShare = () => {
 }
 
 // 查看系统详情
-const viewSystem = (system) => {
+const viewSystem = system => {
   // 实现查看系统详情逻辑
 }
 
@@ -431,13 +437,13 @@ const viewAllSystems = () => {
 }
 
 // 图片预览功能
-const handlePreview = (img) => {
+const handlePreview = img => {
   previewImage.value = img
   previewVisible.value = true
 }
 
 // 格式化日期
-const formatDate = (date) => {
+const formatDate = date => {
   return new Date(date).toLocaleDateString('zh-CN', {
     year: 'numeric',
     month: 'long',
@@ -446,7 +452,7 @@ const formatDate = (date) => {
 }
 
 // 格式化数字
-const formatNumber = (num) => {
+const formatNumber = num => {
   return num >= 1000 ? (num / 1000).toFixed(1) + 'k' : num
 }
 
@@ -463,28 +469,46 @@ onBeforeUnmount(() => {
 <style scoped>
 .product-detail-layout {
   min-height: 100vh;
-  background: #f7f9fb;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
 .breadcrumb {
-  margin: 24px 0 16px 32px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  margin: 0;
+  padding: 20px 40px;
+  border-bottom: 1px solid rgba(22, 119, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .product-main {
   display: flex;
   align-items: flex-start;
   gap: 40px;
-  margin: 0 auto 36px auto;
-  max-width: 1080px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(22, 119, 255, 0.07);
-  padding: 32px 44px 28px 44px;
+  margin: 40px auto;
+  max-width: 1200px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.1);
+  padding: 40px;
+  border: 1px solid rgba(22, 119, 255, 0.1);
+  animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .main-content {
-  background: #f7f9fb;
-  padding-bottom: 40px;
+  background: transparent;
+  padding: 0 20px 40px 20px;
   min-height: 800px;
 }
 
@@ -497,18 +521,32 @@ onBeforeUnmount(() => {
 
 .main-image-container {
   position: relative;
-  width: 330px;
-  height: 330px;
+  width: 400px;
+  height: 400px;
   cursor: zoom-in;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 2px solid rgba(22, 119, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.main-image-container:hover {
+  border-color: rgba(22, 119, 255, 0.3);
+  box-shadow: 0 8px 30px rgba(22, 119, 255, 0.15);
+  transform: translateY(-2px);
 }
 
 .main-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 18px;
-  box-shadow: 0 2px 18px rgba(22, 119, 255, 0.10);
   background: #fff;
+  transition: transform 0.4s ease;
+}
+
+.main-image-container:hover .main-img {
+  transform: scale(1.05);
 }
 
 .image-zoom-overlay {
@@ -565,69 +603,152 @@ onBeforeUnmount(() => {
 }
 
 .product-title {
-  font-size: 1.45rem;
-  color: #1677ff;
-  font-weight: 800;
-  margin-bottom: 14px;
+  font-size: 2rem;
+  color: #1e293b;
+  font-weight: 700;
+  margin-bottom: 16px;
   letter-spacing: 1px;
+  line-height: 1.3;
+  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .product-code {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 16px;
+  display: inline-block;
+  background: rgba(22, 119, 255, 0.1);
+  color: #1677ff;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  border: 1px solid rgba(22, 119, 255, 0.2);
 }
 
 .product-features {
-  margin-bottom: 24px;
-  color: #444;
-  font-size: 15.7px;
-  line-height: 1.85;
+  margin-bottom: 28px;
+  color: #374151;
+  font-size: 15px;
+  line-height: 1.8;
   list-style: none;
   padding-left: 0;
 }
 
+.product-features li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: rgba(22, 119, 255, 0.02);
+  border-radius: 8px;
+  border-left: 3px solid #1677ff;
+  transition: all 0.3s ease;
+}
+
+.product-features li:hover {
+  background: rgba(22, 119, 255, 0.05);
+  transform: translateX(4px);
+}
+
 .feature-icon {
   color: #1677ff;
-  margin-right: 8px;
+  margin-right: 12px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .product-specs {
-  margin-bottom: 24px;
-  padding: 16px;
-  background: #f8f9fa;
-  border-radius: 8px;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(22, 119, 255, 0.1);
+  box-shadow: 0 2px 12px rgba(22, 119, 255, 0.05);
 }
 
 .product-specs h3 {
+  font-size: 18px;
+  color: #1e293b;
+  margin-bottom: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-specs h3::before {
+  content: '📊';
   font-size: 16px;
-  color: #333;
-  margin-bottom: 12px;
 }
 
 .specs-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 16px;
 }
 
 .spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
   font-size: 14px;
+  border: 1px solid rgba(22, 119, 255, 0.05);
 }
 
 .spec-label {
-  color: #666;
+  color: #64748b;
+  font-weight: 500;
 }
 
 .spec-value {
-  color: #333;
-  font-weight: 500;
+  color: #1e293b;
+  font-weight: 600;
 }
 
 .product-btns {
   display: flex;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.product-btns .ant-btn {
+  border-radius: 25px !important;
+  height: 45px !important;
+  padding: 0 24px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+}
+
+.product-btns .ant-btn-primary {
+  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%) !important;
+  box-shadow: 0 4px 15px rgba(22, 119, 255, 0.3) !important;
+}
+
+.product-btns .ant-btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(22, 119, 255, 0.4) !important;
+}
+
+.product-btns .ant-btn-default {
+  background: rgba(22, 119, 255, 0.1) !important;
+  color: #1677ff !important;
+  border: 1px solid rgba(22, 119, 255, 0.2) !important;
+}
+
+.product-btns .ant-btn-default:hover {
+  background: rgba(22, 119, 255, 0.2) !important;
+  transform: translateY(-2px) !important;
 }
 
 /* 视频区样式优化 */
@@ -922,24 +1043,47 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 800px) {
+  .breadcrumb {
+    padding: 16px 20px;
+  }
+
   .product-main,
   .product-video-section {
     flex-direction: column;
     gap: 24px;
+    margin: 20px auto;
+    padding: 24px 20px;
   }
 
   .main-image-container {
     width: 100%;
-    height: auto;
+    max-width: 350px;
+    height: 350px;
+    margin: 0 auto 20px auto;
   }
 
-  .main-img {
-    width: 100%;
-    height: auto;
+  .product-info-block {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .product-title {
+    font-size: 1.6rem;
   }
 
   .specs-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .product-btns {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .product-btns .ant-btn {
+    flex: 1;
+    min-width: 120px;
   }
 
   .systems-row {
@@ -953,16 +1097,59 @@ onBeforeUnmount(() => {
 
 @media (max-width: 600px) {
   .breadcrumb {
-    margin: 12px 0 10px 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+
+  .product-main {
+    margin: 16px auto;
+    padding: 20px 16px;
+  }
+
+  .main-image-container {
+    width: 100%;
+    max-width: 280px;
+    height: 280px;
+  }
+
+  .product-title {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .product-features {
+    font-size: 14px;
+  }
+
+  .product-features li {
+    padding: 6px 10px;
+    margin-bottom: 8px;
+  }
+
+  .product-specs {
+    padding: 16px;
+    margin-bottom: 24px;
+  }
+
+  .product-specs h3 {
+    font-size: 16px;
+  }
+
+  .spec-item {
+    padding: 8px 12px;
+    font-size: 13px;
   }
 
   .product-btns {
     flex-direction: column;
+    gap: 8px;
   }
 
   .product-btns .ant-btn {
-    margin-left: 0 !important;
-    margin-top: 8px;
+    width: 100% !important;
+    margin: 0 !important;
+    height: 40px !important;
+    font-size: 13px !important;
   }
 
   .video-thumb-container {
