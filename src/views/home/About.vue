@@ -183,7 +183,15 @@
             @click="openHonorModal(honor)"
           >
             <div class="honor-image-container">
-              <img :src="honor.img" :alt="honor.title" class="honor-image" />
+              <img
+                :src="honor.img"
+                :alt="honor.title"
+                class="honor-image"
+                loading="lazy"
+                decoding="async"
+                @error="handleImageError"
+                @load="handleImageLoad"
+              />
               <div class="honor-overlay">
                 <div class="honor-overlay-content">
                   <span class="view-icon">🔍</span>
@@ -221,14 +229,20 @@
     class="honor-modal"
   >
     <div v-if="selectedHonor" class="honor-modal-content">
-      <img :src="selectedHonor.img" :alt="selectedHonor.title" class="honor-modal-image" />
+      <img
+        :src="selectedHonor.img"
+        :alt="selectedHonor.title"
+        class="honor-modal-image"
+        loading="eager"
+        decoding="sync"
+        @error="handleModalImageError"
+      />
       <h3 class="honor-modal-title">{{ selectedHonor.title }}</h3>
     </div>
   </a-modal>
 </template>
 
 <script setup>
-import rongyu from '@/assets/images/rongyu.jpeg'
 import rongyu1 from '@/assets/images/rongyu1.jpg'
 import rongyu10 from '@/assets/images/rongyu10.jpg'
 import rongyu11 from '@/assets/images/rongyu11.jpg'
@@ -269,6 +283,25 @@ const selectedHonor = ref(null)
 const openHonorModal = honor => {
   selectedHonor.value = honor
   honorModalVisible.value = true
+}
+
+// 图片加载错误处理
+const handleImageError = event => {
+  console.warn('荣誉资质图片加载失败:', event.target.src)
+  // 可以设置默认图片
+  event.target.src = '/src/assets/images/logo.png'
+}
+
+// 图片加载成功处理
+const handleImageLoad = event => {
+  // 图片加载成功后的处理
+  event.target.style.opacity = '1'
+}
+
+// 模态框图片错误处理
+const handleModalImageError = event => {
+  console.warn('模态框图片加载失败:', event.target.src)
+  event.target.src = '/src/assets/images/logo.png'
 }
 
 onMounted(() => {
@@ -326,7 +359,6 @@ const team = [
   }
 ]
 const honors = [
-  { title: '高新技术企业证书', img: rongyu },
   { title: '质量管理体系认证', img: rongyu1 },
   { title: '环境管理体系认证', img: rongyu2 },
   { title: '职业健康安全管理体系认证', img: rongyu3 },
@@ -405,8 +437,24 @@ const honors = [
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.4s ease;
-  padding: 12px;
+  object-position: center;
+  transition:
+    transform 0.4s ease,
+    opacity 0.3s ease;
+  padding: 8px;
+  opacity: 0;
+  /* 图片质量优化 */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+  -ms-interpolation-mode: bicubic;
+  /* 防止图片模糊 */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  /* 图片锐化 */
+  filter: contrast(1.05) brightness(1.02);
 }
 
 .honor-item:hover .honor-image {
@@ -472,9 +520,22 @@ const honors = [
 .honor-modal-image {
   width: 100%;
   height: auto;
-  max-height: 70vh;
+  max-height: 80vh;
   object-fit: contain;
+  object-position: center;
   background: #f8fafc;
+  /* 高质量图片渲染 */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+  -ms-interpolation-mode: bicubic;
+  /* 防止模糊 */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  /* 增强对比度和清晰度 */
+  filter: contrast(1.1) brightness(1.05);
 }
 
 .honor-modal-title {

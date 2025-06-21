@@ -4,37 +4,8 @@
       <!-- 主要内容区域 -->
       <div class="footer-main">
         <div class="footer-container">
-          <!-- 公司信息 -->
-          <div class="footer-section company-info">
-            <div class="company-logo">
-              <img src="@/assets/images/logo.png" alt="岱威管业" class="logo-img" />
-              <div class="company-name">
-                <h3>山东岱威创新管业</h3>
-                <p>专业管道系统解决方案提供商</p>
-              </div>
-            </div>
-            <p class="company-desc">
-              致力于为客户提供高品质的管道产品和专业的技术服务，
-              在管道行业拥有丰富的经验和卓越的技术实力。
-            </p>
-            <div class="company-stats">
-              <div class="stat-item">
-                <span class="stat-number">15+</span>
-                <span class="stat-label">年经验</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">200+</span>
-                <span class="stat-label">专利</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">1000+</span>
-                <span class="stat-label">客户</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 产品中心 -->
-          <div class="footer-section">
+          <!-- 快速导航 -->
+          <div class="footer-section quick-nav">
             <h3>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path
@@ -44,21 +15,12 @@
                   fill="none"
                 />
                 <path d="M3 7L2 3H1" stroke="currentColor" stroke-width="1.5" />
-                <circle cx="6" cy="17" r="1" stroke="currentColor" stroke-width="1.5" fill="none" />
-                <circle
-                  cx="15"
-                  cy="17"
-                  r="1"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  fill="none"
-                />
               </svg>
-              产品中心
+              快速导航
             </h3>
             <ul>
-              <li @click="navigateTo('/products')" class="nav-link">
-                <span>碳化硅聚合陶瓷管件</span>
+              <li @click="navigateTo('/')" class="nav-link">
+                <span>首页</span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
                     d="M5 3l4 4-4 4"
@@ -68,59 +30,8 @@
                   />
                 </svg>
               </li>
-              <li @click="navigateTo('/products')" class="nav-link">
-                <span>陶瓷内衬复合钢管</span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path
-                    d="M5 3l4 4-4 4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </li>
-              <li @click="navigateTo('/products')" class="nav-link">
-                <span>双金属耐磨管及衬板</span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path
-                    d="M5 3l4 4-4 4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </li>
-              <li @click="navigateTo('/products')" class="nav-link">
-                <span>查看全部产品</span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path
-                    d="M5 3l4 4-4 4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </li>
-            </ul>
-          </div>
-
-          <!-- 服务支持 -->
-          <div class="footer-section">
-            <h3>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path
-                  d="M10 2L3 7v9c0 5 7 7 7 7s7-2 7-7V7l-7-5z"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  fill="none"
-                />
-                <path d="M8 11l2 2 4-4" stroke="currentColor" stroke-width="1.5" />
-              </svg>
-              服务支持
-            </h3>
-            <ul>
               <li @click="navigateTo('/about')" class="nav-link">
-                <span>技术支持</span>
+                <span>关于我们</span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
                     d="M5 3l4 4-4 4"
@@ -130,19 +41,8 @@
                   />
                 </svg>
               </li>
-              <li @click="navigateTo('/contact')" class="nav-link">
-                <span>售后服务</span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path
-                    d="M5 3l4 4-4 4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </li>
-              <li @click="navigateTo('/contact')" class="nav-link">
-                <span>在线咨询</span>
+              <li @click="navigateTo('/news')" class="nav-link">
+                <span>新闻中心</span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
                     d="M5 3l4 4-4 4"
@@ -166,6 +66,147 @@
             </ul>
           </div>
 
+          <!-- 产品中心 -->
+          <div class="footer-section">
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path
+                  d="M10 2L3 7v9c0 5 7 7 7 7s7-2 7-7V7l-7-5z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  fill="none"
+                />
+                <circle
+                  cx="10"
+                  cy="10"
+                  r="3"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  fill="none"
+                />
+              </svg>
+              产品中心
+            </h3>
+            <ul>
+              <li @click="navigateToCategory('碳化硅聚合陶瓷管')" class="nav-link">
+                <span>碳化硅聚合陶瓷管</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 3l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </li>
+              <li @click="navigateToCategory('陶瓷内衬复合钢管')" class="nav-link">
+                <span>陶瓷内衬复合钢管</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 3l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </li>
+              <li @click="navigateToCategory('双金属耐磨管')" class="nav-link">
+                <span>双金属耐磨管</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 3l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </li>
+              <li @click="navigateToCategory('龟甲网耐磨陶瓷管')" class="nav-link">
+                <span>龟甲网耐磨陶瓷管</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 3l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </li>
+              <li @click="navigateTo('/products')" class="nav-link">
+                <span>查看全部产品</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 3l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 热门产品 -->
+          <div class="footer-section">
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path
+                  d="M10 1l3 6h6l-5 4 2 6-6-4-6 4 2-6-5-4h6l3-6z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  fill="none"
+                />
+              </svg>
+              热门产品
+            </h3>
+            <ul>
+              <li @click="navigateToProduct('真空皮带脱水机及配件')" class="nav-link">
+                <span>真空皮带脱水机</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 3l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </li>
+              <li @click="navigateToProduct('烧结碳化硅陶瓷管件·喷嘴')" class="nav-link">
+                <span>碳化硅陶瓷喷嘴</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 3l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </li>
+              <li @click="navigateToProduct('堆焊耐磨衬板管件')" class="nav-link">
+                <span>堆焊耐磨衬板</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 3l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </li>
+              <li @click="navigateToProduct('陶瓷内衬复合钢管')" class="nav-link">
+                <span>陶瓷内衬钢管</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 3l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </li>
+            </ul>
+          </div>
+
           <!-- 联系方式 -->
           <div class="footer-section contact-section">
             <h3>
@@ -176,7 +217,10 @@
               联系我们
             </h3>
             <ul class="contact-list">
-              <li class="contact-item">
+              <li
+                class="contact-item clickable"
+                @click="copyToClipboard('0531-87357881', '服务热线')"
+              >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path
                     d="M2 2h3l1 3-2 2c1 2 3 4 5 5l2-2 3 1v3c0 1-1 2-2 2C7 14 2 9 2 4c0-1 1-2 2-2z"
@@ -186,19 +230,52 @@
                   />
                 </svg>
                 <div class="contact-info">
-                  <span class="contact-label">电话</span>
+                  <span class="contact-label">服务热线</span>
+                  <span class="contact-value">0531-87357881</span>
+                </div>
+                <div class="copy-hint">点击复制</div>
+              </li>
+              <li
+                class="contact-item clickable"
+                @click="copyToClipboard('18663761618', '手机号码')"
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <rect
+                    x="3"
+                    y="1"
+                    width="10"
+                    height="14"
+                    rx="2"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    fill="none"
+                  />
+                  <path
+                    d="M7 12h2"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <div class="contact-info">
+                  <span class="contact-label">手机号码</span>
                   <span class="contact-value">18663761618</span>
                 </div>
+                <div class="copy-hint">点击复制</div>
               </li>
-              <li class="contact-item">
+              <li
+                class="contact-item clickable"
+                @click="copyToClipboard('sddwcxgy@126.com', '邮箱地址')"
+              >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M2 3h12l-6 4-6-4z" fill="currentColor" />
                   <path d="M2 3v10h12V3" stroke="currentColor" stroke-width="1.5" fill="none" />
                 </svg>
                 <div class="contact-info">
-                  <span class="contact-label">邮箱</span>
+                  <span class="contact-label">邮箱地址</span>
                   <span class="contact-value">sddwcxgy@126.com</span>
                 </div>
+                <div class="copy-hint">点击复制</div>
               </li>
               <li class="contact-item">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -218,7 +295,7 @@
                   />
                 </svg>
                 <div class="contact-info">
-                  <span class="contact-label">地址</span>
+                  <span class="contact-label">公司地址</span>
                   <span class="contact-value">山东省济南市长清区双龙路1006号</span>
                 </div>
               </li>
@@ -279,30 +356,20 @@
       <!-- 底部版权 -->
       <div class="footer-bottom">
         <div class="footer-bottom-content">
-          <div class="copyright">
-            <span>© 2025 山东岱威创新管业有限公司</span>
-            <span class="separator">|</span>
-            <span>版权所有</span>
-            <span class="separator">|</span>
-            <span>鲁ICP备xxxxxxxx号</span>
-          </div>
           <div class="footer-links">
             <span @click="navigateTo('/about')" class="footer-link">关于我们</span>
             <span @click="navigateTo('/contact')" class="footer-link">联系我们</span>
+            <span @click="navigateTo('/products')" class="footer-link">产品中心</span>
             <span @click="navigateTo('/news')" class="footer-link">新闻中心</span>
+          </div>
+          <div class="copyright-center">
+            <span>© 山东岱威创新管业有限公司</span>
+            <span class="separator">|</span>
+            <span>鲁ICP备17022491号</span>
           </div>
         </div>
       </div>
     </footer>
-
-    <!-- 返回顶部按钮 -->
-    <a-back-top>
-      <div class="back-top-button">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M10 4l-6 6h4v6h4v-6h4l-6-6z" fill="currentColor" />
-        </svg>
-      </div>
-    </a-back-top>
   </a-layout-footer>
 </template>
 
@@ -316,6 +383,39 @@ const showWx = ref(false)
 // 导航到指定页面
 const navigateTo = (path: string) => {
   router.push(path)
+}
+
+// 导航到产品详情页
+const navigateToProduct = (productTitle: string) => {
+  // 跳转到具体的产品详情页，使用正确的路由路径
+  router.push(`/products/${encodeURIComponent(productTitle)}`)
+}
+
+// 导航到产品分类页面
+const navigateToCategory = (category: string) => {
+  // 跳转到产品服务页面，并通过query参数传递分类名称
+  router.push({
+    path: '/products',
+    query: { category: category }
+  })
+}
+
+// 复制联系方式到剪贴板
+const copyToClipboard = async (text: string, type: string) => {
+  try {
+    await navigator.clipboard.writeText(text)
+    // 这里需要导入message组件，暂时用console.log代替
+    console.log(`${type}已复制到剪贴板`)
+  } catch (error) {
+    // 降级方案
+    const textArea = document.createElement('textarea')
+    textArea.value = text
+    document.body.appendChild(textArea)
+    textArea.select()
+    document.execCommand('copy')
+    document.body.removeChild(textArea)
+    console.log(`${type}已复制到剪贴板`)
+  }
 }
 
 // 切换微信二维码显示
@@ -513,10 +613,43 @@ const toggleWechat = () => {
   gap: 12px;
   padding: 12px 0;
   border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 .contact-item:last-child {
   border-bottom: none;
+}
+
+.contact-item.clickable {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 12px 8px;
+  margin: 0 -8px;
+}
+
+.contact-item.clickable:hover {
+  background: rgba(22, 119, 255, 0.1);
+  transform: translateX(4px);
+}
+
+.copy-hint {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: #1677ff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: rgba(22, 119, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.contact-item.clickable:hover .copy-hint {
+  opacity: 1;
 }
 
 .contact-item svg {
@@ -586,17 +719,135 @@ const toggleWechat = () => {
 }
 
 /* 微信二维码样式 */
-.wechat-qrcode {
+.wechat-section {
+  margin-top: 24px;
+  position: relative;
+}
+
+.wechat-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(22, 119, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(22, 119, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.wechat-trigger:hover {
+  background: rgba(22, 119, 255, 0.2);
+  color: #ffffff;
+}
+
+.wechat-trigger svg {
+  color: #1677ff;
+}
+
+.wechat-trigger .arrow {
+  margin-left: auto;
+  transition: transform 0.3s ease;
+}
+
+.wechat-trigger .arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.wechat-qr {
   position: absolute;
   bottom: 100%;
   left: 0;
-  background: white;
-  border-radius: 16px;
+  right: 0;
+  margin-bottom: 12px;
   padding: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   z-index: 10;
-  min-width: 200px;
-  margin-bottom: 10px;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.qr-placeholder {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #e2e8f0 100%);
+  border: 2px dashed #1677ff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.qr-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(22, 119, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(67, 198, 172, 0.1) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.qr-placeholder:hover {
+  border-color: #43c6ac;
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(22, 119, 255, 0.2);
+}
+
+.qr-text {
+  font-size: 15px;
+  color: #1677ff;
+  font-weight: 600;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.qr-sub {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.qr-placeholder::after {
+  content: '📱';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  opacity: 0.3;
+  z-index: 1;
 }
 
 .qrcode-header {
@@ -667,19 +918,7 @@ const toggleWechat = () => {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 16px;
-}
-
-.copyright {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #64748b;
-  font-size: 0.85rem;
-}
-
-.separator {
-  color: #475569;
+  gap: 20px;
 }
 
 .footer-links {
@@ -692,29 +931,30 @@ const toggleWechat = () => {
   font-size: 0.85rem;
   cursor: pointer;
   transition: color 0.3s ease;
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
 .footer-link:hover {
   color: #1677ff;
+  background: rgba(22, 119, 255, 0.1);
 }
 
-/* 返回顶部按钮样式 */
-.back-top-button {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  border-radius: 50%;
+.copyright-center {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.3);
-  transition: all 0.3s ease;
+  gap: 8px;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px 20px;
+  background: rgba(22, 119, 255, 0.05);
+  border-radius: 20px;
+  border: 1px solid rgba(22, 119, 255, 0.1);
 }
 
-.back-top-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(22, 119, 255, 0.4);
+.separator {
+  color: #475569;
 }
 
 /* 响应式设计 */
@@ -804,24 +1044,25 @@ const toggleWechat = () => {
 
   .footer-bottom-content {
     flex-direction: column;
+    gap: 16px;
     text-align: center;
     padding: 20px;
+  }
+
+  .footer-links {
+    justify-content: center;
   }
 
   .footer-bottom {
     background: rgba(15, 23, 42, 0.95) !important;
   }
 
-  .copyright {
+  .copyright-center {
     color: #94a3b8 !important;
   }
 
   .footer-link {
     color: #cbd5e1 !important;
-  }
-
-  .footer-links {
-    justify-content: center;
   }
 
   .wechat-qrcode {

@@ -3,15 +3,7 @@
     <Header />
     <a-layout-content class="main-content">
       <!-- 面包屑 -->
-      <div class="breadcrumb">
-        <a-breadcrumb>
-          <a-breadcrumb-item><a href="/">首页</a></a-breadcrumb-item>
-          <a-breadcrumb-item>
-            <a href="/products">产品服务</a>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item>{{ product.name }}</a-breadcrumb-item>
-        </a-breadcrumb>
-      </div>
+      <Breadcrumb :items="breadcrumbItems" />
 
       <!-- 产品主图和简介 -->
       <div class="product-main">
@@ -82,6 +74,33 @@
               </div>
             </div>
           </div>
+
+          <!-- 产品详细内容 -->
+          <div class="product-detail-content" v-if="product.detailContent">
+            <h3>产品详情</h3>
+            <div class="detail-content" v-html="product.detailContent"></div>
+          </div>
+
+          <!-- 产品标签 -->
+          <div class="product-tags" v-if="product.tags && product.tags.length">
+            <h3>产品标签</h3>
+            <div class="tags-container">
+              <span v-for="tag in product.tags" :key="tag" class="product-tag">{{ tag }}</span>
+            </div>
+          </div>
+
+          <!-- 发布信息 -->
+          <div class="product-meta" v-if="product.publishDate">
+            <div class="meta-item">
+              <span class="meta-label">发布时间：</span>
+              <span class="meta-value">{{ formatDate(product.publishDate) }}</span>
+            </div>
+            <div class="meta-item" v-if="product.code">
+              <span class="meta-label">产品编号：</span>
+              <span class="meta-value">{{ product.code }}</span>
+            </div>
+          </div>
+
           <div class="product-btns">
             <a-button type="primary" @click="handleConsult">
               <message-outlined />
@@ -99,110 +118,64 @@
         </div>
       </div>
 
-      <!-- 视频及相关内容推荐 -->
-      <div class="product-video-section">
-        <div class="video-left">
-          <div class="video-player" @click="playVideo">
-            <img :src="product.videoCover" class="video-cover" />
-            <div class="video-play-btn">
-              <play-circle-outlined />
+      <!-- 联系咨询区域 -->
+      <div class="contact-section">
+        <div class="contact-card">
+          <div class="contact-header">
+            <h3>产品咨询</h3>
+            <p>如需了解更多产品信息，请联系我们</p>
+          </div>
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div class="contact-text">
+                <div class="contact-label">服务热线</div>
+                <div class="contact-value">0531-87357881</div>
+              </div>
             </div>
-            <div class="video-duration" v-if="product.videoDuration">
-              {{ product.videoDuration }}
+            <div class="contact-item">
+              <div class="contact-icon">📱</div>
+              <div class="contact-text">
+                <div class="contact-label">手机号码</div>
+                <div class="contact-value">18663761618</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📧</div>
+              <div class="contact-text">
+                <div class="contact-label">邮箱地址</div>
+                <div class="contact-value">sddwcxgy@126.com</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div class="contact-text">
+                <div class="contact-label">公司地址</div>
+                <div class="contact-value">山东省济南市长清区双龙路1006号</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">🌐</div>
+              <div class="contact-text">
+                <div class="contact-label">公司网址</div>
+                <div class="contact-value">www.sddwcxgy.cn</div>
+              </div>
             </div>
           </div>
-          <div class="video-info">
-            <h3>{{ product.videoTitle || '产品演示视频' }}</h3>
-            <p>{{ product.videoDesc }}</p>
-          </div>
-        </div>
-        <div class="video-right">
-          <div class="video-recommend-title">相关视频</div>
-          <ul class="video-recommend-list">
-            <li v-for="(item, i) in product.relatedVideos" :key="i" @click="playRelatedVideo(item)">
-              <div class="video-thumb-container">
-                <img :src="item.img" class="video-thumb" />
-                <div class="video-play-icon">
-                  <play-circle-outlined />
-                </div>
-                <div class="video-duration-small" v-if="item.duration">{{ item.duration }}</div>
-              </div>
-              <div class="video-info-small">
-                <div class="video-title">{{ item.title }}</div>
-                <div class="video-desc" v-if="item.desc">{{ item.desc }}</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 资料下载区域 -->
-      <div class="product-resource-section">
-        <div class="section-header">
-          <h2>产品资料</h2>
-          <div class="section-actions">
-            <a-button type="link" @click="downloadAll">
-              <download-outlined />
-              下载全部
+          <div class="contact-actions">
+            <a-button type="primary" size="large" @click="handleConsult">
+              <message-outlined />
+              立即咨询
             </a-button>
-          </div>
-        </div>
-        <div class="resource-tabs">
-          <a-tabs v-model:activeKey="tabKey">
-            <a-tab-pane key="all" tab="所有资源">
-              <ResourceTable :resources="product.resources" @download="handleResourceDownload" />
-            </a-tab-pane>
-            <a-tab-pane key="software" tab="软件">
-              <SoftwareTable :softwares="product.softwares" @download="handleSoftwareDownload" />
-            </a-tab-pane>
-          </a-tabs>
-        </div>
-      </div>
-
-      <!-- 相关系统/产品推荐 -->
-      <div class="product-systems-section">
-        <div class="section-header">
-          <h2>相关系统</h2>
-          <a-button type="link" @click="viewAllSystems">
-            查看全部
-            <right-outlined />
-          </a-button>
-        </div>
-        <div class="systems-row">
-          <div
-            v-for="(item, i) in product.systems"
-            :key="i"
-            class="system-block"
-            @click="viewSystem(item)"
-          >
-            <div class="system-img-container">
-              <img :src="item.img" alt="" class="system-img" />
-              <div class="system-overlay">
-                <eye-outlined />
-              </div>
-            </div>
-            <div class="system-caption">
-              <div class="system-name">{{ item.name }}</div>
-              <div class="system-desc">{{ item.desc }}</div>
-            </div>
+            <a-button size="large" @click="handleDownload">
+              <download-outlined />
+              下载资料
+            </a-button>
           </div>
         </div>
       </div>
     </a-layout-content>
     <Footer />
-
-    <!-- 视频播放弹窗 -->
-    <a-modal
-      v-model:visible="videoModalVisible"
-      :footer="null"
-      :width="800"
-      :destroyOnClose="true"
-      class="video-modal"
-    >
-      <div class="video-container">
-        <video ref="videoPlayer" controls :src="currentVideoUrl" class="video-player-full"></video>
-      </div>
-    </a-modal>
 
     <!-- 图片预览弹窗 -->
     <a-modal
@@ -220,18 +193,20 @@
 </template>
 
 <script setup>
+import Breadcrumb from '@/components/Breadcrumb.vue'
 import Footer from '@/components/Footer.vue'
 import Header from '@/components/Header.vue'
-import ResourceTable from '@/components/ResourceTable.vue'
-import SoftwareTable from '@/components/SoftwareTable.vue'
+import {
+  findProductByTitle,
+  getProductFeatures,
+  getProductSpecs
+} from '@/composables/useProductData'
 import {
   CheckCircleOutlined,
   ClockCircleOutlined,
   DownloadOutlined,
   EyeOutlined,
   MessageOutlined,
-  PlayCircleOutlined,
-  RightOutlined,
   ShareAltOutlined,
   StarOutlined,
   ZoomInOutlined
@@ -241,7 +216,12 @@ import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
-const id = Number(route.params.id)
+
+// 获取当前产品数据
+const currentProduct = computed(() => {
+  const productTitle = decodeURIComponent(route.params.id)
+  return findProductByTitle(productTitle)
+})
 
 // 当前显示的主图
 const currentMainImage = ref(route.query.image)
@@ -259,105 +239,50 @@ const productStats = ref({
 })
 
 // 从路由参数获取产品数据
-const productData = computed(() => ({
-  name: decodeURIComponent(route.params.id),
-  category: route.query.category,
-  mainImage: currentMainImage.value,
-  images: [
-    route.query.image,
-    route.query.image.replace('.jpg', '_1.jpg'),
-    route.query.image.replace('.jpg', '_2.jpg'),
-    route.query.image.replace('.jpg', '_3.jpg'),
-    route.query.image.replace('.jpg', '_4.jpg')
-  ].filter(Boolean), // 过滤掉无效的图片路径
-  features: [
-    '一体式管件，安装更便捷，可靠性高',
-    '安装效率比传统方式提升4倍',
-    '比螺纹连接快5倍',
-    '适用管径：1"~2½"（32~65 mm, 76.1 mm）'
-  ],
-  specs: {
-    材质: '碳钢',
-    表面处理: '镀锌',
-    工作压力: '16 bar',
-    工作温度: '-10°C ~ +80°C',
-    认证: 'UL, FM, CE'
-  },
-  videoCover: route.query.image,
-  videoTitle: `${decodeURIComponent(route.params.id)} 产品演示`,
-  videoDesc: `了解${decodeURIComponent(route.params.id)}的安装优势和创新特性`,
-  videoDuration: '3:45',
-  relatedVideos: [
-    {
-      img: route.query.image,
-      title: `${decodeURIComponent(route.params.id)} 安装演示`,
-      link: '#',
-      duration: '2:30',
-      desc: '详细安装步骤演示'
-    },
-    {
-      img: route.query.image,
-      title: '产品对比讲解',
-      link: '#',
-      duration: '4:15',
-      desc: '与传统产品对比分析'
-    },
-    {
-      img: route.query.image,
-      title: '系统案例',
-      link: '#',
-      duration: '5:20',
-      desc: '实际工程应用案例'
+const productData = computed(() => {
+  const product = currentProduct.value
+  if (!product) {
+    // 如果没有找到产品，返回默认数据
+    return {
+      name: decodeURIComponent(route.params.id),
+      category: route.query.category || '产品',
+      mainImage: currentMainImage.value || route.query.image,
+      images: [route.query.image].filter(Boolean),
+      features: getProductFeatures(route.query.category, decodeURIComponent(route.params.id)),
+      specs: getProductSpecs(route.query.category, decodeURIComponent(route.params.id)),
+      code: 'N/A',
+      publishDate: new Date(),
+      tags: [],
+      detailContent: '<p>产品详情加载中...</p>'
     }
-  ],
-  resources: [
-    {
-      name: `${decodeURIComponent(route.params.id)} 产品样本`,
-      number: '10.06',
-      download: '#',
-      collection: '#'
-    },
-    {
-      name: '安装说明书',
-      number: '101,103',
-      download: '#',
-      collection: '#'
-    },
-    {
-      name: '应用指南',
-      number: 'AN-001',
-      download: '#',
-      collection: '#'
-    }
-  ],
-  softwares: [
-    { name: 'Revit ELS-GLOBAL - 10.06', download: '#' },
-    { name: 'Revit Europe - 10.06', download: '#' },
-    { name: 'AutoCAD 10.06', download: '#' }
-  ],
-  systems: [
-    {
-      img: route.query.image,
-      name: `${decodeURIComponent(route.params.id)}`,
-      desc: '创新的一体式设计'
-    },
-    {
-      img: route.query.image,
-      name: '相关系统',
-      desc: '提升效率的解决方案'
-    }
-  ]
-}))
+  }
+
+  return {
+    name: product.title,
+    category: product.category,
+    mainImage: currentMainImage.value || product.img,
+    images: product.images || [product.img, product.img, product.img, product.img],
+    features: getProductFeatures(product.category, product.title),
+    specs: getProductSpecs(product.category, product.title),
+    code: product.code,
+    publishDate: product.publishDate,
+    tags: product.tags || [],
+    detailContent: product.detailContent || '<p>产品详情</p>'
+  }
+})
 
 // 状态管理
 const showZoom = ref(false)
 const zoomStyle = ref({})
-const videoModalVisible = ref(false)
-const currentVideoUrl = ref('')
-const tabKey = ref('all')
 
 // 使用计算属性获取产品数据
 const product = computed(() => productData.value)
+
+// 面包屑数据
+const breadcrumbItems = computed(() => [
+  { path: '/products', text: '产品服务', icon: '🔧' },
+  { text: product.value.name, icon: '📦' }
+])
 
 // 图片切换功能
 const setMainImage = img => {
@@ -389,51 +314,22 @@ const resetZoom = () => {
   showZoom.value = false
 }
 
-// 视频播放功能
-const playVideo = () => {
-  currentVideoUrl.value = product.value.videoUrl
-  videoModalVisible.value = true
-}
-
-const playRelatedVideo = video => {
-  currentVideoUrl.value = video.link
-  videoModalVisible.value = true
-}
-
 // 下载功能
 const handleDownload = () => {
   // 实现下载逻辑
-}
-
-const downloadAll = () => {
-  // 实现批量下载逻辑
-}
-
-const handleResourceDownload = resource => {
-  // 实现资源下载逻辑
-}
-
-const handleSoftwareDownload = software => {
-  // 实现软件下载逻辑
+  console.log('下载产品资料')
 }
 
 // 咨询功能
 const handleConsult = () => {
   // 实现咨询逻辑
+  console.log('联系技术咨询')
 }
 
 // 分享功能
 const handleShare = () => {
   // 实现分享逻辑
-}
-
-// 查看系统详情
-const viewSystem = system => {
-  // 实现查看系统详情逻辑
-}
-
-const viewAllSystems = () => {
-  router.push('/systems')
+  console.log('分享产品')
 }
 
 // 图片预览功能
@@ -470,15 +366,6 @@ onBeforeUnmount(() => {
 .product-detail-layout {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-}
-
-.breadcrumb {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  margin: 0;
-  padding: 20px 40px;
-  border-bottom: 1px solid rgba(22, 119, 255, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .product-main {
@@ -710,6 +597,122 @@ onBeforeUnmount(() => {
   font-weight: 600;
 }
 
+/* 产品详细内容样式 */
+.product-detail-content {
+  margin-bottom: 28px;
+}
+
+.product-detail-content h3 {
+  font-size: 18px;
+  color: #1e293b;
+  margin-bottom: 16px;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(22, 119, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.detail-content {
+  color: #374151;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.detail-content h2 {
+  font-size: 16px;
+  color: #1e293b;
+  margin: 20px 0 12px 0;
+  font-weight: 600;
+}
+
+.detail-content h3 {
+  font-size: 15px;
+  color: #374151;
+  margin: 16px 0 8px 0;
+  font-weight: 600;
+}
+
+.detail-content ul {
+  margin: 12px 0;
+  padding-left: 20px;
+}
+
+.detail-content li {
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.detail-content p {
+  margin-bottom: 12px;
+}
+
+/* 产品标签样式 */
+.product-tags {
+  margin-bottom: 28px;
+}
+
+.product-tags h3 {
+  font-size: 18px;
+  color: #1e293b;
+  margin-bottom: 16px;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(22, 119, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-tag {
+  display: inline-block;
+  background: rgba(22, 119, 255, 0.1);
+  color: #1677ff;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-weight: 500;
+  border: 1px solid rgba(22, 119, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.product-tag:hover {
+  background: rgba(22, 119, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* 产品元信息样式 */
+.product-meta {
+  margin-bottom: 28px;
+  padding: 16px;
+  background: rgba(22, 119, 255, 0.02);
+  border-radius: 8px;
+  border-left: 3px solid #1677ff;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.meta-item:last-child {
+  margin-bottom: 0;
+}
+
+.meta-label {
+  font-weight: 600;
+  color: #374151;
+  margin-right: 8px;
+  min-width: 80px;
+}
+
+.meta-value {
+  color: #1677ff;
+  font-weight: 500;
+}
+
 .product-btns {
   display: flex;
   gap: 12px;
@@ -751,304 +754,156 @@ onBeforeUnmount(() => {
   transform: translateY(-2px) !important;
 }
 
-/* 视频区样式优化 */
-.product-video-section {
-  display: flex;
-  max-width: 1080px;
-  margin: 0 auto 36px auto;
-  gap: 32px;
+/* 联系咨询区域样式 */
+.contact-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-.video-left {
-  flex: 1.5;
+.contact-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.1);
+  border: 1px solid rgba(22, 119, 255, 0.1);
+  animation: slideInUp 0.6s ease-out;
 }
 
-.video-player {
-  position: relative;
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #000;
-  cursor: pointer;
-  transition: transform 0.2s;
+.contact-header {
+  text-align: center;
+  margin-bottom: 32px;
 }
 
-.video-player:hover {
-  transform: translateY(-2px);
-}
-
-.video-cover {
-  width: 100%;
-  border-radius: 12px;
-}
-
-.video-play-btn {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 48px;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.video-duration {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-}
-
-.video-info {
-  margin-top: 16px;
-}
-
-.video-info h3 {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 8px;
-}
-
-.video-info p {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.video-right {
-  flex: 1.1;
-  padding-top: 12px;
-}
-
-.video-recommend-title {
-  font-size: 17px;
-  color: #1677ff;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.video-recommend-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.video-recommend-list li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 18px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.video-recommend-list li:hover {
-  transform: translateX(4px);
-}
-
-.video-thumb-container {
-  position: relative;
-  width: 120px;
-  height: 68px;
-  margin-right: 12px;
-}
-
-.video-thumb {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 6px;
-}
-
-.video-play-icon {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
+.contact-header h3 {
   font-size: 24px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: #1e293b;
+  margin-bottom: 8px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.video-duration-small {
-  position: absolute;
-  right: 4px;
-  bottom: 4px;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  padding: 2px 4px;
-  border-radius: 2px;
-  font-size: 10px;
-}
-
-.video-info-small {
-  flex: 1;
-}
-
-.video-title {
-  color: #333;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 4px;
-}
-
-.video-desc {
-  color: #666;
-  font-size: 12px;
-}
-
-/* 资源下载区样式优化 */
-.product-resource-section {
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 2px 16px rgba(22, 119, 255, 0.06);
-  padding: 24px;
-  max-width: 1080px;
-  margin: 0 auto 46px auto;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.section-header h2 {
-  font-size: 18px;
-  color: #1677ff;
+.contact-header p {
+  color: #64748b;
+  font-size: 16px;
   margin: 0;
 }
 
-/* 相关系统样式优化 */
-.product-systems-section {
-  max-width: 1080px;
-  margin: 0 auto 36px auto;
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
 }
 
-.systems-row {
+.contact-item {
   display: flex;
-  gap: 24px;
-  justify-content: flex-start;
-  align-items: stretch;
-}
-
-.system-block {
-  background: linear-gradient(120deg, #eaf6ff 0%, #fafdff 100%);
-  border-radius: 12px;
-  box-shadow: 0 2px 11px rgba(22, 119, 255, 0.05);
+  align-items: center;
+  gap: 16px;
   padding: 20px;
-  flex: 1;
-  cursor: pointer;
-  transition: all 0.3s;
+  background: rgba(22, 119, 255, 0.02);
+  border-radius: 12px;
+  border-left: 4px solid #1677ff;
+  transition: all 0.3s ease;
 }
 
-.system-block:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.1);
+.contact-item:hover {
+  background: rgba(22, 119, 255, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(22, 119, 255, 0.1);
 }
 
-.system-img-container {
-  position: relative;
-  width: 100%;
-  height: 160px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.system-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-
-.system-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+.contact-icon {
+  font-size: 24px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s;
+  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  border-radius: 12px;
+  color: white;
+  flex-shrink: 0;
 }
 
-.system-overlay .anticon {
-  color: #fff;
-  font-size: 32px;
+.contact-text {
+  flex: 1;
 }
 
-.system-block:hover .system-img {
-  transform: scale(1.05);
-}
-
-.system-block:hover .system-overlay {
-  opacity: 1;
-}
-
-.system-caption {
-  text-align: center;
-}
-
-.system-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1677ff;
-  margin-bottom: 8px;
-}
-
-.system-desc {
-  color: #666;
+.contact-label {
   font-size: 14px;
-  line-height: 1.5;
+  color: #64748b;
+  margin-bottom: 4px;
+  font-weight: 500;
 }
 
-/* 视频弹窗样式 */
-.video-modal :deep(.ant-modal-content) {
-  background: #000;
-  padding: 0;
+.contact-value {
+  font-size: 16px;
+  color: #1e293b;
+  font-weight: 600;
 }
 
-.video-container {
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 比例 */
-  position: relative;
+.contact-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.video-player-full {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.contact-actions .ant-btn {
+  border-radius: 25px !important;
+  height: 50px !important;
+  padding: 0 32px !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  min-width: 160px !important;
+}
+
+.contact-actions .ant-btn-primary {
+  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%) !important;
+  box-shadow: 0 4px 15px rgba(22, 119, 255, 0.3) !important;
+}
+
+.contact-actions .ant-btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(22, 119, 255, 0.4) !important;
+}
+
+.contact-actions .ant-btn-default {
+  background: rgba(22, 119, 255, 0.1) !important;
+  color: #1677ff !important;
+  border: 1px solid rgba(22, 119, 255, 0.2) !important;
+}
+
+.contact-actions .ant-btn-default:hover {
+  background: rgba(22, 119, 255, 0.2) !important;
+  transform: translateY(-2px) !important;
 }
 
 /* 响应式优化 */
 @media (max-width: 1200px) {
   .product-main,
-  .product-video-section,
-  .product-resource-section,
-  .product-systems-section {
+  .contact-section {
     max-width: 98vw;
     padding: 20px;
+  }
+
+  .contact-info {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
   }
 }
 
 @media (max-width: 800px) {
-  .breadcrumb {
-    padding: 16px 20px;
-  }
-
-  .product-main,
-  .product-video-section {
+  .product-main {
     flex-direction: column;
     gap: 24px;
     margin: 20px auto;
@@ -1086,12 +941,27 @@ onBeforeUnmount(() => {
     min-width: 120px;
   }
 
-  .systems-row {
-    flex-direction: column;
+  .contact-section {
+    margin: 20px auto;
+    padding: 0 16px;
   }
 
-  .system-block {
-    margin-bottom: 16px;
+  .contact-card {
+    padding: 24px 20px;
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .contact-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contact-actions .ant-btn {
+    width: 100% !important;
   }
 }
 
@@ -1150,11 +1020,6 @@ onBeforeUnmount(() => {
     margin: 0 !important;
     height: 40px !important;
     font-size: 13px !important;
-  }
-
-  .video-thumb-container {
-    width: 100px;
-    height: 56px;
   }
 }
 

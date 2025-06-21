@@ -8,25 +8,27 @@
         <img src="@/assets/images/product2.jpeg" alt="产品服务" class="banner-bg-img" />
         <div class="banner-particles"></div>
         <div class="products-banner-text">
-          <div class="banner-badge">
+          <div class="banner-badge" data-aos="fade-down" data-aos-delay="200">
             <span class="badge-icon">🏭</span>
             <span>专业管道解决方案</span>
           </div>
-          <h1>
+          <h1 data-aos="fade-up" data-aos-delay="400">
             <span class="title-main">产品服务</span>
             <span class="title-sub">Product Services</span>
           </h1>
-          <p>致力于为客户提供高质量、多样化的管道产品与全方位服务</p>
-          <div class="banner-stats">
-            <div class="stat-item">
+          <p data-aos="fade-up" data-aos-delay="600">
+            致力于为客户提供高质量、多样化的管道产品与全方位服务
+          </p>
+          <div class="banner-stats" data-aos="fade-up" data-aos-delay="800">
+            <div class="stat-item" data-aos="zoom-in" data-aos-delay="1000">
               <span class="stat-number">200+</span>
               <span class="stat-label">产品型号</span>
             </div>
-            <div class="stat-item">
+            <div class="stat-item" data-aos="zoom-in" data-aos-delay="1200">
               <span class="stat-number">15+</span>
               <span class="stat-label">年经验</span>
             </div>
-            <div class="stat-item">
+            <div class="stat-item" data-aos="zoom-in" data-aos-delay="1400">
               <span class="stat-number">1000+</span>
               <span class="stat-label">成功案例</span>
             </div>
@@ -39,15 +41,7 @@
       <section class="products-section">
         <div class="product-detail-modern">
           <!-- 顶部面包屑 -->
-          <div class="product-breadcrumb">
-            <a-breadcrumb>
-              <a-breadcrumb-item><a href="/">首页</a></a-breadcrumb-item>
-              <a-breadcrumb-item>
-                <a href="/products">产品服务</a>
-              </a-breadcrumb-item>
-              <a-breadcrumb-item>{{ currentCategory }}</a-breadcrumb-item>
-            </a-breadcrumb>
-          </div>
+          <Breadcrumb :items="breadcrumbItems" />
           <div class="product-detail-content">
             <!-- 左侧信息区 -->
             <aside class="side-info-panel">
@@ -93,9 +87,14 @@
                   新闻中心
                 </div>
                 <ul>
-                  <li v-for="(news, i) in newsList" :key="i" class="news-item">
+                  <li
+                    v-for="(news, i) in newsList"
+                    :key="i"
+                    class="news-item"
+                    @click="goToNews(news.id)"
+                  >
                     <span class="news-dot"></span>
-                    <span class="news-text">{{ news }}</span>
+                    <span class="news-text">{{ news.title }}</span>
                   </li>
                 </ul>
               </section>
@@ -232,6 +231,9 @@
                   <div class="item-content">
                     <div class="img-title">{{ item.title }}</div>
                     <div class="item-category">{{ item.category }}</div>
+                    <div class="item-description" v-if="item.description">
+                      {{ item.description }}
+                    </div>
                     <div class="item-actions">
                       <button class="action-btn primary" @click.stop="goDetail(item)">
                         查看详情
@@ -260,107 +262,53 @@
 </template>
 
 <script setup>
-import chenci from '@/assets/images/chenci.jpg'
-import chenjiao from '@/assets/images/chenjiao.jpg'
-import daibeibao from '@/assets/images/daibeibao.jpg'
-import daituo from '@/assets/images/daituo.jpg'
-import duihan from '@/assets/images/duihan.jpg'
-import gangsu from '@/assets/images/gangsu.jpg'
-import gaonai from '@/assets/images/gaonai.png'
-import guijia1 from '@/assets/images/guijia1.jpg'
-import guijia2 from '@/assets/images/guijia2.jpg'
-import jusi from '@/assets/images/jusi.jpg'
-import penzui from '@/assets/images/penzui.jpg'
-import shuangjin from '@/assets/images/shuangjin.jpg'
-import tanhua from '@/assets/images/tanhua.jpg'
-import tanhuada from '@/assets/images/tanhuada.jpg'
-import tanhuaduo from '@/assets/images/tanhuaduo.jpg'
-import tanhuaguan from '@/assets/images/tanhuaguan.jpg'
-import tanhuahe from '@/assets/images/tanhuahe.jpg'
-import tanhuayi from '@/assets/images/tanhuayi.jpg'
-import tanhuazhi from '@/assets/images/tanhuazhi.jpg'
-import taoci from '@/assets/images/taoci.jpg'
-import taocifu from '@/assets/images/taocifu.png'
-import taocinai from '@/assets/images/taocinai.jpg'
-import taociwan from '@/assets/images/taociwan.jpg'
-import xiangjiao from '@/assets/images/xiangjiao.jpg'
-import zhenkong from '@/assets/images/zhenkong.jpg'
-import zuran1 from '@/assets/images/zuran1.jpg'
-import zuran2 from '@/assets/images/zuran2.jpg'
+import Breadcrumb from '@/components/Breadcrumb.vue'
 import Footer from '@/components/Footer.vue'
 import Header from '@/components/Header.vue'
+import {
+  categories as sharedCategories,
+  allProductList as sharedProductList
+} from '@/composables/useProductData'
 import { useSEO } from '@/composables/useSEO'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 const { setSEO } = useSEO()
 
-// 分类
-const categories = [
-  '碳化硅聚合陶瓷管',
-  '反应阻燃型-碳化硅聚合陶瓷涂抹',
-  '双金属耐磨管',
-  '陶瓷内衬复合钢管',
-  '陶瓷贴片耐磨管',
-  '龟甲网耐磨陶瓷管'
-]
+// 使用共享的分类数据
+const categories = sharedCategories
 const currentCategory = ref(categories[0])
 function selectCategory(cat) {
   currentCategory.value = cat
 }
 
-// 新闻
+// 新闻 - 对应News.vue中的新闻数据
 const newsList = [
-  '碳化硅陶瓷管的新型应用案例',
-  '几种常见耐磨管道对比',
-  '反应阻燃型陶瓷管道技术更新',
-  '工业管道选型小知识',
-  '陶瓷贴片耐磨管安装方法'
+  { id: 8, title: '耐磨陶瓷贴片怎么安装？' },
+  { id: 9, title: '衬瓷管道安装技术要求' },
+  { id: 5, title: '陶瓷耐磨管的制造工艺与材料有何差异？' },
+  { id: 6, title: '耐磨管可以在哪些领域应用？' },
+  { id: 11, title: '耐磨陶瓷管的优势和用途' },
+  { id: 7, title: '双金属耐磨管：对于耐磨材料的选用有哪些要求？' }
 ]
 
 // 关键词
 const keywords = [
-  '脱硫管道',
-  '耐磨陶瓷管',
-  '陶瓷贴片耐磨管',
+  '真空皮带脱水机配件',
+  '耐磨陶瓷弯头',
+  '耐磨陶瓷贴片',
+  '陶瓷内衬弯管',
+  '耐磨耐腐蚀管道',
+  '高铝球',
+  '陶瓷内衬复合钢管',
+  '碳化硅衬瓷三通',
   '龟甲网耐磨陶瓷管',
-  'SIC陶瓷涂抹',
-  '真空带式脱水机',
-  '碳化硅陶瓷喷嘴'
+  '刚玉陶瓷复合管',
+  '陶瓷耐磨片',
+  '高耐磨陶瓷贴片'
 ]
 
-// 产品图片和标题（每个分类一组，演示可适当复用图片）
-const allProductList = [
-  { category: '碳化硅聚合陶瓷管', img: zhenkong, title: '真空皮带脱水机及配件' },
-  { category: '碳化硅聚合陶瓷管', img: duihan, title: '堆焊耐磨衬板管件' },
-  { category: '碳化硅聚合陶瓷管', img: xiangjiao, title: '橡胶膨胀节' },
-  { category: '碳化硅聚合陶瓷管', img: penzui, title: '烧结碳化硅陶瓷管件.喷嘴' },
-  { category: '碳化硅聚合陶瓷管', img: jusi, title: '聚四氟内衬管件' },
-  { category: '碳化硅聚合陶瓷管', img: gangsu, title: '钢塑复合管件' },
-  { category: '碳化硅聚合陶瓷管', img: chenjiao, title: '衬胶管件' },
-  { category: '碳化硅聚合陶瓷管', img: tanhua, title: ' 碳化硅聚合陶瓷直管' },
-  { category: '碳化硅聚合陶瓷管', img: chenci, title: '衬瓷弯管' },
-  { category: '碳化硅聚合陶瓷管', img: tanhuaduo, title: '碳化硅聚合三（多）通' },
-  { category: '碳化硅聚合陶瓷管', img: daituo, title: '带托座衬瓷弯头' },
-  { category: '碳化硅聚合陶瓷管', img: tanhuada, title: '碳化硅聚合陶瓷大小头' },
-  { category: '碳化硅聚合陶瓷管', img: tanhuahe, title: '碳化硅聚合陶瓷管' },
-  { category: '碳化硅聚合陶瓷管', img: tanhuayi, title: '碳化硅聚合陶瓷大小头异型件' },
-  { category: '碳化硅聚合陶瓷管', img: tanhuaguan, title: '碳化硅衬瓷管件' },
-  { category: '碳化硅聚合陶瓷管', img: tanhuazhi, title: '碳化硅直管' },
-
-  { category: '反应阻燃型-碳化硅聚合陶瓷涂抹', img: zuran1, title: '阻燃型碳化硅衬瓷材料' },
-  { category: '反应阻燃型-碳化硅聚合陶瓷涂抹', img: zuran2, title: '阻燃型碳化硅陶瓷衬材' },
-  { category: '双金属耐磨管', img: shuangjin, title: '双金属耐磨管及异形件' },
-
-  { category: '陶瓷内衬复合钢管', img: taoci, title: '陶瓷内衬复合钢管' },
-  { category: '陶瓷内衬复合钢管', img: taociwan, title: '陶瓷耐磨弯管' },
-  { category: '陶瓷内衬复合钢管', img: taocinai, title: '陶瓷耐磨直管' },
-  { category: '陶瓷内衬复合钢管', img: daibeibao, title: '带背包耐磨陶瓷管件' },
-  { category: '陶瓷内衬复合钢管', img: taocifu, title: '陶瓷复合钢管' },
-
-  { category: '陶瓷贴片耐磨管', img: gaonai, title: '碳化硅陶瓷耐磨管道' },
-  { category: '龟甲网耐磨陶瓷管', img: guijia1, title: '龟甲网耐磨陶瓷管' },
-  { category: '龟甲网耐磨陶瓷管', img: guijia2, title: '龟甲网刚玉喷涂耐磨管' }
-]
+// 使用共享的产品数据
+const allProductList = sharedProductList
 
 const filteredProductList = computed(() =>
   allProductList.filter(item => item.category === currentCategory.value)
@@ -387,6 +335,12 @@ const getProductCount = category => {
   return allProductList.filter(item => item.category === category).length
 }
 
+// 面包屑数据
+const breadcrumbItems = computed(() => [
+  { text: '产品服务', icon: '🔧' },
+  { text: currentCategory.value, icon: '📦' }
+])
+
 const router = useRouter()
 function goDetail(item) {
   // 将产品数据作为路由参数传递
@@ -399,13 +353,30 @@ function goDetail(item) {
   })
 }
 
+// 跳转到新闻详情页面
+function goToNews(newsId) {
+  router.push(`/news/${newsId}`)
+}
+
+// 获取route实例
+const route = useRoute()
+
+// 处理分类参数的函数
+function handleCategoryParam() {
+  const categoryParam = route.query.category
+  if (categoryParam && categories.includes(categoryParam)) {
+    currentCategory.value = categoryParam
+  }
+}
+
 onMounted(() => {
   // 设置SEO
   setSEO({
-    title: '产品服务',
+    title: '产品中心 - 山东岱威创新管业有限公司',
     description:
-      '山东岱威创新管业专业提供碳化硅聚合陶瓷管、双金属耐磨管、陶瓷内衬复合钢管等多种管道产品。',
-    keywords: '碳化硅陶瓷管,双金属耐磨管,陶瓷内衬管,管道产品,岱威管业'
+      '山东岱威创新管业专业生产碳化硅聚合陶瓷管、双金属耐磨管、陶瓷内衬复合钢管、陶瓷贴片耐磨管、龟甲网耐磨陶瓷管等系列产品，广泛应用于电力、化工、矿山、水泥等行业。',
+    keywords:
+      '碳化硅聚合陶瓷管,双金属耐磨管,陶瓷内衬复合钢管,陶瓷贴片耐磨管,龟甲网耐磨陶瓷管,耐磨管道,岱威管业'
   })
 
   // 页面滚动到顶部
@@ -414,12 +385,16 @@ onMounted(() => {
     behavior: 'smooth'
   })
 
-  // 处理从其他页面跳转过来的分类参数
-  const route = useRoute()
-  const categoryParam = route.query.category
-  if (categoryParam && categories.includes(categoryParam)) {
-    currentCategory.value = categoryParam
-  }
+  // 初始处理分类参数
+  handleCategoryParam()
+
+  // 监听路由变化
+  router.afterEach(() => {
+    // 路由变化后重新处理分类参数
+    setTimeout(() => {
+      handleCategoryParam()
+    }, 100)
+  })
 })
 </script>
 
@@ -519,6 +494,18 @@ onMounted(() => {
   color: #fff;
   max-width: 800px;
   padding: 0 20px;
+  animation: bannerTextFadeIn 1.5s ease-out;
+}
+
+@keyframes bannerTextFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .banner-badge {
@@ -533,7 +520,22 @@ onMounted(() => {
   margin-bottom: 24px;
   font-size: 14px;
   font-weight: 500;
-  animation: badgeGlow 3s ease-in-out infinite;
+  animation:
+    badgeGlow 3s ease-in-out infinite,
+    badgeSlideDown 1s ease-out 0.2s both;
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+@keyframes badgeSlideDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes badgeGlow {
@@ -563,6 +565,20 @@ onMounted(() => {
 
 .products-banner-text h1 {
   margin-bottom: 16px;
+  animation: titleSlideUp 1.2s ease-out 0.4s both;
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+@keyframes titleSlideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .title-main {
@@ -574,6 +590,16 @@ onMounted(() => {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 8px;
+  animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  0% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  }
 }
 
 .title-sub {
@@ -583,6 +609,19 @@ onMounted(() => {
   color: #94a3b8;
   letter-spacing: 2px;
   text-transform: uppercase;
+  animation: subtitleFadeIn 1s ease-out 0.8s both;
+  opacity: 0;
+}
+
+@keyframes subtitleFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .products-banner-text p {
@@ -590,6 +629,20 @@ onMounted(() => {
   line-height: 1.6;
   margin: 24px 0 32px 0;
   color: #cbd5e1;
+  animation: descriptionFadeIn 1.2s ease-out 0.6s both;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+@keyframes descriptionFadeIn {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .banner-stats {
@@ -597,6 +650,20 @@ onMounted(() => {
   justify-content: center;
   gap: 40px;
   margin-top: 32px;
+  animation: statsSlideUp 1.5s ease-out 0.8s both;
+  transform: translateY(40px);
+  opacity: 0;
+}
+
+@keyframes statsSlideUp {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .stat-item {
@@ -607,24 +674,94 @@ onMounted(() => {
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
+  animation: statItemZoom 0.8s ease-out both;
+  transform: scale(0.8);
+  opacity: 0;
+}
+
+.stat-item:nth-child(1) {
+  animation-delay: 1s;
+}
+
+.stat-item:nth-child(2) {
+  animation-delay: 1.2s;
+}
+
+.stat-item:nth-child(3) {
+  animation-delay: 1.4s;
+}
+
+@keyframes statItemZoom {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .stat-item:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.05);
   background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2);
 }
 
 .stat-number {
   display: block;
   font-size: 2rem;
   font-weight: 700;
-  color: #60a5fa;
+  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 4px;
+  animation: numberPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes numberPulse {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  100% {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
 }
 
 .stat-label {
   font-size: 0.9rem;
   color: #cbd5e1;
+  animation: labelFadeIn 0.8s ease-out both;
+  opacity: 0;
+}
+
+.stat-item:nth-child(1) .stat-label {
+  animation-delay: 1.2s;
+}
+
+.stat-item:nth-child(2) .stat-label {
+  animation-delay: 1.4s;
+}
+
+.stat-item:nth-child(3) .stat-label {
+  animation-delay: 1.6s;
+}
+
+@keyframes labelFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .scroll-indicator {
@@ -671,16 +808,6 @@ onMounted(() => {
   background: #f7f9fb;
   min-height: 100vh;
   font-family: 'Inter', 'HarmonyOS Sans', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
-}
-
-/* 面包屑 */
-.product-breadcrumb {
-  background: #fff;
-  border-radius: 0 0 14px 14px;
-  box-shadow: 0 1px 8px rgba(22, 119, 255, 0.04);
-  padding: 24px 32px 12px 32px;
-  margin-bottom: 0;
-  font-size: 16px;
 }
 
 .product-detail-content {
@@ -817,6 +944,7 @@ onMounted(() => {
   padding: 8px 0;
   border-bottom: 1px solid rgba(22, 119, 255, 0.05);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .news-item:hover {
@@ -1154,8 +1282,21 @@ onMounted(() => {
   padding: 4px 8px;
   border-radius: 12px;
   display: inline-block;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   font-weight: 500;
+}
+
+.item-description {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .item-actions {
@@ -1350,11 +1491,6 @@ onMounted(() => {
 
   .stat-label {
     font-size: 0.75rem;
-  }
-
-  .product-breadcrumb {
-    padding: 12px 16px;
-    font-size: 14px;
   }
 
   .product-detail-content {
