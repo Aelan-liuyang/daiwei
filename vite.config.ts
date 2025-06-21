@@ -1,8 +1,8 @@
-import { defineConfig, ConfigEnv, loadEnv } from "vite"
-import vue from "@vitejs/plugin-vue"
+import vue from '@vitejs/plugin-vue'
+import { ConfigEnv, defineConfig, loadEnv } from 'vite'
 
 // 引入node内置模块path：可以获取绝对路径（找不到模块“path”或其相应的类型声明。ts(2307))
-import path from "path"
+import path from 'path'
 
 // https://vitejs.dev/config/
 const viteConfig = defineConfig((mode: ConfigEnv) => {
@@ -11,16 +11,15 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
     plugins: [vue()],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "src") //@ 表示 src
+        '@': path.resolve(__dirname, 'src') //@ 表示 src
       }
     },
-    base: "./",
-    publicPath: "./",
+    base: './',
     optimizeDeps: {
-      include: ["axios"]
+      include: ['axios']
     },
     server: {
-      host: "0.0.0.0", //解决 vite use --host to expose
+      host: '0.0.0.0', //解决 vite use --host to expose
       port: env.VITE_PORT as unknown as number,
       open: true,
       // 是否开启 https
@@ -29,19 +28,19 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
       ssr: false,
       hmr: true, //热更新是否开启
       proxy: {
-        "/api": {
+        '/api': {
           target: env.VITE_API_URL,
           ws: true,
           changeOrigin: true, //是否允许跨域
-          rewrite: path => path.replace(/^\/api/, "")
+          rewrite: path => path.replace(/^\/api/, '')
         }
       }
     },
     build: {
-      outDir: "dist",
-      target: "modules",
-      assetsDir: "assets", // 指定生成静态资源的存放路径
-      minify: "terser", // 混淆器，terser构建后文件体积更小
+      outDir: 'dist',
+      target: 'es2015',
+      assetsDir: 'assets', // 指定生成静态资源的存放路径
+      minify: 'terser', // 混淆器，terser构建后文件体积更小
       sourcemap: false,
       chunkSizeWarningLimit: 1500,
       rollupOptions: {
@@ -51,7 +50,7 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
           assetFileNames: `assets/[name].${new Date().getTime()}.[ext]`,
           compact: true,
           manualChunks: {
-            vue: ["vue", "vue-router"]
+            vue: ['vue', 'vue-router']
           }
         }
       }

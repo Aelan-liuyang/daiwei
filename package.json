@@ -10,6 +10,8 @@
     "build:staging": "vite build --mode staging",
     "build:analyze": "ANALYZE=true vite build",
     "preview": "vite preview",
+    "serve-dist": "node serve-dist.js",
+    "build:serve": "npm run build && npm run serve-dist",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint src --ext .vue,.js,.ts --fix",
     "format": "prettier --write src/"
