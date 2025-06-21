@@ -9,7 +9,7 @@
           <div class="banner-content">
             <h1 class="banner-title">新闻中心</h1>
             <p class="banner-subtitle">关注行业动态，了解技术前沿</p>
-            <div class="banner-stats">
+            <div class="banner-stats mobile-hidden">
               <div class="stat-item">
                 <div class="stat-number">{{ totalNews }}</div>
                 <div class="stat-label">新闻资讯</div>
@@ -94,7 +94,11 @@
                 </div>
                 <p class="news-desc">{{ item.description }}</p>
                 <div class="news-tags">
-                  <span v-for="tag in item.tags.slice(0, 3)" :key="tag" class="news-tag">
+                  <span
+                    v-for="(tag, index) in item.tags.slice(0, 3)"
+                    :key="tag"
+                    :class="['news-tag', { 'mobile-hidden': index > 1 }]"
+                  >
                     {{ tag }}
                   </span>
                 </div>
@@ -140,7 +144,7 @@
         <!-- 右侧边栏 -->
         <div class="news-sidebar">
           <!-- 新闻统计 -->
-          <div class="sidebar-block stats-block">
+          <div class="sidebar-block stats-block mobile-hidden">
             <h3 class="sidebar-title">
               <span class="title-icon">📊</span>
               新闻统计
@@ -166,7 +170,7 @@
           </div>
 
           <!-- 热门标签 -->
-          <div class="sidebar-block">
+          <div class="sidebar-block mobile-hidden">
             <h3 class="sidebar-title">
               <span class="title-icon">🏷️</span>
               热门标签
@@ -236,7 +240,7 @@
           </div>
 
           <!-- 归档 -->
-          <div class="sidebar-block">
+          <div class="sidebar-block mobile-hidden">
             <h3 class="sidebar-title">
               <span class="title-icon">📅</span>
               新闻归档
@@ -1405,6 +1409,13 @@ onMounted(() => {
   font-weight: 500;
 }
 
+/* 移动端内容隐藏 */
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+}
+
 /* 响应式设计 */
 @media (max-width: 1200px) {
   .banner-stats {
@@ -1453,15 +1464,27 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .news-banner {
-    height: 250px;
+    height: 200px;
+  }
+
+  .banner-content {
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
   }
 
   .banner-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
   }
 
   .banner-subtitle {
     font-size: 1rem;
+    margin-bottom: 0;
   }
 
   .banner-stats {
@@ -1503,7 +1526,7 @@ onMounted(() => {
 
 @media (max-width: 480px) {
   .news-banner {
-    height: 200px;
+    height: 160px;
   }
 
   .banner-title {
@@ -1528,6 +1551,22 @@ onMounted(() => {
 
   .news-title {
     font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .news-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .news-tags {
+    margin-bottom: 12px;
+  }
+
+  .news-tag {
+    font-size: 11px;
+    padding: 3px 6px;
   }
 
   .sidebar-block {
@@ -1537,6 +1576,50 @@ onMounted(() => {
   .stats-grid {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .news-banner {
+    height: 140px;
+  }
+
+  .banner-title {
+    font-size: 1.3rem;
+  }
+
+  .banner-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .news-filter-section {
+    padding: 12px;
+  }
+
+  .filter-title {
+    font-size: 16px;
+  }
+
+  .news-item-content {
+    padding: 12px;
+  }
+
+  .news-title {
+    font-size: 15px;
+  }
+
+  .news-desc {
+    font-size: 13px;
+  }
+
+  .category-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .read-more-btn {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
 </style>

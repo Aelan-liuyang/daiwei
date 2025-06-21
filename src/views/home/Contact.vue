@@ -565,7 +565,7 @@ const closeContactModal = () => {
   margin-bottom: 28px;
   line-height: 1.8;
   letter-spacing: 0.5px;
-  padding: 16px 20px;
+  padding: 16px 12px;
   background: rgba(248, 250, 252, 0.8);
   border-radius: 16px;
   border-left: 4px solid transparent;

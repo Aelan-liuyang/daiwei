@@ -147,7 +147,7 @@
           </div>
 
           <!-- 热门产品 -->
-          <div class="footer-section">
+          <div class="footer-section hot-products-section">
             <h3>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path
@@ -208,7 +208,7 @@
           </div>
 
           <!-- 联系方式 -->
-          <div class="footer-section contact-section">
+          <div class="footer-section contact-section mobile-hidden">
             <h3>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M3 5h14l-7 7L3 5z" stroke="currentColor" stroke-width="1.5" fill="none" />
@@ -302,7 +302,7 @@
             </ul>
 
             <!-- 社交媒体 -->
-            <div class="social-section">
+            <div class="social-section mobile-hidden">
               <h4>关注我们</h4>
               <div class="social-icons">
                 <div class="social-item" @click="toggleWechat">
@@ -358,9 +358,9 @@
         <div class="footer-bottom-content">
           <div class="footer-links">
             <span @click="navigateTo('/about')" class="footer-link">关于我们</span>
-            <span @click="navigateTo('/contact')" class="footer-link">联系我们</span>
+            <span @click="navigateTo('/contact')" class="footer-link mobile-hidden">联系我们</span>
             <span @click="navigateTo('/products')" class="footer-link">产品中心</span>
-            <span @click="navigateTo('/news')" class="footer-link">新闻中心</span>
+            <span @click="navigateTo('/news')" class="footer-link mobile-hidden">新闻中心</span>
           </div>
           <div class="copyright-center">
             <span>© 山东岱威创新管业有限公司</span>
@@ -369,6 +369,14 @@
           </div>
         </div>
       </div>
+      <a-back-top :visibility-height="300" class="custom-backtop">
+        <div class="backtop-content">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 4L4 10h12L10 4z" fill="currentColor" />
+            <path d="M4 16h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+      </a-back-top>
     </footer>
   </a-layout-footer>
 </template>
@@ -850,6 +858,51 @@ const toggleWechat = () => {
   z-index: 1;
 }
 
+/* 回到顶部按钮样式 */
+.custom-backtop {
+  z-index: 1000;
+}
+
+.custom-backtop :deep(.ant-back-top) {
+  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  border: none;
+  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  right: 40px;
+  bottom: 40px;
+}
+
+.custom-backtop :deep(.ant-back-top:hover) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(22, 119, 255, 0.4);
+}
+
+.backtop-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.custom-backtop:hover .backtop-content {
+  transform: translateY(-2px);
+}
+
+.backtop-content svg {
+  transition: transform 0.3s ease;
+}
+
+.custom-backtop:hover .backtop-content svg {
+  transform: scale(1.1);
+}
+
 .qrcode-header {
   display: flex;
   justify-content: space-between;
@@ -976,18 +1029,33 @@ const toggleWechat = () => {
 }
 
 @media (max-width: 768px) {
+  /* 隐藏移动端不重要的内容 */
+  .mobile-hidden {
+    display: none !important;
+  }
+
   .footer {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   }
 
   .footer-main {
-    padding: 60px 0 30px 0;
+    padding: 40px 0 20px 0;
   }
 
   .footer-container {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 0 20px;
+    gap: 30px;
+    padding: 0 15px;
+  }
+
+  /* 隐藏热门产品区域 */
+  .hot-products-section {
+    display: none;
+  }
+
+  /* 隐藏新闻中心链接 */
+  .quick-nav ul li:nth-child(3) {
+    display: none;
   }
 
   .company-logo {
@@ -1080,12 +1148,23 @@ const toggleWechat = () => {
   }
 
   .footer-main {
-    padding: 40px 0 20px 0;
+    padding: 30px 0 15px 0;
   }
 
   .footer-container {
-    padding: 0 16px;
-    gap: 30px;
+    padding: 0 12px;
+    gap: 20px;
+  }
+
+  /* 进一步简化产品列表 - 只保留前3个和最后一个 */
+  .footer-section ul li:nth-child(4),
+  .footer-section ul li:nth-child(5) {
+    display: none;
+  }
+
+  /* 确保"查看全部产品"链接显示 */
+  .footer-section ul li:last-child {
+    display: block;
   }
 
   .company-name h3 {
@@ -1178,6 +1257,70 @@ const toggleWechat = () => {
 
   .footer-links {
     gap: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .footer-main {
+    padding: 20px 0 10px 0;
+  }
+
+  .footer-container {
+    padding: 0 10px;
+    gap: 16px;
+  }
+
+  .footer-section h3 {
+    font-size: 0.9rem !important;
+    margin-bottom: 12px;
+  }
+
+  .nav-link {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+
+  .contact-value {
+    font-size: 0.8rem;
+  }
+
+  .contact-label {
+    font-size: 0.75rem;
+  }
+
+  .footer-bottom-content {
+    padding: 12px;
+  }
+
+  .footer-links {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .footer-link {
+    font-size: 0.8rem;
+  }
+
+  .copyright {
+    font-size: 0.75rem;
+  }
+
+  /* 移动端回到顶部按钮优化 */
+  .custom-backtop :deep(.ant-back-top) {
+    width: 40px;
+    height: 40px;
+    right: 15px;
+    bottom: 15px;
+  }
+}
+
+/* 平板端回到顶部按钮优化 */
+@media (max-width: 768px) {
+  .custom-backtop :deep(.ant-back-top) {
+    width: 45px;
+    height: 45px;
+    right: 20px;
+    bottom: 20px;
   }
 }
 </style>

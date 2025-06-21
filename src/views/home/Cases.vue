@@ -31,7 +31,7 @@
       </section>
 
       <!-- 案例统计 -->
-      <section class="case-stats-section">
+      <section class="case-stats-section mobile-hidden">
         <div class="stats-container">
           <div class="stat-item">
             <div class="stat-number">{{ filteredCases.length }}</div>
@@ -68,11 +68,17 @@
               <h3 class="case-title">{{ c.title }}</h3>
               <div class="case-desc">{{ c.desc }}</div>
               <div class="case-tags">
-                <span class="case-tag" v-for="tag in c.tags" :key="tag">{{ tag }}</span>
+                <span
+                  class="case-tag"
+                  v-for="(tag, index) in c.tags"
+                  :key="tag"
+                  :class="{ 'mobile-hidden': index > 1 }"
+                  >{{ tag }}</span
+                >
               </div>
               <div class="case-actions">
                 <button class="action-btn primary">查看详情</button>
-                <button class="action-btn secondary">了解更多</button>
+                <button class="action-btn secondary mobile-hidden">了解更多</button>
               </div>
             </div>
           </div>
@@ -639,6 +645,13 @@ onMounted(() => {
   margin-top: 36px;
 }
 
+/* 移动端内容隐藏 */
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+}
+
 /* 响应式优化 */
 @media (max-width: 1200px) {
   .stats-container {
@@ -692,22 +705,55 @@ onMounted(() => {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .cases-banner {
-    height: 65px;
-    min-height: 0;
+    height: 200px;
   }
 
   .cases-banner-text {
-    padding-bottom: 12px;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 
   .cases-banner-text h1 {
-    font-size: 1.1rem;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
   }
 
   .cases-banner-sub {
-    font-size: 0.82rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cases-banner {
+    height: 160px;
+  }
+
+  .cases-banner-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .cases-banner-sub {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .cases-banner {
+    height: 140px;
+  }
+
+  .cases-banner-text h1 {
+    font-size: 1.3rem;
+  }
+
+  .cases-banner-sub {
+    font-size: 0.8rem;
   }
 
   .case-filter-section {
@@ -738,20 +784,50 @@ onMounted(() => {
 
   .case-title {
     font-size: 16px;
+    margin-bottom: 8px;
   }
 
   .case-desc {
     font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .case-tags {
+    margin-bottom: 12px;
   }
 
   .case-tag {
     font-size: 11px;
     padding: 3px 8px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+  }
+
+  .case-actions {
+    display: flex;
+    gap: 8px;
   }
 
   .action-btn {
+    flex: 1;
     padding: 10px 12px;
     font-size: 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .action-btn.primary {
+    background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+    color: white;
+  }
+
+  .action-btn.secondary {
+    background: #f8fafc;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
   }
 }
 </style>

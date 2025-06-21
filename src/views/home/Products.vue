@@ -8,18 +8,18 @@
         <img src="@/assets/images/product2.jpeg" alt="产品服务" class="banner-bg-img" />
         <div class="banner-particles"></div>
         <div class="products-banner-text">
-          <div class="banner-badge" data-aos="fade-down" data-aos-delay="200">
+          <div class="banner-badge mobile-hidden" data-aos="fade-down" data-aos-delay="200">
             <span class="badge-icon">🏭</span>
             <span>专业管道解决方案</span>
           </div>
           <h1 data-aos="fade-up" data-aos-delay="400">
             <span class="title-main">产品服务</span>
-            <span class="title-sub">Product Services</span>
+            <span class="title-sub mobile-hidden">Product Services</span>
           </h1>
-          <p data-aos="fade-up" data-aos-delay="600">
+          <p class="mobile-hidden" data-aos="fade-up" data-aos-delay="600">
             致力于为客户提供高质量、多样化的管道产品与全方位服务
           </p>
-          <div class="banner-stats" data-aos="fade-up" data-aos-delay="800">
+          <div class="banner-stats mobile-hidden" data-aos="fade-up" data-aos-delay="800">
             <div class="stat-item" data-aos="zoom-in" data-aos-delay="1000">
               <span class="stat-number">200+</span>
               <span class="stat-label">产品型号</span>
@@ -34,7 +34,7 @@
             </div>
           </div>
         </div>
-        <div class="scroll-indicator">
+        <div class="scroll-indicator mobile-hidden">
           <div class="scroll-arrow"></div>
         </div>
       </div>
@@ -73,7 +73,7 @@
                 </ul>
               </section>
 
-              <section class="side-block news">
+              <section class="side-block news mobile-hidden">
                 <div class="side-title">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
@@ -99,7 +99,7 @@
                 </ul>
               </section>
 
-              <section class="side-block keywords">
+              <section class="side-block keywords mobile-hidden">
                 <div class="side-title">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M9 9l-3-3m0 0l-3 3m3-3v12" stroke="currentColor" stroke-width="1.5" />
@@ -120,7 +120,7 @@
               </section>
 
               <!-- 新增联系卡片 -->
-              <section class="side-block contact-card">
+              <section class="side-block contact-card mobile-hidden">
                 <div class="side-title">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
@@ -156,7 +156,7 @@
                   </h2>
                   <p class="product-subtitle">共 {{ filteredProductList.length }} 款产品</p>
                 </div>
-                <div class="view-controls">
+                <div class="view-controls mobile-hidden">
                   <button
                     :class="['view-btn', { active: viewMode === 'grid' }]"
                     @click="viewMode = 'grid'"
@@ -314,8 +314,18 @@ const filteredProductList = computed(() =>
   allProductList.filter(item => item.category === currentCategory.value)
 )
 
-// 视图模式
+// 视图模式 - 移动端强制使用网格模式
 const viewMode = ref('grid')
+
+// 检测是否为移动端
+const isMobile = ref(false)
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 768
+  // 移动端强制使用网格模式
+  if (isMobile.value) {
+    viewMode.value = 'grid'
+  }
+}
 
 // 获取分类图标
 const getCategoryIcon = category => {
@@ -384,6 +394,10 @@ onMounted(() => {
     top: 0,
     behavior: 'smooth'
   })
+
+  // 检测移动端并设置视图模式
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
 
   // 初始处理分类参数
   handleCategoryParam()
@@ -527,6 +541,34 @@ onMounted(() => {
   opacity: 0;
 }
 
+/* 移动端Banner Badge优化 */
+@media (max-width: 768px) {
+  .banner-badge {
+    font-size: 12px;
+    padding: 6px 12px;
+    margin-bottom: 20px;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-badge {
+    font-size: 11px;
+    padding: 5px 10px;
+    margin-bottom: 16px;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 360px) {
+  .banner-badge {
+    font-size: 10px;
+    padding: 4px 8px;
+    margin-bottom: 12px;
+    gap: 3px;
+  }
+}
+
 @keyframes badgeSlideDown {
   0% {
     transform: translateY(-20px);
@@ -570,6 +612,19 @@ onMounted(() => {
   opacity: 0;
 }
 
+/* 移动端Products Banner标题优化 */
+@media (max-width: 768px) {
+  .products-banner-text h1 {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-banner-text h1 {
+    margin-bottom: 10px;
+  }
+}
+
 @keyframes titleSlideUp {
   0% {
     transform: translateY(30px);
@@ -593,6 +648,28 @@ onMounted(() => {
   animation: titleGlow 2s ease-in-out infinite alternate;
 }
 
+/* 移动端主标题优化 */
+@media (max-width: 768px) {
+  .title-main {
+    font-size: 2.2rem;
+    margin-bottom: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-main {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .title-main {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+  }
+}
+
 @keyframes titleGlow {
   0% {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
@@ -611,6 +688,28 @@ onMounted(() => {
   text-transform: uppercase;
   animation: subtitleFadeIn 1s ease-out 0.8s both;
   opacity: 0;
+}
+
+/* 移动端副标题优化 */
+@media (max-width: 768px) {
+  .title-sub {
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-sub {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .title-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.3px;
+  }
 }
 
 @keyframes subtitleFadeIn {
@@ -632,6 +731,31 @@ onMounted(() => {
   animation: descriptionFadeIn 1.2s ease-out 0.6s both;
   transform: translateY(20px);
   opacity: 0;
+}
+
+/* 移动端描述文字优化 */
+@media (max-width: 768px) {
+  .products-banner-text p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 20px 0 24px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-banner-text p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 16px 0 20px 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .products-banner-text p {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin: 12px 0 16px 0;
+  }
 }
 
 @keyframes descriptionFadeIn {
@@ -723,6 +847,28 @@ onMounted(() => {
   animation: numberPulse 2s ease-in-out infinite alternate;
 }
 
+/* 移动端统计数字优化 */
+@media (max-width: 768px) {
+  .stat-number {
+    font-size: 1.6rem;
+    margin-bottom: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-number {
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+  }
+}
+
+@media (max-width: 360px) {
+  .stat-number {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+  }
+}
+
 @keyframes numberPulse {
   0% {
     transform: scale(1);
@@ -739,6 +885,25 @@ onMounted(() => {
   color: #cbd5e1;
   animation: labelFadeIn 0.8s ease-out both;
   opacity: 0;
+}
+
+/* 移动端统计标签优化 */
+@media (max-width: 768px) {
+  .stat-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-label {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .stat-label {
+    font-size: 0.6rem;
+  }
 }
 
 .stat-item:nth-child(1) .stat-label {
@@ -1413,6 +1578,56 @@ onMounted(() => {
   }
 }
 
+/* 移动端内容隐藏 */
+@media (max-width: 768px) {
+  /* 隐藏新闻中心、热门关键词、联系我们、视图切换 */
+  .mobile-hidden {
+    display: none !important;
+  }
+
+  /* 优化移动端banner文字显示 */
+  .products-banner-text {
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .products-banner-text h1 {
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .title-main {
+    font-size: 1.8rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.2;
+  }
+
+  /* 强制使用网格模式 */
+  .product-gallery-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+
+  .product-gallery-grid.list {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 简化侧边栏，只保留产品分类 */
+  .side-info-panel {
+    margin-bottom: 20px;
+  }
+
+  .side-block.product-category {
+    margin-bottom: 0;
+  }
+}
+
 @media (max-width: 900px) {
   .products-banner {
     height: 300px;
@@ -1454,7 +1669,27 @@ onMounted(() => {
 
 @media (max-width: 600px) {
   .products-banner {
-    height: 250px;
+    height: 180px; /* 进一步减小到180px */
+  }
+}
+
+@media (max-width: 480px) {
+  .products-banner {
+    height: 160px;
+  }
+
+  .title-main {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .products-banner {
+    height: 120px; /* 超小屏幕进一步减小到120px */
+  }
+
+  .title-main {
+    font-size: 1.3rem !important;
   }
 
   .products-banner-text {
@@ -1530,31 +1765,58 @@ onMounted(() => {
   }
 
   .product-gallery-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     gap: 16px;
   }
 
-  .product-gallery-grid.list .gallery-item {
+  /* 移动端强制网格模式，简化布局 */
+  .product-gallery-grid.list .gallery-item,
+  .product-gallery-grid .gallery-item {
+    display: flex;
     flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  .product-gallery-grid.list .img-wrap {
+  .product-gallery-grid.list .img-wrap,
+  .product-gallery-grid .img-wrap {
     width: 100%;
+    height: 200px;
   }
 
-  .product-gallery-grid.list .item-content {
-    padding-left: 0;
-    padding-top: 16px;
+  .product-gallery-grid.list .item-content,
+  .product-gallery-grid .item-content {
+    padding: 16px;
+    flex: 1;
   }
 
   .item-actions {
-    flex-direction: column;
+    display: flex;
     gap: 8px;
+    margin-top: 12px;
   }
 
   .action-btn {
-    padding: 12px 16px;
-    font-size: 14px;
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .action-btn.primary {
+    background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+    color: white;
+  }
+
+  .action-btn.secondary {
+    background: #f8fafc;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
   }
 }
 </style>
