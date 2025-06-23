@@ -3,48 +3,29 @@
   <a-layout class="home-layout">
     <Header />
     <a-layout-content class="main-content">
-      <!-- Hero Banner - 基于真实产品数据 -->
+      <!-- Hero Banner - 简洁优化版 -->
       <section class="hero-banner">
         <div class="hero-bg">
           <img :src="bannerImage" alt="岱威管业" class="hero-bg-img" />
           <div class="hero-overlay"></div>
         </div>
-        <!-- 动画装饰元素 -->
-        <div class="hero-animations">
-          <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-            <div class="shape shape-6"></div>
-          </div>
-          <div class="particles">
-            <div class="particle" v-for="i in 20" :key="i" :style="getParticleStyle(i)"></div>
-          </div>
+        <!-- 简洁的动画装饰 -->
+        <div class="hero-decorations">
+          <div class="floating-circle circle-1"></div>
+          <div class="floating-circle circle-2"></div>
+          <div class="floating-circle circle-3"></div>
         </div>
         <div class="hero-content">
-          <div class="hero-badge mobile-hidden" data-aos="fade-down" data-aos-delay="200">
+          <div class="hero-badge mobile-hidden">
             <span class="badge-icon">🏭</span>
-            <span>耐磨、耐腐蚀、耐冲击、耐热复合管综合服务商</span>
+            <span>专业管道解决方案</span>
           </div>
-          <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">
-            <span class="title-main">山东岱威创新管业有限公司</span>
-            <span class="title-sub mobile-hidden"
-              >专业为电力、矿山、钢铁、石化、水泥、洗选煤等行业提供一体化解决方案</span
-            >
+          <h1 class="hero-title">
+            <span class="title-main">岱威创新管业</span>
+            <span class="title-sub mobile-hidden">耐磨 · 耐腐蚀 · 耐冲击 · 耐热</span>
           </h1>
-          <p class="hero-desc mobile-hidden" data-aos="fade-up" data-aos-delay="600">
-            集研发、生产、经营为一体，专业生产碳化硅聚合陶瓷管、双金属耐磨管、陶瓷内衬复合钢管、
-            陶瓷贴片耐磨管、龟甲网耐磨陶瓷管等产品，提供适应不同介质环境的多种类型管道和管件
-          </p>
-          <div class="hero-stats mobile-hidden" data-aos="fade-up" data-aos-delay="800">
-            <div class="stat-item" v-for="(stat, index) in heroStats" :key="index">
-              <div class="stat-number">{{ stat.number }}</div>
-              <div class="stat-label">{{ stat.label }}</div>
-            </div>
-          </div>
-          <div class="hero-actions" data-aos="fade-up" data-aos-delay="1000">
+          <p class="hero-desc mobile-hidden">15年专业经验，为工业领域提供高品质管道产品与服务</p>
+          <div class="hero-actions">
             <a-button
               type="primary"
               size="large"
@@ -69,12 +50,6 @@
               联系咨询
             </a-button>
           </div>
-        </div>
-        <div class="scroll-indicator mobile-hidden">
-          <div class="scroll-mouse">
-            <div class="scroll-wheel"></div>
-          </div>
-          <span>向下滚动</span>
         </div>
       </section>
 
@@ -332,7 +307,9 @@ import factory3 from '@/assets/images/factory3.jpg'
 import guijia1 from '@/assets/images/guijia1.jpg'
 import shuangjin from '@/assets/images/shuangjin.jpg'
 import taoci from '@/assets/images/taoci.jpg'
-import zhenkong from '@/assets/images/zhenkong.jpg'
+import tanhuahe from '@/assets/images/tanhuahe.jpg'
+import gaonai from '@/assets/images/gaonai.png'
+import zuran1 from '@/assets/images/zuran1.jpg'
 
 // 路由和SEO
 const router = useRouter()
@@ -379,12 +356,12 @@ const featuredProducts = [
     category: '碳化硅聚合陶瓷管',
     description:
       '采用碳化硅聚合陶瓷材料，具有优异的耐磨、耐腐蚀、耐高温性能，广泛应用于电力、化工等行业的粉料输送。',
-    img: zhenkong,
+    img: tanhuahe,
     tags: ['碳化硅', '聚合陶瓷', '耐高温']
   },
   {
     id: 2,
-    title: '双金属耐磨管',
+    title: '双金属耐磨管及异形件',
     category: '双金属耐磨管',
     description:
       '内层采用高铬合金，外层为碳钢，通过离心铸造工艺制成，具有优异的耐磨性能和机械强度。',
@@ -401,10 +378,10 @@ const featuredProducts = [
   },
   {
     id: 4,
-    title: '陶瓷贴片耐磨管',
+    title: '高耐磨陶瓷贴片',
     category: '陶瓷贴片耐磨管',
     description: '采用高强度陶瓷贴片与钢管焊接，具有良好的耐磨性和抗冲击性能，安装维护方便。',
-    img: taoci,
+    img: gaonai,
     tags: ['陶瓷贴片', '焊接工艺', '抗冲击']
   },
   {
@@ -417,10 +394,10 @@ const featuredProducts = [
   },
   {
     id: 6,
-    title: '反应阻燃型碳化硅聚合陶瓷涂抹',
+    title: '阻燃型碳化硅衬瓷材料',
     category: '反应阻燃型-碳化硅聚合陶瓷涂抹',
     description: '具有优异的阻燃性能和耐高温特性，适用于脱硫脱硝等特殊工况环境的防护涂层。',
-    img: zhenkong,
+    img: zuran1,
     tags: ['阻燃型', '脱硫脱硝', '防护涂层']
   }
 ]
@@ -545,22 +522,6 @@ const navigateToCase = (caseItem: any) => {
   })
 }
 
-// 生成粒子样式
-const getParticleStyle = (index: number) => {
-  const size = (index % 3) + 2 // 2-4px，基于index
-  const left = (index * 5.26) % 100 // 基于index分布
-  const animationDelay = (index * 1.5) % 20 // 基于index的延迟
-  const animationDuration = 15 + (index % 10) // 15-25s
-
-  return {
-    width: `${size}px`,
-    height: `${size}px`,
-    left: `${left}%`,
-    animationDelay: `${animationDelay}s`,
-    animationDuration: `${animationDuration}s`
-  }
-}
-
 onMounted(async () => {
   // 设置SEO
   setSEO({
@@ -641,12 +602,12 @@ onMounted(async () => {
   padding: 0;
 }
 
-/* Hero Banner 样式 */
+/* Hero Banner 样式 - 优化版 */
 .hero-banner {
   position: relative;
-  height: 80vh;
-  min-height: 600px;
-  max-height: 700px;
+  height: 60vh;
+  min-height: 480px;
+  max-height: 580px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -657,25 +618,25 @@ onMounted(async () => {
 /* 移动端Hero Banner优化 */
 @media (max-width: 768px) {
   .hero-banner {
-    height: 70vh;
-    min-height: 500px;
-    max-height: 600px;
+    height: 55vh;
+    min-height: 420px;
+    max-height: 500px;
   }
 }
 
 @media (max-width: 480px) {
   .hero-banner {
-    height: 55vh;
-    min-height: 350px;
-    max-height: 450px;
+    height: 50vh;
+    min-height: 320px;
+    max-height: 400px;
   }
 }
 
 @media (max-width: 360px) {
   .hero-banner {
-    height: 50vh;
-    min-height: 300px;
-    max-height: 400px;
+    height: 45vh;
+    min-height: 280px;
+    max-height: 350px;
   }
 }
 
@@ -693,17 +654,12 @@ onMounted(async () => {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transform: scale(1.1);
-  animation: heroZoom 20s ease-in-out infinite alternate;
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }
 
-@keyframes heroZoom {
-  0% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1.15);
-  }
+.hero-banner:hover .hero-bg-img {
+  transform: scale(1.08);
 }
 
 .hero-overlay {
@@ -712,19 +668,8 @@ onMounted(async () => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.8) 0%, rgba(67, 198, 172, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(22, 119, 255, 0.75) 0%, rgba(67, 198, 172, 0.65) 100%);
   z-index: 2;
-  animation: overlayPulse 8s ease-in-out infinite;
-}
-
-@keyframes overlayPulse {
-  0%,
-  100% {
-    background: linear-gradient(135deg, rgba(22, 119, 255, 0.8) 0%, rgba(67, 198, 172, 0.6) 100%);
-  }
-  50% {
-    background: linear-gradient(135deg, rgba(22, 119, 255, 0.7) 0%, rgba(67, 198, 172, 0.7) 100%);
-  }
 }
 
 .hero-content {
@@ -814,11 +759,13 @@ onMounted(async () => {
   margin-bottom: 30px;
   font-size: 14px;
   font-weight: 600;
-  animation:
-    badgeFloat 3s ease-in-out infinite,
-    badgeGlow 4s ease-in-out infinite;
+  transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
+}
+
+.hero-badge:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
 /* 移动端Hero Badge优化 */
@@ -837,50 +784,6 @@ onMounted(async () => {
     padding: 6px 12px;
     margin-bottom: 15px;
     gap: 4px;
-  }
-}
-
-.hero-badge::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transform: rotate(45deg);
-  animation: badgeShine 6s ease-in-out infinite;
-}
-
-@keyframes badgeShine {
-  0% {
-    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-  }
-  50% {
-    transform: translateX(100%) translateY(100%) rotate(45deg);
-  }
-  100% {
-    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-  }
-}
-
-@keyframes badgeFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes badgeGlow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
   }
 }
 
@@ -909,9 +812,9 @@ onMounted(async () => {
 
 .title-main {
   display: block;
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 12px;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 16px;
   background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -921,10 +824,10 @@ onMounted(async () => {
 
 .title-sub {
   display: block;
-  font-size: 1.4rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 300;
   color: #cbd5e1;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 /* 移动端标题优化 */
@@ -965,13 +868,14 @@ onMounted(async () => {
 }
 
 .hero-desc {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  margin-bottom: 40px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 50px;
   color: #e2e8f0;
-  max-width: 700px;
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
+  font-weight: 300;
 }
 
 .hero-stats {
@@ -1233,8 +1137,8 @@ onMounted(async () => {
   letter-spacing: 1px;
 }
 
-/* Hero Banner 动画元素 */
-.hero-animations {
+/* Hero Banner 简洁装饰元素 */
+.hero-decorations {
   position: absolute;
   top: 0;
   left: 0;
@@ -1245,146 +1149,67 @@ onMounted(async () => {
   overflow: hidden;
 }
 
-/* 移动端动画优化 */
+.floating-circle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: gentleFloat 8s ease-in-out infinite;
+}
+
+.circle-1 {
+  width: 120px;
+  height: 120px;
+  top: 15%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 80px;
+  height: 80px;
+  top: 70%;
+  right: 15%;
+  animation-delay: -2s;
+}
+
+.circle-3 {
+  width: 60px;
+  height: 60px;
+  top: 40%;
+  right: 25%;
+  animation-delay: -4s;
+}
+
+@keyframes gentleFloat {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+/* 移动端装饰优化 */
 @media (max-width: 768px) {
-  .hero-animations {
-    opacity: 0.7; /* 减少动画强度 */
+  .hero-decorations {
+    opacity: 0.6;
   }
 
-  .floating-shapes .shape {
-    animation-duration: 40s; /* 减慢动画速度 */
-  }
-
-  .particles .particle {
-    animation-duration: 30s; /* 减慢粒子动画 */
+  .floating-circle {
+    animation-duration: 10s;
   }
 }
 
 @media (max-width: 480px) {
-  .hero-animations {
-    opacity: 0.5; /* 进一步减少动画强度 */
+  .hero-decorations {
+    opacity: 0.4;
   }
 
-  /* 在小屏幕上隐藏部分动画元素 */
-  .shape-3,
-  .shape-5,
-  .shape-6 {
+  .circle-3 {
     display: none;
-  }
-}
-
-.floating-shapes {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.shape {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  animation: float 20s infinite linear;
-}
-
-.shape-1 {
-  width: 80px;
-  height: 80px;
-  top: 20%;
-  left: 10%;
-  animation-delay: 0s;
-  animation-duration: 25s;
-}
-
-.shape-2 {
-  width: 60px;
-  height: 60px;
-  top: 60%;
-  left: 80%;
-  animation-delay: -5s;
-  animation-duration: 30s;
-}
-
-.shape-3 {
-  width: 40px;
-  height: 40px;
-  top: 30%;
-  left: 70%;
-  animation-delay: -10s;
-  animation-duration: 20s;
-}
-
-.shape-4 {
-  width: 100px;
-  height: 100px;
-  top: 70%;
-  left: 20%;
-  animation-delay: -15s;
-  animation-duration: 35s;
-}
-
-.shape-5 {
-  width: 50px;
-  height: 50px;
-  top: 10%;
-  left: 60%;
-  animation-delay: -8s;
-  animation-duration: 28s;
-}
-
-.shape-6 {
-  width: 70px;
-  height: 70px;
-  top: 80%;
-  left: 60%;
-  animation-delay: -12s;
-  animation-duration: 22s;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100px) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-.particles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.particle {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  animation: particleFloat 20s infinite linear;
-  top: 100%;
-}
-
-@keyframes particleFloat {
-  0% {
-    transform: translateY(0px) translateX(0px);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh) translateX(50px);
-    opacity: 0;
   }
 }
 
