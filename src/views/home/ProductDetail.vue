@@ -22,7 +22,8 @@
               <span>点击查看大图</span>
             </div>
           </div>
-          <div class="thumbs-row">
+          <!-- 动态缩略图 -->
+          <div class="thumbs-row" v-if="product.images && product.images.length > 1">
             <div
               v-for="(img, i) in product.images"
               :key="i"
@@ -36,23 +37,31 @@
               />
             </div>
           </div>
-          <!-- 产品动态数据 -->
+          <!-- 优化后的产品统计信息 -->
           <div class="product-stats">
-            <div class="stat-item">
-              <eye-outlined />
-              <span>浏览量: {{ formatNumber(productStats.views) }}</span>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <eye-outlined />
+                </div>
+                <div class="stat-content">
+                  <div class="stat-number">{{ formatNumber(productStats.views) }}</div>
+                  <div class="stat-label">浏览量</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <star-outlined />
+                </div>
+                <div class="stat-content">
+                  <div class="stat-number">{{ formatNumber(productStats.favorites) }}</div>
+                  <div class="stat-label">收藏</div>
+                </div>
+              </div>
             </div>
-            <div class="stat-item">
-              <download-outlined />
-              <span>下载量: {{ formatNumber(productStats.downloads) }}</span>
-            </div>
-            <div class="stat-item">
-              <star-outlined />
-              <span>收藏: {{ formatNumber(productStats.favorites) }}</span>
-            </div>
-            <div class="stat-item">
+            <div class="update-info">
               <clock-circle-outlined />
-              <span>更新: {{ formatDate(productStats.lastUpdated) }}</span>
+              <span>更新于 {{ formatDate(productStats.lastUpdated) }}</span>
             </div>
           </div>
         </div>
@@ -106,13 +115,9 @@
               <message-outlined />
               技术咨询
             </a-button>
-            <a-button @click="handleDownload">
-              <download-outlined />
-              下载资料
-            </a-button>
             <a-button @click="handleShare">
               <share-alt-outlined />
-              分享
+              分享到微信
             </a-button>
           </div>
         </div>
@@ -167,9 +172,9 @@
               <message-outlined />
               立即咨询
             </a-button>
-            <a-button size="large" @click="handleDownload">
-              <download-outlined />
-              下载资料
+            <a-button size="large" @click="handleShare">
+              <share-alt-outlined />
+              分享到微信
             </a-button>
           </div>
         </div>
@@ -204,14 +209,14 @@ import {
 import {
   CheckCircleOutlined,
   ClockCircleOutlined,
-  DownloadOutlined,
   EyeOutlined,
   MessageOutlined,
   ShareAltOutlined,
   StarOutlined,
   ZoomInOutlined
 } from '@ant-design/icons-vue'
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { Modal, message } from 'ant-design-vue'
+import { computed, h, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -261,7 +266,7 @@ const productData = computed(() => {
     name: product.title,
     category: product.category,
     mainImage: currentMainImage.value || product.img,
-    images: product.images || [product.img, product.img, product.img, product.img],
+    images: product.images || [product.img], // 动态图片数组，如果没有额外图片就只显示主图
     features: getProductFeatures(product.category, product.title),
     specs: getProductSpecs(product.category, product.title),
     code: product.code,
@@ -314,22 +319,63 @@ const resetZoom = () => {
   showZoom.value = false
 }
 
-// 下载功能
-const handleDownload = () => {
-  // 实现下载逻辑
-  console.log('下载产品资料')
-}
-
-// 咨询功能
+// 咨询功能 - 显示联系方式弹窗
 const handleConsult = () => {
-  // 实现咨询逻辑
-  console.log('联系技术咨询')
+  Modal.info({
+    title: `产品咨询 - ${product.value.name}`,
+    content: h('div', { style: 'line-height: 1.8; color: #374151;' }, [
+      h('div', { style: 'margin-bottom: 16px; font-weight: 600; color: #1e293b;' }, '联系方式：'),
+      h('div', { style: 'margin-bottom: 8px;' }, '📞 服务热线：0531-87357881'),
+      h('div', { style: 'margin-bottom: 8px;' }, '📱 手机号码：18663761618'),
+      h('div', { style: 'margin-bottom: 8px;' }, '📧 邮箱地址：sddwcxgy@126.com'),
+      h('div', { style: 'margin-bottom: 8px;' }, '📍 公司地址：山东省济南市长清区双龙路1006号'),
+      h('div', { style: 'margin-bottom: 16px;' }, '🌐 公司网址：www.sddwcxgy.cn'),
+      h(
+        'div',
+        {
+          style:
+            'padding: 12px; background: #f8fafc; border-radius: 8px; border-left: 4px solid #1677ff; color: #64748b; font-size: 14px;'
+        },
+        '请通过以上方式联系我们获取详细产品信息和技术支持。'
+      )
+    ]),
+    width: 520,
+    okText: '知道了',
+    centered: true
+  })
 }
 
-// 分享功能
+// 分享到微信功能
 const handleShare = () => {
-  // 实现分享逻辑
-  console.log('分享产品')
+  // 检查是否在微信环境中
+  const isWechat = /micromessenger/i.test(navigator.userAgent)
+
+  if (isWechat) {
+    // 在微信中，提示用户点击右上角分享
+    Modal.info({
+      title: '分享到微信',
+      content: '请点击右上角的"..."按钮，选择"分享给朋友"或"分享到朋友圈"',
+      okText: '知道了'
+    })
+  } else {
+    // 非微信环境，复制链接到剪贴板
+    navigator.clipboard
+      .writeText(window.location.href)
+      .then(() => {
+        message.success('产品链接已复制到剪贴板，可以分享给朋友了！')
+      })
+      .catch(() => {
+        // 降级方案
+        const textArea = document.createElement('textarea')
+        textArea.value = window.location.href
+        document.body.appendChild(textArea)
+        textArea.select()
+        document.execCommand('copy')
+        document.body.removeChild(textArea)
+
+        message.success('产品链接已复制到剪贴板，可以分享给朋友了！')
+      })
+  }
 }
 
 // 图片预览功能
@@ -363,6 +409,180 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+/* 全局样式用于动态内容 */
+</style>
+
+<style>
+/* 产品详情页动态内容样式 - 非scoped */
+.detail-content {
+  color: #374151;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+/* 突出显示数值和单位 - 专业版 */
+.detail-content em {
+  background: rgba(22, 119, 255, 0.1);
+  color: #1677ff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 2px;
+  border: 1px solid rgba(22, 119, 255, 0.2);
+}
+
+/* 突出显示重要关键词 - 专业版 */
+.detail-content .highlight-keyword {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  margin: 0 2px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  font-size: 14px;
+}
+
+/* 突出显示温度、压力等技术参数 - 专业版 */
+.detail-content .tech-param {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  margin: 0 2px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  font-size: 14px;
+}
+
+/* 应用领域高亮 - 专业版 */
+.detail-content .industry-highlight {
+  background: rgba(139, 92, 246, 0.1);
+  color: #7c3aed;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 0 2px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+/* 重要组件名称加粗 - 专业版 */
+.detail-content strong {
+  font-weight: 800;
+  color: #1e293b;
+  background: rgba(245, 158, 11, 0.1);
+  padding: 1px 4px;
+  border-radius: 3px;
+  border-bottom: 2px solid #f59e0b;
+  margin: 0 1px;
+}
+
+/* H2和H3标题中的strong样式 */
+.detail-content h2 strong {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-weight: 800;
+}
+
+.detail-content h3 strong {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: #1e293b;
+  font-weight: 800;
+}
+
+/* 特别突出的组件名称（滤布、喷嘴、胶带等） - 专业版 */
+.detail-content p strong,
+.detail-content li strong {
+  background: rgba(245, 158, 11, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.detail-content h2 {
+  font-size: 18px;
+  color: #1e293b;
+  margin: 24px 0 16px 0;
+  font-weight: 700;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(22, 119, 255, 0.2);
+}
+
+.detail-content h2::before {
+  content: '■';
+  margin-right: 8px;
+  color: white;
+  font-size: 14px;
+}
+
+.detail-content h3 {
+  font-size: 16px;
+  color: #1e293b;
+  margin: 20px 0 12px 0;
+  font-weight: 700;
+  padding: 8px 12px;
+  background: rgba(22, 119, 255, 0.05);
+  border-left: 3px solid #1677ff;
+  border-radius: 0 4px 4px 0;
+}
+
+.detail-content h3::before {
+  content: '▶';
+  margin-right: 6px;
+  color: #1677ff;
+  font-size: 12px;
+}
+
+.detail-content ul {
+  margin: 16px 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.detail-content li {
+  margin-bottom: 12px;
+  color: #374151;
+  padding: 10px 16px;
+  background: rgba(22, 119, 255, 0.02);
+  border-radius: 6px;
+  border-left: 3px solid #43c6ac;
+  position: relative;
+  transition: all 0.3s ease;
+  line-height: 1.6;
+}
+
+.detail-content li:hover {
+  background: rgba(22, 119, 255, 0.05);
+  transform: translateX(4px);
+  border-left-color: #1677ff;
+}
+
+.detail-content li::before {
+  content: '•';
+  color: #43c6ac;
+  font-weight: 700;
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.detail-content p {
+  margin-bottom: 16px;
+  text-align: justify;
+}
 .product-detail-layout {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -609,40 +829,6 @@ onBeforeUnmount(() => {
   font-weight: 600;
   border-bottom: 2px solid rgba(22, 119, 255, 0.1);
   padding-bottom: 8px;
-}
-
-.detail-content {
-  color: #374151;
-  line-height: 1.8;
-  font-size: 15px;
-}
-
-.detail-content h2 {
-  font-size: 16px;
-  color: #1e293b;
-  margin: 20px 0 12px 0;
-  font-weight: 600;
-}
-
-.detail-content h3 {
-  font-size: 15px;
-  color: #374151;
-  margin: 16px 0 8px 0;
-  font-weight: 600;
-}
-
-.detail-content ul {
-  margin: 12px 0;
-  padding-left: 20px;
-}
-
-.detail-content li {
-  margin-bottom: 8px;
-  color: #374151;
-}
-
-.detail-content p {
-  margin-bottom: 12px;
 }
 
 /* 产品标签样式 */
@@ -1043,27 +1229,86 @@ onBeforeUnmount(() => {
   opacity: 1;
 }
 
+/* 优化后的产品统计信息样式 */
 .product-stats {
-  display: flex;
-  justify-content: space-around;
   margin-top: 24px;
-  padding: 16px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(22, 119, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.08);
 }
 
-.stat-item {
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: #666;
-  font-size: 13px;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(22, 119, 255, 0.02);
+  border-radius: 12px;
+  border-left: 4px solid #1677ff;
+  transition: all 0.3s ease;
 }
 
-.stat-item .anticon {
+.stat-card:hover {
+  background: rgba(22, 119, 255, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(22, 119, 255, 0.1);
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-number {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.update-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(22, 119, 255, 0.02);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #64748b;
+  border: 1px solid rgba(22, 119, 255, 0.05);
+}
+
+.update-info .anticon {
   color: #1677ff;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .image-preview-modal :deep(.ant-modal-content) {
@@ -1085,7 +1330,7 @@ onBeforeUnmount(() => {
   object-fit: contain;
 }
 
-/* 优化缩略图样式 */
+/* 动态缩略图样式优化 */
 .thumbs-row {
   display: flex;
   gap: 12px;
@@ -1094,6 +1339,16 @@ onBeforeUnmount(() => {
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: #1677ff #f0f0f0;
+  justify-content: flex-start;
+}
+
+/* 根据图片数量调整布局 */
+.thumbs-row:has(.thumb-container:nth-child(2):last-child) {
+  justify-content: center;
+}
+
+.thumbs-row:has(.thumb-container:nth-child(3):last-child) {
+  justify-content: center;
 }
 
 .thumbs-row::-webkit-scrollbar {

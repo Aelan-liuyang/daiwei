@@ -14,7 +14,9 @@
     "build:serve": "npm run build && npm run serve-dist",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint src --ext .vue,.js,.ts --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
+    "build:seo": "npm run generate:sitemap && npm run build"
   },
   "dependencies": {
     "ant-design-vue": "^4.2.6",

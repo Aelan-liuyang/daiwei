@@ -27,6 +27,20 @@ import zhenkong from '@/assets/images/zhenkong.jpg'
 import zuran1 from '@/assets/images/zuran1.jpg'
 import zuran2 from '@/assets/images/zuran2.jpg'
 
+// 导入products目录下的真空皮带脱水机图片
+import product1 from '@/assets/images/products/product-1.jpg'
+import product10 from '@/assets/images/products/product-10.jpg'
+import product11 from '@/assets/images/products/product-11.jpg'
+import product12 from '@/assets/images/products/product-12.jpg'
+import product13 from '@/assets/images/products/product-13.jpg'
+import product3 from '@/assets/images/products/product-3.jpg'
+import product4 from '@/assets/images/products/product-4.jpg'
+import product5 from '@/assets/images/products/product-5.jpg'
+import product6 from '@/assets/images/products/product-6.jpg'
+import product7 from '@/assets/images/products/product-7.jpg'
+import product8 from '@/assets/images/products/product-8.jpg'
+import product9 from '@/assets/images/products/product-9.jpg'
+
 // 产品分类
 export const categories = [
   '碳化硅聚合陶瓷管',
@@ -50,43 +64,48 @@ export const allProductList = [
     publishDate: new Date('2020-12-03'),
     tags: ['真空皮带脱水机', '真空皮带脱水机配件', '真空皮带脱水机应用'],
     detailContent: `
-      <p><strong>真空皮带脱水机</strong>，以滤布为过滤介质，利用物料重力和真空吸力实现固液分离的效率高的固液分离设备。</p>
+      <p><strong>真空皮带脱水机</strong>，以<strong>滤布</strong>为过滤介质，利用物料重力和<em>真空吸力</em>实现固液分离的<span class="highlight-keyword">效率高</span>的固液分离设备。</p>
 
-      <h2>工作原理</h2>
-      <p>该设备采用固定真空盒，滤布铺敷在环形胶带上，环形胶带由减速机拖动在真空盒上连续运行，胶带与真空盒滑台上的摩擦带接触并形成水密封结构。料浆由下料斗，均匀的布在滤布上。当真空室接通真空系统时，在胶带上形成真空抽滤区，滤液穿过滤布经胶带上的横沟槽汇总并由小孔进入真空室，固体颗粒被截留在滤布上形成滤饼。</p>
+      <h2><strong>工作原理</strong></h2>
+      <p>该设备采用<strong>固定真空盒</strong>，<strong>滤布</strong>铺敷在<strong>环形胶带</strong>上，环形<strong>胶带</strong>由减速机拖动在真空盒上连续运行，<strong>胶带</strong>与真空盒滑台上的摩擦带接触并形成<em>水密封结构</em>。料浆由下料斗，均匀的布在<strong>滤布</strong>上。当真空室接通真空系统时，在<strong>胶带</strong>上形成<span class="highlight-keyword">真空抽滤区</span>，滤液穿过<strong>滤布</strong>经<strong>胶带</strong>上的横沟槽汇总并由小孔进入真空室，固体颗粒被截留在<strong>滤布</strong>上形成<em>滤饼</em>。</p>
 
-      <h2>设备特点</h2>
+      <p>进入真空室的滤液经排液罐排出，随着橡胶带的移动，一形成的滤饼依次进入<strong>滤饼洗涤区</strong>和<strong>洗干区</strong>，然后<strong>滤布</strong>和<strong>胶带</strong>分开，在<strong>卸料辊</strong>处将滤饼卸出(进入<strong>卸料区</strong>)。卸除滤饼的<strong>滤布</strong>经清洗后获得再生，在经过一组<strong>支承辊</strong>和<strong>纠偏装置</strong>后重新进入过滤区，然后再进入下一个过滤周期。</p>
+
+      <h2><strong>设备特点</strong></h2>
       <ul>
-        <li>在结构上实现模块化设计，组装灵活，运输方便。也可安装调试完毕后，在整体吊装运输。</li>
-        <li>在过滤上实现了滤布与胶带同步运行，能够连续完成进料、抽滤、洗涤、干燥、滤布再生等功能。</li>
-        <li>在控制上实现远程与现场交互控制的方式，便于实施操作。</li>
-        <li>在胶带支承上实现了托辊式、气垫式、托盘式、多条摩擦带支撑的多种方式减少摩擦阻力，增加胶带寿命。</li>
-        <li>在洗涤上实现了分段收集，并可顺流或逆流洗涤。</li>
-        <li>在滤布再生上可选配高压清洗方式增加滤布的再生效果及寿命。</li>
-        <li>在排液方式上有零位排液、高位排液、辅助排液。</li>
-        <li>在设备外形上增加了气罩或铝塑窗实现了半封闭或全封闭，用于含挥发性气体或蒸汽的物料处理。</li>
+        <li>●在结构上实现<span class="highlight-keyword">模块化设计</span>，组装灵活，运输方便。也可安装调试完毕后，在整体吊装运输。</li>
+        <li>●在过滤上实现了<strong>滤布</strong>与<strong>胶带</strong><em>同步运行</em>，能够连续完成进料、抽滤、洗涤、干燥、<strong>滤布</strong>再生等功能。</li>
+        <li>●在控制上实现<span class="highlight-keyword">远程与现场交互控制</span>的方式，便于实施操作。</li>
+        <li>●在<strong>胶带</strong>支承上实现了<em>托辊式、气垫式、托盘式、多条摩擦带支撑</em>的多种方式减少摩擦阻力，增加<strong>胶带</strong>寿命。</li>
+        <li>●在洗涤上实现了<span class="highlight-keyword">分段收集</span>，并可顺流或逆流洗涤。</li>
+        <li>●在<strong>滤布</strong>再生上可选配<em>高压清洗方式</em>增加<strong>滤布</strong>的再生效果及寿命。</li>
+        <li>●在排液方式上有<span class="tech-param">零位排液、高位排液、辅助排液</span>。</li>
+        <li>●在设备外形上增加了气罩或铝塑窗实现了<span class="highlight-keyword">半封闭或全封闭</span>，用于含挥发性气体或蒸汽的物料处理。</li>
       </ul>
 
-      <h2>设备主要配件</h2>
-      <h3>滤布</h3>
-      <p>烟气脱硫中真空皮带脱水机的滤布，具有抗拉强度大、耐磨、耐酸碱性、易剥离、滤水性能好等特点，特别是独特的接头、封边、制作工艺，能提高滤布的使用寿命。公司代理各种型号进口，国产滤布。规格：宽度为4.5米以内、长度不限。</p>
+      <h2><strong>设备主要配件</strong></h2>
 
-      <h3>橡胶棍</h3>
-      <p>真空皮带脱水机的主、从动棍，是驱动皮带运动的部件，由钢质滚筒外包耐酸碱橡胶制成。规格：500、820、1000、1200、1400等各种规格尺寸。</p>
+      <h3><strong>滤布</strong></h3>
+      <p><span class="industry-highlight">烟气脱硫</span>中真空皮带脱水机的<strong>滤布</strong>，具有<em>抗拉强度大、耐磨、耐酸碱性、易剥离、滤水性能好</em>等特点，特别是独特的接头、封边、制作工艺，能提高<strong>滤布</strong>的使用寿命。公司代理各种型号进口，国产<strong>滤布</strong>。</p>
+      <p><strong>规格：</strong>宽度为<span class="tech-param">4.5米以内</span>、长度不限。</p>
 
-      <h3>胶带</h3>
-      <p>橡胶过滤带也称真空皮带，是DU水平带式真空脱水机的关键部件。带体表面为一排排横向沟槽，沟槽中有一排或多排排液孔，排液孔段可采用纯胶结构；带体的骨架层采用高强度的聚酯帆布或绦纶帆布滤带的上、下覆盖胶可根据工况条件采用不同的配方，满足耐酸碱、耐热、耐油、耐寒等不同需求；胶带的成型和硫化采用一次整体复合工艺，确保了带体的平整和性能的稳定。</p>
+      <h3><strong>橡胶棍</strong></h3>
+      <p>真空皮带脱水机的<strong>主、从动棍</strong>，是驱动皮带运动的部件，由钢质滚筒外包<em>耐酸碱橡胶</em>制成。</p>
+      <p><strong>规格：</strong><span class="tech-param">500、820、1000、1200、1400</span>等各种规格尺寸。</p>
 
-      <h3>喷嘴</h3>
-      <p>喷嘴的功效：采用工艺水喷射，清洗滤布和胶带，且配置有真空吸管密封的箱体，这样可以保证清洁的工作现场。喷头采用国际喷雾公司的产品，可以充分保证清洗效果。</p>
+      <h3><strong>胶带</strong></h3>
+      <p><strong>橡胶过滤带</strong>也称<strong>真空皮带</strong>，是DU水平带式真空脱水机的<span class="highlight-keyword">关键部件</span>。带体表面为一排排横向沟槽，沟槽中有一排或多排排液孔，排液孔段可采用<em>纯胶结构</em>；带体的骨架层采用<strong>高强度的聚酯帆布或绦纶帆布</strong>，<strong>滤布</strong>的上、下覆盖胶可根据工况条件采用不同的配方，满足<span class="tech-param">耐酸碱、耐热、耐油、耐寒</span>等不同需求；<strong>胶带</strong>的成型和硫化采用<span class="highlight-keyword">一次整体复合工艺</span>，确保了带体的平整和性能的稳定。</p>
 
-      <h3>旋流器</h3>
-      <p>旋流子采用新型耐磨、耐腐材料制作，设计结构合理，能有效提高旋流子的寿命和处理效果。具有浓缩效果好、分级效率高、耐酸碱腐蚀性强、使用寿命长等特点。</p>
+      <h3><strong>喷嘴</strong></h3>
+      <p><strong>喷嘴</strong>的功效：采用<em>工艺水喷射</em>，清洗<strong>滤布</strong>和<strong>胶带</strong>，且配置有真空吸管密封的箱体，这样可以保证<span class="highlight-keyword">清洁的工作现场</span>。<strong>喷嘴</strong>采用<strong>国际喷雾公司</strong>的产品，可以充分保证清洗效果。</p>
 
-      <h3>纠偏总成</h3>
-      <p>采用气缸或气囊推动纠偏转一定角度来自动纠正滤布的偏移，保证滤布的正常运转。</p>
+      <h3><strong>旋流器</strong></h3>
+      <p><strong>旋流器</strong>采用<em>新型耐磨、耐腐材料</em>制作，设计结构合理，能有效提高<strong>旋流器</strong>的寿命和处理效果。具有<span class="highlight-keyword">浓缩效果好、分级效率高、耐酸碱腐蚀性强、使用寿命长</span>等特点。</p>
+
+      <h3><strong>纠偏总成</strong></h3>
+      <p>采用<em>气缸或气囊推动</em><strong>纠偏总成</strong>转一定角度来自动纠正<strong>滤布</strong>的偏移，保证<strong>滤布</strong>的<span class="highlight-keyword">正常运转</span>。</p>
     `,
-    images: [zhenkong, zhenkong, zhenkong, zhenkong]
+    images: [zhenkong, product1, product3, product4]
   },
   {
     id: 2,
@@ -117,7 +136,7 @@ export const allProductList = [
       工作温度：-20°C ~ +400°C<br>
       适用压力：≤2.5MPa</p>
     `,
-    images: [duihan, duihan, duihan, duihan]
+    images: [duihan]
   },
   {
     id: 3,
@@ -129,26 +148,34 @@ export const allProductList = [
     publishDate: new Date('2020-12-03'),
     tags: ['橡胶膨胀节', '管道补偿', '密封件'],
     detailContent: `
-      <p><strong>橡胶膨胀节</strong>是管道系统中的重要补偿元件，用于吸收管道的热胀冷缩、振动和位移。</p>
+      <p><strong>橡胶膨胀节</strong>是管道系统中的<span class="highlight-keyword">重要补偿元件</span>，用于吸收管道的<em>热胀冷缩、振动和位移</em>。</p>
 
-      <h2>产品优势</h2>
+      <h2><strong>产品优势</strong></h2>
       <ul>
-        <li>补偿能力强，能够吸收轴向、横向和角向位移</li>
-        <li>密封性能好，无泄漏</li>
-        <li>耐温范围广，适应性强</li>
-        <li>安装维护方便</li>
+        <li>●<span class="highlight-keyword">补偿能力强</span>，能够吸收<em>轴向、横向和角向位移</em></li>
+        <li>●<span class="highlight-keyword">密封性能好</span>，无泄漏</li>
+        <li>●<span class="tech-param">耐温范围广</span>，适应性强</li>
+        <li>●<em>安装维护方便</em></li>
+        <li>●<strong>耐腐蚀性能</strong>优异，使用寿命长</li>
+        <li>●<strong>减震降噪</strong>效果显著</li>
       </ul>
 
-      <h2>技术参数</h2>
-      <p>工作温度：-40°C ~ +120°C<br>
-      工作压力：0.25 ~ 2.5MPa<br>
-      补偿量：±10 ~ ±50mm<br>
-      连接方式：法兰连接</p>
+      <h2><strong>技术参数</strong></h2>
+      <p><strong>工作温度：</strong><span class="tech-param">-40°C ~ +120°C</span></p>
+      <p><strong>工作压力：</strong><span class="tech-param">0.25 ~ 2.5MPa</span></p>
+      <p><strong>补偿量：</strong><span class="tech-param">±10 ~ ±50mm</span></p>
+      <p><strong>连接方式：</strong><strong>法兰连接</strong></p>
+      <p><strong>材质：</strong><em>天然橡胶、氯丁橡胶、丁基橡胶</em>等</p>
 
-      <h2>应用场合</h2>
-      <p>广泛应用于供热、供水、化工、冶金等管道系统中，特别适用于有温度变化和振动的场合。</p>
+      <h2><strong>应用场合</strong></h2>
+      <p>●<strong>供热系统</strong>：<strong>热水管道</strong>、<strong>蒸汽管道</strong>、<strong>采暖系统</strong></p>
+      <p>●<strong>供水系统</strong>：<strong>给水管道</strong>、<strong>排水管道</strong>、<strong>消防管道</strong></p>
+      <p>●<strong>化工系统</strong>：<strong>化工管道</strong>、<strong>酸碱管道</strong>、<strong>腐蚀性介质管道</strong></p>
+      <p>●<strong>冶金系统</strong>：<strong>冷却水管道</strong>、<strong>工艺管道</strong>、<strong>高温管道</strong></p>
+
+      <p>特别适用于有<em>温度变化和振动</em>的场合，能够有效保护管道系统，延长使用寿命。</p>
     `,
-    images: [xiangjiao, xiangjiao, xiangjiao, xiangjiao]
+    images: [xiangjiao]
   },
   {
     id: 4,
@@ -160,30 +187,33 @@ export const allProductList = [
     publishDate: new Date('2020-12-02'),
     tags: ['烧结碳化硅', '陶瓷喷嘴', '高温管件'],
     detailContent: `
-      <p><strong>反应烧结碳化硅制品</strong>具有高强度、高硬度、高耐磨、耐高温、耐腐蚀、抗热震、导热好、耐极冷急热和抗高温蠕变等优异性能和主要特点。可制成耐腐蚀件、耐磨件、脱硫喷嘴、耐腐蚀件及各种异型结构件等。</p>
+      <p><strong>反应烧结碳化硅制品</strong>具有<em>高强度、高硬度、高耐磨</em>、<span class="tech-param">耐高温、耐腐蚀、抗热震</span>、导热好、<span class="highlight-keyword">耐极冷急热</span>和<span class="highlight-keyword">抗高温蠕变</span>等优异性能和主要特点。可制成<span class="industry-highlight">耐腐蚀件、耐磨件、脱硫喷嘴</span>、耐腐蚀件及各种<strong>异型结构件</strong>等。</p>
 
-      <h2>产品规格</h2>
-      <p>提供DN400及以下<strong>烧结碳化硅陶瓷管件</strong>及脱硫用各种喷嘴。</p>
+      <h2><strong>产品规格</strong></h2>
+      <p>提供<span class="tech-param">DN400及以下</span><strong>烧结碳化硅陶瓷管件</strong>及<span class="industry-highlight">脱硫</span>用各种<strong>喷嘴</strong>。</p>
 
-      <h2>产品特性</h2>
+      <h2><strong>产品特性</strong></h2>
       <ul>
-        <li>高强度、高硬度，机械性能优异</li>
-        <li>高耐磨性能，使用寿命长</li>
-        <li>耐高温性能突出，可在极端温度下工作</li>
-        <li>耐腐蚀性强，适用于恶劣化学环境</li>
-        <li>抗热震性能好，温度急变不开裂</li>
-        <li>导热性能优良，热传导效率高</li>
-        <li>耐极冷急热，温度适应范围广</li>
-        <li>抗高温蠕变，长期高温下形状稳定</li>
+        <li>●<span class="highlight-keyword">高强度、高硬度</span>，机械性能优异</li>
+        <li>●<span class="highlight-keyword">高耐磨性能</span>，使用寿命长</li>
+        <li>●<span class="tech-param">耐高温性能突出</span>，可在<em>极端温度</em>下工作</li>
+        <li>●<span class="tech-param">耐腐蚀性强</span>，适用于恶劣化学环境</li>
+        <li>●<span class="highlight-keyword">抗热震性能好</span>，温度急变不开裂</li>
+        <li>●<span class="highlight-keyword">导热性能优良</span>，热传导效率高</li>
+        <li>●<span class="tech-param">耐极冷急热</span>，温度适应范围广</li>
+        <li>●<span class="highlight-keyword">抗高温蠕变</span>，长期高温下形状稳定</li>
       </ul>
 
-      <h2>应用领域</h2>
-      <p>广泛应用于脱硫系统、化工设备、冶金工业、电力行业等领域，特别适用于制造耐腐蚀件、耐磨部件、脱硫喷嘴等关键组件。</p>
+      <h2><strong>主要应用</strong></h2>
+      <p>●<strong>脱硫系统</strong>：<strong>脱硫喷嘴</strong>、<strong>脱硫管道</strong>、<strong>脱硫塔内件</strong></p>
+      <p>●<strong>化工设备</strong>：<strong>耐腐蚀管件</strong>、<strong>化工泵部件</strong>、<strong>反应器内衬</strong></p>
+      <p>●<strong>冶金工业</strong>：<strong>高温管道</strong>、<strong>耐磨衬板</strong>、<strong>冶炼设备部件</strong></p>
+      <p>●<strong>电力行业</strong>：<strong>锅炉管道</strong>、<strong>除尘设备</strong>、<strong>烟气处理系统</strong></p>
 
-      <h2>产品优势</h2>
-      <p>采用反应烧结工艺制造，确保产品具有优异的综合性能，能够在极端工况下稳定工作，是传统材料的理想替代品。</p>
+      <h2><strong>产品优势</strong></h2>
+      <p>采用<strong>反应烧结工艺</strong>制造，确保产品具有<span class="highlight-keyword">优异的综合性能</span>，能够在<em>极端工况</em>下稳定工作，是传统材料的<span class="highlight-keyword">理想替代品</span>。特别适用于制造<strong>耐腐蚀件</strong>、<strong>耐磨部件</strong>、<strong>脱硫喷嘴</strong>等关键组件。</p>
     `,
-    images: [penzui, penzui, penzui, penzui]
+    images: [penzui]
   },
   {
     id: 5,
@@ -195,7 +225,7 @@ export const allProductList = [
     publishDate: new Date('2020-12-02'),
     tags: ['聚四氟内衬', '耐腐蚀管件', '化工管道'],
     detailContent: `
-      <p><strong>聚四氟内衬管件</strong>采用优质聚四氟乙烯材料作为内衬，具有优异的耐腐蚀性能。</p>
+      <p><strong>聚四氟乙烯(PTFE、 F4)</strong>是耐腐蚀性能十分突出，管道及配件有"塑料王”的美誉。具有优异的耐温性能和耐腐蚀性能，是理想的硝酸、氯气、王水、混酸、溴化物等有机溶剂等强腐蚀性介质的输送介质。密度: 2.10-2.30g/cm3 ，拉伸强度: 218MPa、广泛应用于化工、电力、离子膜烧碱等各种需要抗酸碱和有机溶剂的介质。</p>
 
       <h2>产品优势</h2>
       <ul>
@@ -208,7 +238,7 @@ export const allProductList = [
       <h2>应用场合</h2>
       <p>广泛应用于化工、制药、食品等行业的强腐蚀性介质输送系统。</p>
     `,
-    images: [jusi, jusi, jusi, jusi]
+    images: [jusi]
   },
   {
     id: 6,
@@ -220,7 +250,7 @@ export const allProductList = [
     publishDate: new Date('2020-12-02'),
     tags: ['钢塑复合', '复合管件', '耐腐蚀'],
     detailContent: `
-      <p><strong>钢塑复合管件</strong>采用钢塑复合结构，结合了钢材的强度和塑料的耐腐蚀性。</p>
+      <p><strong>钢塑复合管件</strong>一般选用碳钢管件为基体, 内衬耐腐蚀、耐热性能的聚乙烯(PE)、 聚丙烯 (PP、 PO)衬里材料,化学稳定性优良。整体一次成型， 内壁光滑,强度高、抗老化、不渗漏、无毒性。对- -般酸、碱、盐及有机溶剂的耐腐蚀性能良好，适用于腐蚀性气体、液体及浆液介质的输送。</p>
 
       <h2>结构特点</h2>
       <ul>
@@ -233,7 +263,7 @@ export const allProductList = [
       <h2>技术优势</h2>
       <p>具有钢管的强度和塑料管的耐腐蚀性，是传统管材的理想替代品。</p>
     `,
-    images: [gangsu, gangsu, gangsu, gangsu]
+    images: [gangsu, product5]
   },
   {
     id: 7,
@@ -258,7 +288,7 @@ export const allProductList = [
       <h2>适用范围</h2>
       <p>适用于输送磨蚀性物料和有振动要求的管道系统。</p>
     `,
-    images: [chenjiao, chenjiao, chenjiao, chenjiao]
+    images: [chenjiao, product6]
   },
   {
     id: 8,
@@ -397,20 +427,36 @@ export const allProductList = [
     publishDate: new Date('2020-12-01'),
     tags: ['碳化硅管道', '聚合陶瓷', '高性能管道'],
     detailContent: `
-      <p><strong>碳化硅聚合陶瓷管</strong>是我公司的主打产品，具有卓越的耐磨和耐腐蚀性能。</p>
+      <p><strong>碳化硅聚合陶瓷管件</strong>，早期衬层材料以解决检修运行中，需及时现场局部修复，损坏、脱落、泄露的<strong>衬胶管件</strong>为主。</p>
 
-      <h2>核心技术</h2>
-      <ul>
-        <li>碳化硅聚合技术，强度超群</li>
-        <li>特殊配方，性能稳定</li>
-        <li>精密制造，质量可靠</li>
-        <li>多规格可选，适应性强</li>
-      </ul>
+      <p>该管件内衬层采用全新的<em>聚合物树脂和无机陶瓷</em>等材料，经特定工艺制备，<span class="highlight-keyword">一次成型</span>。具有<em>衬层与管件层间结合强度高、高防腐、高耐磨、耐温差大，韧性好，现场易修复</em>等优点，有效避免了可能引起的管道堵塞的不确定性因素。</p>
 
-      <h2>性能指标</h2>
-      <p>硬度HRA85-90，密度3.1-3.2g/cm³，工作温度-40°C~+800°C，是传统管材的理想替代品。</p>
+      <p>针对<strong>异型件</strong>易损等特点，公司结合现场多年使用情况，经全新改进设计，使用寿命比<strong>衬胶管</strong>件提升<span class="tech-param">2倍以上</span>，并申请国家专利，专利号:<span class="tech-param">202021335562.9</span>。在输送含有酸、碱、盐、污水等磨削性、腐蚀性浆液输送中，综合性能及性价比非常突出。为客户环保设备的安全运行提供良好的保障。</p>
+
+      <h2><strong>产品特点</strong></h2>
+
+      <h3><strong>1、层间结合强度大、耐温性广、使用安全可靠</strong></h3>
+      <p><strong>复合钢管</strong>基体采用<strong>碳钢管</strong>，内衬层与基体结合强度在<span class="tech-param">15MPa以上</span>，是<strong>衬胶管件</strong>（一般为<span class="tech-param">15KPa</span>）结合强度的<span class="highlight-keyword">100倍</span>。<strong>内衬陶瓷层</strong>，化学惰性强，硬度大，韧性强。在<span class="tech-param">-40℃——200℃</span>范围内对冷热交替、干湿交替、负压、腐蚀、冲涮等工况运营环境下无变化。在环评在线实时监测设备运行期间，消除潜在生产隐患，保障设备安全运行。</p>
+
+      <h3><strong>2、异型件经改进设计，使用寿命大幅提高</strong></h3>
+      <p><strong>弯管、变径管</strong>等易损<strong>异型管件</strong>，结合多年现场实际经验，进行全新改进设计，已申请国家专利，专利号：<span class="tech-param">202021335562.9</span>。使用寿命提升<span class="highlight-keyword">2倍以上</span>，大幅降低检修维护成本，有效提升整体管线使用寿命。</p>
+
+      <h3><strong>3、高防腐、高耐磨、防结垢、易清理</strong></h3>
+      <p><strong>内衬材料</strong>均是<em>耐磨损、耐腐蚀材料</em>，形成的<strong>陶瓷层</strong>呈<span class="highlight-keyword">交替叠层结构</span>，从基础上解决了耐磨和耐腐特性。管道<strong>内衬层</strong>比较光滑，运行阻力小，易于清理，具有<span class="highlight-keyword">防结垢性能</span>，使用过程中维护实用、方便。</p>
+
+      <h3><strong>4、法兰面采用内密封工艺，密封性好，易于安装</strong></h3>
+      <p><strong>法兰密封面</strong>处经特殊处理后，<strong>内衬层</strong>翻边与<strong>法兰</strong>密封<span class="highlight-keyword">一次复合成型</span>，使<strong>法兰防腐层</strong>和密封线平齐，密封性好，并降低了运输、安装过程中磕碰对<strong>内衬层</strong>造成损伤，给安装运输带来方便。</p>
+
+      <h3><strong>5、安装维护方便，现场可修复后直接运行，省时有效</strong></h3>
+      <p>对原系统因安装角度和尺寸偏差较大，新制作管件难于现场对接，泄露损坏的<strong>异型件</strong>。原管件外壁<strong>钢管</strong>只要能满足强度要求，对局部损坏部位进行切补修复后，便可进行<strong>衬瓷</strong>施工，一般完工<span class="tech-param">2小时后</span>设备就能投入生产运行。方便快捷，省时有效。</p>
+
+      <h3><strong>6、拆装灵活，维护方便</strong></h3>
+      <p>易损部位管件采用<strong>固定法兰</strong>和<strong>松套法兰</strong>组合方式，方便安装、检修和日常维护工作，给施工人员提供更多便利。</p>
+
+      <h2><strong>应用领域</strong></h2>
+      <p>衬<strong>碳化硅聚合陶瓷管</strong><strong>钢管</strong>耐酸、碱、盐腐蚀，耐磨性能突出，耐温在<span class="tech-param">-40℃~180℃</span>之间长期运行。在<span class="industry-highlight">石油化工、纺织、电力、冶金</span>等输送腐蚀性浆液介质、<span class="industry-highlight">烟气石灰石湿法脱硫</span>、污（废）水、<span class="industry-highlight">氯碱行业</span>、耐腐蚀设备的<strong>衬层防护</strong>方面使用性能非常突出。</p>
     `,
-    images: [tanhuahe, tanhuahe, tanhuahe, tanhuahe]
+    images: [tanhuahe, product7]
   },
   {
     id: 14,
@@ -494,12 +540,12 @@ export const allProductList = [
     category: '反应阻燃型-碳化硅聚合陶瓷涂抹',
     img: zuran1,
     title: '阻燃型碳化硅衬瓷材料',
-    description: '具有阻燃特性的碳化硅衬瓷材料，适用于高温高风险环境。',
+    description: '反应阻燃型碳化硅聚合陶瓷衬层材料-适应吸收塔等部位局部修复。',
     code: 'ZRTH-711',
     publishDate: new Date('2020-11-30'),
     tags: ['阻燃材料', '碳化硅衬瓷', '高温防护'],
     detailContent: `
-      <p><strong>阻燃型碳化硅衬瓷材料</strong>具有优异的阻燃特性，适用于高温高风险环境。</p>
+      <p><strong>阻燃型碳化硅衬瓷材料</strong>具有较高的耐磨性，较高的热稳定性，优良的耐腐蚀性。特别对含氯溶液或有机溶剂耐腐蚀性能较好。固化物阻燃性能氧指数在55以上，离开火焰后5-15秒，自动熄灭，具有良好的阻燃效果。</p>
 
       <h2>阻燃特性</h2>
       <ul>
@@ -510,9 +556,9 @@ export const allProductList = [
       </ul>
 
       <h2>应用场合</h2>
-      <p>广泛应用于石化、冶金等高温高风险行业，为设备和人员提供可靠的防火保护。</p>
+      <p>广泛应用于阻燃、耐酸碱盐、耐腐蚀设备、有机溶剂及漂白性介质等的化学工程及工业中。</p>
     `,
-    images: [zuran1, zuran1, zuran1, zuran1]
+    images: [zuran1, zuran2]
   },
   {
     id: 18,
@@ -551,14 +597,14 @@ export const allProductList = [
     publishDate: new Date('2020-11-29'),
     tags: ['双金属耐磨管', '复合结构', '异形件'],
     detailContent: `
-      <p><strong>双金属耐磨管及异形件</strong>采用双金属复合结构，具有优异的耐磨性能和经济性。</p>
+      <p><strong>双金属耐磨管</strong>以钢管为基体，内衬高耐磨合金材料，采用中频电 炉冶炼，直管通过离心浇注，异型管件采用消失模真空吸铸工艺，钢管 和内衬高耐磨合金层间形成牢固的冶金结合。双金属耐磨管充分发挥了 高铭合金的耐磨、耐腐性、耐高温、抗热冲击性和普通钢管良好的机械 强度、抗冲击性能。解决了单一材质的管道难以调和的可焊性与耐磨性 的矛盾，使两种材料性能达到较好结合。是耐磨管道体系中整体强度、 使用安全性及使用寿命等综合性比较高的较理想产品。</p>
 
       <h2>结构特点</h2>
       <ul>
-        <li>双金属复合，性能互补</li>
-        <li>内层耐磨，外层强度高</li>
-        <li>制造工艺成熟，质量稳定</li>
-        <li>成本适中，性价比高</li>
+        <li>双金属复合，性能互补，综合性能好</li>
+        <li>内层耐磨，外层强度高、抗热振性能好</li>
+        <li>制造工艺成熟，质量稳定、安装、运输、使用方便</li>
+        <li>综合性能好、抗热振性能好、运行阻力小、受冲击部位偏心加厚设计、外形美观</li>
       </ul>
 
       <h2>技术参数</h2>
@@ -567,7 +613,7 @@ export const allProductList = [
       <h2>应用优势</h2>
       <p>是中等磨损工况的理想选择，在保证性能的同时有效控制成本。</p>
     `,
-    images: [shuangjin, shuangjin, shuangjin, shuangjin]
+    images: [shuangjin, product8, product9]
   },
 
   // 陶瓷内衬复合钢管系列
@@ -581,23 +627,25 @@ export const allProductList = [
     publishDate: new Date('2020-11-28'),
     tags: ['陶瓷内衬', '复合钢管', '耐磨管道'],
     detailContent: `
-      <p><strong>陶瓷内衬复合钢管</strong>结合了陶瓷的耐磨性和钢材的强度，是理想的耐磨管道产品。</p>
+      <p><strong>陶瓷内衬复合钢管</strong>结合了<strong>陶瓷</strong>的耐磨性和<strong>钢材</strong>的强度，是理想的<span class="highlight-keyword">耐磨管道产品</span>。</p>
 
-      <h2>复合结构</h2>
+      <h2><strong>复合结构</strong></h2>
       <ul>
-        <li>陶瓷内衬，耐磨性能卓越</li>
-        <li>钢管外壳，机械强度高</li>
-        <li>复合工艺，结合牢固</li>
-        <li>整体性能，优势明显</li>
+        <li>●<strong>陶瓷内衬</strong>，耐磨性能卓越，<span class="highlight-keyword">耐磨性</span>是普通钢管的<span class="tech-param">20-30倍</span></li>
+        <li>●<strong>钢管外壳</strong>，机械强度高，承压能力强</li>
+        <li>●<strong>复合工艺</strong>，结合牢固，<span class="highlight-keyword">内硬外韧</span></li>
+        <li>●整体性能，优势明显，<span class="highlight-keyword">性能互补</span></li>
+        <li>●<strong>内壁光滑</strong>，流阻小，输送效率高</li>
+        <li>●<strong>耐腐蚀性能</strong>优异，适用于多种介质</li>
       </ul>
 
-      <h2>技术指标</h2>
-      <p>陶瓷厚度6-20mm，硬度HRA85-88，工作温度-40°C~+700°C，适用管径DN50-DN1200。</p>
+      <h2><strong>技术指标</strong></h2>
+      <p><strong>陶瓷厚度：</strong><span class="tech-param">6-20mm</span>，<strong>硬度：</strong><span class="tech-param">HRA85-88</span>，<strong>工作温度：</strong><span class="tech-param">-40°C~+700°C</span>，<strong>适用管径：</strong><span class="tech-param">DN50-DN1200</span>。</p>
 
-      <h2>应用效果</h2>
-      <p>使用寿命比普通钢管提升5-10倍，是高磨损输送系统的首选产品。</p>
+      <h2><strong>应用效果</strong></h2>
+      <p>使用寿命比普通钢管提升<span class="tech-param">5-10倍</span>，是<span class="highlight-keyword">高磨损输送系统</span>的首选产品。广泛应用于<span class="industry-highlight">电力、冶金、矿山、化工</span>等行业的物料输送管道系统。</p>
     `,
-    images: [taoci, taoci, taoci, taoci]
+    images: [taoci, product10, product11, product12]
   },
   {
     id: 21,
@@ -741,12 +789,12 @@ export const allProductList = [
     publishDate: new Date('2020-11-25'),
     tags: ['龟甲网结构', '耐磨陶瓷', '抗冲击'],
     detailContent: `
-      <p><strong>龟甲网耐磨陶瓷管</strong>采用独特的龟甲网结构，具有优异的抗冲击性能。</p>
+      <p><strong>龟甲网耐磨陶瓷管</strong>以钢管为基体，选用耐高温的六角形大泥爪龟甲网，内焊锚固在基体管上做骨架，内衬刚玉质高耐磨、耐高温、耐腐蚀陶瓷复合材料，经自然反应固化形成一种复合陶瓷产品。</p>
 
       <h2>结构特点</h2>
       <ul>
-        <li>龟甲网结构，抗冲击性强</li>
-        <li>陶瓷涂层，耐磨性优异</li>
+        <li>龟甲网结构，抗冲击性强、耐温性能好</li>
+        <li>陶瓷涂层，耐磨性优异、机械强度高</li>
         <li>结构稳定，使用寿命长</li>
         <li>适用于高冲击工况</li>
       </ul>
@@ -757,7 +805,7 @@ export const allProductList = [
       <h2>应用优势</h2>
       <p>特别适用于有冲击载荷的管道系统，能够有效抵抗物料的冲击和磨损。</p>
     `,
-    images: [guijia1, guijia1, guijia1, guijia1]
+    images: [guijia1, product13]
   },
   {
     id: 27,
