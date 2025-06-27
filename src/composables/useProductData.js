@@ -33,6 +33,21 @@ import product10 from '@/assets/images/products/product-10.jpg'
 import product11 from '@/assets/images/products/product-11.jpg'
 import product12 from '@/assets/images/products/product-12.jpg'
 import product13 from '@/assets/images/products/product-13.jpg'
+import product14 from '@/assets/images/products/product-14.jpg'
+import product15 from '@/assets/images/products/product-15.jpg'
+import product16 from '@/assets/images/products/product-16.jpg'
+import product17 from '@/assets/images/products/product-17.jpg'
+import product18 from '@/assets/images/products/product-18.jpg'
+import product19 from '@/assets/images/products/product-19.jpg'
+import product20 from '@/assets/images/products/product-20.jpg'
+import product21 from '@/assets/images/products/product-21.jpg'
+import product22 from '@/assets/images/products/product-22.jpg'
+import product23 from '@/assets/images/products/product-23.jpg'
+import product24 from '@/assets/images/products/product-24.jpg'
+import product25 from '@/assets/images/products/product-25.jpg'
+import product26 from '@/assets/images/products/product-26.jpg'
+import product27 from '@/assets/images/products/product-27.jpg'
+
 import product3 from '@/assets/images/products/product-3.jpg'
 import product4 from '@/assets/images/products/product-4.jpg'
 import product5 from '@/assets/images/products/product-5.jpg'
@@ -313,7 +328,7 @@ export const allProductList = [
       <h2>应用优势</h2>
       <p>是传统金属管道的理想替代品，特别适用于高磨损、高腐蚀的工况环境。</p>
     `,
-    images: [tanhua, tanhua, tanhua, tanhua]
+    images: [tanhua, product19, product20]
   },
   {
     id: 9,
@@ -338,7 +353,7 @@ export const allProductList = [
       <h2>应用场合</h2>
       <p>广泛应用于电力、冶金、矿山等行业的磨蚀性物料输送系统的转弯部位。</p>
     `,
-    images: [chenci, chenci, chenci, chenci]
+    images: [chenci, product17, product18]
   },
   {
     id: 10,
@@ -390,7 +405,7 @@ export const allProductList = [
       <h2>应用优势</h2>
       <p>特别适用于大口径、重载荷的管道系统，能够有效分散管道重量，延长使用寿命。</p>
     `,
-    images: [daituo, daituo, daituo, daituo]
+    images: [daituo, product15, product16]
   },
   {
     id: 12,
@@ -415,7 +430,7 @@ export const allProductList = [
       <h2>技术优势</h2>
       <p>能够实现不同管径管道的可靠连接，保证流体的平稳过渡，减少湍流和压力损失。</p>
     `,
-    images: [tanhuada, tanhuada, tanhuada, tanhuada]
+    images: [tanhuada, tanhuayi, ]
   },
   {
     id: 13,
@@ -481,7 +496,7 @@ export const allProductList = [
       <h2>应用范围</h2>
       <p>广泛应用于各种特殊工况和非标准管道系统，为客户提供完整的解决方案。</p>
     `,
-    images: [tanhuayi, tanhuayi, tanhuayi, tanhuayi]
+    images: [tanhuayi, product14,tanhuaguan,tanhuahe]
   },
   {
     id: 15,
@@ -493,7 +508,7 @@ export const allProductList = [
     publishDate: new Date('2020-12-01'),
     tags: ['碳化硅衬瓷', '复合工艺', '高性能管件'],
     detailContent: `
-      <p><strong>碳化硅衬瓷管件</strong>采用碳化硅衬瓷工艺制造，结合了碳化硅的优异性能。</p>
+      <p><strong>碳化硅聚合陶瓷管</strong>综合性能超越耐磨防腐衬胶复合管。具有整体强度高、高防腐、高耐磨、高粘接强度、现场易修复、耐温性好等特点。衬层采用全新的聚合物树脂和无机陶瓷等材料经特定工艺制备，钢管内衬形成的陶瓷层结构从根本上解决了衬胶管道在运行中衬层易脱层、脱落引发的安全隐患，使用寿命成倍延长。安装施工期间调整段现场衬瓷， 节省了工期进度。</p>
 
       <h2>工艺特点</h2>
       <ul>
@@ -502,11 +517,10 @@ export const allProductList = [
         <li>复合结构，优势互补</li>
         <li>制造精密，质量稳定</li>
       </ul>
-
-      <h2>技术优势</h2>
-      <p>充分发挥碳化硅材料的优异性能，为客户提供高品质的管道解决方案。</p>
+      <h2>应用范围</h2>
+      <p>广泛用于核电、环保、电力、冶金、化工、化肥、造纸、医药、食品、酿造等行业。是衬胶、衬塑管道、不锈钢管道、玻璃钢管道及其他管道的理想替代品。</p>
     `,
-    images: [tanhuaguan, tanhuaguan, tanhuaguan, tanhuaguan]
+    images: [tanhuaguan, product14,tanhuahe]
   },
   {
     id: 16,
@@ -518,20 +532,23 @@ export const allProductList = [
     publishDate: new Date('2020-12-01'),
     tags: ['碳化硅直管', '纯碳化硅', '极端工况'],
     detailContent: `
-      <p><strong>碳化硅直管</strong>采用纯碳化硅材料制造，适用于极端工况环境。</p>
+      <p><strong>碳化硅聚合陶瓷管</strong>概括功用跨越耐磨防腐衬胶复合管。具有整体强度高、高防腐、高耐磨、高粘接强度、现场易批改、耐温性好等特征。衬层选用全新的聚合物树脂和无机陶瓷等材料经特定工艺制备，钢管内衬构成的陶瓷层结构从底子上处理了衬胶管道在工作中衬层易脱层、坠落引发的危险，运用寿数成倍延伸。设备施工期间调整段现场衬瓷， 节约了工期进度。</p>
 
       <h2>材料优势</h2>
       <ul>
-        <li>纯碳化硅材料，性能极佳</li>
-        <li>耐极高温，可达1600°C</li>
-        <li>化学稳定性好，耐强腐蚀</li>
-        <li>机械强度高，抗冲击</li>
+        <li>结合强度大，运用可靠</li>
+        <li>高强度、高耐磨、耐性好</li>
+        <li>高防腐、防结垢</li>
+        <li>密封性强，耐温性好</li>
+        <li>适应性强、使用尺寸广泛、现场可批改</li>
+        <li>异型管件冲击部位规划加强，运用寿数延伸</li>
+        <li>设备维护便当，异型件拆装更便当</li>
       </ul>
 
       <h2>应用领域</h2>
       <p>特别适用于高温、强腐蚀、高磨损的极端工况环境，是最高端的管道产品。</p>
     `,
-    images: [tanhuazhi, tanhuazhi, tanhuazhi, tanhuazhi]
+    images: [tanhuazhi, product14,tanhuaguan,tanhuahe]
   },
 
   // 反应阻燃型-碳化硅聚合陶瓷涂抹系列
@@ -583,7 +600,7 @@ export const allProductList = [
       <h2>技术优势</h2>
       <p>结合了碳化硅的优异性能和阻燃材料的防火特性，为高风险环境提供双重保护。</p>
     `,
-    images: [zuran2, zuran2, zuran2, zuran2]
+    images: [zuran2, zuran1, ]
   },
 
   // 双金属耐磨管系列
@@ -657,20 +674,20 @@ export const allProductList = [
     publishDate: new Date('2020-11-28'),
     tags: ['陶瓷弯管', '耐磨弯头', '弯道输送'],
     detailContent: `
-      <p><strong>陶瓷耐磨弯管</strong>专为弯道输送系统设计，具有优异的耐磨性能。</p>
+      <p><strong>陶瓷耐磨弯管</strong>从内到外由陶瓷层、过渡层和钢管层组成。陶瓷层是由2600℃以上的熔融氧化铝在离心作用下，均匀渗透复合在钢管内壁上形成的致密的高耐磨层，与钢管成为一体。</p>
 
       <h2>设计特点</h2>
       <ul>
         <li>弯管结构，适应管路走向</li>
         <li>陶瓷内衬，耐磨性强</li>
         <li>流线设计，阻力小</li>
-        <li>结构合理，应力分布均匀</li>
+        <li>耐磨性好，耐温性能好、工程造价低</li>
       </ul>
 
-      <h2>应用优势</h2>
-      <p>特别适用于高磨损的弯道输送系统，有效解决弯头磨损严重的问题。</p>
+      <h2>应用范围</h2>
+      <p>由于该管具有耐磨、耐蚀、耐热性能，因此可广泛应用于电力、冶金、矿山、煤炭、化工等行业作为输送煤粉、精矿粉和尾矿运送、铝液等磨削性颗粒物料和腐蚀性介质，是一种理想的耐磨蚀管道。</p>
     `,
-    images: [taociwan, taociwan, taociwan, taociwan]
+    images: [taociwan, product21]
   },
   {
     id: 22,
@@ -695,7 +712,7 @@ export const allProductList = [
       <h2>技术优势</h2>
       <p>是直管段耐磨保护的理想选择，广泛应用于各种磨蚀性物料的输送系统。</p>
     `,
-    images: [taocinai, taocinai, taocinai, taocinai]
+    images: [taocinai, product22, ]
   },
   {
     id: 23,
@@ -720,7 +737,7 @@ export const allProductList = [
       <h2>应用优势</h2>
       <p>特别适用于需要频繁维护的管道系统，大大降低了维护成本和停机时间。</p>
     `,
-    images: [daibeibao, daibeibao, daibeibao, daibeibao]
+    images: [daibeibao, product23, ]
   },
   {
     id: 24,
@@ -745,7 +762,7 @@ export const allProductList = [
       <h2>性能特点</h2>
       <p>具有陶瓷的耐磨耐腐蚀性能和钢材的机械强度，是高端管道产品的代表。</p>
     `,
-    images: [taocifu, taocifu, taocifu, taocifu]
+    images: [taocifu, product24,]
   },
 
   // 陶瓷贴片耐磨管系列
@@ -759,13 +776,15 @@ export const allProductList = [
     publishDate: new Date('2020-11-26'),
     tags: ['陶瓷贴片', '高耐磨', '局部保护'],
     detailContent: `
-      <p><strong>高耐磨陶瓷贴片</strong>是用于管道内壁耐磨保护的高性能产品。</p>
+      <p><strong>耐磨陶瓷贴片耐磨管</strong>，外壁以钢管为基体，内衬高耐磨氧化铝陶瓷贴片，贴片与钢管内壁间隙填充采用专用陶瓷粘结胶固定，利用拱形自嵌原理，瓷片形成360°环形结构，陶瓷贴片边缘采用梯形设计，贴片间相互挤压、块块互锁，有效地保证了瓷片不会脱落。</p>
+      <p><strong>高耐磨陶瓷贴片</strong>耐磨管耐冲击磨损能力远大于一般小陶瓷片和自蔓延陶瓷内衬复合钢管。瓷片厚度在8mm－60mm之间，可结合现场实际磨损量的工况条件来确定所需瓷片厚度。</p>
 
       <h2>产品特点</h2>
       <ul>
         <li>贴片技术，局部保护</li>
-        <li>安装灵活，适应性强</li>
-        <li>成本控制，性能优异</li>
+        <li>贴片硬度大、性价比高，使用寿命长</li>
+        <li>粘接牢靠，能承受苛刻的工况</li>
+        <li>耐腐蚀好，表面光滑，不堵物料</li>
         <li>维护方便，更换简单</li>
       </ul>
 
@@ -775,7 +794,7 @@ export const allProductList = [
       <h2>应用范围</h2>
       <p>特别适用于弯头、三通等关键部位的耐磨保护，是经济实用的耐磨解决方案。</p>
     `,
-    images: [gaonai, gaonai, gaonai, gaonai]
+    images: [gaonai, product25, product26, product27]
   },
 
   // 龟甲网耐磨陶瓷管系列
