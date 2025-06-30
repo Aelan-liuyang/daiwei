@@ -304,11 +304,11 @@ import factoryImg from '@/assets/images/factory.jpg'
 import factory1 from '@/assets/images/factory1.jpg'
 import factory2 from '@/assets/images/factory2.jpg'
 import factory3 from '@/assets/images/factory3.jpg'
+import gaonai from '@/assets/images/gaonai.png'
 import guijia1 from '@/assets/images/guijia1.jpg'
 import shuangjin from '@/assets/images/shuangjin.jpg'
-import taoci from '@/assets/images/taoci.jpg'
 import tanhuahe from '@/assets/images/tanhuahe.jpg'
-import gaonai from '@/assets/images/gaonai.png'
+import taoci from '@/assets/images/taoci.jpg'
 import zuran1 from '@/assets/images/zuran1.jpg'
 
 // 路由和SEO
@@ -654,13 +654,22 @@ onMounted(async () => {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
+  /* 动画：初始放大1.12倍，2s内缩小回原大小，ease-out */
+  transform: scale(1.12);
+  animation: bannerZoomIn 2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
+@keyframes bannerZoomIn {
+  from {
+    transform: scale(1.12);
+  }
 
-.hero-banner:hover .hero-bg-img {
-  transform: scale(1.08);
+  to {
+    transform: scale(1);
+  }
 }
+/* .hero-banner:hover .hero-bg-img {
+  transform: scale(1.08);
+} */
 
 .hero-overlay {
   position: absolute;
