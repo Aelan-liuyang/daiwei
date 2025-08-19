@@ -20,8 +20,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/home/About.vue'),
     meta: {
       title: '关于我们',
-      description:
-        '了解山东岱威创新管业的企业历史、发展理念、技术实力和服务优势。',
+      description: '了解山东岱威创新管业的企业历史、发展理念、技术实力和服务优势。',
       keywords: '企业介绍,公司简介,岱威管业,管道企业'
     }
   },
@@ -31,8 +30,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/home/Products.vue'),
     meta: {
       title: '产品服务',
-      description:
-        '岱威管业提供全系列管道产品，包括管件、阀门、智能管网系统等，满足不同行业需求。',
+      description: '岱威管业提供全系列管道产品，包括管件、阀门、智能管网系统等，满足不同行业需求。',
       keywords: '管道产品,管件系列,阀门产品,智能管网,产品目录'
     }
   },
@@ -62,8 +60,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/home/Contact.vue'),
     meta: {
       title: '联系我们',
-      description:
-        '联系山东岱威创新管业，获取专业的管道系统解决方案和技术支持。',
+      description: '联系山东岱威创新管业，获取专业的管道系统解决方案和技术支持。',
       keywords: '联系方式,技术支持,业务咨询,岱威管业联系'
     }
   },
@@ -100,7 +97,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/daiwei/'),
   routes,
   strict: false,
   scrollBehavior: () => ({ left: 0, top: 0, behavior: 'smooth' }) //可以使用 "smooth" 实现平滑滚动效果
