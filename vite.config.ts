@@ -1,37 +1,34 @@
 import vue from '@vitejs/plugin-vue'
+import path from 'path'
 import { ConfigEnv, defineConfig, loadEnv } from 'vite'
 
-// 引入node内置模块path：可以获取绝对路径（找不到模块“path”或其相应的类型声明。ts(2307))
-import path from 'path'
-
-// https://vitejs.dev/config/
-const viteConfig = defineConfig((mode: ConfigEnv) => {
+export default defineConfig((mode: ConfigEnv) => {
   const env = loadEnv(mode.mode, process.cwd())
+  const isProduction = mode.mode === 'production'
+
   return {
     plugins: [vue()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src') //@ 表示 src
+        '@': path.resolve(__dirname, 'src') // @ 表示 src
       }
     },
-    base: '/',
+    base: isProduction ? '/daiwei/' : '/', // 生产环境使用仓库名称，开发环境使用根路径
     optimizeDeps: {
       include: ['axios']
     },
     server: {
-      host: '0.0.0.0', //解决 vite use --host to expose
+      host: '0.0.0.0', // 解决 vite use --host to expose
       port: env.VITE_PORT as unknown as number,
       open: true,
-      // 是否开启 https
       https: false,
-      // 服务端渲染
       ssr: false,
-      hmr: true, //热更新是否开启
+      hmr: true,
       proxy: {
         '/api': {
           target: env.VITE_API_URL,
           ws: true,
-          changeOrigin: true, //是否允许跨域
+          changeOrigin: true, // 是否允许跨域
           rewrite: path => path.replace(/^\/api/, '')
         }
       }
@@ -57,4 +54,3 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
     }
   }
 })
-export default viteConfig
