@@ -14,7 +14,7 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
         '@': path.resolve(__dirname, 'src') //@ 表示 src
       }
     },
-    base: './',
+    base: '/daiwei/',
     optimizeDeps: {
       include: ['axios']
     },
