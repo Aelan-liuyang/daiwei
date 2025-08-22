@@ -13,7 +13,7 @@ export default defineConfig((mode: ConfigEnv) => {
         '@': path.resolve(__dirname, 'src') // @ 表示 src
       }
     },
-    base: isProduction ? './' : '/daiwei', // 生产环境使用仓库名称，开发环境使用根路径
+    base: isProduction ? '/' : '/daiwei/', // 生产环境使用仓库名称，开发环境使用根路径
     optimizeDeps: {
       include: ['axios']
     },
