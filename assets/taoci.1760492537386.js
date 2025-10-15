@@ -1,1 +1,0 @@
-const s="/daiwei/assets/taoci.1760492537386.jpg";export{s as t};
