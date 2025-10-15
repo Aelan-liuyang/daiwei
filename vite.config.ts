@@ -4,21 +4,21 @@ import { ConfigEnv, defineConfig, loadEnv } from 'vite'
 
 export default defineConfig((mode: ConfigEnv) => {
   const env = loadEnv(mode.mode, process.cwd())
-  const isProduction = mode.mode === 'development'
+  const isProduction = mode.mode === 'production'
 
   return {
     plugins: [vue()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src') // @ 表示 src
+        '@': path.resolve(__dirname, 'src')
       }
     },
-    base: isProduction ? '/' : '/daiwei/', // 生产环境使用仓库名称，开发环境使用根路径
+    base: isProduction ? '/daiwei/' : '/', // 修正：生产环境用仓库名
     optimizeDeps: {
       include: ['axios']
     },
     server: {
-      host: '0.0.0.0', // 解决 vite use --host to expose
+      host: '0.0.0.0',
       port: env.VITE_PORT as unknown as number,
       open: true,
       https: false,
@@ -28,7 +28,7 @@ export default defineConfig((mode: ConfigEnv) => {
         '/api': {
           target: env.VITE_API_URL,
           ws: true,
-          changeOrigin: true, // 是否允许跨域
+          changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, '')
         }
       }
@@ -36,8 +36,8 @@ export default defineConfig((mode: ConfigEnv) => {
     build: {
       outDir: 'dist',
       target: 'es2015',
-      assetsDir: 'assets', // 指定生成静态资源的存放路径
-      minify: 'terser', // 混淆器，terser构建后文件体积更小
+      assetsDir: 'assets',
+      minify: 'terser',
       sourcemap: false,
       chunkSizeWarningLimit: 1500,
       rollupOptions: {
