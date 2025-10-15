@@ -165,6 +165,18 @@ import {
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+import chenci from '@/assets/images/chenci.jpg'
+import factory from '@/assets/images/factory.jpg'
+import gaonai from '@/assets/images/gaonai.png'
+import rongyu4 from '@/assets/images/rongyu4.jpg'
+import shuangjin from '@/assets/images/shuangjin.jpg'
+import tanhuada from '@/assets/images/tanhuada.jpg'
+import tanhuaguan from '@/assets/images/tanhuaguan.jpg'
+import taoci from '@/assets/images/taoci.jpg'
+import taocifu from '@/assets/images/taocifu.png'
+import taocinai from '@/assets/images/taocinai.jpg'
+import taociwan from '@/assets/images/taociwan.jpg'
+
 const { setSEO } = useSEO()
 
 const route = useRoute()
@@ -185,7 +197,7 @@ const allNewsData = [
     author: '岱威技术部',
     category: '技术动态',
     priority: '重要',
-    coverImage: '/src/assets/images/taoci.jpg',
+    coverImage: taoci,
     content: `
       <p>陶瓷耐磨管制造商保证产品质量的方法有很多，以下是一些常见的措施。</p>
 
@@ -217,7 +229,7 @@ const allNewsData = [
     shares: 15,
     author: '岱威技术部',
     category: '行业资讯',
-    coverImage: '/src/assets/images/shuangjin.jpg',
+    coverImage: shuangjin,
     content: `
       <p>耐磨管是一种使用特殊材料制成的管道，具有良好的耐磨性能。它在很多行业中能够发挥重要作用，下面我将详细介绍几个主要受益于耐磨管的行业。</p>
 
@@ -246,7 +258,7 @@ const allNewsData = [
     shares: 8,
     author: '岱威技术部',
     category: '技术动态',
-    coverImage: '/src/assets/images/tanhuaguan.jpg',
+    coverImage: tanhuaguan,
     content: `
       <p>陶瓷耐磨管是一种特殊的陶瓷制品，具有优异的耐磨性能和高温稳定性。它广泛应用于工业领域中对耐磨性和导热性要求较高的场合，比如煤矿、钢铁、电力等行业中的输送和处理磨料介质的管道系统。</p>
 
@@ -274,7 +286,7 @@ const allNewsData = [
     shares: 6,
     author: '岱威技术部',
     category: '技术动态',
-    coverImage: '/src/assets/images/gaonai.png',
+    coverImage: gaonai,
     content: `
       <p>耐磨管适用于高温环境的主要原因是其材料具有优异的高温耐受性和良好的抗磨损性能。下面将介绍几种常见的高温环境，耐磨管的应用和优势。</p>
 
@@ -300,7 +312,7 @@ const allNewsData = [
     shares: 9,
     author: '岱威技术部',
     category: '技术动态',
-    coverImage: '/src/assets/images/taocinai.jpg',
+    coverImage: taocinai,
     content: `
       <p>陶瓷耐磨管是一种具有高耐磨性能的管道材料，广泛应用于各个领域如冶金、化工、矿山、电力等。它主要用于输送高温、高压、酸碱和腐蚀介质的管道系统中，能够长时间保持较高的耐磨性能和稳定性。</p>
 
@@ -326,7 +338,7 @@ const allNewsData = [
     shares: 7,
     author: '岱威技术部',
     category: '行业资讯',
-    coverImage: '/src/assets/images/factory.jpg',
+    coverImage: factory,
     content: `
       <p>耐磨管是一种具有高耐磨性能的管材，广泛应用于多个领域，包括工业、交通运输、能源、建筑等。在工业生产中，耐磨管常用于输送具有磨蚀性的物料，如矿石、煤炭、水泥等。</p>
 
@@ -352,7 +364,7 @@ const allNewsData = [
     shares: 5,
     author: '岱威技术部',
     category: '技术动态',
-    coverImage: '/src/assets/images/tanhuada.jpg',
+    coverImage: tanhuada,
     content: `
       <p>双金属耐磨管是一种磨损和腐蚀性能较强的管道材料，广泛应用于输送具有高腐蚀度、高磨损度物料的行业，例如矿山、电站、化工、冶金等领域。对于耐磨材料的选用，需要满足以下几个方面的要求。</p>
 
@@ -377,7 +389,7 @@ const allNewsData = [
     shares: 4,
     author: '岱威技术部',
     category: '技术动态',
-    coverImage: '/src/assets/images/taocifu.png',
+    coverImage: taocifu,
     content: `
       <p>耐磨陶瓷贴片是一种常用于室内地面铺装的材料，具有高强度、耐磨损、耐压力等特点，广泛应用于商业建筑、公共场所、机场、火车站等场所。安装时需要注意以下几点：</p>
 
@@ -402,7 +414,7 @@ const allNewsData = [
     shares: 3,
     author: '岱威技术部',
     category: '技术动态',
-    coverImage: '/src/assets/images/chenci.jpg',
+    coverImage: chenci,
     content: `
       <p>衬瓷管道是一种常用的管道，广泛应用于化工、冶金、电力、航空航天、医药等领域。它具备耐腐蚀、耐磨损等优异的性能，因此在含有强酸、强碱、高温等恶劣环境下作业时，衬瓷管道是首选的管道材料。</p>
 
@@ -427,7 +439,7 @@ const allNewsData = [
     shares: 3,
     author: '岱威技术部',
     category: '行业资讯',
-    coverImage: '/src/assets/images/taociwan.jpg',
+    coverImage: taociwan,
     content: `
       <p>传统的合金钢管、不锈钢管等寿命短，长时间使用会腐蚀，给企业造成一定的损失。随着技术的日新月异，取而代之的是耐磨陶瓷管，耐磨陶瓷管不仅耐磨、耐高温、抗腐蚀、寿命长，而且性价比高。</p>
 
@@ -454,7 +466,7 @@ const allNewsData = [
     author: '岱威管业',
     category: '企业新闻',
     priority: '重要',
-    coverImage: '/src/assets/images/rongyu4.jpg',
+    coverImage: rongyu4,
     content: `
       <p>近日，山东岱威创新管业有限公司凭借在耐磨管道领域的技术创新和市场表现，成功获得"山东省专精特新企业"荣誉称号。这一荣誉的获得，标志着公司在专业化、精细化、特色化、新颖化发展道路上取得了重要成果。</p>
 

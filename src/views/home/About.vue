@@ -340,13 +340,13 @@ onMounted(() => {
 })
 const team = [
   {
-    name: '李明',
+    name: '庄振华',
     role: '创始人 & CEO',
     desc: '20年工业管道工程经验，擅长企业战略与产品创新。',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
   },
   {
-    name: '王芳',
+    name: '庄晓婧',
     role: '技术总监',
     desc: '工业自动化硕士，主导智能设计与运维平台研发。',
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg'

@@ -272,7 +272,19 @@ import { CalendarOutlined, EyeOutlined, RightOutlined } from '@ant-design/icons-
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
+import chenci from '@/assets/images/chenci.jpg'
+import factory from '@/assets/images/factory.jpg'
+import gaonai from '@/assets/images/gaonai.png'
+import rongyu4 from '@/assets/images/rongyu4.jpg'
+import shuangjin from '@/assets/images/shuangjin.jpg'
+import tanhuada from '@/assets/images/tanhuada.jpg'
+import tanhuaguan from '@/assets/images/tanhuaguan.jpg'
+import tanhuahe from '@/assets/images/tanhuahe.jpg'
 import taoci from '@/assets/images/taoci.jpg'
+import taocifu from '@/assets/images/taocifu.png'
+import taocinai from '@/assets/images/taocinai.jpg'
+import taociwan from '@/assets/images/taociwan.jpg'
+
 const { setSEO } = useSEO()
 const router = useRouter()
 
@@ -308,7 +320,7 @@ const newsList = ref([
     likes: 38,
     shares: 15,
     category: '行业资讯',
-    coverImage: './src/assets/images/shuangjin.jpg',
+    coverImage: shuangjin,
     tags: ['耐磨管', '行业应用', '矿业', '电力']
   },
   {
@@ -321,7 +333,7 @@ const newsList = ref([
     likes: 32,
     shares: 8,
     category: '技术动态',
-    coverImage: '/src/assets/images/tanhuaguan.jpg',
+    coverImage: tanhuaguan,
     tags: ['陶瓷耐磨管', '热传导', '高温稳定性', '技术特性']
   },
   {
@@ -334,7 +346,7 @@ const newsList = ref([
     likes: 28,
     shares: 6,
     category: '技术动态',
-    coverImage: '/src/assets/images/gaonai.png',
+    coverImage: gaonai,
     tags: ['耐磨管', '高温环境', '炉窑', '工业应用']
   },
   {
@@ -347,7 +359,7 @@ const newsList = ref([
     likes: 25,
     shares: 9,
     category: '技术动态',
-    coverImage: '/src/assets/images/taocinai.jpg',
+    coverImage: taocinai,
     tags: ['陶瓷耐磨管', '制造工艺', '材料科学', '技术创新']
   },
   {
@@ -360,7 +372,7 @@ const newsList = ref([
     likes: 22,
     shares: 7,
     category: '行业资讯',
-    coverImage: '/src/assets/images/factory.jpg',
+    coverImage: factory,
     tags: ['耐磨管', '应用领域', '工业生产', '交通运输']
   },
   {
@@ -373,7 +385,7 @@ const newsList = ref([
     likes: 19,
     shares: 5,
     category: '技术动态',
-    coverImage: '/src/assets/images/tanhuada.jpg',
+    coverImage: tanhuada,
     tags: ['双金属耐磨管', '材料选用', '耐磨性能', '工程应用']
   },
   {
@@ -386,7 +398,7 @@ const newsList = ref([
     likes: 16,
     shares: 4,
     category: '技术动态',
-    coverImage: '/src/assets/images/taocifu.png',
+    coverImage: taocifu,
     tags: ['陶瓷贴片', '安装工艺', '施工技术', '应用指南']
   },
   {
@@ -399,7 +411,7 @@ const newsList = ref([
     likes: 14,
     shares: 3,
     category: '技术动态',
-    coverImage: '/src/assets/images/chenci.jpg',
+    coverImage: chenci,
     tags: ['衬瓷管道', '安装技术', '技术要求', '工程规范']
   },
   {
@@ -412,7 +424,7 @@ const newsList = ref([
     likes: 12,
     shares: 2,
     category: '技术动态',
-    coverImage: '/src/assets/images/tanhuahe.jpg',
+    coverImage: tanhuahe,
     tags: ['双金属耐磨管', '材质介绍', '复合材料', '技术知识']
   },
   {
@@ -425,7 +437,7 @@ const newsList = ref([
     likes: 11,
     shares: 3,
     category: '行业资讯',
-    coverImage: '/src/assets/images/taociwan.jpg',
+    coverImage: taociwan,
     tags: ['耐磨陶瓷管', '产品优势', '应用用途', '性价比']
   },
   {
@@ -439,7 +451,7 @@ const newsList = ref([
     shares: 18,
     category: '企业新闻',
     priority: '重要',
-    coverImage: '/src/assets/images/rongyu4.jpg',
+    coverImage: rongyu4,
     tags: ['企业荣誉', '专精特新', '技术创新', '岱威创新']
   }
 ])
