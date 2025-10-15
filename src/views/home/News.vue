@@ -272,6 +272,7 @@ import { CalendarOutlined, EyeOutlined, RightOutlined } from '@ant-design/icons-
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
+import taoci from '@/assets/images/taoci.jpg'
 const { setSEO } = useSEO()
 const router = useRouter()
 
@@ -294,7 +295,7 @@ const newsList = ref([
     shares: 12,
     category: '技术动态',
     priority: '重要',
-    coverImage: '/src/assets/images/taoci.jpg',
+    coverImage: taoci,
     tags: ['陶瓷耐磨管', '质量保证', '制造工艺', '产品质量']
   },
   {
@@ -307,7 +308,7 @@ const newsList = ref([
     likes: 38,
     shares: 15,
     category: '行业资讯',
-    coverImage: '/src/assets/images/shuangjin.jpg',
+    coverImage: './src/assets/images/shuangjin.jpg',
     tags: ['耐磨管', '行业应用', '矿业', '电力']
   },
   {
