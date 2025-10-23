@@ -48,7 +48,7 @@ const isFixed = ref(false)
 const showMobileMenu = ref(false)
 
 const menuList = [
-  { key: 'home', label: '首页2', path: '/' },
+  { key: 'home', label: '首页', path: '/' },
   { key: 'products', label: '产品服务', path: '/products' },
   { key: 'cases', label: '工程案例', path: '/cases' },
   { key: 'news', label: '新闻中心', path: '/news' },
