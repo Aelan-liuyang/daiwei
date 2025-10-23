@@ -1,0 +1,1 @@
+const s="/daiwei/assets/rongyu4.1761199701795.jpg";export{s as r};
