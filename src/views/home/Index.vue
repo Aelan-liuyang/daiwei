@@ -1,4 +1,3 @@
-移动端的
 <template>
   <a-layout class="home-layout">
     <Header />
