@@ -1,1 +1,0 @@
-const s="/daiwei/assets/guijia1.1761199872026.jpg",a="/daiwei/assets/zuran1.1761199872026.jpg";export{s as g,a as z};

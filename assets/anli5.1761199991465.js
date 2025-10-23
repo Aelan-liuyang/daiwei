@@ -1,0 +1,1 @@
+const a="/daiwei/assets/anli1.1761199991465.jpg",s="/daiwei/assets/anli5.1761199991465.jpg";export{a,s as b};

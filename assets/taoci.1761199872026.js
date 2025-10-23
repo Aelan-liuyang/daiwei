@@ -1,1 +1,0 @@
-const s="/daiwei/assets/gaonai.1761199872026.png",a="/daiwei/assets/shuangjin.1761199872026.jpg",i="/daiwei/assets/taoci.1761199872026.jpg";export{s as g,a as s,i as t};
