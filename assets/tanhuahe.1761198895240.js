@@ -1,0 +1,1 @@
+const a="/daiwei/assets/tanhuahe.1761198895240.jpg";export{a as t};
