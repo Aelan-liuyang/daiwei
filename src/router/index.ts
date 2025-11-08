@@ -97,7 +97,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory('/daiwei/'),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
   strict: false,
   scrollBehavior: () => ({ left: 0, top: 0, behavior: 'smooth' }) //可以使用 "smooth" 实现平滑滚动效果

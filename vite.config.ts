@@ -6,6 +6,21 @@ export default defineConfig((mode: ConfigEnv) => {
   const env = loadEnv(mode.mode, process.cwd())
   const isProduction = mode.mode === 'production'
 
+  // ✅ 新增：判断部署目标
+  const isGithub = process.env.DEPLOY_TARGET === 'github'
+
+  // ✅ 新增：动态 base 路径
+  // 开发环境 -> "/"
+  // GitHub Pages -> "/daiwei/"
+  // Cloudflare Pages -> "./"
+  const base = !isProduction ? '/' : isGithub ? '/daiwei/' : './'
+
+  // ✅ 新增：构建日志
+  if (isProduction) {
+    console.log(`🚀 Building for: ${isGithub ? 'GitHub Pages' : 'Cloudflare Pages'}`)
+    console.log(`📁 Base path: ${base}`)
+  }
+
   return {
     plugins: [vue()],
     resolve: {
@@ -13,7 +28,8 @@ export default defineConfig((mode: ConfigEnv) => {
         '@': path.resolve(__dirname, 'src')
       }
     },
-    base: isProduction ? '/daiwei/' : '/', // 修正：生产环境用仓库名
+    // ✅ 修改：使用动态 base
+    base,
     optimizeDeps: {
       include: ['axios']
     },
