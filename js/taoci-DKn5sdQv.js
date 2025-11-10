@@ -1,0 +1,1 @@
+const a="/daiwei/images/gaonai-CWPYRzBL.png",i="/daiwei/images/shuangjin-DV4xG2Ue.jpg",g="/daiwei/images/taoci-X54Fy1uH.jpg";export{a as g,i as s,g as t};

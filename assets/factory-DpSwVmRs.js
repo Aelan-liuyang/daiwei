@@ -1,1 +1,0 @@
-const s="/daiwei/assets/factory-CIXLdl9f.jpg";export{s as f};

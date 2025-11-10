@@ -1,0 +1,1 @@
+const a="/daiwei/images/factory-CIXLdl9f.jpg";export{a as f};
