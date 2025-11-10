@@ -1,0 +1,1 @@
+const s="/assets/rongyu4.1762733545202.jpg";export{s as r};

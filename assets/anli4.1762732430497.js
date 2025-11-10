@@ -1,1 +1,0 @@
-const a=""+new URL("anli2.1762732430497.jpg",import.meta.url).href,e=""+new URL("anli3.1762732430497.jpg",import.meta.url).href,r=""+new URL("anli4.1762732430497.jpg",import.meta.url).href;export{a,e as b,r as c};
