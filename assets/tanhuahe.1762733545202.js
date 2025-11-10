@@ -1,1 +1,0 @@
-const s="/assets/tanhuahe.1762733545202.jpg";export{s as t};
