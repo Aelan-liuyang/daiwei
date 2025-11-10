@@ -1,15 +1,20 @@
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-import { ConfigEnv, defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 
-export default defineConfig(({ command, mode }: ConfigEnv) => {
+export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd())
-  const isProduction = command === 'build' // ✅ 改用 command
+  const isProduction = command === 'build'
 
-  const isGithub = process.env.DEPLOY_TARGET === 'github' || process.env.GITHUB_ACTIONS === 'true'
+  // 判断部署目标（GitHub / Cloudflare）
+  const target = process.env.DEPLOY_TARGET || ''
+  const isGithub = target === 'github' || process.env.GITHUB_ACTIONS === 'true'
+  const isCloudflare = target === 'cloudflare' || process.env.CF_PAGES === 'true'
 
-  // ✅ Cloudflare 使用相对路径 './'
-  const base = !isProduction ? '/' : isGithub ? '/daiwei/' : './'
+  // ✅ 基础路径配置
+  const base = isGithub
+    ? '/daiwei/' // GitHub Pages 子路径
+    : '/' // Cloudflare Pages 根路径
 
   if (isProduction) {
     console.log(`🚀 Building for: ${isGithub ? 'GitHub Pages' : 'Cloudflare Pages'}`)
@@ -18,31 +23,33 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
 
   return {
     plugins: [vue()],
+
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src')
       }
     },
+
     base,
+
     optimizeDeps: {
       include: ['axios']
     },
+
     server: {
       host: '0.0.0.0',
-      port: env.VITE_PORT as unknown as number,
+      port: env.VITE_PORT ? Number(env.VITE_PORT) : 5173,
       open: true,
-      https: false,
-      ssr: false,
-      hmr: true,
+      cors: true,
       proxy: {
         '/api': {
           target: env.VITE_API_URL,
-          ws: true,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, '')
+          rewrite: p => p.replace(/^\/api/, '')
         }
       }
     },
+
     build: {
       outDir: 'dist',
       target: 'es2015',
@@ -52,20 +59,19 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
       chunkSizeWarningLimit: 1500,
       rollupOptions: {
         output: {
-          entryFileNames: `js/[name]-[hash].js`, // ✅ 改成 js/ 目录
+          entryFileNames: `js/[name]-[hash].js`,
           chunkFileNames: `js/[name]-[hash].js`,
           assetFileNames: assetInfo => {
             const info = assetInfo.name.split('.')
             const ext = info[info.length - 1]
-            if (/\.(png|jpe?g|gif|svg|ico)(\?.*)?$/i.test(assetInfo.name)) {
+            if (/\.(png|jpe?g|gif|svg|ico)$/i.test(assetInfo.name)) {
               return `images/[name]-[hash][extname]`
             }
-            if (/\.(woff2?|eot|ttf|otf)(\?.*)?$/i.test(assetInfo.name)) {
+            if (/\.(woff2?|eot|ttf|otf)$/i.test(assetInfo.name)) {
               return `fonts/[name]-[hash][extname]`
             }
             return `assets/[name]-[hash][extname]`
           },
-          compact: true,
           manualChunks: {
             vue: ['vue', 'vue-router']
           }
