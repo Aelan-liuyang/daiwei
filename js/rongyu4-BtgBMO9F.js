@@ -1,0 +1,1 @@
+const a="/daiwei/images/rongyu4-DtYbBKV0.jpg";export{a as r};

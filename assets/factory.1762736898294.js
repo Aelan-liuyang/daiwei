@@ -1,1 +1,0 @@
-const r=""+new URL("factory.1762736898294.jpg",import.meta.url).href;export{r as f};
