@@ -13,7 +13,7 @@ export default defineConfig((mode: ConfigEnv) => {
   // 开发环境 -> "/"
   // GitHub Pages -> "/daiwei/"
   // Cloudflare Pages -> "./"
-  const base = !isProduction ? '/' : isGithub ? '/daiwei/' : './'
+  const base = !isProduction ? '/' : isGithub ? '/daiwei/' : '/'
 
   // ✅ 新增：构建日志
   if (isProduction) {
