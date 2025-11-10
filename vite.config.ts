@@ -6,16 +6,15 @@ export default defineConfig((mode: ConfigEnv) => {
   const env = loadEnv(mode.mode, process.cwd())
   const isProduction = mode.mode === 'production'
 
-  // ✅ 新增：判断部署目标
-  const isGithub = process.env.DEPLOY_TARGET === 'github'
+  // ✅ 判断部署目标
+  const isGithub = process.env.DEPLOY_TARGET === 'github' || process.env.GITHUB_ACTIONS === 'true'
 
   // ✅ 新增：动态 base 路径
   // 开发环境 -> "/"
   // GitHub Pages -> "/daiwei/"
   // Cloudflare Pages -> "./"
-  const base = !isProduction ? '/' : isGithub ? '/daiwei/' : './'
+  const base = !isProduction ? '/' : isGithub ? '/daiwei/' : '/'
 
-  // ✅ 新增：构建日志
   if (isProduction) {
     console.log(`🚀 Building for: ${isGithub ? 'GitHub Pages' : 'Cloudflare Pages'}`)
     console.log(`📁 Base path: ${base}`)
@@ -28,7 +27,6 @@ export default defineConfig((mode: ConfigEnv) => {
         '@': path.resolve(__dirname, 'src')
       }
     },
-    // ✅ 修改：使用动态 base
     base,
     optimizeDeps: {
       include: ['axios']
@@ -58,9 +56,9 @@ export default defineConfig((mode: ConfigEnv) => {
       chunkSizeWarningLimit: 1500,
       rollupOptions: {
         output: {
-          entryFileNames: `assets/[name].${new Date().getTime()}.js`,
-          chunkFileNames: `assets/[name].${new Date().getTime()}.js`,
-          assetFileNames: `assets/[name].${new Date().getTime()}.[ext]`,
+          entryFileNames: `assets/[name]-[hash].js`,
+          chunkFileNames: `assets/[name]-[hash].js`,
+          assetFileNames: `assets/[name]-[hash].[ext]`,
           compact: true,
           manualChunks: {
             vue: ['vue', 'vue-router']
