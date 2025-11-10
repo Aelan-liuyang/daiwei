@@ -1,9 +1,7 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-// import Layout from '../components/HelloWorld.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    //路由初始指向
     path: '/',
     name: 'home',
     component: () => import('@/views/home/Index.vue'),
@@ -93,14 +91,20 @@ const routes: Array<RouteRecordRaw> = [
       description: '阅读岱威管业的详细新闻内容和行业分析。',
       keywords: '新闻详情,行业分析,企业动态,技术资讯'
     }
+  },
+  {
+    // 404 处理
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
   }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  // ✅ 改用 createWebHistory，不传参数
+  history: createWebHistory(),
   routes,
   strict: false,
-  scrollBehavior: () => ({ left: 0, top: 0, behavior: 'smooth' }) //可以使用 "smooth" 实现平滑滚动效果
+  scrollBehavior: () => ({ left: 0, top: 0, behavior: 'smooth' })
 })
 
 export default router
