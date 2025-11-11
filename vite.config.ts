@@ -9,12 +9,16 @@ export default defineConfig(({ command, mode }) => {
   // 判断部署目标（GitHub / Cloudflare）
   const target = process.env.DEPLOY_TARGET || ''
   const isGithub = target === 'github' || process.env.GITHUB_ACTIONS === 'true'
-  const isCloudflare = target === 'cloudflare' || process.env.CF_PAGES === 'true'
+  // Cloudflare Pages 会自动设置 CF_PAGES 环境变量
+  const isCloudflare =
+    target === 'cloudflare' || process.env.CF_PAGES === '1' || process.env.CF_PAGES === 'true'
 
   // ✅ 基础路径配置
+  // 默认使用根路径（适用于 Cloudflare Pages）
+  // 只有在明确指定 GitHub 时才使用子路径
   const base = isGithub
     ? '/daiwei/' // GitHub Pages 子路径
-    : '/' // Cloudflare Pages 根路径
+    : '/' // Cloudflare Pages 根路径（默认）
 
   if (isProduction) {
     console.log(`🚀 Building for: ${isGithub ? 'GitHub Pages' : 'Cloudflare Pages'}`)
