@@ -14,14 +14,14 @@ export default defineConfig(({ command, mode }) => {
     target === 'cloudflare' || process.env.CF_PAGES === '1' || process.env.CF_PAGES === 'true'
 
   // ✅ 基础路径配置
-  // 默认使用根路径（适用于 Cloudflare Pages）
-  // 只有在明确指定 GitHub 时才使用子路径
-  const base = isGithub
-    ? '/daiwei/' // GitHub Pages 子路径
-    : '/' // Cloudflare Pages 根路径（默认）
+  // 开发环境：保持根路径 "/"
+  // GitHub Pages：部署在仓库子路径 "/daiwei/"
+  // Cloudflare Pages：使用相对路径 "./" 以兼容静态资源
+  const base = isGithub ? '/daiwei/' : isCloudflare ? './' : '/'
 
   if (isProduction) {
-    console.log(`🚀 Building for: ${isGithub ? 'GitHub Pages' : 'Cloudflare Pages'}`)
+    const targetName = isGithub ? 'GitHub Pages' : isCloudflare ? 'Cloudflare Pages' : 'Default'
+    console.log(`🚀 Building for: ${targetName}`)
     console.log(`📁 Base path: ${base}`)
   }
 
@@ -66,12 +66,16 @@ export default defineConfig(({ command, mode }) => {
           entryFileNames: `js/[name]-[hash].js`,
           chunkFileNames: `js/[name]-[hash].js`,
           assetFileNames: assetInfo => {
-            const info = assetInfo.name.split('.')
+            const name = assetInfo?.name ?? ''
+            if (!name) {
+              return `assets/[name]-[hash][extname]`
+            }
+            const info = name.split('.')
             const ext = info[info.length - 1]
-            if (/\.(png|jpe?g|gif|svg|ico)$/i.test(assetInfo.name)) {
+            if (/\.(png|jpe?g|gif|svg|ico)$/i.test(name)) {
               return `images/[name]-[hash][extname]`
             }
-            if (/\.(woff2?|eot|ttf|otf)$/i.test(assetInfo.name)) {
+            if (/\.(woff2?|eot|ttf|otf)$/i.test(name)) {
               return `fonts/[name]-[hash][extname]`
             }
             return `assets/[name]-[hash][extname]`
