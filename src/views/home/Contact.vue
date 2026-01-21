@@ -4,11 +4,28 @@
 
     <a-layout-content class="cyber-content">
       <section class="cyber-banner">
-        <div class="banner-scanner"></div>
-        <div class="earth-wrap">
-          <img src="@/assets/images/diqiu1.jpeg" alt="Global" class="earth-img" />
-          <div class="orbit-lines"></div>
+        <div class="stars-bg"></div>
+        <div class="earth-background">
+          <div class="earth-layer layer-1"></div>
+          <div class="earth-layer layer-2"></div>
+          <div class="earth-layer layer-3"></div>
         </div>
+        <div class="space-overlay">
+          <div class="orbit-ring ring-1"></div>
+          <div class="orbit-ring ring-2"></div>
+          <div class="orbit-ring ring-3"></div>
+          <div class="orbit-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+          </div>
+        </div>
+        <div class="content-overlay"></div>
         <div class="banner-title-box">
           <div class="cyber-tag">全球连接</div>
           <h1 class="main-title">全域链接 <span>共创未来</span></h1>
@@ -179,42 +196,272 @@ const handleSubmit = async () => {
   min-height: 100vh;
 }
 
-/* --- 1. 明亮渐变 Banner --- */
+/* --- 1. 地球全屏背景 Banner --- */
 .cyber-banner {
-  height: 500px;
+  height: 600px;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background: #000;
 }
 
-.earth-wrap {
+/* 星空背景 */
+.stars-bg {
   position: absolute;
-  right: -5%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 600px;
-  height: 600px;
+  inset: 0;
+  background:
+    radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(3px 3px at 20% 80%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 30% 40%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 40% 60%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 50% 30%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 60% 70%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(3px 3px at 70% 10%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(2px 2px at 80% 50%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 90% 85%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 15% 90%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 85% 25%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(2px 2px at 95% 65%, rgba(255, 255, 255, 0.7), transparent);
+  background-size: 100% 100%;
+  animation: twinkle 8s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* 地球全屏背景 - 三层视差 */
+.earth-background {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.earth-layer {
+  position: absolute;
+  inset: -20%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+
+.layer-1 {
+  background-image: url('https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=1200');
+  opacity: 0.7;
+  animation: rotateEarthSlow 120s linear infinite;
+  filter: brightness(0.8) saturate(1.2) blur(0px);
+}
+
+.layer-2 {
+  background-image: url('https://images.unsplash.com/photo-1614728423169-3f65fd722b7e?w=1200');
+  opacity: 0.5;
+  animation: rotateEarthMedium 90s linear infinite reverse;
+  filter: brightness(1) saturate(1.3) hue-rotate(10deg);
+}
+
+.layer-3 {
+  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200');
   opacity: 0.6;
+  animation: rotateEarthFast 60s linear infinite;
+  filter: brightness(1.1) saturate(1.4) contrast(1.2);
+  box-shadow:
+    inset 0 0 200px rgba(102, 126, 234, 0.3),
+    0 0 150px rgba(102, 126, 234, 0.4);
 }
 
-.earth-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: brightness(1.2) saturate(1.3);
-  animation: rotateEarth 60s linear infinite;
-}
-
-@keyframes rotateEarth {
+@keyframes rotateEarthSlow {
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg) scale(1.5);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg) scale(1.5);
   }
+}
+
+@keyframes rotateEarthMedium {
+  from {
+    transform: rotate(0deg) scale(1.6);
+  }
+  to {
+    transform: rotate(-360deg) scale(1.6);
+  }
+}
+
+@keyframes rotateEarthFast {
+  from {
+    transform: rotate(0deg) scale(1.4);
+  }
+  to {
+    transform: rotate(360deg) scale(1.4);
+  }
+}
+
+/* 太空轨道覆盖层 */
+.space-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* 巨大的轨道环 */
+.orbit-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+}
+
+.ring-1 {
+  width: 150%;
+  height: 150%;
+  border-color: rgba(251, 191, 36, 0.3);
+  border-width: 3px;
+  animation: rotateRing 40s linear infinite;
+}
+
+.ring-2 {
+  width: 120%;
+  height: 120%;
+  border-color: rgba(147, 197, 253, 0.25);
+  border-width: 2px;
+  border-style: dashed;
+  animation: rotateRing 60s linear infinite reverse;
+}
+
+.ring-3 {
+  width: 180%;
+  height: 180%;
+  border-color: rgba(240, 171, 252, 0.2);
+  border-width: 2px;
+  animation: rotateRing 80s linear infinite;
+}
+
+@keyframes rotateRing {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* 增强的轨道粒子系统 */
+.orbit-particles {
+  position: absolute;
+  inset: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px currentColor;
+}
+
+.particle:nth-child(1) {
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(circle, #fbbf24 0%, transparent 70%);
+  color: #fbbf24;
+  animation: orbit360 15s linear infinite;
+}
+
+.particle:nth-child(2) {
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(circle, #93c5fd 0%, transparent 70%);
+  color: #93c5fd;
+  animation: orbit360 20s linear infinite;
+  animation-delay: -5s;
+}
+
+.particle:nth-child(3) {
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(circle, #f0abfc 0%, transparent 70%);
+  color: #f0abfc;
+  animation: orbit360 25s linear infinite;
+  animation-delay: -10s;
+}
+
+.particle:nth-child(4) {
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(circle, #6ee7b7 0%, transparent 70%);
+  color: #6ee7b7;
+  animation: orbit360 18s linear infinite;
+  animation-delay: -3s;
+}
+
+.particle:nth-child(5) {
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(circle, #fca5a5 0%, transparent 70%);
+  color: #fca5a5;
+  animation: orbit360 22s linear infinite reverse;
+}
+
+.particle:nth-child(6) {
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(circle, #a5b4fc 0%, transparent 70%);
+  color: #a5b4fc;
+  animation: orbit360 28s linear infinite reverse;
+  animation-delay: -7s;
+}
+
+.particle:nth-child(7) {
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(circle, #fde047 0%, transparent 70%);
+  color: #fde047;
+  animation: orbit360 16s linear infinite;
+  animation-delay: -12s;
+}
+
+.particle:nth-child(8) {
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(circle, #c4b5fd 0%, transparent 70%);
+  color: #c4b5fd;
+  animation: orbit360 30s linear infinite reverse;
+  animation-delay: -15s;
+}
+
+@keyframes orbit360 {
+  from {
+    transform: rotate(0deg) translateX(400px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(400px) rotate(-360deg);
+  }
+}
+
+/* 内容覆盖层 - 确保文字可读 */
+.content-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.5) 0%,
+    rgba(118, 75, 162, 0.4) 50%,
+    rgba(240, 147, 251, 0.5) 100%
+  );
+  z-index: 4;
 }
 
 .banner-title-box {
@@ -224,19 +471,50 @@ const handleSubmit = async () => {
   width: 100%;
   max-width: 1200px;
   padding: 0 40px;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.5),
+    0 4px 20px rgba(102, 126, 234, 0.3);
 }
 
 .main-title {
-  font-size: 64px;
+  font-size: 72px;
   font-weight: 900;
   color: #fff;
   letter-spacing: -2px;
+  margin-bottom: 15px;
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%,
+  100% {
+    text-shadow:
+      0 2px 10px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    text-shadow:
+      0 2px 10px rgba(0, 0, 0, 0.5),
+      0 0 50px rgba(255, 255, 255, 0.5);
+  }
 }
 
 .main-title span {
-  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
 }
 
 .cyber-tag {
@@ -245,12 +523,26 @@ const handleSubmit = async () => {
   letter-spacing: 4px;
   margin-bottom: 10px;
   font-family: 'Microsoft YaHei', sans-serif;
+  text-transform: uppercase;
+  animation: tagPulse 2s ease-in-out infinite;
+}
+
+@keyframes tagPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .sub-title {
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.95);
   margin-top: 10px;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
 
 /* --- 2. Terminal Section --- */
@@ -531,31 +823,53 @@ const handleSubmit = async () => {
   }
 
   .main-title {
-    font-size: 40px;
+    font-size: 48px;
   }
 
   .form-cyber-wrap {
     padding: 30px 20px;
   }
 
-  .earth-wrap {
-    width: 400px;
-    height: 400px;
-    right: -10%;
-  }
-
   .banner-title-box {
     padding: 0 20px;
+  }
+
+  .cyber-banner {
+    height: 500px;
+  }
+
+  .orbit-ring.ring-1 {
+    width: 200%;
+    height: 200%;
+  }
+
+  .orbit-ring.ring-2 {
+    width: 160%;
+    height: 160%;
+  }
+
+  .orbit-ring.ring-3 {
+    width: 240%;
+    height: 240%;
+  }
+
+  @keyframes orbit360 {
+    from {
+      transform: rotate(0deg) translateX(280px) rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg) translateX(280px) rotate(-360deg);
+    }
   }
 }
 
 @media (max-width: 576px) {
   .main-title {
-    font-size: 32px;
+    font-size: 36px;
   }
 
   .cyber-tag {
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 2px;
   }
 
@@ -569,6 +883,39 @@ const handleSubmit = async () => {
 
   .glow-text {
     font-size: 24px;
+  }
+
+  .cyber-banner {
+    height: 450px;
+  }
+
+  .particle {
+    width: 6px;
+    height: 6px;
+  }
+
+  @keyframes orbit360 {
+    from {
+      transform: rotate(0deg) translateX(200px) rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg) translateX(200px) rotate(-360deg);
+    }
+  }
+
+  .orbit-ring.ring-1 {
+    width: 250%;
+    height: 250%;
+  }
+
+  .orbit-ring.ring-2 {
+    width: 200%;
+    height: 200%;
+  }
+
+  .orbit-ring.ring-3 {
+    width: 300%;
+    height: 300%;
   }
 }
 </style>
