@@ -1,39 +1,166 @@
 <template>
-  <a-layout-header class="header" :class="{ fixed: isFixed }">
+  <a-layout-header class="header" :class="{ fixed: isFixed, 'is-scrolled': isScrolled }">
     <div class="header-content">
-      <div class="logo" @click="router.push('/')">山东岱威创新管业</div>
+      <!-- Logo -->
+      <div class="logo" @click="router.push('/')">
+        <div class="logo-icon">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+        </div>
+        <span class="logo-text">岱威管业</span>
+      </div>
 
-      <!-- 移动端菜单切换按钮 -->
-      <button
-        class="mobile-menu-toggle"
-        @click="toggleMobileMenu"
-        :class="{ active: showMobileMenu }"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav">
+        <div
+          v-for="item in menuList"
+          :key="item.key"
+          ref="menuRefs"
+          :class="['nav-item', { active: selectedMenu === item.key }]"
+          @click="handleMenuClick(item.key)"
+        >
+          <span class="nav-label">{{ item.label }}</span>
+          <span v-if="selectedMenu === item.key" class="nav-indicator"></span>
+        </div>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="header-actions">
+        <!-- Phone Button -->
+        <a
+          href="tel:18663761618"
+          class="phone-btn"
+          @click.prevent="showPhoneTooltip = !showPhoneTooltip"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+            />
+          </svg>
+          <span class="phone-number">186-6376-1618</span>
+        </a>
+
+        <!-- Phone Tooltip -->
+        <Transition name="tooltip">
+          <div
+            v-if="showPhoneTooltip"
+            class="phone-tooltip"
+            v-click-outside="() => (showPhoneTooltip = false)"
+          >
+            <div class="tooltip-header">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+              <span>联系我们</span>
+            </div>
+            <a href="tel:0531-87357881" class="tooltip-item">
+              <span class="item-label">服务热线</span>
+              <span class="item-value">0531-87357881</span>
+            </a>
+            <a href="tel:18663761618" class="tooltip-item">
+              <span class="item-label">业务咨询</span>
+              <span class="item-value">186-6376-1618</span>
+            </a>
+          </div>
+        </Transition>
+
+        <!-- CTA Button -->
+        <button class="cta-btn" @click="router.push('/contact')">在线咨询</button>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          class="menu-toggle"
+          @click="toggleMobileMenu"
+          :class="{ active: showMobileMenu }"
+          aria-label="切换菜单"
+        >
+          <span class="toggle-line"></span>
+          <span class="toggle-line"></span>
+          <span class="toggle-line"></span>
+        </button>
+      </div>
     </div>
 
-    <!-- 移动端遮罩层 -->
-    <div v-if="showMobileMenu" class="mobile-overlay" @click="toggleMobileMenu"></div>
+    <!-- Mobile Menu Overlay -->
+    <Transition name="overlay">
+      <div v-if="showMobileMenu" class="mobile-overlay" @click="toggleMobileMenu"></div>
+    </Transition>
 
-    <nav class="menu-bar" :class="{ 'mobile-open': showMobileMenu }">
-      <div
-        v-for="item in menuList"
-        :key="item.key"
-        ref="menuRefs"
-        :class="['menu-item', { active: selectedMenu === item.key }]"
-        @click="handleMenuClick(item.key)"
-      >
-        <span class="menu-label">{{ item.label }}</span>
-        <span
-          v-if="selectedMenu === item.key"
-          class="active-underline"
-          :style="getUnderlineStyle(item.key)"
-        ></span>
-      </div>
-    </nav>
+    <!-- Mobile Menu -->
+    <Transition name="menu">
+      <nav v-if="showMobileMenu" class="mobile-nav">
+        <div class="mobile-nav-header">
+          <span class="mobile-title">导航菜单</span>
+          <button class="mobile-close" @click="toggleMobileMenu">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="mobile-nav-items">
+          <div
+            v-for="(item, index) in menuList"
+            :key="item.key"
+            :class="['mobile-nav-item', { active: selectedMenu === item.key }]"
+            :style="{ animationDelay: `${index * 50}ms` }"
+            @click="handleMenuClick(item.key)"
+          >
+            <span class="mobile-nav-label">{{ item.label }}</span>
+            <svg
+              class="mobile-nav-arrow"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="mobile-nav-footer">
+          <div class="mobile-contact">
+            <span class="contact-label">服务热线</span>
+            <a href="tel:18663761618" class="contact-phone">186-6376-1618</a>
+          </div>
+          <button class="mobile-cta" @click="handleMenuClick('contact')">立即咨询</button>
+        </div>
+      </nav>
+    </Transition>
   </a-layout-header>
 </template>
 
@@ -45,7 +172,9 @@ const router = useRouter()
 const route = useRoute()
 const selectedMenu = ref('home')
 const isFixed = ref(false)
+const isScrolled = ref(false)
 const showMobileMenu = ref(false)
+const showPhoneTooltip = ref(false)
 
 const menuList = [
   { key: 'home', label: '首页', path: '/' },
@@ -56,20 +185,41 @@ const menuList = [
   { key: 'contact', label: '联系我们', path: '/contact' }
 ]
 
-// 用于存储每个菜单项的宽度
-const menuRefs = ref([])
-const underlineWidths = ref({})
-
-// 计算下划线样式
-const getUnderlineStyle = key => {
-  let width = underlineWidths.value[key]
-  if (!width) width = 0
-  return {
-    width: width + 'px'
+// Click outside directive
+const vClickOutside = {
+  mounted(el, binding) {
+    el._clickOutside = event => {
+      if (!(el === event.target || el.contains(event.target))) {
+        binding.value()
+      }
+    }
+    document.addEventListener('click', el._clickOutside)
+  },
+  unmounted(el) {
+    document.removeEventListener('click', el._clickOutside)
   }
 }
 
-// 路径和菜单key的映射，支持详情页高亮
+// Menu refs for underline width
+const menuRefs = ref([])
+const underlineWidths = ref({})
+
+const getUnderlineStyle = key => {
+  const width = underlineWidths.value[key] || 0
+  return { width: width + 'px' }
+}
+
+const updateUnderlineWidths = () => {
+  nextTick(() => {
+    underlineWidths.value = {}
+    menuList.forEach((item, idx) => {
+      const el = menuRefs.value[idx]?.querySelector('.nav-label')
+      underlineWidths.value[item.key] = el ? el.offsetWidth : 0
+    })
+  })
+}
+
+// Path to menu key mapping
 const pathToKey = [
   { pattern: /^\/$/, key: 'home' },
   { pattern: /^\/products(\/.*)?$/, key: 'products' },
@@ -86,29 +236,26 @@ const getMenuKeyByPath = path => {
   return 'home'
 }
 
-const updateUnderlineWidths = () => {
-  nextTick(() => {
-    underlineWidths.value = {}
-    menuList.forEach((item, idx) => {
-      const el = menuRefs.value[idx]?.querySelector('.menu-label')
-      underlineWidths.value[item.key] = el ? el.offsetWidth : 0
-    })
-  })
-}
-
 const handleScroll = () => {
-  isFixed.value = window.scrollY > 50
+  const scrollY = window.scrollY
+  isFixed.value = scrollY > 50
+  isScrolled.value = scrollY > 10
 }
 
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
+  // Prevent body scroll when menu is open
+  document.body.style.overflow = showMobileMenu.value ? 'hidden' : ''
 }
 
 const handleMenuClick = key => {
   selectedMenu.value = key
-  showMobileMenu.value = false // 点击菜单项后关闭移动端菜单
+  showMobileMenu.value = false
+  showPhoneTooltip.value = false
+  document.body.style.overflow = ''
+
   const item = menuList.find(i => i.key === key)
-  if (item && item.path) {
+  if (item?.path) {
     router.push(item.path)
   }
 }
@@ -119,12 +266,11 @@ const syncMenuWithRoute = () => {
 
 onMounted(() => {
   syncMenuWithRoute()
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll, { passive: true })
   updateUnderlineWidths()
   window.addEventListener('resize', updateUnderlineWidths)
 })
 
-// 监听路由变化，确保新闻详情页等也高亮新闻中心
 watch(
   () => route.path,
   () => {
@@ -135,510 +281,550 @@ watch(
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
   window.removeEventListener('resize', updateUnderlineWidths)
+  document.body.style.overflow = ''
 })
 </script>
 
 <style scoped>
+/* Base Header */
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(135deg, #001529 0%, #0f1419 100%);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 0 48px;
-  min-height: 70px;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.menu-bar {
-  display: flex;
-  gap: 36px;
-}
-
-/* 移动端菜单切换按钮 - PC端隐藏 */
-.mobile-menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 30px;
-  height: 30px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 10;
-}
-
-/* PC端确保header-content不影响布局 */
-@media (min-width: 801px) {
-  .header-content {
-    display: contents;
-  }
-}
-
-.mobile-menu-toggle span {
-  width: 100%;
-  height: 3px;
-  background: #ffffff;
-  border-radius: 2px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: center;
-}
-
-.mobile-menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
-}
-
-.mobile-menu-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.mobile-menu-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
-
-.header.fixed {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  background: rgba(0, 21, 41, 0.95);
-  backdrop-filter: blur(20px);
-}
-
-.logo {
-  color: #fff;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  user-select: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-right: 40px;
-  line-height: 70px;
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.logo:hover {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transform: scale(1.02);
-}
-
-/* PC端Logo样式确保 */
-@media (min-width: 801px) {
-  .logo {
-    margin-right: 40px;
-    line-height: 70px;
-  }
-}
-
-.menu-bar {
-  display: flex;
-  gap: 36px;
-}
-
-.menu-item {
-  position: relative;
-  color: #cbd5e1;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 8px 16px;
-  line-height: 70px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.menu-item::before {
-  content: '';
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.1) 0%, rgba(67, 198, 172, 0.1) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.menu-item:hover {
+.header.is-scrolled {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.header.fixed {
+  background: rgba(15, 23, 42, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 15px rgba(8, 145, 255, 0.4);
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 800;
   color: #ffffff;
-  transform: translateY(-1px);
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-.menu-item:hover::before {
-  opacity: 1;
+/* Desktop Navigation */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.menu-item.active {
-  color: #ffffff;
-  font-weight: 600;
-  background: rgba(22, 119, 255, 0.15);
-}
-
-.menu-label {
-  display: inline-block;
+.nav-item {
   position: relative;
-  z-index: 1;
-  padding: 0 2px;
-}
-
-.active-underline {
-  display: block;
-  height: 3px;
-  border-radius: 2px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  position: absolute;
-  left: 50%;
-  bottom: 8px;
-  transform: translateX(-50%);
+  padding: 10px 18px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1;
-  pointer-events: none;
-  box-shadow: 0 2px 8px rgba(22, 119, 255, 0.4);
+  border-radius: 10px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* 平板端样式 */
-@media (max-width: 1024px) {
-  .header {
-    padding: 0 30px;
-  }
-
-  .menu-bar {
-    gap: 24px;
-  }
+.nav-item:hover {
+  color: #ffffff;
+  background: rgba(8, 145, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(8, 145, 255, 0.2);
 }
 
-/* 移动端遮罩层 */
-.mobile-overlay {
+.nav-item.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(8, 145, 255, 0.25) 0%, rgba(8, 145, 255, 0.1) 100%);
+  box-shadow:
+    0 4px 20px rgba(8, 145, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.nav-indicator {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  background: linear-gradient(90deg, #60a5fa, #0891ff);
+  border-radius: 3px;
+  box-shadow:
+    0 0 15px rgba(8, 145, 255, 0.8),
+    0 0 30px rgba(8, 145, 255, 0.4);
+}
+
+/* Header Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+/* Phone Button */
+.phone-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  color: #0891ff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.phone-btn:hover {
+  background: #ffffff;
+  border-color: #0891ff;
+  box-shadow: 0 6px 20px rgba(8, 145, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.phone-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.phone-btn:hover svg {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* Phone Tooltip */
+.phone-tooltip {
+  position: absolute;
+  top: calc(100% + 16px);
+  right: 80px;
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  min-width: 240px;
+  z-index: 100;
+  border: 2px solid rgba(8, 145, 255, 0.1);
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #0891ff;
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tooltip-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tooltip-item:hover {
+  background: #f1f5f9;
+}
+
+.item-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.item-value {
+  font-size: 15px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.tooltip-enter-active,
+.tooltip-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tooltip-enter-from,
+.tooltip-leave-to {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+}
+
+/* CTA Button */
+.cta-btn {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 20px rgba(8, 145, 255, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 30px rgba(8, 145, 255, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Menu Toggle */
+.menu-toggle {
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 800px) {
-  /* 移动端遮罩层 */
-  .mobile-overlay {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    z-index: 99;
-    animation: fadeIn 0.3s ease;
-  }
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+.toggle-line {
+  width: 20px;
+  height: 2.5px;
+  background: white;
+  border-radius: 2px;
+  margin: 0 auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
 
-  .header {
-    flex-direction: column;
-    padding: 0;
-    min-height: 64px;
-    background: rgba(0, 21, 41, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(22, 119, 255, 0.2);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-  }
+.menu-toggle.active .toggle-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
 
-  .header.fixed {
-    background: rgba(0, 21, 41, 0.98);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-    border-bottom-color: rgba(22, 119, 255, 0.3);
-  }
+.menu-toggle.active .toggle-line:nth-child(2) {
+  opacity: 0;
+}
 
-  .header-content {
-    padding: 14px 20px;
-    min-height: 64px;
-    width: 100%;
-  }
+.menu-toggle.active .toggle-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
-  .mobile-menu-toggle {
-    display: flex;
-    background: rgba(22, 119, 255, 0.1);
-    border-radius: 8px;
-    padding: 4px;
-    transition: all 0.3s ease;
-  }
+/* Mobile Overlay */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+}
 
-  .mobile-menu-toggle:hover {
-    background: rgba(22, 119, 255, 0.2);
-  }
+.overlay-enter-active,
+.overlay-leave-active {
+  transition: opacity 0.3s ease;
+}
 
-  .mobile-menu-toggle.active {
-    background: var(--gradient-primary);
-  }
+.overlay-enter-from,
+.overlay-leave-to {
+  opacity: 0;
+}
 
-  .logo {
-    font-size: 19px;
-    line-height: 1.3;
-    margin-right: 0;
-    padding: 0;
-    font-weight: 700;
-    letter-spacing: 1px;
-    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+/* Mobile Navigation */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  max-width: 85vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+}
 
-  .logo:hover {
-    background: linear-gradient(135deg, #60a5fa 0%, #34d399 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+.menu-enter-active,
+.menu-leave-active {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  .menu-bar {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(0, 21, 41, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(22, 119, 255, 0.2);
-    padding: 20px 16px;
-    padding-bottom: env(safe-area-inset-bottom, 20px);
-    gap: 0;
-    flex-direction: column;
-    transform: translateY(-110%);
+.menu-enter-from,
+.menu-leave-to {
+  transform: translateX(100%);
+}
+
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-title {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mobile-close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mobile-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-nav-items {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease backwards;
+}
+
+@keyframes slideIn {
+  from {
     opacity: 0;
-    visibility: hidden;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    z-index: 100;
-    max-height: calc(100vh - 64px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
+    transform: translateX(20px);
+  }
+}
+
+.mobile-nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(8, 145, 255, 0.3);
+  color: white;
+}
+
+.mobile-nav-item.active {
+  background: linear-gradient(135deg, rgba(8, 145, 255, 0.2) 0%, rgba(8, 145, 255, 0.1) 100%);
+  border-color: rgba(8, 145, 255, 0.4);
+  color: white;
+}
+
+.mobile-nav-label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.mobile-nav-arrow {
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-item:hover .mobile-nav-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.mobile-nav-footer {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.mobile-contact {
+  margin-bottom: 16px;
+}
+
+.contact-label {
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.contact-phone {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0891ff;
+  text-decoration: none;
+}
+
+.mobile-cta {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(8, 145, 255, 0.3);
+}
+
+.mobile-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(8, 145, 255, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .header-content {
+    padding: 0 24px;
   }
 
-  .menu-bar.mobile-open {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
+  .phone-number {
+    display: none;
   }
 
-  .menu-item {
-    font-size: 16px;
-    padding: 18px 20px;
-    line-height: 1.4;
-    border-radius: 14px;
-    color: rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    font-weight: 500;
-    text-align: left;
-    width: 100%;
-    margin-bottom: 10px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    min-height: 56px;
+  .cta-btn {
+    display: none;
+  }
+
+  .menu-toggle {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
   }
 
-  /* 菜单项渐入动画 */
-  .menu-bar.mobile-open .menu-item:nth-child(1) {
-    animation: slideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.05s both;
-  }
-  .menu-bar.mobile-open .menu-item:nth-child(2) {
-    animation: slideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
-  }
-  .menu-bar.mobile-open .menu-item:nth-child(3) {
-    animation: slideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.15s both;
-  }
-  .menu-bar.mobile-open .menu-item:nth-child(4) {
-    animation: slideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
-  }
-  .menu-bar.mobile-open .menu-item:nth-child(5) {
-    animation: slideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.25s both;
-  }
-  .menu-bar.mobile-open .menu-item:nth-child(6) {
-    animation: slideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+  .desktop-nav {
+    display: none;
   }
 
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  .phone-tooltip {
+    right: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 0 16px;
+    height: 64px;
   }
 
-  /* 菜单项右侧箭头 */
-  .menu-item::after {
-    content: '›';
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
+  .logo-icon {
+    width: 38px;
+    height: 38px;
   }
 
-  .menu-item:active {
-    transform: scale(0.98);
-  }
-
-  .menu-item:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(22, 119, 255, 0.4);
-  }
-
-  .menu-item:hover::after {
-    color: var(--color-primary-400);
-    transform: translateX(4px);
-  }
-
-  .menu-item.active {
-    color: #ffffff;
-    background: linear-gradient(135deg, rgba(22, 119, 255, 0.95) 0%, rgba(67, 198, 172, 0.95) 100%);
-    border-color: transparent;
-    box-shadow:
-      0 4px 16px rgba(22, 119, 255, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  }
-
-  .menu-item.active::after {
-    content: '✓';
-    color: white;
+  .logo-text {
     font-size: 18px;
   }
 
-  .menu-item::before {
+  .phone-btn {
+    padding: 8px;
+  }
+
+  .phone-btn span {
     display: none;
   }
 
-  .menu-label {
-    position: relative;
-    z-index: 2;
-    flex: 1;
-  }
-
-  .active-underline {
-    display: none;
-  }
-
-  /* 滚动条样式 */
-  .menu-bar::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .menu-bar::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .menu-bar::-webkit-scrollbar-thumb {
-    background: rgba(22, 119, 255, 0.5);
-    border-radius: 2px;
+  .phone-tooltip {
+    right: 16px;
+    left: 16px;
+    min-width: auto;
   }
 }
 
-/* 小屏手机样式 */
-@media (max-width: 480px) {
-  .header {
-    min-height: 56px;
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .nav-item,
+  .phone-btn,
+  .cta-btn,
+  .mobile-nav-item {
+    transition: all 0.2s ease;
   }
 
-  .header-content {
-    padding: 12px 16px;
-    min-height: 56px;
-  }
-
-  .logo {
-    font-size: 17px;
-    line-height: 1.3;
-  }
-
-  .mobile-menu-toggle {
-    width: 30px;
-    height: 30px;
-  }
-
-  .mobile-menu-toggle span {
-    height: 2.5px;
-  }
-
-  .menu-bar {
-    padding: 16px 12px;
-    padding-bottom: env(safe-area-inset-bottom, 16px);
-    max-height: calc(100vh - 56px);
-  }
-
-  .menu-item {
-    font-size: 15px;
-    padding: 16px 18px;
-    margin-bottom: 8px;
-    min-height: 52px;
-    border-radius: 12px;
-  }
-
-  .menu-item::after {
-    font-size: 22px;
-  }
-}
-
-/* 超小屏幕样式 */
-@media (max-width: 375px) {
-  .header {
-    min-height: 52px;
-  }
-
-  .header-content {
-    padding: 10px 12px;
-    min-height: 52px;
-  }
-
-  .logo {
-    font-size: 15px;
-  }
-
-  .mobile-menu-toggle {
-    width: 28px;
-    height: 28px;
-  }
-
-  .menu-bar {
-    padding: 14px 10px;
-    padding-bottom: env(safe-area-inset-bottom, 14px);
-  }
-
-  .menu-item {
-    font-size: 14px;
-    padding: 14px 16px;
-    min-height: 48px;
+  .mobile-nav-item {
+    animation: none;
   }
 }
 </style>

@@ -1,143 +1,322 @@
 <template>
-  <a-layout class="cyber-contact-layout">
+  <a-layout class="contact-layout">
     <Header />
 
-    <a-layout-content class="cyber-content">
-      <section class="cyber-banner">
-        <div class="stars-bg"></div>
-        <div class="earth-background">
-          <div class="earth-layer layer-1"></div>
-          <div class="earth-layer layer-2"></div>
-          <div class="earth-layer layer-3"></div>
-        </div>
-        <div class="space-overlay">
-          <div class="orbit-ring ring-1"></div>
-          <div class="orbit-ring ring-2"></div>
-          <div class="orbit-ring ring-3"></div>
-          <div class="orbit-particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
+    <a-layout-content>
+      <!-- Hero Banner - 工业科技风格 -->
+      <section class="contact-hero">
+        <div class="hero-pattern"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+          <div class="hero-badge">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+              />
+            </svg>
+            <span>24小时服务热线</span>
+          </div>
+          <h1 class="hero-title">
+            联系我们
+            <span class="title-highlight">合作共赢</span>
+          </h1>
+          <p class="hero-subtitle">专业团队随时为您提供管道解决方案咨询与技术支持</p>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-value">15+</span>
+              <span class="stat-label">年行业经验</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <span class="stat-value">2小时</span>
+              <span class="stat-label">快速响应</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <span class="stat-value">1000+</span>
+              <span class="stat-label">成功案例</span>
+            </div>
           </div>
         </div>
-        <div class="content-overlay"></div>
-        <div class="banner-title-box">
-          <div class="cyber-tag">全球连接</div>
-          <h1 class="main-title">全域链接 <span>共创未来</span></h1>
-          <p class="sub-title">山东岱威 · 专业管道解决方案提供商</p>
+        <div class="hero-decorations">
+          <div class="deco-circle circle-1"></div>
+          <div class="deco-circle circle-2"></div>
+          <div class="deco-line"></div>
         </div>
       </section>
 
-      <section class="terminal-section">
-        <div class="terminal-container">
-          <div class="cyber-grid-bg"></div>
+      <!-- 主要内容区 - 上面：地图和联系方式 -->
+      <section class="contact-info-section">
+        <div class="container">
+          <div class="section-header-center">
+            <h2>联系我们</h2>
+            <p>多种方式，随时为您服务</p>
+          </div>
 
-          <div class="contact-terminal">
-            <div class="terminal-header">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="terminal-title">联系信息</span>
+          <div class="info-grid">
+            <!-- 左侧：地图 -->
+            <div class="map-panel">
+              <div class="map-container-large">
+                <iframe
+                  src="https://map.baidu.com/search/山东省济南市长清区双龙路1006号"
+                  frameborder="0"
+                  class="map-frame"
+                ></iframe>
+                <div class="map-overlay">
+                  <div class="location-tag">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    <span>山东省济南市长清区</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="address-info">
+                <div class="address-row">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <span>山东省济南市长清区双龙路1006号</span>
+                </div>
+                <div class="address-row">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  <span>周一至周六 8:00 - 18:00</span>
+                </div>
+              </div>
             </div>
 
-            <div class="terminal-body">
-              <div class="info-nodes">
+            <!-- 右侧：联系方式列表 -->
+            <div class="contact-list-panel">
+              <div class="contact-list">
                 <div
-                  v-for="(item, index) in contactItems"
+                  v-for="(item, index) in contactCards"
                   :key="index"
-                  class="node-card"
-                  @click="handleAction(item)"
+                  class="contact-item-large"
+                  :class="{ 'is-primary': index === 0 }"
+                  @click="handleCardClick(item)"
                 >
-                  <div class="node-icon">{{ item.icon }}</div>
-                  <div class="node-content">
-                    <label>{{ item.label }}</label>
-                    <div class="value">{{ item.value }}</div>
+                  <div class="item-icon-large" v-html="item.icon"></div>
+                  <div class="item-content-large">
+                    <span class="item-label-large">{{ item.label }}</span>
+                    <span class="item-value-large">{{ item.value }}</span>
                   </div>
-                  <div class="node-scan-line"></div>
+                  <div class="item-action">
+                    <svg
+                      v-if="index === 0"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                      />
+                    </svg>
+                    <svg
+                      v-else
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </div>
                 </div>
               </div>
 
-              <div class="map-terminal">
-                <div class="map-inner">
-                  <iframe
-                    src="https://ditu.amap.com/search?query=山东省济南市长清区双龙路1006号&city=370113&zoom=15"
-                    frameborder="0"
-                    class="cyber-map"
-                  ></iframe>
-                  <div class="map-overlay">
-                    <div class="loc-tag"><EnvironmentOutlined /> 济南 · 双龙路1006号</div>
-                  </div>
-                </div>
+              <!-- 快速操作按钮 -->
+              <div class="quick-actions">
+                <a href="tel:18663761618" class="action-btn primary">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                    />
+                  </svg>
+                  立即拨打
+                </a>
+                <a href="mailto:sddwcxgy@126.com" class="action-btn secondary">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                  发送邮件
+                </a>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="inquiry-section">
-        <div class="form-cyber-wrap">
-          <div class="form-decor-tl"></div>
-          <div class="form-decor-br"></div>
-
-          <div class="inquiry-header">
-            <h2 class="glow-text">咨询反馈</h2>
-            <p>请录入您的需求,我们的系统将为您匹配专属工程师</p>
+      <!-- 下面：在线咨询表单 -->
+      <section class="contact-form-section">
+        <div class="container">
+          <div class="section-header-center">
+            <h2>在线咨询</h2>
+            <p>填写您的需求，我们将尽快与您联系</p>
           </div>
 
-          <a-form
-            ref="formRef"
-            :model="formData"
-            :rules="formRules"
-            layout="vertical"
-            @finish="handleSubmit"
-            class="custom-cyber-form"
-          >
-            <a-row :gutter="32">
-              <a-col :xs="24" :sm="12">
-                <a-form-item label="姓名" name="name">
-                  <a-input v-model:value="formData.name" placeholder="请输入姓名..." />
+          <div class="form-panel-full">
+            <a-form
+              ref="formRef"
+              :model="formData"
+              :rules="formRules"
+              layout="vertical"
+              @finish="handleSubmit"
+              class="contact-form"
+            >
+              <div class="form-row">
+                <a-form-item label="您的姓名" name="name" class="form-item">
+                  <a-input v-model:value="formData.name" placeholder="请输入姓名" size="large" />
                 </a-form-item>
-              </a-col>
-              <a-col :xs="24" :sm="12">
-                <a-form-item label="公司" name="company">
-                  <a-input v-model:value="formData.company" placeholder="请输入公司名称..." />
-                </a-form-item>
-              </a-col>
-              <a-col :xs="24" :sm="12">
-                <a-form-item label="手机" name="phone">
-                  <a-input v-model:value="formData.phone" placeholder="请输入手机号..." />
-                </a-form-item>
-              </a-col>
-              <a-col :xs="24" :sm="12">
-                <a-form-item label="邮箱" name="email">
-                  <a-input v-model:value="formData.email" placeholder="请输入邮箱..." />
-                </a-form-item>
-              </a-col>
-              <a-col :xs="24">
-                <a-form-item label="详细需求" name="message">
-                  <a-textarea
-                    v-model:value="formData.message"
-                    :rows="4"
-                    placeholder="请描述您的需求..."
+                <a-form-item label="公司名称" name="company" class="form-item">
+                  <a-input
+                    v-model:value="formData.company"
+                    placeholder="请输入公司名称"
+                    size="large"
                   />
                 </a-form-item>
-              </a-col>
-            </a-row>
+              </div>
 
-            <div class="submit-area">
-              <button class="cyber-btn" :disabled="submitting">
-                <span class="btn-content">
-                  {{ submitting ? '提交中...' : '确认提交' }}
-                </span>
-                <div class="btn-glitch"></div>
-              </button>
+              <div class="form-row">
+                <a-form-item label="联系电话" name="phone" class="form-item">
+                  <a-input v-model:value="formData.phone" placeholder="请输入手机号" size="large" />
+                </a-form-item>
+                <a-form-item label="电子邮箱" name="email" class="form-item">
+                  <a-input v-model:value="formData.email" placeholder="请输入邮箱" size="large" />
+                </a-form-item>
+              </div>
+
+              <a-form-item label="咨询内容" name="message">
+                <a-textarea
+                  v-model:value="formData.message"
+                  :rows="4"
+                  placeholder="请详细描述您的需求，包括产品类型、使用场景、数量等信息..."
+                  size="large"
+                />
+              </a-form-item>
+
+              <div class="form-footer">
+                <div class="form-privacy">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                  <span>我们承诺保护您的隐私信息</span>
+                </div>
+                <button type="submit" class="submit-btn" :disabled="submitting">
+                  <span v-if="!submitting" class="btn-content">
+                    <span>提交咨询</span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                  </span>
+                  <span v-else class="btn-loading">
+                    <svg
+                      class="loading-icon"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-dasharray="60"
+                        stroke-dashoffset="60"
+                      />
+                    </svg>
+                    提交中...
+                  </span>
+                </button>
+              </div>
+            </a-form>
+          </div>
+        </div>
+      </section>
+
+      <!-- 服务承诺 -->
+      <section class="service-promise">
+        <div class="container">
+          <div class="promise-grid">
+            <div v-for="(item, index) in promises" :key="index" class="promise-item">
+              <div class="promise-icon" v-html="item.icon"></div>
+              <h4>{{ item.title }}</h4>
+              <p>{{ item.desc }}</p>
             </div>
-          </a-form>
+          </div>
         </div>
       </section>
     </a-layout-content>
@@ -149,16 +328,60 @@
 <script setup lang="ts">
 import Footer from '@/components/Footer.vue'
 import Header from '@/components/Header.vue'
-import { EnvironmentOutlined } from '@ant-design/icons-vue'
 import { message } from 'ant-design-vue'
 import { reactive, ref } from 'vue'
 
 const submitting = ref(false)
-const contactItems = [
-  { icon: '📍', label: '地址', value: '济南市长清区双龙路1006号', key: 'addr' },
-  { icon: '📱', label: '手机', value: '18663761618', key: 'phone' },
-  { icon: '📠', label: '传真', value: '0531-87357881', key: 'fax' },
-  { icon: '📧', label: '邮箱', value: 'sddwcxgy@126.com', key: 'email' }
+const formRef = ref()
+
+const contactCards = [
+  {
+    label: '服务热线',
+    value: '0531-87357881',
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+    action: 'tel:0531-87357881'
+  },
+  {
+    label: '业务咨询',
+    value: '186-6376-1618',
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+    action: 'tel:18663761618'
+  },
+  {
+    label: '电子邮箱',
+    value: 'sddwcxgy@126.com',
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+    action: 'mailto:sddwcxgy@126.com'
+  },
+  {
+    label: '公司传真',
+    value: '0531-87357881',
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>',
+    action: 'copy'
+  }
+]
+
+const promises = [
+  {
+    title: '专业解答',
+    desc: '资深工程师一对一服务',
+    icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>'
+  },
+  {
+    title: '快速响应',
+    desc: '2小时内回复您的咨询',
+    icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
+  },
+  {
+    title: '技术支持',
+    desc: '提供完整的技术方案',
+    icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>'
+  },
+  {
+    title: '售后保障',
+    desc: '完善的售后服务体系',
+    icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="12" r="3"/></svg>'
+  }
 ]
 
 const formData = reactive({
@@ -170,752 +393,757 @@ const formData = reactive({
 })
 
 const formRules = {
-  name: [{ required: true, message: '请输入姓名' }],
-  phone: [{ required: true, pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号' }],
-  message: [{ required: true, message: '请输入需求描述' }]
+  name: [{ required: true, message: '请输入您的姓名', trigger: 'blur' }],
+  phone: [
+    { required: true, message: '请输入联系电话', trigger: 'blur' },
+    { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur' }
+  ],
+  message: [{ required: true, message: '请输入咨询内容', trigger: 'blur' }]
 }
 
-const handleAction = (item: any) => {
-  navigator.clipboard.writeText(item.value)
-  message.success(`${item.label} 已复制`)
+const handleCardClick = (item: any) => {
+  if (item.action === 'copy') {
+    navigator.clipboard.writeText(item.value)
+    message.success(`${item.label}已复制到剪贴板`)
+  } else if (item.action.startsWith('tel:')) {
+    window.location.href = item.action
+  } else if (item.action.startsWith('mailto:')) {
+    window.location.href = item.action
+  }
 }
 
 const handleSubmit = async () => {
   submitting.value = true
-  await new Promise(r => setTimeout(r, 1500))
-  submitting.value = false
-  message.success('数据同步成功,我们将尽快联系您')
+  try {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    message.success('提交成功！我们的工作人员会尽快与您联系')
+    formRef.value?.resetFields()
+  } catch (error) {
+    message.error('提交失败，请稍后重试')
+  } finally {
+    submitting.value = false
+  }
 }
 </script>
 
 <style scoped>
-/* --- 全局明亮背景 --- */
-.cyber-contact-layout {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #1a202c;
+/* 布局 */
+.contact-layout {
+  background: #f8fafc;
   min-height: 100vh;
 }
 
-/* --- 1. 地球全屏背景 Banner --- */
-.cyber-banner {
-  height: 600px;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Hero Banner */
+.contact-hero {
   position: relative;
-  overflow: hidden;
+  height: 480px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000;
+  overflow: hidden;
 }
 
-/* 星空背景 */
-.stars-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.9), transparent),
-    radial-gradient(3px 3px at 20% 80%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(2px 2px at 30% 40%, rgba(255, 255, 255, 0.9), transparent),
-    radial-gradient(1px 1px at 40% 60%, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(2px 2px at 50% 30%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(1px 1px at 60% 70%, rgba(255, 255, 255, 0.6), transparent),
-    radial-gradient(3px 3px at 70% 10%, rgba(255, 255, 255, 0.9), transparent),
-    radial-gradient(2px 2px at 80% 50%, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(1px 1px at 90% 85%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(2px 2px at 15% 90%, rgba(255, 255, 255, 0.6), transparent),
-    radial-gradient(1px 1px at 85% 25%, rgba(255, 255, 255, 0.9), transparent),
-    radial-gradient(2px 2px at 95% 65%, rgba(255, 255, 255, 0.7), transparent);
-  background-size: 100% 100%;
-  animation: twinkle 8s ease-in-out infinite;
-  z-index: 1;
-}
-
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-/* 地球全屏背景 - 三层视差 */
-.earth-background {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-}
-
-.earth-layer {
-  position: absolute;
-  inset: -20%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 50%;
-}
-
-.layer-1 {
-  background-image: url('https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=1200');
-  opacity: 0.7;
-  animation: rotateEarthSlow 120s linear infinite;
-  filter: brightness(0.8) saturate(1.2) blur(0px);
-}
-
-.layer-2 {
-  background-image: url('https://images.unsplash.com/photo-1614728423169-3f65fd722b7e?w=1200');
-  opacity: 0.5;
-  animation: rotateEarthMedium 90s linear infinite reverse;
-  filter: brightness(1) saturate(1.3) hue-rotate(10deg);
-}
-
-.layer-3 {
-  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200');
-  opacity: 0.6;
-  animation: rotateEarthFast 60s linear infinite;
-  filter: brightness(1.1) saturate(1.4) contrast(1.2);
-  box-shadow:
-    inset 0 0 200px rgba(102, 126, 234, 0.3),
-    0 0 150px rgba(102, 126, 234, 0.4);
-}
-
-@keyframes rotateEarthSlow {
-  from {
-    transform: rotate(0deg) scale(1.5);
-  }
-  to {
-    transform: rotate(360deg) scale(1.5);
-  }
-}
-
-@keyframes rotateEarthMedium {
-  from {
-    transform: rotate(0deg) scale(1.6);
-  }
-  to {
-    transform: rotate(-360deg) scale(1.6);
-  }
-}
-
-@keyframes rotateEarthFast {
-  from {
-    transform: rotate(0deg) scale(1.4);
-  }
-  to {
-    transform: rotate(360deg) scale(1.4);
-  }
-}
-
-/* 太空轨道覆盖层 */
-.space-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-}
-
-/* 巨大的轨道环 */
-.orbit-ring {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  transform: translate(-50%, -50%);
-}
-
-.ring-1 {
-  width: 150%;
-  height: 150%;
-  border-color: rgba(251, 191, 36, 0.3);
-  border-width: 3px;
-  animation: rotateRing 40s linear infinite;
-}
-
-.ring-2 {
-  width: 120%;
-  height: 120%;
-  border-color: rgba(147, 197, 253, 0.25);
-  border-width: 2px;
-  border-style: dashed;
-  animation: rotateRing 60s linear infinite reverse;
-}
-
-.ring-3 {
-  width: 180%;
-  height: 180%;
-  border-color: rgba(240, 171, 252, 0.2);
-  border-width: 2px;
-  animation: rotateRing 80s linear infinite;
-}
-
-@keyframes rotateRing {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-/* 增强的轨道粒子系统 */
-.orbit-particles {
-  position: absolute;
-  inset: 0;
-}
-
-.particle {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  box-shadow: 0 0 20px currentColor;
-}
-
-.particle:nth-child(1) {
-  top: 50%;
-  left: 50%;
-  background: radial-gradient(circle, #fbbf24 0%, transparent 70%);
-  color: #fbbf24;
-  animation: orbit360 15s linear infinite;
-}
-
-.particle:nth-child(2) {
-  top: 50%;
-  left: 50%;
-  background: radial-gradient(circle, #93c5fd 0%, transparent 70%);
-  color: #93c5fd;
-  animation: orbit360 20s linear infinite;
-  animation-delay: -5s;
-}
-
-.particle:nth-child(3) {
-  top: 50%;
-  left: 50%;
-  background: radial-gradient(circle, #f0abfc 0%, transparent 70%);
-  color: #f0abfc;
-  animation: orbit360 25s linear infinite;
-  animation-delay: -10s;
-}
-
-.particle:nth-child(4) {
-  top: 50%;
-  left: 50%;
-  background: radial-gradient(circle, #6ee7b7 0%, transparent 70%);
-  color: #6ee7b7;
-  animation: orbit360 18s linear infinite;
-  animation-delay: -3s;
-}
-
-.particle:nth-child(5) {
-  top: 50%;
-  left: 50%;
-  background: radial-gradient(circle, #fca5a5 0%, transparent 70%);
-  color: #fca5a5;
-  animation: orbit360 22s linear infinite reverse;
-}
-
-.particle:nth-child(6) {
-  top: 50%;
-  left: 50%;
-  background: radial-gradient(circle, #a5b4fc 0%, transparent 70%);
-  color: #a5b4fc;
-  animation: orbit360 28s linear infinite reverse;
-  animation-delay: -7s;
-}
-
-.particle:nth-child(7) {
-  top: 50%;
-  left: 50%;
-  background: radial-gradient(circle, #fde047 0%, transparent 70%);
-  color: #fde047;
-  animation: orbit360 16s linear infinite;
-  animation-delay: -12s;
-}
-
-.particle:nth-child(8) {
-  top: 50%;
-  left: 50%;
-  background: radial-gradient(circle, #c4b5fd 0%, transparent 70%);
-  color: #c4b5fd;
-  animation: orbit360 30s linear infinite reverse;
-  animation-delay: -15s;
-}
-
-@keyframes orbit360 {
-  from {
-    transform: rotate(0deg) translateX(400px) rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translateX(400px) rotate(-360deg);
-  }
-}
-
-/* 内容覆盖层 - 确保文字可读 */
-.content-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(102, 126, 234, 0.5) 0%,
-    rgba(118, 75, 162, 0.4) 50%,
-    rgba(240, 147, 251, 0.5) 100%
-  );
-  z-index: 4;
-}
-
-.banner-title-box {
-  position: relative;
-  z-index: 5;
-  text-align: left;
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 40px;
-  text-shadow:
-    0 2px 10px rgba(0, 0, 0, 0.5),
-    0 4px 20px rgba(102, 126, 234, 0.3);
-}
-
-.main-title {
-  font-size: 72px;
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: -2px;
-  margin-bottom: 15px;
-  animation: titleGlow 3s ease-in-out infinite;
-}
-
-@keyframes titleGlow {
-  0%,
-  100% {
-    text-shadow:
-      0 2px 10px rgba(0, 0, 0, 0.5),
-      0 0 30px rgba(255, 255, 255, 0.3);
-  }
-  50% {
-    text-shadow:
-      0 2px 10px rgba(0, 0, 0, 0.5),
-      0 0 50px rgba(255, 255, 255, 0.5);
-  }
-}
-
-.main-title span {
-  background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 3s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
-  0%,
-  100% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
-}
-
-.cyber-tag {
-  color: #fbbf24;
-  font-weight: 800;
-  letter-spacing: 4px;
-  margin-bottom: 10px;
-  font-family: 'Microsoft YaHei', sans-serif;
-  text-transform: uppercase;
-  animation: tagPulse 2s ease-in-out infinite;
-}
-
-@keyframes tagPulse {
-  0%,
-  100% {
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.sub-title {
-  font-size: 20px;
-  color: rgba(255, 255, 255, 0.95);
-  margin-top: 10px;
-  font-weight: 300;
-  letter-spacing: 1px;
-}
-
-/* --- 2. Terminal Section --- */
-.terminal-section {
-  padding: 80px 0;
-  position: relative;
-  background: #f8fafc;
-}
-
-.cyber-grid-bg {
+.hero-pattern {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(102, 126, 234, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(102, 126, 234, 0.08) 1px, transparent 1px);
-  background-size: 40px 40px;
-  z-index: 0;
-}
-
-.terminal-container {
-  position: relative;
-  padding: 0 20px;
-}
-
-.contact-terminal {
-  max-width: 1200px;
-  margin: 0 auto;
-  background: #ffffff;
-  border: 2px solid #e0e7ff;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.15);
-  overflow: hidden;
-  position: relative;
+    radial-gradient(circle at 25% 25%, rgba(8, 145, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(8, 145, 255, 0.08) 0%, transparent 50%);
   z-index: 1;
 }
 
-.terminal-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 15px 25px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-bottom: none;
+.hero-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(8, 145, 255, 0.15) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
 }
 
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.terminal-title {
-  color: #ffffff;
-  font-family: 'Microsoft YaHei', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  margin-left: 10px;
-}
-
-.terminal-body {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  padding: 40px;
-  gap: 40px;
-}
-
-.info-nodes {
-  display: grid;
-  gap: 20px;
-}
-
-.node-card {
-  background: #f8fafc;
-  border: 2px solid #e0e7ff;
-  padding: 20px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  cursor: pointer;
+.hero-content {
   position: relative;
-  overflow: hidden;
-  transition: 0.3s;
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 800px;
 }
 
-.node-card:hover {
-  background: #eef2ff;
-  border-color: #667eea;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
-}
-
-.node-icon {
-  font-size: 28px;
-}
-
-.node-content {
-  flex: 1;
-}
-
-.node-card label {
-  color: #667eea;
-  font-size: 13px;
-  font-family: 'Microsoft YaHei', sans-serif;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(8, 145, 255, 0.15);
+  border: 1px solid rgba(8, 145, 255, 0.3);
+  padding: 10px 20px;
+  border-radius: 50px;
+  color: #60a5fa;
+  font-size: 14px;
   font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-size: 52px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.title-highlight {
   display: block;
+  background: linear-gradient(135deg, #60a5fa 0%, #0891ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: #94a3b8;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 32px;
+  font-weight: 800;
+  color: #ffffff;
   margin-bottom: 4px;
 }
 
-.node-card .value {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1e293b;
+.stat-label {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
 }
 
-.node-scan-line {
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.hero-decorations {
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.15), transparent);
-  animation: scan 3s infinite;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
-@keyframes scan {
-  to {
-    left: 100%;
-  }
+.deco-circle {
+  position: absolute;
+  border: 2px solid rgba(8, 145, 255, 0.2);
+  border-radius: 50%;
 }
 
-.map-terminal {
-  border: 2px solid #e0e7ff;
-  border-radius: 8px;
-  overflow: hidden;
+.circle-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -100px;
+}
+
+.circle-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  left: -80px;
+  border-color: rgba(8, 145, 255, 0.1);
+}
+
+.deco-line {
+  position: absolute;
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(8, 145, 255, 0.3), transparent);
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Contact Info Section - 上面部分 */
+.contact-info-section {
+  padding: 80px 0;
+  background: #f8fafc;
+}
+
+.section-header-center {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-header-center h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.section-header-center p {
+  font-size: 16px;
+  color: #64748b;
+}
+
+/* Info Grid - 地图和联系方式左右排列 */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+}
+
+/* Map Panel */
+.map-panel {
   background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.map-inner {
+.map-container-large {
   position: relative;
-  height: 100%;
+  height: 400px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 
-.cyber-map {
+.map-frame {
   width: 100%;
   height: 100%;
-  min-height: 350px;
-  filter: none;
+  border: none;
 }
 
 .map-overlay {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 16px;
+  left: 16px;
 }
 
-.loc-tag {
-  background: rgba(102, 126, 234, 0.95);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
+.location-tag {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  background: rgba(8, 145, 255, 0.95);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* --- 3. 明亮表单 --- */
-.inquiry-section {
-  padding: 100px 20px;
+.address-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.address-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #475569;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.address-row svg {
+  color: #0891ff;
+  flex-shrink: 0;
+}
+
+/* Contact List Panel */
+.contact-list-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-item-large {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-item-large:hover {
+  transform: translateX(8px);
+  border-color: #0891ff;
+  box-shadow: 0 8px 25px rgba(8, 145, 255, 0.15);
+}
+
+.contact-item-large.is-primary {
+  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  color: white;
+  border: none;
+}
+
+.contact-item-large.is-primary:hover {
+  box-shadow: 0 12px 35px rgba(8, 145, 255, 0.35);
+}
+
+.item-icon-large {
+  width: 52px;
+  height: 52px;
+  background: rgba(8, 145, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0891ff;
+  flex-shrink: 0;
+}
+
+.contact-item-large.is-primary .item-icon-large {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.item-content-large {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-label-large {
+  display: block;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contact-item-large.is-primary .item-label-large {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.item-value-large {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.4;
+}
+
+.contact-item-large.is-primary .item-value-large {
+  color: white;
+}
+
+.item-action {
+  color: #94a3b8;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.contact-item-large:hover .item-action {
+  color: #0891ff;
+  transform: scale(1.1);
+}
+
+.contact-item-large.is-primary .item-action {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(8, 145, 255, 0.3);
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(8, 145, 255, 0.4);
+}
+
+.action-btn.secondary {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+.action-btn.secondary:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+/* Contact Form Section - 下面部分 */
+.contact-form-section {
+  padding: 80px 0 100px;
+  background: #ffffff;
+}
+
+.form-panel-full {
   max-width: 900px;
   margin: 0 auto;
   background: #f8fafc;
+  border-radius: 20px;
+  padding: 48px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.form-cyber-wrap {
-  background: #ffffff;
-  padding: 60px;
-  border-radius: 12px;
-  border: 2px solid #e0e7ff;
-  position: relative;
-  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.15);
-}
-
-.inquiry-header {
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.glow-text {
-  font-size: 32px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 10px;
-}
-
-.inquiry-header p {
-  color: #64748b;
-  margin-top: 10px;
+/* Form Styles */
+.contact-form :deep(.ant-form-item-label > label) {
   font-size: 15px;
-}
-
-/* 修改 Ant Design 输入框样式 */
-.custom-cyber-form :deep(.ant-form-item-label > label) {
-  color: #667eea !important;
-  font-family: 'Microsoft YaHei', sans-serif;
   font-weight: 600;
-  font-size: 14px;
+  color: #334155;
 }
 
-.custom-cyber-form :deep(.ant-input),
-.custom-cyber-form :deep(.ant-input-affix-wrapper),
-.custom-cyber-form :deep(.ant-input-textarea-show-count .ant-input) {
-  background: #f8fafc !important;
-  border: 2px solid #e0e7ff !important;
-  color: #1e293b !important;
-  border-radius: 8px;
-  font-size: 14px;
-  padding: 10px 16px;
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 8px;
 }
 
-.custom-cyber-form :deep(.ant-input:focus),
-.custom-cyber-form :deep(.ant-input-focused),
-.custom-cyber-form :deep(.ant-input:hover) {
-  border-color: #667eea !important;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+.form-item {
+  margin-bottom: 0;
 }
 
-.custom-cyber-form :deep(.ant-input::placeholder) {
+.contact-form :deep(.ant-input),
+.contact-form :deep(.ant-input-affix-wrapper),
+.contact-form :deep(.ant-input-textarea) {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.contact-form :deep(.ant-input:hover),
+.contact-form :deep(.ant-input-affix-wrapper:hover) {
+  border-color: #cbd5e1;
+}
+
+.contact-form :deep(.ant-input:focus),
+.contact-form :deep(.ant-input-focused) {
+  border-color: #0891ff;
+  box-shadow: 0 0 0 4px rgba(8, 145, 255, 0.1);
+}
+
+.contact-form :deep(.ant-input::placeholder) {
   color: #94a3b8;
 }
 
-/* 现代渐变按钮 */
-.submit-area {
-  margin-top: 20px;
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
 }
 
-.cyber-btn {
-  width: 100%;
-  height: 60px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.form-privacy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.form-privacy svg {
+  color: #22c55e;
+}
+
+.submit-btn {
+  padding: 16px 40px;
+  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
   border: none;
-  color: #ffffff;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
   font-weight: 700;
-  font-size: 18px;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  margin-top: 40px;
-  transition: 0.3s;
-  border-radius: 8px;
-  letter-spacing: 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(8, 145, 255, 0.4);
 }
 
-.cyber-btn:hover:not(:disabled) {
+.submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 25px rgba(8, 145, 255, 0.5);
 }
 
-.cyber-btn:disabled {
-  opacity: 0.6;
+.submit-btn:disabled {
+  opacity: 0.7;
   cursor: not-allowed;
 }
 
 .btn-content {
-  position: relative;
-  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* 移动端适配 */
-@media (max-width: 992px) {
-  .terminal-body {
+.btn-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loading-icon {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Service Promise */
+.service-promise {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.promise-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.promise-item {
+  text-align: center;
+  padding: 32px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.promise-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px);
+  border-color: rgba(8, 145, 255, 0.3);
+}
+
+.promise-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(8, 145, 255, 0.15);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: #60a5fa;
+}
+
+.promise-item h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.promise-item p {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* Responsive */
+/* Responsive */
+@media (max-width: 1200px) {
+  .info-grid {
     grid-template-columns: 1fr;
   }
 
-  .main-title {
-    font-size: 48px;
+  .contact-list-panel {
+    flex-direction: row;
   }
 
-  .form-cyber-wrap {
-    padding: 30px 20px;
+  .contact-list {
+    flex: 1;
   }
 
-  .banner-title-box {
-    padding: 0 20px;
-  }
-
-  .cyber-banner {
-    height: 500px;
-  }
-
-  .orbit-ring.ring-1 {
-    width: 200%;
-    height: 200%;
-  }
-
-  .orbit-ring.ring-2 {
-    width: 160%;
-    height: 160%;
-  }
-
-  .orbit-ring.ring-3 {
-    width: 240%;
-    height: 240%;
-  }
-
-  @keyframes orbit360 {
-    from {
-      transform: rotate(0deg) translateX(280px) rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg) translateX(280px) rotate(-360deg);
-    }
+  .quick-actions {
+    flex-direction: column;
+    width: 200px;
+    margin-top: 0;
   }
 }
 
-@media (max-width: 576px) {
-  .main-title {
+@media (max-width: 768px) {
+  .contact-hero {
+    height: 400px;
+    padding: 60px 0;
+  }
+
+  .hero-title {
     font-size: 36px;
   }
 
-  .cyber-tag {
-    font-size: 11px;
-    letter-spacing: 2px;
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 20px;
   }
 
-  .sub-title {
-    font-size: 14px;
+  .stat-divider {
+    display: none;
   }
 
-  .terminal-body {
-    padding: 20px;
+  .contact-info-section,
+  .contact-form-section {
+    padding: 60px 0;
   }
 
-  .glow-text {
+  .section-header-center h2 {
+    font-size: 28px;
+  }
+
+  .map-container-large {
+    height: 300px;
+  }
+
+  .contact-list-panel {
+    flex-direction: column;
+  }
+
+  .quick-actions {
+    flex-direction: row;
+    width: auto;
+    margin-top: 8px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-panel-full {
+    padding: 32px 24px;
+  }
+
+  .form-footer {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+
+  .promise-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+  }
+
+  .stat-value {
     font-size: 24px;
   }
 
-  .cyber-banner {
-    height: 450px;
+  .contact-item-large {
+    padding: 16px;
   }
 
-  .particle {
-    width: 6px;
-    height: 6px;
+  .item-icon-large {
+    width: 44px;
+    height: 44px;
   }
 
-  @keyframes orbit360 {
-    from {
-      transform: rotate(0deg) translateX(200px) rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg) translateX(200px) rotate(-360deg);
-    }
+  .item-value-large {
+    font-size: 15px;
   }
 
-  .orbit-ring.ring-1 {
-    width: 250%;
-    height: 250%;
+  .quick-actions {
+    flex-direction: column;
   }
 
-  .orbit-ring.ring-2 {
-    width: 200%;
-    height: 200%;
+  .promise-grid {
+    grid-template-columns: 1fr;
   }
 
-  .orbit-ring.ring-3 {
-    width: 300%;
-    height: 300%;
+  .form-panel-full {
+    padding: 24px 16px;
+  }
+
+  .section-header-center h2 {
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-item-large,
+  .promise-item,
+  .submit-btn {
+    transition: all 0.2s ease;
+  }
+
+  .loading-icon {
+    animation: none;
   }
 }
 </style>

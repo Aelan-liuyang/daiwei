@@ -3,7 +3,12 @@
     <Header />
     <a-layout-content class="main-content">
       <div class="cases-banner">
-        <img src="@/assets/images/gcAnli.jpeg" alt="新闻中心" class="banner-bg-img" />
+        <LazyImage 
+          :src="gcAnli" 
+          alt="工程案例" 
+          image-class="banner-bg-img"
+          preload
+        />
       </div>
       <div class="cases-banner-text">
         <h1>工程案例</h1>
@@ -52,7 +57,12 @@
         <div class="case-grid">
           <div v-for="c in filteredCases" :key="c.id" class="case-card" @click="goDetail(c)">
             <div class="case-img-wrap">
-              <img :src="c.img" :alt="c.title" class="case-img" />
+              <LazyImage
+                :src="c.img"
+                :alt="c.title"
+                image-class="case-img"
+                aspect-ratio="62.5%"
+              />
               <div class="case-overlay">
                 <div class="overlay-content">
                   <span class="view-icon">👁️</span>
@@ -97,6 +107,8 @@ import anli4 from '@/assets/images/anli4.jpg'
 import anli5 from '@/assets/images/anli5.jpg'
 import Footer from '@/components/Footer.vue'
 import Header from '@/components/Header.vue'
+import LazyImage from '@/components/LazyImage.vue'
+import gcAnli from '@/assets/images/gcAnli.jpeg'
 import { useSEO } from '@/composables/useSEO'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'

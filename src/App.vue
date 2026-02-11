@@ -1,7 +1,15 @@
 <script setup lang="ts">
+import OnlineChat from '@/components/OnlineChat.vue'
 </script>
 <template>
-  <router-view></router-view>
+  <div class="app-container">
+    <router-view></router-view>
+    <OnlineChat />
+  </div>
 </template>
 
-<style></style>
+<style>
+.app-container {
+  min-height: 100vh;
+}
+</style>

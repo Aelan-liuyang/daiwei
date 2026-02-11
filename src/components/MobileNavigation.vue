@@ -32,7 +32,7 @@
       >
         <div class="mobile-menu-header">
           <div class="mobile-menu-logo">
-            <img src="/images/logo.png" alt="岱威管业" />
+            <img :src="logoImg" alt="岱威管业" />
             <span>岱威管业</span>
           </div>
           <button
@@ -119,6 +119,7 @@
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useResponsive } from '@/composables/useResponsive'
+import logoImg from '@/assets/images/logo.png'
 
 interface MenuItem {
   key: string
