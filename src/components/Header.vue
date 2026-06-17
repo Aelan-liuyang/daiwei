@@ -1,225 +1,106 @@
 <template>
-  <a-layout-header class="header" :class="{ fixed: isFixed, 'is-scrolled': isScrolled }">
-    <div class="header-content">
+  <header class="global-nav" :class="{ 'is-scrolled': isScrolled, 'is-menu-open': showMobileMenu }">
+    <div class="nav-inner">
       <!-- Logo -->
-      <div class="logo" @click="router.push('/')">
+      <a href="/" class="nav-logo" @click.prevent="router.push('/')">
         <div class="logo-icon">
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="6" fill="#f0a500"/>
+            <path d="M7 14 L14 7 L21 14 L14 21 Z" fill="white" opacity="0.9"/>
+            <circle cx="14" cy="14" r="3.5" fill="#0a1628"/>
           </svg>
         </div>
-        <span class="logo-text">岱威管业</span>
-      </div>
+        <div class="logo-text-wrap">
+          <span class="logo-main">岱威管业</span>
+          <span class="logo-sub">工业管道整体解决方案</span>
+        </div>
+      </a>
 
       <!-- Desktop Navigation -->
-      <nav class="desktop-nav">
-        <div
+      <nav class="nav-links">
+        <a
           v-for="item in menuList"
           :key="item.key"
-          ref="menuRefs"
-          :class="['nav-item', { active: selectedMenu === item.key }]"
-          @click="handleMenuClick(item.key)"
+          :href="item.path"
+          class="nav-link"
+          :class="{ active: selectedMenu === item.key }"
+          @click.prevent="handleMenuClick(item.key)"
         >
-          <span class="nav-label">{{ item.label }}</span>
-          <span v-if="selectedMenu === item.key" class="nav-indicator"></span>
-        </div>
+          {{ item.label }}
+        </a>
       </nav>
 
-      <!-- Right Actions -->
-      <div class="header-actions">
-        <!-- Phone Button -->
-        <a
-          href="tel:18663761618"
-          class="phone-btn"
-          @click.prevent="showPhoneTooltip = !showPhoneTooltip"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
-            />
+      <!-- Desktop CTA -->
+      <div class="nav-actions">
+        <a href="tel:0531-87357881" class="nav-phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.93 19.79 19.79 0 0 1 1.61 5.35C1.06 3.38 2.5 1.61 4.48 1.61h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
           </svg>
-          <span class="phone-number">186-6376-1618</span>
+          0531-87357881
         </a>
-
-        <!-- Phone Tooltip -->
-        <Transition name="tooltip">
-          <div
-            v-if="showPhoneTooltip"
-            class="phone-tooltip"
-            v-click-outside="() => (showPhoneTooltip = false)"
-          >
-            <div class="tooltip-header">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
-                />
-              </svg>
-              <span>联系我们</span>
-            </div>
-            <a href="tel:0531-87357881" class="tooltip-item">
-              <span class="item-label">服务热线</span>
-              <span class="item-value">0531-87357881</span>
-            </a>
-            <a href="tel:18663761618" class="tooltip-item">
-              <span class="item-label">业务咨询</span>
-              <span class="item-value">186-6376-1618</span>
-            </a>
-          </div>
-        </Transition>
-
-        <!-- CTA Button -->
-        <button class="cta-btn" @click="router.push('/contact')">在线咨询</button>
-
-        <!-- Mobile Menu Toggle -->
-        <button
-          class="menu-toggle"
-          @click="toggleMobileMenu"
-          :class="{ active: showMobileMenu }"
-          aria-label="切换菜单"
-        >
-          <span class="toggle-line"></span>
-          <span class="toggle-line"></span>
-          <span class="toggle-line"></span>
-        </button>
+        <a href="/contact" class="nav-cta" @click.prevent="router.push('/contact')">
+          获取报价
+        </a>
       </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        class="menu-toggle"
+        @click="toggleMobileMenu"
+        :aria-expanded="showMobileMenu"
+        aria-label="Toggle menu"
+      >
+        <span class="toggle-line top"></span>
+        <span class="toggle-line middle"></span>
+        <span class="toggle-line bottom"></span>
+      </button>
     </div>
 
     <!-- Mobile Menu Overlay -->
-    <Transition name="overlay">
-      <div v-if="showMobileMenu" class="mobile-overlay" @click="toggleMobileMenu"></div>
-    </Transition>
-
-    <!-- Mobile Menu -->
-    <Transition name="menu">
-      <nav v-if="showMobileMenu" class="mobile-nav">
-        <div class="mobile-nav-header">
-          <span class="mobile-title">导航菜单</span>
-          <button class="mobile-close" @click="toggleMobileMenu">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-
-        <div class="mobile-nav-items">
-          <div
-            v-for="(item, index) in menuList"
-            :key="item.key"
-            :class="['mobile-nav-item', { active: selectedMenu === item.key }]"
-            :style="{ animationDelay: `${index * 50}ms` }"
-            @click="handleMenuClick(item.key)"
-          >
-            <span class="mobile-nav-label">{{ item.label }}</span>
-            <svg
-              class="mobile-nav-arrow"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </div>
-        </div>
-
-        <div class="mobile-nav-footer">
-          <div class="mobile-contact">
-            <span class="contact-label">服务热线</span>
-            <a href="tel:18663761618" class="contact-phone">186-6376-1618</a>
-          </div>
-          <button class="mobile-cta" @click="handleMenuClick('contact')">立即咨询</button>
-        </div>
+    <div class="mobile-menu" :class="{ 'is-open': showMobileMenu }">
+      <nav class="mobile-nav-links">
+        <a
+          v-for="item in menuList"
+          :key="item.key"
+          :href="item.path"
+          class="mobile-nav-link"
+          :class="{ active: selectedMenu === item.key }"
+          @click.prevent="handleMenuClick(item.key)"
+        >
+          <span class="mobile-link-label">{{ item.label }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+        <div class="mobile-nav-divider"></div>
+        <a href="tel:0531-87357881" class="mobile-nav-link contact-link">
+          <span class="mobile-link-label">📞 0531-87357881</span>
+        </a>
+        <a href="/contact" class="mobile-cta" @click.prevent="handleMenuClick('contact')">
+          获取报价
+        </a>
       </nav>
-    </Transition>
-  </a-layout-header>
+    </div>
+  </header>
 </template>
 
 <script setup>
-import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const router = useRouter()
 const route = useRoute()
 const selectedMenu = ref('home')
-const isFixed = ref(false)
 const isScrolled = ref(false)
 const showMobileMenu = ref(false)
-const showPhoneTooltip = ref(false)
 
 const menuList = [
-  { key: 'home', label: '首页', path: '/' },
-  { key: 'products', label: '产品服务', path: '/products' },
+  { key: 'products', label: '产品与服务', path: '/products' },
   { key: 'cases', label: '工程案例', path: '/cases' },
-  { key: 'news', label: '新闻中心', path: '/news' },
-  { key: 'about', label: '关于我们', path: '/about' },
-  { key: 'contact', label: '联系我们', path: '/contact' }
+  { key: 'news', label: '新闻动态', path: '/news' },
+  { key: 'about', label: '关于我们', path: '/about' }
 ]
 
-// Click outside directive
-const vClickOutside = {
-  mounted(el, binding) {
-    el._clickOutside = event => {
-      if (!(el === event.target || el.contains(event.target))) {
-        binding.value()
-      }
-    }
-    document.addEventListener('click', el._clickOutside)
-  },
-  unmounted(el) {
-    document.removeEventListener('click', el._clickOutside)
-  }
-}
-
-// Menu refs for underline width
-const menuRefs = ref([])
-const underlineWidths = ref({})
-
-const getUnderlineStyle = key => {
-  const width = underlineWidths.value[key] || 0
-  return { width: width + 'px' }
-}
-
-const updateUnderlineWidths = () => {
-  nextTick(() => {
-    underlineWidths.value = {}
-    menuList.forEach((item, idx) => {
-      const el = menuRefs.value[idx]?.querySelector('.nav-label')
-      underlineWidths.value[item.key] = el ? el.offsetWidth : 0
-    })
-  })
-}
-
-// Path to menu key mapping
 const pathToKey = [
   { pattern: /^\/$/, key: 'home' },
   { pattern: /^\/products(\/.*)?$/, key: 'products' },
@@ -237,26 +118,28 @@ const getMenuKeyByPath = path => {
 }
 
 const handleScroll = () => {
-  const scrollY = window.scrollY
-  isFixed.value = scrollY > 50
-  isScrolled.value = scrollY > 10
+  isScrolled.value = window.scrollY > 20
 }
 
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
-  // Prevent body scroll when menu is open
   document.body.style.overflow = showMobileMenu.value ? 'hidden' : ''
 }
 
 const handleMenuClick = key => {
   selectedMenu.value = key
-  showMobileMenu.value = false
-  showPhoneTooltip.value = false
-  document.body.style.overflow = ''
+  if (showMobileMenu.value) {
+    showMobileMenu.value = false
+    document.body.style.overflow = ''
+  }
 
   const item = menuList.find(i => i.key === key)
   if (item?.path) {
     router.push(item.path)
+  } else if (key === 'home') {
+    router.push('/')
+  } else if (key === 'contact') {
+    router.push('/contact')
   }
 }
 
@@ -267,8 +150,6 @@ const syncMenuWithRoute = () => {
 onMounted(() => {
   syncMenuWithRoute()
   window.addEventListener('scroll', handleScroll, { passive: true })
-  updateUnderlineWidths()
-  window.addEventListener('resize', updateUnderlineWidths)
 })
 
 watch(
@@ -280,551 +161,294 @@ watch(
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
-  window.removeEventListener('resize', updateUnderlineWidths)
   document.body.style.overflow = ''
 })
 </script>
 
 <style scoped>
-/* Base Header */
-.header {
+/* ========== 导航栏基础 ========== */
+.global-nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  height: 72px;
   z-index: 1000;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #0a1628;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.header.is-scrolled {
-  background: rgba(15, 23, 42, 0.95);
+.global-nav.is-scrolled {
+  background: rgba(10, 22, 40, 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  border-bottom-color: rgba(240, 165, 0, 0.2);
 }
 
-.header.fixed {
-  background: rgba(15, 23, 42, 0.98);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+.global-nav.is-menu-open {
+  background: #0a1628;
 }
 
-.header-content {
-  max-width: 1400px;
+.nav-inner {
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 40px;
-  height: 72px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 32px;
 }
 
-/* Logo */
-.logo {
+/* ========== Logo ========== */
+.nav-logo {
   display: flex;
   align-items: center;
   gap: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
 }
-
-.logo:hover {
-  transform: scale(1.02);
-}
+.nav-logo:hover { opacity: 0.9; }
 
 .logo-icon {
-  width: 42px;
-  height: 42px;
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
-  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.logo-text-wrap {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: 0 4px 15px rgba(8, 145, 255, 0.4);
+  flex-direction: column;
+  line-height: 1;
 }
 
-.logo-text {
-  font-size: 22px;
-  font-weight: 800;
+.logo-main {
+  font-size: 18px;
+  font-weight: 700;
   color: #ffffff;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.5px;
 }
 
-/* Desktop Navigation */
-.desktop-nav {
+.logo-sub {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.5px;
+  margin-top: 3px;
+  font-weight: 400;
+}
+
+/* ========== 桌面导航链接 ========== */
+.nav-links {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex: 1;
+  justify-content: center;
 }
 
-.nav-item {
+.nav-link {
   position: relative;
-  padding: 10px 18px;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 10px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
-.nav-item:hover {
+.nav-link:hover {
   color: #ffffff;
-  background: rgba(8, 145, 255, 0.15);
-  box-shadow: 0 4px 15px rgba(8, 145, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.nav-item.active {
-  color: #ffffff;
-  background: linear-gradient(135deg, rgba(8, 145, 255, 0.25) 0%, rgba(8, 145, 255, 0.1) 100%);
-  box-shadow:
-    0 4px 20px rgba(8, 145, 255, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+.nav-link.active {
+  color: #f0a500;
+  background: rgba(240, 165, 0, 0.1);
 }
 
-.nav-indicator {
+.nav-link.active::after {
+  content: '';
   position: absolute;
-  bottom: 4px;
+  bottom: -1px;
   left: 50%;
   transform: translateX(-50%);
-  width: 24px;
-  height: 3px;
-  background: linear-gradient(90deg, #60a5fa, #0891ff);
-  border-radius: 3px;
-  box-shadow:
-    0 0 15px rgba(8, 145, 255, 0.8),
-    0 0 30px rgba(8, 145, 255, 0.4);
+  width: 20px;
+  height: 2px;
+  background: #f0a500;
+  border-radius: 1px;
 }
 
-/* Header Actions */
-.header-actions {
+/* ========== 桌面右侧操作 ========== */
+.nav-actions {
   display: flex;
   align-items: center;
   gap: 16px;
-  position: relative;
+  flex-shrink: 0;
 }
 
-/* Phone Button */
-.phone-btn {
+.nav-phone {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  color: #0891ff;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  font-weight: 400;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: color 0.2s;
 }
+.nav-phone:hover { color: rgba(255, 255, 255, 0.9); }
 
-.phone-btn:hover {
-  background: #ffffff;
-  border-color: #0891ff;
-  box-shadow: 0 6px 20px rgba(8, 145, 255, 0.35);
-  transform: translateY(-2px);
-}
-
-.phone-btn svg {
-  transition: transform 0.3s ease;
-}
-
-.phone-btn:hover svg {
-  transform: rotate(15deg) scale(1.1);
-}
-
-/* Phone Tooltip */
-.phone-tooltip {
-  position: absolute;
-  top: calc(100% + 16px);
-  right: 80px;
-  background: white;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
-  min-width: 240px;
-  z-index: 100;
-  border: 2px solid rgba(8, 145, 255, 0.1);
-}
-
-.tooltip-header {
-  display: flex;
+.nav-cta {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: #0891ff;
-  font-weight: 600;
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.tooltip-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.tooltip-item:hover {
-  background: #f1f5f9;
-}
-
-.item-label {
-  font-size: 12px;
-  color: #64748b;
-  font-weight: 500;
-}
-
-.item-value {
-  font-size: 15px;
-  color: #0f172a;
-  font-weight: 600;
-}
-
-.tooltip-enter-active,
-.tooltip-leave-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.tooltip-enter-from,
-.tooltip-leave-to {
-  opacity: 0;
-  transform: translateY(-10px) scale(0.95);
-}
-
-/* CTA Button */
-.cta-btn {
-  padding: 12px 28px;
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
-  color: white;
+  padding: 8px 20px;
+  background: #f0a500;
+  color: #0a1628;
   font-size: 14px;
   font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:
-    0 4px 20px rgba(8, 145, 255, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+.nav-cta:hover {
+  background: #f5c842;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
+  color: #0a1628;
 }
 
-.cta-btn:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 8px 30px rgba(8, 145, 255, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* Menu Toggle */
+/* ========== 移动汉堡菜单 ========== */
 .menu-toggle {
   display: none;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
   gap: 5px;
-  width: 44px;
-  height: 44px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
   cursor: pointer;
-  padding: 0;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  transition: background 0.2s;
+  background: rgba(255,255,255,0.06);
 }
-
-.menu-toggle:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
+.menu-toggle:hover { background: rgba(255,255,255,0.12); }
 
 .toggle-line {
+  display: block;
   width: 20px;
-  height: 2.5px;
-  background: white;
-  border-radius: 2px;
-  margin: 0 auto;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  height: 2px;
+  background: #f5f5f7;
+  border-radius: 1px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+  transform-origin: center;
 }
 
-.menu-toggle.active .toggle-line:nth-child(1) {
+.is-menu-open .toggle-line.top {
   transform: translateY(7px) rotate(45deg);
 }
-
-.menu-toggle.active .toggle-line:nth-child(2) {
+.is-menu-open .toggle-line.middle {
   opacity: 0;
+  transform: scaleX(0);
 }
-
-.menu-toggle.active .toggle-line:nth-child(3) {
+.is-menu-open .toggle-line.bottom {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile Overlay */
-.mobile-overlay {
+/* ========== 移动菜单 ========== */
+.mobile-menu {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  z-index: 998;
-}
-
-.overlay-enter-active,
-.overlay-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.overlay-enter-from,
-.overlay-leave-to {
-  opacity: 0;
-}
-
-/* Mobile Navigation */
-.mobile-nav {
-  position: fixed;
-  top: 0;
+  top: 72px;
+  left: 0;
   right: 0;
-  width: 320px;
-  max-width: 85vw;
-  height: 100vh;
-  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  height: calc(100vh - 72px);
+  background: #0a1628;
   z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-menu.is-open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-nav-links {
+  padding: 32px 40px 40px;
   display: flex;
   flex-direction: column;
-  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+  gap: 4px;
 }
 
-.menu-enter-active,
-.menu-leave-active {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.menu-enter-from,
-.menu-leave-to {
-  transform: translateX(100%);
-}
-
-.mobile-nav-header {
+.mobile-nav-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-title {
-  color: white;
-  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 22px;
   font-weight: 600;
-}
-
-.mobile-close {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.mobile-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.mobile-nav-items {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.mobile-nav-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  margin-bottom: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  color: #cbd5e1;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  animation: slideIn 0.4s ease backwards;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-}
-
-.mobile-nav-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(8, 145, 255, 0.3);
-  color: white;
-}
-
-.mobile-nav-item.active {
-  background: linear-gradient(135deg, rgba(8, 145, 255, 0.2) 0%, rgba(8, 145, 255, 0.1) 100%);
-  border-color: rgba(8, 145, 255, 0.4);
-  color: white;
-}
-
-.mobile-nav-label {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.mobile-nav-arrow {
-  opacity: 0.5;
-  transition: all 0.3s ease;
-}
-
-.mobile-nav-item:hover .mobile-nav-arrow {
-  opacity: 1;
-  transform: translateX(4px);
-}
-
-.mobile-nav-footer {
-  padding: 20px 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.mobile-contact {
-  margin-bottom: 16px;
-}
-
-.contact-label {
-  display: block;
-  font-size: 12px;
-  color: #64748b;
-  margin-bottom: 4px;
-}
-
-.contact-phone {
-  font-size: 20px;
-  font-weight: 700;
-  color: #0891ff;
+  letter-spacing: -0.3px;
   text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: #f0a500;
+}
+
+.mobile-nav-link svg {
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.mobile-nav-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 16px 0;
 }
 
 .mobile-cta {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
-  border: none;
-  border-radius: 10px;
-  color: white;
+  display: block;
+  margin-top: 24px;
+  padding: 16px;
+  background: #f0a500;
+  color: #0a1628;
   font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(8, 145, 255, 0.3);
+  font-weight: 700;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
 }
+.mobile-cta:hover { background: #f5c842; color: #0a1628; }
 
-.mobile-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(8, 145, 255, 0.4);
-}
-
-/* Responsive */
+/* ========== 响应式 ========== */
 @media (max-width: 1024px) {
-  .header-content {
-    padding: 0 24px;
-  }
+  .nav-inner { padding: 0 24px; }
+  .nav-phone { display: none; }
+}
 
-  .phone-number {
-    display: none;
-  }
-
-  .cta-btn {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
-
-  .desktop-nav {
-    display: none;
-  }
-
-  .phone-tooltip {
-    right: 60px;
-  }
+@media (max-width: 834px) {
+  .nav-links, .nav-actions { display: none; }
+  .menu-toggle { display: flex; }
 }
 
 @media (max-width: 480px) {
-  .header-content {
-    padding: 0 16px;
-    height: 64px;
-  }
-
-  .logo-icon {
-    width: 38px;
-    height: 38px;
-  }
-
-  .logo-text {
-    font-size: 18px;
-  }
-
-  .phone-btn {
-    padding: 8px;
-  }
-
-  .phone-btn span {
-    display: none;
-  }
-
-  .phone-tooltip {
-    right: 16px;
-    left: 16px;
-    min-width: auto;
-  }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .header,
-  .nav-item,
-  .phone-btn,
-  .cta-btn,
-  .mobile-nav-item {
-    transition: all 0.2s ease;
-  }
-
-  .mobile-nav-item {
-    animation: none;
-  }
+  .logo-sub { display: none; }
+  .nav-inner { padding: 0 20px; }
 }
 </style>

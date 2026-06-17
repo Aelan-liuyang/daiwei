@@ -1,84 +1,129 @@
 /**
  * 设计令牌 (Design Tokens)
- * 统一的设计系统变量定义
+ * 岱威管业 - 工业企业级品牌色系
  */
 
 :root {
-  /* ============ 品牌色彩 ============ */
-  /* 主色调 - 蓝色系 */
-  --color-primary: #1677ff;
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #1677ff;
-  --color-primary-700: #0056d6;
-  --color-primary-800: #003366;
-  --color-primary-900: #002952;
+  /* ============ 品牌核心色 ============ */
+  /* 主色：深海军蓝（工业企业感） */
+  --color-brand-navy: #0a1628;
+  --color-brand-blue: #1e3a5f;
+  --color-brand-blue-mid: #1a5276;
+  --color-brand-blue-light: #0056b3;
+  --color-brand-blue-bright: #1976d2;
 
-  /* 辅助色 - 青绿色系 */
-  --color-secondary: #43c6ac;
-  --color-secondary-50: #ecfdf5;
-  --color-secondary-100: #d1fae5;
-  --color-secondary-200: #a7f3d0;
-  --color-secondary-300: #6ee7b7;
-  --color-secondary-400: #43c6ac;
-  --color-secondary-500: #10b981;
-  --color-secondary-600: #059669;
-  --color-secondary-700: #047857;
-  --color-secondary-800: #065f46;
-  --color-secondary-900: #064e3b;
+  /* 强调色：工业金/橙（CTA、重点） */
+  --color-accent-gold: #f0a500;
+  --color-accent-gold-light: #f5c842;
+  --color-accent-gold-dark: #c8860a;
+  --color-accent-orange: #e67e22;
+
+  /* ============ 主色调 ============ */
+  --color-primary: #1e3a5f;
+  --color-primary-50: #e8f0fc;
+  --color-primary-100: #c6d8f5;
+  --color-primary-200: #96b8ec;
+  --color-primary-300: #6496dc;
+  --color-primary-400: #3a78cc;
+  --color-primary-500: #1e3a5f;
+  --color-primary-600: #1a3254;
+  --color-primary-700: #152845;
+  --color-primary-800: #0e1d32;
+  --color-primary-900: #0a1628;
+
+  /* 辅助色 */
+  --color-secondary: #34495e;
+  --color-secondary-50: #f0f4f8;
+  --color-secondary-100: #d9e4ee;
+  --color-secondary-200: #b3c8dd;
+  --color-secondary-300: #8daacb;
+  --color-secondary-400: #668fb9;
+  --color-secondary-500: #4a7ba7;
+  --color-secondary-600: #3a6490;
+  --color-secondary-700: #2c4f75;
+  --color-secondary-800: #1f3a5a;
+  --color-secondary-900: #142840;
+
+  /* 强调色（金色） */
+  --color-accent: #f0a500;
+  --color-accent-50: #fff8e6;
+  --color-accent-100: #feeab4;
+  --color-accent-200: #fdd880;
+  --color-accent-300: #fcc64c;
+  --color-accent-400: #f5b620;
+  --color-accent-500: #f0a500;
+  --color-accent-600: #c8880a;
+  --color-accent-700: #a26a08;
+  --color-accent-800: #7c4e05;
+  --color-accent-900: #573503;
 
   /* 表面颜色 */
-  --color-surface-variant: #f1f5f9;
-  --color-surface-hover: #e2e8f0;
-  --color-outline: #cbd5e1;
+  --color-surface-variant: #f0f4f8;
+  --color-surface-hover: #dce6f0;
+  --color-outline: #b8ccd8;
 
   /* 容器颜色 */
-  --color-primary-container: #eff6ff;
-  --color-on-primary-container: #1677ff;
-  --color-primary-container-hover: #dbeafe;
+  --color-primary-container: #e8f0fc;
+  --color-on-primary-container: #0a1628;
+  --color-primary-container-hover: #c6d8f5;
 
   /* 中性色 */
-  --color-gray-50: #fafafa;
-  --color-gray-100: #f5f5f5;
-  --color-gray-200: #e5e5e5;
-  --color-gray-300: #d4d4d4;
-  --color-gray-400: #a3a3a3;
-  --color-gray-500: #737373;
-  --color-gray-600: #525252;
-  --color-gray-700: #404040;
-  --color-gray-800: #262626;
-  --color-gray-900: #171717;
+  --color-gray-50: #f8fafb;
+  --color-gray-100: #f0f4f7;
+  --color-gray-200: #e0e8ef;
+  --color-gray-300: #c8d6e0;
+  --color-gray-400: #9eb3c2;
+  --color-gray-500: #6e8fa3;
+  --color-gray-600: #4e6e82;
+  --color-gray-700: #334f62;
+  --color-gray-800: #1e3344;
+  --color-gray-900: #0f1f2e;
 
   /* 语义化颜色 */
-  --color-success: #10b981;
-  --color-success-light: #d1fae5;
-  --color-warning: #f59e0b;
-  --color-warning-light: #fef3c7;
-  --color-error: #ef4444;
-  --color-error-light: #fee2e2;
-  --color-info: #3b82f6;
-  --color-info-light: #dbeafe;
+  --color-success: #27ae60;
+  --color-success-light: #d5f5e3;
+  --color-warning: #f39c12;
+  --color-warning-light: #fef9e7;
+  --color-error: #e74c3c;
+  --color-error-light: #fdecea;
+  --color-info: #2980b9;
+  --color-info-light: #e8f4fd;
+
+  /* 文字颜色 */
+  --color-text-base: #1a2a3a;
+  --color-text-secondary: #4a6278;
+  --color-text-muted: #6e8fa3;
+  --color-text-on-dark: #ffffff;
+  --color-text-on-dark-secondary: rgba(255, 255, 255, 0.75);
+  --color-text-on-dark-muted: rgba(255, 255, 255, 0.5);
+
+  /* 背景颜色 */
+  --color-background: #ffffff;
+  --color-bg-light: #f8fafb;
+  --color-bg-section: #f0f4f7;
+  --color-bg-dark: #0a1628;
+  --color-bg-dark-mid: #1e3a5f;
 
   /* ============ 渐变色 ============ */
-  --gradient-primary: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  --gradient-primary-hover: linear-gradient(135deg, #0056d6 0%, #34a894 100%);
-  --gradient-secondary: linear-gradient(135deg, #6ee7b7 0%, #3b82f6 100%);
-  --gradient-dark: linear-gradient(135deg, #1a1f2e 0%, #16213e 100%);
-  --gradient-light: linear-gradient(135deg, #fafafa 0%, #e5e5e5 100%);
+  --gradient-primary: linear-gradient(135deg, #1e3a5f 0%, #0a1628 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #254d7d 0%, #142240 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(10,22,40,0.85) 0%, rgba(30,58,95,0.7) 50%, rgba(10,22,40,0.6) 100%);
+  --gradient-blue: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
+  --gradient-gold: linear-gradient(135deg, #f5c842 0%, #f0a500 100%);
+  --gradient-section-dark: linear-gradient(180deg, #0a1628 0%, #1e3a5f 100%);
+  --gradient-section-light: linear-gradient(180deg, #ffffff 0%, #f0f4f7 100%);
 
   /* 玻璃态效果 */
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --glass-bg: rgba(10, 22, 40, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 8px 32px 0 rgba(10, 22, 40, 0.3);
 
   /* ============ 字体 ============ */
   --font-sans:
-    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', sans-serif;
+    'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue',
+    -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --font-display:
+    'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 
   /* 字体大小 */
@@ -138,18 +183,20 @@
   --radius-full: 9999px;
 
   /* ============ 阴影 ============ */
-  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  --shadow-xs: 0 1px 2px 0 rgba(10, 22, 40, 0.06);
+  --shadow-sm: 0 1px 3px 0 rgba(10, 22, 40, 0.1), 0 1px 2px -1px rgba(10, 22, 40, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(10, 22, 40, 0.1), 0 2px 4px -2px rgba(10, 22, 40, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(10, 22, 40, 0.12), 0 4px 6px -4px rgba(10, 22, 40, 0.08);
+  --shadow-xl: 0 20px 25px -5px rgba(10, 22, 40, 0.14), 0 8px 10px -6px rgba(10, 22, 40, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(10, 22, 40, 0.3);
+  --shadow-inner: inset 0 2px 4px 0 rgba(10, 22, 40, 0.06);
+  --shadow-blue: 0 10px 40px -10px rgba(30, 58, 95, 0.3);
+  --shadow-gold: 0 6px 20px rgba(240, 165, 0, 0.3);
 
   /* 彩色阴影 */
-  --shadow-primary: 0 10px 40px -10px rgba(22, 119, 255, 0.4);
-  --shadow-primary-lg: 0 20px 60px -15px rgba(22, 119, 255, 0.5);
-  --shadow-secondary: 0 10px 40px -10px rgba(67, 198, 172, 0.4);
+  --shadow-primary: 0 10px 40px -10px rgba(30, 58, 95, 0.4);
+  --shadow-primary-lg: 0 20px 60px -15px rgba(30, 58, 95, 0.5);
+  --shadow-secondary: 0 10px 40px -10px rgba(30, 58, 95, 0.15);
 
   /* ============ 动画 ============ */
   --duration-fast: 150ms;
@@ -214,42 +261,14 @@
   --opacity-80: 0.8;
   --opacity-90: 0.9;
   --opacity-100: 1;
-}
 
-/* ============ 深色模式适配 ============ */
-html.dark {
-  --color-gray-50: #0f172a;
-  --color-gray-100: #1e293b;
-  --color-gray-200: #334155;
-  --color-gray-300: #475569;
-  --color-gray-400: #64748b;
-  --color-gray-500: #94a3b8;
-  --color-gray-600: #cbd5e1;
-  --color-gray-700: #e2e8f0;
-  --color-gray-800: #f1f5f9;
-  --color-gray-900: #f8fafc;
-
-  --color-surface-variant: #1e293b;
-  --color-surface-hover: #334155;
-  --color-outline: #334155;
-  
-  --glass-bg: rgba(15, 23, 42, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.1);
-}
-
-@media (prefers-color-scheme: dark) {
-  html:not(.light) {
-    --color-gray-50: #0f172a;
-    --color-gray-100: #1e293b;
-    --color-gray-200: #334155;
-    --color-gray-300: #475569;
-    --color-gray-400: #64748b;
-    --color-gray-500: #94a3b8;
-    --color-gray-600: #cbd5e1;
-    --color-gray-700: #e2e8f0;
-    --color-gray-800: #f1f5f9;
-    --color-gray-900: #f8fafc;
-  }
+  /* ============ 企业级专用变量 ============ */
+  --nav-height: 72px;
+  --nav-bg: #0a1628;
+  --nav-bg-scrolled: rgba(10, 22, 40, 0.97);
+  --section-padding: 100px 0;
+  --section-padding-sm: 64px 0;
+  --section-padding-lg: 140px 0;
 }
 
 /* ============ 打印样式优化 ============ */

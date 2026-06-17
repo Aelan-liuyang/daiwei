@@ -4,38 +4,34 @@
     <a-layout-content class="main-content">
       <!-- 现代化Banner -->
       <div class="about-banner">
-        <div class="banner-bg-overlay"></div>
-        <img src="@/assets/images/aboutUs.jpeg" alt="关于我们" class="banner-bg-img" />
-        <div class="banner-particles"></div>
-        <!-- <div class="about-banner-content">
-          <div class="banner-badge">
-            <span class="badge-icon">🏢</span>
-            <span>专业管道解决方案提供商</span>
-          </div>
+        <div class="about-banner-content">
+          <p class="banner-eyebrow">ABOUT DAIWEI</p>
           <h1>
-            <span class="title-main">关于岱威</span>
-            <span class="title-sub">About Daiwei</span>
+            <span class="title-zh">关于岱威</span>
           </h1>
-          <p>致力于成为全球工业管道系统领域具有影响力的创新型企业</p>
+          <p class="banner-desc">致力于成为全球工业管道系统领域具有影响力的创新型企业</p>
           <div class="banner-stats">
             <div class="stat-item">
               <span class="stat-number">15+</span>
               <span class="stat-label">年经验</span>
             </div>
+            <div class="stat-divider"></div>
             <div class="stat-item">
               <span class="stat-number">200+</span>
               <span class="stat-label">专利技术</span>
             </div>
+            <div class="stat-divider"></div>
             <div class="stat-item">
               <span class="stat-number">1000+</span>
               <span class="stat-label">合作客户</span>
             </div>
           </div>
-        </div> -->
+        </div>
         <div class="scroll-indicator">
           <div class="scroll-arrow"></div>
         </div>
       </div>
+
 
       <!-- 公司简介 -->
       <section class="about-section about-intro animate-on-scroll">
@@ -399,13 +395,11 @@ const honors = [
 
 .honor-item {
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.08);
+  border-radius: 4px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: 1px solid rgba(22, 119, 255, 0.1);
-  animation: slideInUp 0.6s ease-out;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 @keyframes slideInUp {
@@ -420,9 +414,9 @@ const honors = [
 }
 
 .honor-item:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(22, 119, 255, 0.15);
-  border-color: rgba(22, 119, 255, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
 .honor-image-container {
@@ -430,7 +424,7 @@ const honors = [
   width: 100%;
   aspect-ratio: 4/3;
   overflow: hidden;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: #1d1d1f;
 }
 
 .honor-image {
@@ -467,7 +461,7 @@ const honors = [
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(22, 119, 255, 0.9);
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -498,7 +492,7 @@ const honors = [
   text-align: center;
   font-size: 14px;
   font-weight: 600;
-  color: #1e293b;
+  color: #1d1d1f;
   line-height: 1.4;
   min-height: 60px;
   display: flex;
@@ -510,7 +504,7 @@ const honors = [
 .honor-modal :deep(.ant-modal-content) {
   padding: 0;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 4px;
 }
 
 .honor-modal-content {
@@ -523,7 +517,7 @@ const honors = [
   max-height: 80vh;
   object-fit: contain;
   object-position: center;
-  background: #f8fafc;
+  background: #fbfbfd;
   /* 高质量图片渲染 */
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
@@ -543,8 +537,8 @@ const honors = [
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #1e293b;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  color: #1d1d1f;
+  background: #1d1d1f;
 }
 
 /* 动画样式 */
@@ -561,7 +555,9 @@ const honors = [
 
 .about-layout {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  
+  background: #fbfbfd;
+  overflow-x: hidden;
 }
 
 .main-content {
@@ -573,14 +569,14 @@ const honors = [
 .about-banner {
   position: relative;
   width: 100%;
-  height: 450px;
+  height: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   color: #fff;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 60%, #0a1628 100%);
 }
 
 .banner-bg-img {
@@ -643,114 +639,78 @@ const honors = [
   position: relative;
   z-index: 3;
   text-align: center;
-  max-width: 800px;
-  padding: 0 20px;
+  max-width: 900px;
+  padding: 0 24px;
+  animation: bannerFadeIn 1s ease-out;
 }
 
-.banner-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50px;
-  padding: 8px 16px;
-  margin-bottom: 24px;
-  font-size: 14px;
-  font-weight: 500;
-  animation: badgeGlow 3s ease-in-out infinite;
+@keyframes bannerFadeIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes badgeGlow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(22, 119, 255, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(22, 119, 255, 0.5);
-  }
-}
-
-.badge-icon {
-  font-size: 16px;
-  animation: iconBounce 2s ease-in-out infinite;
-}
-
-@keyframes iconBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
+.banner-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  margin-top: 0;
 }
 
 .about-banner-content h1 {
-  margin-bottom: 16px;
+  margin: 0 0 20px 0;
 }
 
-.title-main {
+.title-zh {
   display: block;
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 8px;
+  color: #ffffff;
+  letter-spacing: -1px;
+  line-height: 1.1;
 }
 
-.title-sub {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: #94a3b8;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.about-banner-content p {
-  font-size: 1.2rem;
+.banner-desc {
+  font-size: 1.1rem;
   line-height: 1.6;
-  margin: 24px 0 32px 0;
-  color: #cbd5e1;
+  margin: 0 0 40px 0 !important;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .banner-stats {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 40px;
-  margin-top: 32px;
+  gap: 0;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 32px;
 }
 
 .stat-item {
   text-align: center;
-  padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.stat-item:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.15);
 }
 
 .stat-number {
   display: block;
   font-size: 2rem;
   font-weight: 700;
-  color: #60a5fa;
+  color: #ffffff;
   margin-bottom: 4px;
+  line-height: 1;
 }
 
 .stat-label {
-  font-size: 0.9rem;
-  color: #cbd5e1;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .scroll-indicator {
@@ -789,11 +749,11 @@ const honors = [
 
 .about-section {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 4px;
   margin: 48px auto 0 auto;
   padding: 0 0 0 0;
   max-width: 1100px;
-  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.03);
+  box-shadow: none;
   overflow: hidden;
 }
 
@@ -807,7 +767,7 @@ const honors = [
   gap: 20px;
   margin-bottom: 32px;
   padding-bottom: 16px;
-  border-bottom: 2px solid rgba(22, 119, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .intro-number {
@@ -816,9 +776,9 @@ const honors = [
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   border-radius: 50%;
-  box-shadow: 0 4px 15px rgba(22, 119, 255, 0.3);
+  box-shadow: none;
 }
 
 .intro-idx {
@@ -835,17 +795,13 @@ const honors = [
   display: block;
   font-weight: 700;
   font-size: 24px;
-  color: #1e293b;
+  color: #0a1628;
   margin-bottom: 4px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .intro-en {
   font-size: 14px;
-  color: #64748b;
+  color: #a1a1a6;
   font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -902,18 +858,16 @@ const honors = [
 
 /* 产品链接样式 */
 .product-link {
-  color: #1677ff;
-  font-weight: 700;
+  color: #1e3a5f;
+  font-weight: 600;
   text-decoration: none;
-  padding: 2px 6px;
-  border-radius: 6px;
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.1) 0%, rgba(67, 198, 172, 0.1) 100%);
-  border: 1px solid rgba(22, 119, 255, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: #e8f0fc;
+  border: 1px solid rgba(30, 58, 95, 0.2);
+  transition: all 0.2s ease;
   display: inline-block;
   margin: 0 2px;
-  position: relative;
-  overflow: hidden;
 }
 
 .product-link::before {
@@ -923,7 +877,7 @@ const honors = [
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background: #1d1d1f;
   transition: left 0.5s ease;
 }
 
@@ -932,27 +886,24 @@ const honors = [
 }
 
 .product-link:hover {
-  color: #ffffff;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  border-color: #1677ff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.3);
+  background: #1e3a5f;
+  color: #fff;
+  border-color: #1e3a5f;
   text-decoration: none;
 }
 
 .product-link:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(22, 119, 255, 0.2);
 }
 
 /* 产品高亮样式 */
 .product-highlight {
-  color: #1e293b;
-  font-weight: 700;
-  background: linear-gradient(135deg, rgba(255, 193, 7, 0.2) 0%, rgba(255, 152, 0, 0.2) 100%);
-  padding: 2px 6px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 193, 7, 0.3);
+  color: #1d1d1f;
+  font-weight: 600;
+  background: #f5f5f7;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   display: inline-block;
   margin: 0 2px;
 }
@@ -964,16 +915,16 @@ const honors = [
   text-align: left;
   font-size: 28px;
   font-weight: 700;
-  color: #1e293b;
+  color: #0a1628;
   margin: 48px 44px 32px 44px;
   letter-spacing: 1px;
 }
 
 .title-icon {
   font-size: 24px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   padding: 8px;
-  border-radius: 12px;
+  border-radius: 4px;
   color: white;
   display: flex;
   align-items: center;
@@ -982,7 +933,7 @@ const honors = [
 
 .title-en {
   font-size: 14px;
-  color: #64748b;
+  color: #a1a1a6;
   font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -990,10 +941,23 @@ const honors = [
 }
 
 .culture {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 100%);
   box-shadow: none;
-  padding-bottom: 40px;
-  border: 1px solid rgba(22, 119, 255, 0.1);
+  padding-bottom: 48px;
+  border: none;
+}
+
+.culture .section-title {
+  color: #f5f5f7;
+}
+
+.culture .title-icon {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.culture .title-en {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .culture-content {
@@ -1004,80 +968,54 @@ const honors = [
 }
 
 .culture-block {
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.1);
-  padding: 32px 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  padding: 36px 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   min-height: 200px;
-  border: 1px solid rgba(22, 119, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.culture-block::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.culture-block:hover::before {
-  transform: scaleX(1);
 }
 
 .culture-block:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 48px rgba(22, 119, 255, 0.2);
-  border-color: rgba(22, 119, 255, 0.3);
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .culture-icon {
   font-size: 48px;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.1) 0%, rgba(67, 198, 172, 0.1) 100%);
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.culture-block:hover .culture-icon {
-  transform: scale(1.1);
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.2) 0%, rgba(67, 198, 172, 0.2) 100%);
 }
 
 .culture-key {
-  font-size: 20px;
-  color: #1e293b;
+  font-size: 18px;
+  color: #ffffff;
   font-weight: 700;
   margin-bottom: 12px;
-  letter-spacing: 1px;
 }
 
 .culture-value {
-  font-size: 16px;
-  color: #64748b;
-  line-height: 1.6;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.7;
   flex: 1;
   display: flex;
   align-items: center;
 }
 
 .history {
-  background: #f7faff;
+  background: #fff;
   box-shadow: none;
   padding: 0 44px 32px 44px;
 }
@@ -1099,8 +1037,7 @@ const honors = [
 
 .team-card {
   background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.1);
+  border-radius: 4px;
   padding: 32px 24px;
   text-align: center;
   min-width: 250px;
@@ -1111,32 +1048,14 @@ const honors = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid rgba(22, 119, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.team-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.team-card:hover::before {
-  transform: scaleX(1);
 }
 
 .team-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 48px rgba(22, 119, 255, 0.2);
-  border-color: rgba(22, 119, 255, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
 .team-avatar {
@@ -1145,41 +1064,41 @@ const honors = [
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 20px;
-  box-shadow: 0 8px 24px rgba(22, 119, 255, 0.2);
+  box-shadow: none;
   border: 4px solid rgba(22, 119, 255, 0.1);
   transition: all 0.3s ease;
 }
 
 .team-card:hover .team-avatar {
   transform: scale(1.05);
-  box-shadow: 0 12px 32px rgba(22, 119, 255, 0.3);
+  box-shadow: none;
   border-color: rgba(22, 119, 255, 0.3);
 }
 
 .team-name {
-  color: #1e293b;
+  color: #1d1d1f;
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1d1d1f;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .team-role {
-  color: #64748b;
+  color: #a1a1a6;
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 12px;
   padding: 4px 12px;
   background: rgba(22, 119, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 4px;
   display: inline-block;
 }
 
 .team-desc {
-  color: #64748b;
+  color: #a1a1a6;
   font-size: 14px;
   line-height: 1.5;
   flex: 1;
@@ -1223,7 +1142,8 @@ const honors = [
 
   .about-banner {
     height: 350px;
-  }
+    background: #1d1d1f;
+}
 
   .title-main {
     font-size: 2.5rem;
@@ -1289,7 +1209,8 @@ const honors = [
 
   .about-banner {
     height: 300px;
-  }
+    background: #1d1d1f;
+}
 
   .title-main {
     font-size: 2rem;
@@ -1362,7 +1283,7 @@ const honors = [
 
   .product-link:hover {
     transform: none;
-    box-shadow: 0 2px 6px rgba(22, 119, 255, 0.2);
+    box-shadow: none;
   }
 
   .product-highlight {

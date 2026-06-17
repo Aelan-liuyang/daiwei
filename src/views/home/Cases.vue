@@ -86,10 +86,7 @@
                   >{{ tag }}</span
                 >
               </div>
-              <div class="case-actions">
-                <button class="action-btn primary">查看详情</button>
-                <button class="action-btn secondary mobile-hidden">了解更多</button>
-              </div>
+              <div class="case-arrow">查看详情 →</div>
             </div>
           </div>
         </div>
@@ -220,7 +217,9 @@ onMounted(() => {
 <style scoped>
 .cases-layout {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  
+  background: #fbfbfd;
+  overflow-x: hidden;
 }
 
 .header {
@@ -250,11 +249,14 @@ onMounted(() => {
 
 /* 筛选器样式 */
 .case-filter-section {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   padding: 20px 0;
   margin-bottom: 20px;
-  border-bottom: 1px solid rgba(22, 119, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 60px;
+  z-index: 10;
 }
 
 .filter-container {
@@ -267,50 +269,52 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 16px;
+  color: #86868b;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .filter-icon {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .filter-tabs {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .filter-tab {
-  padding: 8px 20px;
-  border: 2px solid rgba(22, 119, 255, 0.2);
-  background: rgba(22, 119, 255, 0.05);
-  color: #1677ff;
-  border-radius: 25px;
+  padding: 7px 18px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  color: #6e6e73;
+  border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   font-weight: 500;
   font-size: 14px;
 }
 
 .filter-tab:hover {
-  background: rgba(22, 119, 255, 0.1);
-  transform: translateY(-2px);
+  background: #f5f5f7;
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #1d1d1f;
 }
 
 .filter-tab.active {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
-  border-color: #1677ff;
-  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.3);
+  border-color: #1e3a5f;
 }
 
 /* 统计部分样式 */
 .case-stats-section {
   padding: 30px 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 100%);
   margin-bottom: 40px;
 }
 
@@ -326,35 +330,30 @@ onMounted(() => {
 .stat-item {
   text-align: center;
   padding: 20px 30px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
-  border-radius: 16px;
-  border: 1px solid rgba(22, 119, 255, 0.1);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   min-width: 120px;
 }
 
 .stat-item:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 8px 24px rgba(22, 119, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .stat-number {
   display: block;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1677ff;
+  color: #fff;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .stat-label {
   font-size: 14px;
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 500;
 }
 
@@ -368,6 +367,7 @@ onMounted(() => {
   overflow: hidden;
   margin-bottom: 40px;
   color: #fff;
+  background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 60%, #0a1628 100%);
 }
 
 .banner-bg-img {
@@ -406,25 +406,26 @@ onMounted(() => {
 
 .cases-banner-text {
   z-index: 2;
-  color: #333;
+  color: #fff;
   text-align: center;
   width: 100%;
 }
 
 .cases-banner-text h1 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin: 0;
-  letter-spacing: 5px;
-  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  letter-spacing: -0.5px;
+  color: #fff;
 }
 
 .cases-banner-sub {
-  font-size: 1.13rem;
-  color: #1677ff;
-  letter-spacing: 4px;
-  margin-top: 10px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.2em;
+  margin-top: 12px;
   font-weight: 400;
+  text-transform: uppercase;
 }
 
 .case-section {
@@ -453,34 +454,21 @@ onMounted(() => {
 }
 
 .case-card {
-  border-radius: 20px;
+  border-radius: 4px;
   background: #ffffff;
-  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100%;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: 1px solid rgba(22, 119, 255, 0.1);
-  animation: slideInUp 0.6s ease-out;
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .case-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 16px 48px rgba(22, 119, 255, 0.2);
-  border-color: rgba(22, 119, 255, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
 .case-img-wrap {
@@ -488,7 +476,7 @@ onMounted(() => {
   width: 100%;
   height: 240px;
   overflow: hidden;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: #1d1d1f;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -511,7 +499,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(22, 119, 255, 0.9);
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -552,34 +540,31 @@ onMounted(() => {
 }
 
 .case-industry {
-  background: rgba(22, 119, 255, 0.1);
-  color: #1677ff;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 12px;
+  background: #f5f5f7;
+  color: #6e6e73;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
   font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .case-date {
-  color: #64748b;
+  color: #a1a1a6;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .case-title {
   font-size: 18px;
-  color: #1e293b;
+  color: #0a1628;
   font-weight: 700;
   margin-bottom: 12px;
   line-height: 1.4;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .case-desc {
-  color: #64748b;
+  color: #a1a1a6;
   font-size: 14px;
   margin-bottom: 16px;
   line-height: 1.6;
@@ -592,60 +577,36 @@ onMounted(() => {
 
 .case-tag {
   display: inline-block;
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.1) 0%, rgba(67, 198, 172, 0.1) 100%);
-  color: #1677ff;
-  font-size: 12px;
-  border-radius: 15px;
-  padding: 4px 12px;
-  margin-right: 8px;
+  background: #f5f5f7;
+  color: #6e6e73;
+  font-size: 11px;
+  border-radius: 12px;
+  padding: 3px 10px;
+  margin-right: 6px;
   margin-bottom: 6px;
   font-weight: 500;
-  border: 1px solid rgba(22, 119, 255, 0.2);
-  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
 }
 
 .case-tag:hover {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
-  transform: translateY(-2px);
+  border-color: #1e3a5f;
 }
 
-.case-actions {
-  display: flex;
-  gap: 8px;
+.case-arrow {
   margin-top: auto;
+  padding-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #86868b;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
 }
 
-.action-btn {
-  flex: 1;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.action-btn.primary {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  color: #ffffff;
-}
-
-.action-btn.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.4);
-}
-
-.action-btn.secondary {
-  background: rgba(22, 119, 255, 0.1);
-  color: #1677ff;
-  border: 1px solid rgba(22, 119, 255, 0.2);
-}
-
-.action-btn.secondary:hover {
-  background: rgba(22, 119, 255, 0.2);
-  transform: translateY(-2px);
+.case-card:hover .case-arrow {
+  color: #1e3a5f;
 }
 
 .footer-bottom {
@@ -720,7 +681,8 @@ onMounted(() => {
 @media (max-width: 768px) {
   .cases-banner {
     height: 200px;
-  }
+    background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 60%, #0a1628 100%);
+}
 
   .cases-banner-text {
     padding: 0 15px;
@@ -744,7 +706,8 @@ onMounted(() => {
 @media (max-width: 480px) {
   .cases-banner {
     height: 160px;
-  }
+    background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 60%, #0a1628 100%);
+}
 
   .cases-banner-text h1 {
     font-size: 1.5rem;
@@ -758,7 +721,8 @@ onMounted(() => {
 @media (max-width: 360px) {
   .cases-banner {
     height: 140px;
-  }
+    background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 60%, #0a1628 100%);
+}
 
   .cases-banner-text h1 {
     font-size: 1.3rem;
@@ -832,14 +796,14 @@ onMounted(() => {
   }
 
   .action-btn.primary {
-    background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+    background: #1e3a5f;
     color: white;
   }
 
   .action-btn.secondary {
-    background: #f8fafc;
-    color: #64748b;
-    border: 1px solid #e2e8f0;
+    background: #fbfbfd;
+    color: #a1a1a6;
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 }
 </style>

@@ -320,14 +320,14 @@ onMounted(() => {
 
 <style scoped>
 .case-detail-layout {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: #fbfbfd;
   min-height: 100vh;
 }
 
 .main-content {
   background: transparent;
   min-height: 480px;
-  padding-bottom: 40px;
+  padding: 40px 0 40px;
 }
 
 /* 顶部信息块 */
@@ -339,9 +339,9 @@ onMounted(() => {
   margin: 40px auto;
   padding: 40px;
   background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.1);
-  border: 1px solid rgba(22, 119, 255, 0.1);
+  border-radius: 4px;
+  box-shadow: none;
+  border: 1px solid rgba(30, 58, 95, 0.1);
   animation: slideInUp 0.6s ease-out;
 }
 
@@ -364,14 +364,14 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.1) 0%, rgba(67, 198, 172, 0.1) 100%);
-  border: 1px solid rgba(22, 119, 255, 0.2);
+  background: #1e3a5f;
+  border: 1px solid rgba(30, 58, 95, 0.2);
   border-radius: 25px;
   padding: 6px 16px;
   margin-bottom: 16px;
   font-size: 14px;
   font-weight: 500;
-  color: #1677ff;
+  color: #1e3a5f;
 }
 
 .badge-icon {
@@ -380,19 +380,15 @@ onMounted(() => {
 
 .case-title {
   font-size: 32px;
-  color: #1e293b;
+  color: #0a1628;
   font-weight: 700;
   margin-bottom: 12px;
   line-height: 1.3;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .case-subtitle {
   font-size: 16px;
-  color: #64748b;
+  color: #a1a1a6;
   margin-bottom: 24px;
   line-height: 1.6;
 }
@@ -409,9 +405,9 @@ onMounted(() => {
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: rgba(22, 119, 255, 0.02);
+  background: rgba(30, 58, 95, 0.02);
   border-radius: 8px;
-  border-left: 3px solid #1677ff;
+  border-left: 3px solid #1e3a5f;
 }
 
 .meta-icon {
@@ -419,13 +415,13 @@ onMounted(() => {
 }
 
 .meta-label {
-  color: #64748b;
+  color: #a1a1a6;
   font-weight: 500;
   min-width: 60px;
 }
 
 .meta-value {
-  color: #1e293b;
+  color: #0a1628;
   font-weight: 600;
 }
 
@@ -436,18 +432,18 @@ onMounted(() => {
 }
 
 .case-tag {
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.1) 0%, rgba(67, 198, 172, 0.1) 100%);
-  color: #1677ff;
+  background: rgba(30, 58, 95, 0.05);
+  color: #1e3a5f;
   font-size: 12px;
   border-radius: 15px;
   padding: 4px 12px;
   font-weight: 500;
-  border: 1px solid rgba(22, 119, 255, 0.2);
+  border: 1px solid rgba(30, 58, 95, 0.1);
   transition: all 0.3s ease;
 }
 
 .case-tag:hover {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
   transform: translateY(-2px);
 }
@@ -456,16 +452,16 @@ onMounted(() => {
   position: relative;
   width: 400px;
   height: 280px;
-  border-radius: 16px;
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(22, 119, 255, 0.15);
+  box-shadow: none;
   transition: all 0.3s ease;
   flex-shrink: 0;
 }
 
 .case-head-image:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(22, 119, 255, 0.2);
+  box-shadow: none;
 }
 
 .case-head-img {
@@ -485,7 +481,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(22, 119, 255, 0.9);
+  background: rgba(30, 58, 95, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -526,7 +522,7 @@ onMounted(() => {
   flex: 1 1 0;
   background: #fff;
   border-radius: 17px;
-  box-shadow: 0 2px 14px rgba(22, 119, 255, 0.08);
+  box-shadow: none;
   padding: 48px 48px 38px 48px;
   min-width: 0;
   display: flex;
@@ -535,7 +531,7 @@ onMounted(() => {
 
 .section-title {
   font-size: 1.14rem;
-  color: #1677ff;
+  color: #1e3a5f;
   font-weight: 700;
   margin: 32px 0 16px 0;
   letter-spacing: 1px;
@@ -577,7 +573,7 @@ onMounted(() => {
   height: 120px;
   object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(22, 119, 255, 0.07);
+  box-shadow: none;
   flex-shrink: 0;
 }
 
@@ -601,7 +597,7 @@ onMounted(() => {
   aspect-ratio: 4/3;
   object-fit: cover;
   border-radius: 9px;
-  box-shadow: 0 2px 10px rgba(22, 119, 255, 0.05);
+  box-shadow: none;
 }
 
 /* 侧边栏 */
@@ -616,7 +612,7 @@ onMounted(() => {
 .side-block {
   background: #fff;
   border-radius: 13px;
-  box-shadow: 0 2px 10px rgba(22, 119, 255, 0.05);
+  box-shadow: none;
   padding: 20px 18px 14px 18px;
   margin-bottom: 0;
 }
@@ -627,18 +623,14 @@ onMounted(() => {
   gap: 8px;
   font-size: 16px;
   font-weight: 700;
-  color: #1e293b;
+  color: #0a1628;
   margin-bottom: 16px;
   letter-spacing: 1px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .title-icon {
   font-size: 16px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   padding: 4px;
   border-radius: 8px;
   color: white;
@@ -659,20 +651,20 @@ onMounted(() => {
   align-items: center;
   gap: 12px;
   padding: 12px;
-  background: rgba(22, 119, 255, 0.02);
+  background: rgba(30, 58, 95, 0.02);
   border-radius: 8px;
-  border-left: 3px solid #1677ff;
+  border-left: 3px solid #1e3a5f;
   transition: all 0.3s ease;
 }
 
 .info-item:hover {
-  background: rgba(22, 119, 255, 0.05);
+  background: rgba(30, 58, 95, 0.05);
   transform: translateX(4px);
 }
 
 .info-icon {
   font-size: 16px;
-  color: #1677ff;
+  color: #1e3a5f;
 }
 
 .info-content {
@@ -684,13 +676,13 @@ onMounted(() => {
 
 .info-label {
   font-size: 12px;
-  color: #64748b;
+  color: #a1a1a6;
   font-weight: 500;
 }
 
 .info-value {
   font-size: 14px;
-  color: #1e293b;
+  color: #0a1628;
   font-weight: 600;
 }
 
@@ -704,39 +696,41 @@ onMounted(() => {
 .stat-item {
   text-align: center;
   padding: 16px 8px;
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.05) 0%, rgba(67, 198, 172, 0.05) 100%);
-  border-radius: 12px;
-  border: 1px solid rgba(22, 119, 255, 0.1);
+  background: #f8fafc;
+  border-radius: 4px;
+  border: 1px solid rgba(30, 58, 95, 0.1);
   transition: all 0.3s ease;
 }
 
 .stat-item:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.1) 0%, rgba(67, 198, 172, 0.1) 100%);
+  background: #ffffff;
+  border-color: rgba(30, 58, 95, 0.2);
+  box-shadow: 0 4px 12px rgba(30,58,95,0.08);
 }
 
 .stat-number {
   font-size: 20px;
   font-weight: 700;
-  color: #1677ff;
+  color: #1e3a5f;
   margin-bottom: 4px;
 }
 
 .stat-label {
   font-size: 11px;
-  color: #64748b;
+  color: #a1a1a6;
   font-weight: 500;
 }
 
 /* 联系区块样式 */
 .contact-block {
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
-  border: 1px solid rgba(22, 119, 255, 0.1) !important;
+  border: 1px solid rgba(30, 58, 95, 0.1) !important;
 }
 
 .contact-desc {
   font-size: 14px;
-  color: #64748b;
+  color: #a1a1a6;
   margin-bottom: 20px;
   line-height: 1.6;
 }
@@ -758,23 +752,23 @@ onMounted(() => {
 }
 
 .contact-btn.primary {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%) !important;
+  background: #1e3a5f !important;
   border: none !important;
 }
 
 .contact-btn.primary:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 16px rgba(22, 119, 255, 0.4) !important;
+  box-shadow: none;
 }
 
 .contact-btn.secondary {
-  background: rgba(22, 119, 255, 0.1) !important;
-  color: #1677ff !important;
-  border: 1px solid rgba(22, 119, 255, 0.2) !important;
+  background: rgba(30, 58, 95, 0.1) !important;
+  color: #1e3a5f !important;
+  border: 1px solid rgba(30, 58, 95, 0.2) !important;
 }
 
 .contact-btn.secondary:hover {
-  background: rgba(22, 119, 255, 0.2) !important;
+  background: rgba(30, 58, 95, 0.2) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -786,7 +780,7 @@ onMounted(() => {
 .image-modal :deep(.ant-modal-content) {
   padding: 0;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 4px;
 }
 
 .image-modal-content {
@@ -798,7 +792,7 @@ onMounted(() => {
   height: auto;
   max-height: 70vh;
   object-fit: contain;
-  background: #f8fafc;
+  background: #fbfbfd;
 }
 
 .modal-title {
@@ -806,8 +800,8 @@ onMounted(() => {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #1e293b;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  color: #0a1628;
+  background: #1e3a5f;
 }
 
 /* 响应式设计 */

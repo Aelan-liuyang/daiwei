@@ -477,13 +477,11 @@ onUnmounted(() => {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  background: #1d1d1f;
   border: 3px solid white;
   color: white;
   cursor: pointer;
-  box-shadow:
-    0 8px 32px rgba(8, 145, 255, 0.4),
-    0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
@@ -507,16 +505,14 @@ onUnmounted(() => {
 
 .chat-toggle-btn:hover {
   transform: translateY(-4px) scale(1.05);
-  box-shadow:
-    0 12px 40px rgba(8, 145, 255, 0.5),
-    0 6px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 .chat-toggle-btn.active {
-  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
-  box-shadow:
-    0 8px 24px rgba(100, 116, 139, 0.4),
-    0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  color: #000;
+  border-color: #000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .btn-icon {
@@ -535,7 +531,7 @@ onUnmounted(() => {
   position: absolute;
   top: -4px;
   right: -4px;
-  background: #ef4444;
+  background: #fff; color: #000;
   color: white;
   border-radius: 50%;
   min-width: 24px;
@@ -545,7 +541,7 @@ onUnmounted(() => {
   justify-content: center;
   font-size: 12px;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.5);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
   border: 2px solid white;
   padding: 0 6px;
 }
@@ -554,7 +550,7 @@ onUnmounted(() => {
 .btn-pulse-ring {
   position: absolute;
   inset: -8px;
-  border: 2px solid #0891ff;
+  border: 2px solid #fff;
   border-radius: 50%;
   opacity: 0;
   animation: pulse-ring 2s ease-out infinite;
@@ -589,7 +585,7 @@ onUnmounted(() => {
 /* 聊天头部 */
 .chat-header {
   padding: 20px 24px;
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  background: #1d1d1f;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -784,7 +780,7 @@ onUnmounted(() => {
 }
 
 .user-avatar {
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  background: #1d1d1f;
 }
 
 /* 消息包装器 */
@@ -813,7 +809,7 @@ onUnmounted(() => {
 }
 
 .message.user-message .message-content {
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  background: #1d1d1f;
   color: white;
   border: none;
   box-shadow: 0 4px 12px rgba(8, 145, 255, 0.3);
@@ -962,7 +958,7 @@ onUnmounted(() => {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  background: #1d1d1f;
   border: none;
   color: white;
   cursor: pointer;

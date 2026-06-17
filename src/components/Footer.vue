@@ -369,8 +369,8 @@ const copyToClipboard = async (text: string, type: string) => {
 }
 
 .footer {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  color: #cbd5e1;
+  background: #0a1628;
+  color: #8caab9;
   position: relative;
   overflow: hidden;
 }
@@ -381,7 +381,7 @@ const copyToClipboard = async (text: string, type: string) => {
   top: -1px;
   left: 0;
   right: 0;
-  color: #f8fafc;
+  color: #f4f7fb;
   overflow: hidden;
   line-height: 0;
 }
@@ -427,13 +427,12 @@ const copyToClipboard = async (text: string, type: string) => {
 .logo-icon {
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  background: #ffffff;
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  box-shadow: 0 8px 24px rgba(8, 145, 255, 0.3);
+  color: #0a0a0a;
 }
 
 .company-title h3 {
@@ -445,7 +444,7 @@ const copyToClipboard = async (text: string, type: string) => {
 }
 
 .company-title span {
-  color: #0891ff;
+  color: #737373;
   font-size: 0.85rem;
   font-weight: 500;
 }
@@ -466,27 +465,23 @@ const copyToClipboard = async (text: string, type: string) => {
 .stat-item {
   text-align: center;
   padding: 14px 16px;
-  background: rgba(8, 145, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  border: 1px solid rgba(8, 145, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   min-width: 80px;
 }
 
 .stat-item:hover {
-  background: rgba(8, 145, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(8, 145, 255, 0.15);
 }
 
 .stat-number {
   display: block;
   font-size: 1.4rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #60a5fa 0%, #0891ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
   margin-bottom: 4px;
 }
 
@@ -512,7 +507,7 @@ const copyToClipboard = async (text: string, type: string) => {
 .title-line {
   width: 4px;
   height: 20px;
-  background: linear-gradient(180deg, #0891ff 0%, #0066cc 100%);
+  background: #f0a500;
   border-radius: 2px;
 }
 
@@ -552,7 +547,7 @@ const copyToClipboard = async (text: string, type: string) => {
   opacity: 0;
   transform: translateX(-8px);
   transition: all 0.3s ease;
-  color: #0891ff;
+  color: #ffffff;
 }
 
 .nav-link:hover .link-arrow {
@@ -564,12 +559,12 @@ const copyToClipboard = async (text: string, type: string) => {
   margin-top: 8px;
   padding-top: 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: #0891ff;
+  color: #ffffff;
   font-weight: 600;
 }
 
 .nav-link.view-all:hover {
-  color: #60a5fa;
+  color: #a3a3a3;
 }
 
 /* 联系信息 */
@@ -605,24 +600,24 @@ const copyToClipboard = async (text: string, type: string) => {
 }
 
 .contact-item.clickable:hover {
-  background: rgba(8, 145, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .contact-icon {
   width: 40px;
   height: 40px;
-  background: rgba(8, 145, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0891ff;
+  color: #ffffff;
   flex-shrink: 0;
   transition: all 0.3s ease;
 }
 
 .contact-item:hover .contact-icon {
-  background: rgba(8, 145, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   transform: scale(1.05);
 }
 
@@ -654,10 +649,10 @@ const copyToClipboard = async (text: string, type: string) => {
   align-items: center;
   gap: 4px;
   padding: 6px 10px;
-  background: rgba(8, 145, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   font-size: 0.7rem;
-  color: #0891ff;
+  color: #ffffff;
   font-weight: 600;
   opacity: 0;
   transform: scale(0.9);
@@ -701,18 +696,18 @@ const copyToClipboard = async (text: string, type: string) => {
 }
 
 .social-btn:hover {
-  background: rgba(8, 145, 255, 0.15);
-  border-color: rgba(8, 145, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-3px);
 }
 
 .social-btn.active {
-  background: rgba(8, 145, 255, 0.2);
-  border-color: #0891ff;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
 }
 
 .social-icon {
-  color: #0891ff;
+  color: #ffffff;
 }
 
 .social-name {
@@ -817,7 +812,7 @@ const copyToClipboard = async (text: string, type: string) => {
 
 /* 底部版权 */
 .footer-bottom {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.25);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   z-index: 1;
@@ -882,20 +877,21 @@ const copyToClipboard = async (text: string, type: string) => {
 .backtop-btn {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  background: #f0a500;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  box-shadow: 0 8px 24px rgba(8, 145, 255, 0.4);
+  color: #0a1628;
+  box-shadow: 0 8px 24px rgba(240, 165, 0, 0.35);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
 .backtop-btn:hover {
   transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 32px rgba(8, 145, 255, 0.5);
+  background: #f5c842;
+  box-shadow: 0 12px 32px rgba(240, 165, 0, 0.5);
 }
 
 /* 响应式设计 */

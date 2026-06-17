@@ -430,8 +430,10 @@ const handleSubmit = async () => {
 <style scoped>
 /* 布局 */
 .contact-layout {
-  background: #f8fafc;
+  
   min-height: 100vh;
+  background: #fbfbfd;
+  overflow-x: hidden;
 }
 
 .container {
@@ -444,7 +446,7 @@ const handleSubmit = async () => {
 .contact-hero {
   position: relative;
   height: 480px;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 60%, #0a1628 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -455,20 +457,13 @@ const handleSubmit = async () => {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 25% 25%, rgba(8, 145, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(8, 145, 255, 0.08) 0%, transparent 50%);
+    radial-gradient(circle at 20% 60%, rgba(255, 255, 255, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
   z-index: 1;
 }
 
 .hero-glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(8, 145, 255, 0.15) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
+  display: none;
 }
 
 .hero-content {
@@ -483,36 +478,36 @@ const handleSubmit = async () => {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(8, 145, 255, 0.15);
-  border: 1px solid rgba(8, 145, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 10px 20px;
   border-radius: 50px;
-  color: #60a5fa;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 24px;
 }
 
 .hero-title {
   font-size: 52px;
-  font-weight: 800;
+  font-weight: 700;
   color: #ffffff;
   margin-bottom: 16px;
-  line-height: 1.2;
-  letter-spacing: -1px;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
 }
 
 .title-highlight {
   display: block;
-  background: linear-gradient(135deg, #60a5fa 0%, #0891ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.7em;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .hero-subtitle {
   font-size: 18px;
-  color: #94a3b8;
+  color: #a1a1a6;
   margin-bottom: 40px;
   line-height: 1.6;
 }
@@ -538,7 +533,7 @@ const handleSubmit = async () => {
 
 .stat-label {
   font-size: 14px;
-  color: #64748b;
+  color: #a1a1a6;
   font-weight: 500;
 }
 
@@ -557,30 +552,30 @@ const handleSubmit = async () => {
 
 .deco-circle {
   position: absolute;
-  border: 2px solid rgba(8, 145, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 50%;
 }
 
 .circle-1 {
-  width: 400px;
-  height: 400px;
-  top: -100px;
-  right: -100px;
+  width: 500px;
+  height: 500px;
+  top: -150px;
+  right: -150px;
 }
 
 .circle-2 {
-  width: 300px;
-  height: 300px;
-  bottom: -80px;
-  left: -80px;
-  border-color: rgba(8, 145, 255, 0.1);
+  width: 350px;
+  height: 350px;
+  bottom: -100px;
+  left: -100px;
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
 .deco-line {
   position: absolute;
   width: 200px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(8, 145, 255, 0.3), transparent);
+  background: #1d1d1f;
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
@@ -589,7 +584,7 @@ const handleSubmit = async () => {
 /* Contact Info Section - 上面部分 */
 .contact-info-section {
   padding: 80px 0;
-  background: #f8fafc;
+  background: #fbfbfd;
 }
 
 .section-header-center {
@@ -600,13 +595,13 @@ const handleSubmit = async () => {
 .section-header-center h2 {
   font-size: 36px;
   font-weight: 800;
-  color: #0f172a;
+  color: #0a1628;
   margin-bottom: 12px;
 }
 
 .section-header-center p {
   font-size: 16px;
-  color: #64748b;
+  color: #a1a1a6;
 }
 
 /* Info Grid - 地图和联系方式左右排列 */
@@ -619,16 +614,16 @@ const handleSubmit = async () => {
 /* Map Panel */
 .map-panel {
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: 4px;
   padding: 24px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: none;
 }
 
 .map-container-large {
   position: relative;
   height: 400px;
-  border-radius: 16px;
+  border-radius: 4px;
   overflow: hidden;
   margin-bottom: 20px;
 }
@@ -649,14 +644,13 @@ const handleSubmit = async () => {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(8, 145, 255, 0.95);
+  background: rgba(0, 0, 0, 0.85);
   color: white;
   padding: 10px 16px;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   backdrop-filter: blur(8px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .address-info {
@@ -669,13 +663,13 @@ const handleSubmit = async () => {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #475569;
+  color: #86868b;
   font-size: 15px;
   font-weight: 500;
 }
 
 .address-row svg {
-  color: #0891ff;
+  color: #86868b;
   flex-shrink: 0;
 }
 
@@ -698,38 +692,37 @@ const handleSubmit = async () => {
   gap: 16px;
   padding: 20px;
   background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .contact-item-large:hover {
-  transform: translateX(8px);
-  border-color: #0891ff;
-  box-shadow: 0 8px 25px rgba(8, 145, 255, 0.15);
+  transform: translateX(4px);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .contact-item-large.is-primary {
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  background: #1e3a5f;
   color: white;
   border: none;
 }
 
 .contact-item-large.is-primary:hover {
-  box-shadow: 0 12px 35px rgba(8, 145, 255, 0.35);
+  box-shadow: none;
 }
 
 .item-icon-large {
   width: 52px;
   height: 52px;
-  background: rgba(8, 145, 255, 0.1);
-  border-radius: 12px;
+  background: #e8f0fc;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0891ff;
+  color: #1e3a5f;
   flex-shrink: 0;
 }
 
@@ -746,7 +739,7 @@ const handleSubmit = async () => {
 .item-label-large {
   display: block;
   font-size: 13px;
-  color: #64748b;
+  color: #a1a1a6;
   font-weight: 600;
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -761,7 +754,7 @@ const handleSubmit = async () => {
   display: block;
   font-size: 17px;
   font-weight: 700;
-  color: #0f172a;
+  color: #0a1628;
   line-height: 1.4;
 }
 
@@ -770,13 +763,13 @@ const handleSubmit = async () => {
 }
 
 .item-action {
-  color: #94a3b8;
+  color: #a1a1a6;
   transition: all 0.3s ease;
   flex-shrink: 0;
 }
 
 .contact-item-large:hover .item-action {
-  color: #0891ff;
+  color: #1d1d1f;
   transform: scale(1.1);
 }
 
@@ -798,7 +791,7 @@ const handleSubmit = async () => {
   justify-content: center;
   gap: 10px;
   padding: 14px 20px;
-  border-radius: 12px;
+  border-radius: 4px;
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
@@ -806,20 +799,21 @@ const handleSubmit = async () => {
 }
 
 .action-btn.primary {
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  background: #1e3a5f;
   color: white;
-  box-shadow: 0 4px 15px rgba(8, 145, 255, 0.3);
+  box-shadow: none;
 }
 
 .action-btn.primary:hover {
+  background: #0a1628;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(8, 145, 255, 0.4);
+  box-shadow: 0 6px 16px rgba(30,58,95,0.3);
 }
 
 .action-btn.secondary {
-  background: #f1f5f9;
-  color: #0f172a;
-  border: 1px solid #e2e8f0;
+  background: #fbfbfd;
+  color: #1d1d1f;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .action-btn.secondary:hover {
@@ -836,18 +830,18 @@ const handleSubmit = async () => {
 .form-panel-full {
   max-width: 900px;
   margin: 0 auto;
-  background: #f8fafc;
-  border-radius: 20px;
+  background: #fbfbfd;
+  border-radius: 4px;
   padding: 48px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: none;
 }
 
 /* Form Styles */
 .contact-form :deep(.ant-form-item-label > label) {
   font-size: 15px;
   font-weight: 600;
-  color: #334155;
+  color: #86868b;
 }
 
 .form-row {
@@ -866,7 +860,7 @@ const handleSubmit = async () => {
 .contact-form :deep(.ant-input-textarea) {
   background: #ffffff;
   border: 2px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 14px 18px;
   font-size: 15px;
   transition: all 0.3s ease;
@@ -880,11 +874,11 @@ const handleSubmit = async () => {
 .contact-form :deep(.ant-input:focus),
 .contact-form :deep(.ant-input-focused) {
   border-color: #0891ff;
-  box-shadow: 0 0 0 4px rgba(8, 145, 255, 0.1);
+  box-shadow: none;
 }
 
 .contact-form :deep(.ant-input::placeholder) {
-  color: #94a3b8;
+  color: #a1a1a6;
 }
 
 .form-footer {
@@ -893,14 +887,14 @@ const handleSubmit = async () => {
   justify-content: space-between;
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .form-privacy {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #64748b;
+  color: #a1a1a6;
   font-size: 14px;
 }
 
@@ -910,20 +904,21 @@ const handleSubmit = async () => {
 
 .submit-btn {
   padding: 16px 40px;
-  background: linear-gradient(135deg, #0891ff 0%, #0066cc 100%);
+  background: #1e3a5f;
   border: none;
-  border-radius: 12px;
+  border-radius: 4px;
   color: white;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(8, 145, 255, 0.4);
+  box-shadow: none;
 }
 
 .submit-btn:hover:not(:disabled) {
+  background: #0a1628;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(8, 145, 255, 0.5);
+  box-shadow: 0 6px 20px rgba(30,58,95,0.4);
 }
 
 .submit-btn:disabled {
@@ -956,7 +951,7 @@ const handleSubmit = async () => {
 /* Service Promise */
 .service-promise {
   padding: 80px 0;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 100%);
 }
 
 .promise-grid {
@@ -969,7 +964,7 @@ const handleSubmit = async () => {
   text-align: center;
   padding: 32px 24px;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
+  border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
@@ -984,7 +979,7 @@ const handleSubmit = async () => {
   width: 64px;
   height: 64px;
   background: rgba(8, 145, 255, 0.15);
-  border-radius: 16px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1001,7 +996,7 @@ const handleSubmit = async () => {
 
 .promise-item p {
   font-size: 14px;
-  color: #94a3b8;
+  color: #a1a1a6;
 }
 
 /* Responsive */

@@ -4,17 +4,12 @@
     <a-layout-content class="main-content">
       <!-- 顶部大Banner -->
       <div class="products-banner">
-        <div class="banner-bg-overlay"></div>
-        <img src="@/assets/images/product2.jpeg" alt="产品服务" class="banner-bg-img" />
-        <div class="banner-particles"></div>
+
+
+
         <div class="products-banner-text">
-          <div class="banner-badge mobile-hidden" data-aos="fade-down" data-aos-delay="200">
-            <span class="badge-icon">🏭</span>
-            <span>专业管道解决方案</span>
-          </div>
           <h1 data-aos="fade-up" data-aos-delay="400">
             <span class="title-main">产品服务</span>
-            <span class="title-sub mobile-hidden">Product Services</span>
           </h1>
           <p class="mobile-hidden" data-aos="fade-up" data-aos-delay="600">
             致力于为客户提供高质量、多样化的管道产品与全方位服务
@@ -33,9 +28,6 @@
               <span class="stat-label">成功案例</span>
             </div>
           </div>
-        </div>
-        <div class="scroll-indicator mobile-hidden">
-          <div class="scroll-arrow"></div>
         </div>
       </div>
       <section class="products-section">
@@ -415,7 +407,9 @@ onMounted(() => {
 <style scoped>
 .products-layout {
   min-height: 100vh;
-  background: #f7f9fb;
+
+  background: #fbfbfd;
+  overflow-x: hidden;
 }
 
 .main-content {
@@ -434,6 +428,9 @@ onMounted(() => {
   overflow: hidden;
   margin-bottom: 40px;
   color: #fff;
+  background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 60%, #0a1628 100%);
+  padding-top: 64px;
+  box-sizing: border-box;
 }
 
 .banner-bg-img {
@@ -528,17 +525,26 @@ onMounted(() => {
   gap: 8px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50px;
-  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 6px 16px;
   margin-bottom: 24px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
+  letter-spacing: 1px;
   animation:
     badgeGlow 3s ease-in-out infinite,
     badgeSlideDown 1s ease-out 0.2s both;
   transform: translateY(-20px);
   opacity: 0;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #43c6ac;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(67, 198, 172, 0.8);
 }
 
 /* 移动端Banner Badge优化 */
@@ -580,30 +586,7 @@ onMounted(() => {
   }
 }
 
-@keyframes badgeGlow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(22, 119, 255, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(22, 119, 255, 0.5);
-  }
-}
 
-.badge-icon {
-  font-size: 16px;
-  animation: iconBounce 2s ease-in-out infinite;
-}
-
-@keyframes iconBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-}
 
 .products-banner-text h1 {
   margin-bottom: 16px;
@@ -640,12 +623,9 @@ onMounted(() => {
   display: block;
   font-size: 3rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
   margin-bottom: 8px;
-  animation: titleGlow 2s ease-in-out infinite alternate;
+  letter-spacing: -0.5px;
 }
 
 /* 移动端主标题优化 */
@@ -683,7 +663,7 @@ onMounted(() => {
   display: block;
   font-size: 1.2rem;
   font-weight: 400;
-  color: #94a3b8;
+  color: #a1a1a6;
   letter-spacing: 2px;
   text-transform: uppercase;
   animation: subtitleFadeIn 1s ease-out 0.8s both;
@@ -770,10 +750,15 @@ onMounted(() => {
 }
 
 .banner-stats {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
-  gap: 40px;
-  margin-top: 32px;
+  align-items: center;
+  margin-top: 48px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px 0;
   animation: statsSlideUp 1.5s ease-out 0.8s both;
   transform: translateY(40px);
   opacity: 0;
@@ -791,16 +776,21 @@ onMounted(() => {
 }
 
 .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0 48px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
   animation: statItemZoom 0.8s ease-out both;
   transform: scale(0.8);
   opacity: 0;
+}
+
+.stat-item:last-child {
+  border-right: none;
 }
 
 .stat-item:nth-child(1) {
@@ -830,21 +820,15 @@ onMounted(() => {
 }
 
 .stat-item:hover {
-  transform: translateY(-4px) scale(1.05);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
 }
 
 .stat-number {
   display: block;
   font-size: 2rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
   margin-bottom: 4px;
-  animation: numberPulse 2s ease-in-out infinite alternate;
 }
 
 /* 移动端统计数字优化 */
@@ -881,6 +865,7 @@ onMounted(() => {
 }
 
 .stat-label {
+  display: block;
   font-size: 0.9rem;
   color: #cbd5e1;
   animation: labelFadeIn 0.8s ease-out both;
@@ -996,27 +981,28 @@ onMounted(() => {
 /* 侧边栏区块 */
 .side-block {
   background: #fff;
-  border-radius: 13px;
-  box-shadow: 0 2px 10px rgba(22, 119, 255, 0.05);
+  border-radius: 4px;
+  box-shadow: none;
   padding: 20px 16px 13px 18px;
   margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .side-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  color: #1677ff;
+  color: #0a1628;
   margin-bottom: 16px;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   padding-bottom: 8px;
-  border-bottom: 2px solid rgba(22, 119, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .side-title svg {
-  color: #1677ff;
+  color: #0a1628;
 }
 
 /* 分类 */
@@ -1033,7 +1019,7 @@ onMounted(() => {
   font-size: 14px;
   color: #374151;
   padding: 12px 16px;
-  border-radius: 12px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-bottom: 8px;
@@ -1066,27 +1052,25 @@ onMounted(() => {
 
 .category-count {
   font-size: 12px;
-  color: #9ca3af;
-  background: rgba(22, 119, 255, 0.1);
+  color: #86868b;
+  background: rgba(0, 0, 0, 0.05);
   padding: 2px 6px;
   border-radius: 10px;
   font-weight: 500;
 }
 
 .product-category li:hover {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  color: #1677ff;
+  background: #f5f5f7;
+  color: #0a1628;
   transform: translateX(4px);
-  border-color: rgba(22, 119, 255, 0.2);
-  box-shadow: 0 2px 8px rgba(22, 119, 255, 0.1);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 .product-category li.active {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
   font-weight: 600;
-  border-color: #1677ff;
-  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.3);
+  border-color: #1e3a5f;
 }
 
 .product-category li.active .category-count {
@@ -1107,36 +1091,36 @@ onMounted(() => {
   gap: 8px;
   margin-bottom: 12px;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(22, 119, 255, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .news-item:hover {
-  background: rgba(22, 119, 255, 0.02);
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin: 0 -12px 12px -12px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+  padding: 8px 8px;
+  margin: 0 -8px 12px -8px;
 }
 
 .news-dot {
-  width: 6px;
-  height: 6px;
-  background: #1677ff;
+  width: 4px;
+  height: 4px;
+  background: #86868b;
   border-radius: 50%;
-  margin-top: 6px;
+  margin-top: 8px;
   flex-shrink: 0;
 }
 
 .news-text {
-  color: #4b5563;
+  color: #6e6e73;
   font-size: 13px;
   line-height: 1.6;
   cursor: pointer;
 }
 
 .news-text:hover {
-  color: #1677ff;
+  color: #0a1628;
 }
 
 /* 关键词 */
@@ -1147,28 +1131,27 @@ onMounted(() => {
 }
 
 .keyword-tag {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  color: #1677ff;
+  background: #f5f5f7;
+  color: #0a1628;
   border-radius: 20px;
   font-size: 12px;
-  padding: 6px 12px;
+  padding: 5px 12px;
   font-weight: 500;
-  border: 1px solid rgba(22, 119, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .keyword-tag:hover {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(22, 119, 255, 0.3);
+  transform: translateY(-1px);
 }
 
 /* 联系卡片 */
 .contact-card {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
-  border: 1px solid rgba(22, 119, 255, 0.1) !important;
+  background: #f5f5f7 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 .contact-info {
@@ -1193,21 +1176,23 @@ onMounted(() => {
 }
 
 .contact-btn {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  color: #ffffff;
+  background: #f0a500;
+  color: #0a1628;
   border: none;
-  border-radius: 25px;
+  border-radius: 6px;
   padding: 12px 24px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 8px;
+  width: 100%;
 }
 
 .contact-btn:hover {
+  background: #f5c842;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(22, 119, 255, 0.4);
+  box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
 }
 
 /* 右侧产品展示区 */
@@ -1215,7 +1200,7 @@ onMounted(() => {
   flex: 1 1 0;
   background: #fff;
   border-radius: 14px;
-  box-shadow: 0 2px 14px rgba(22, 119, 255, 0.06);
+  box-shadow: none;
   padding: 32px 22px 24px 22px;
   min-width: 0;
   display: flex;
@@ -1229,7 +1214,7 @@ onMounted(() => {
   align-items: flex-end;
   margin-bottom: 32px;
   padding-bottom: 16px;
-  border-bottom: 2px solid rgba(22, 119, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .header-content {
@@ -1241,7 +1226,7 @@ onMounted(() => {
   align-items: center;
   gap: 12px;
   font-size: 1.8rem;
-  color: #1e293b;
+  color: #0a1628;
   font-weight: 700;
   margin-bottom: 8px;
   letter-spacing: 1px;
@@ -1249,9 +1234,9 @@ onMounted(() => {
 
 .title-icon {
   font-size: 1.5rem;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   padding: 8px;
-  border-radius: 12px;
+  border-radius: 4px;
   color: white;
   display: flex;
   align-items: center;
@@ -1259,42 +1244,41 @@ onMounted(() => {
 }
 
 .product-subtitle {
-  color: #64748b;
+  color: #a1a1a6;
   font-size: 0.9rem;
   margin: 0;
 }
 
 .view-controls {
   display: flex;
-  gap: 8px;
-  background: #f8fafc;
+  gap: 4px;
+  background: #f5f5f7;
   padding: 4px;
-  border-radius: 12px;
-  border: 1px solid rgba(22, 119, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .view-btn {
-  padding: 8px 12px;
+  padding: 7px 12px;
   border: none;
   background: transparent;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  color: #64748b;
-  transition: all 0.3s ease;
+  color: #86868b;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .view-btn:hover {
-  background: rgba(22, 119, 255, 0.1);
-  color: #1677ff;
+  background: rgba(0, 0, 0, 0.06);
+  color: #0a1628;
 }
 
 .view-btn.active {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(22, 119, 255, 0.3);
 }
 
 /* 产品网格 */
@@ -1341,39 +1325,27 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  box-shadow: none;
   padding: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid rgba(22, 119, 255, 0.1);
-  animation: slideInUp 0.6s ease-out;
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .gallery-item:hover {
-  box-shadow: 0 12px 40px rgba(22, 119, 255, 0.15);
-  transform: translateY(-8px);
-  border-color: rgba(22, 119, 255, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
 .img-wrap {
   position: relative;
   width: 100%;
   aspect-ratio: 1.2 / 1;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: #fbfbfd;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -1398,7 +1370,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(22, 119, 255, 0.9);
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1433,7 +1405,7 @@ onMounted(() => {
 
 .img-title {
   font-size: 16px;
-  color: #1e293b;
+  color: #0a1628;
   font-weight: 600;
   margin-bottom: 8px;
   line-height: 1.4;
@@ -1441,19 +1413,20 @@ onMounted(() => {
 }
 
 .item-category {
-  font-size: 12px;
-  color: #64748b;
-  background: rgba(22, 119, 255, 0.1);
-  padding: 4px 8px;
-  border-radius: 12px;
+  font-size: 11px;
+  color: #86868b;
+  background: #f5f5f7;
+  padding: 3px 8px;
+  border-radius: 20px;
   display: inline-block;
   margin-bottom: 12px;
   font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .item-description {
   font-size: 13px;
-  color: #64748b;
+  color: #a1a1a6;
   line-height: 1.5;
   margin-bottom: 16px;
   overflow: hidden;
@@ -1482,19 +1455,19 @@ onMounted(() => {
 }
 
 .action-btn.primary {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
 }
 
 .action-btn.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.4);
+  box-shadow: none;
 }
 
 .action-btn.secondary {
-  background: rgba(22, 119, 255, 0.1);
-  color: #1677ff;
-  border: 1px solid rgba(22, 119, 255, 0.2);
+  background: #f5f5f7;
+  color: #0a1628;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .action-btn.secondary:hover {
@@ -1506,7 +1479,7 @@ onMounted(() => {
 .empty-state {
   text-align: center;
   padding: 60px 20px;
-  color: #64748b;
+  color: #a1a1a6;
 }
 
 .empty-icon {
@@ -1631,7 +1604,8 @@ onMounted(() => {
 @media (max-width: 900px) {
   .products-banner {
     height: 300px;
-  }
+    background: #1e3a5f;
+}
 
   .title-main {
     font-size: 2.2rem;
@@ -1670,13 +1644,15 @@ onMounted(() => {
 @media (max-width: 600px) {
   .products-banner {
     height: 180px; /* 进一步减小到180px */
-  }
+    background: #1e3a5f;
+}
 }
 
 @media (max-width: 480px) {
   .products-banner {
     height: 160px;
-  }
+    background: #1e3a5f;
+}
 
   .title-main {
     font-size: 1.5rem !important;
@@ -1686,7 +1662,8 @@ onMounted(() => {
 @media (max-width: 360px) {
   .products-banner {
     height: 120px; /* 超小屏幕进一步减小到120px */
-  }
+    background: #1e3a5f;
+}
 
   .title-main {
     font-size: 1.3rem !important;
@@ -1775,9 +1752,9 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     background: white;
-    border-radius: 12px;
+    border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
   }
 
   .product-gallery-grid.list .img-wrap,
@@ -1809,14 +1786,14 @@ onMounted(() => {
   }
 
   .action-btn.primary {
-    background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+    background: #1e3a5f;
     color: white;
   }
 
   .action-btn.secondary {
-    background: #f8fafc;
-    color: #64748b;
-    border: 1px solid #e2e8f0;
+    background: #fbfbfd;
+    color: #a1a1a6;
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 }
 </style>

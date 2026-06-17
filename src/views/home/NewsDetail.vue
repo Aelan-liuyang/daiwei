@@ -598,11 +598,11 @@ onMounted(() => {
 <style scoped>
 .news-detail-layout {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: #fbfbfd;
 }
 
 .main-content {
-  padding: 0 0 40px;
+  padding: 40px 0 40px;
 }
 
 .news-container {
@@ -616,8 +616,8 @@ onMounted(() => {
 .news-content {
   flex: 1;
   background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.1);
+  border-radius: 4px;
+  box-shadow: none;
   padding: 40px;
   border: 1px solid rgba(22, 119, 255, 0.1);
   animation: slideInUp 0.6s ease-out;
@@ -648,40 +648,36 @@ onMounted(() => {
 }
 
 .category-badge {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
   padding: 6px 16px;
-  border-radius: 20px;
+  border-radius: 4px;
   font-size: 12px;
   font-weight: 600;
 }
 
 .reading-time {
-  color: #94a3b8;
+  color: #a1a1a6;
   font-size: 12px;
   font-weight: 500;
 }
 
 .article-title {
   font-size: 32px;
-  color: #1e293b;
+  color: #0a1628;
   font-weight: 700;
   margin-bottom: 16px;
   line-height: 1.3;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .article-summary {
   font-size: 16px;
-  color: #64748b;
+  color: #a1a1a6;
   line-height: 1.6;
   margin-bottom: 24px;
   padding: 16px;
   background: rgba(22, 119, 255, 0.05);
-  border-radius: 12px;
+  border-radius: 4px;
   border-left: 4px solid #1677ff;
 }
 
@@ -689,7 +685,7 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #64748b;
+  color: #a1a1a6;
   font-size: 14px;
 }
 
@@ -731,16 +727,16 @@ onMounted(() => {
 }
 
 .action-btn:hover {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
   transform: translateY(-2px);
 }
 
 .article-cover {
   margin: 32px 0;
-  border-radius: 16px;
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(22, 119, 255, 0.15);
+  box-shadow: none;
 }
 
 .article-cover img {
@@ -761,30 +757,28 @@ onMounted(() => {
   margin: 32px 0;
 }
 
-.article-content h2 {
+.article-content :deep(h2) {
   font-size: 22px;
   margin: 40px 0 20px;
-  color: #1e293b;
+  color: #0a1628;
   font-weight: 700;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   padding-left: 16px;
-  border-left: 4px solid #1677ff;
+  border-left: 4px solid #1e3a5f;
 }
 
-.article-content p {
-  margin-bottom: 20px;
+.article-content :deep(p) {
+  margin-bottom: 24px;
   text-align: justify;
+  line-height: 1.9;
+  letter-spacing: 0.5px;
 }
 
 .article-footer {
   margin-top: 48px;
   padding: 32px;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-radius: 16px;
-  border: 1px solid rgba(22, 119, 255, 0.1);
+  background: #f8fafc;
+  border-radius: 4px;
+  border: 1px solid rgba(30, 58, 95, 0.1);
 }
 
 .article-tags {
@@ -797,7 +791,7 @@ onMounted(() => {
   gap: 8px;
   font-size: 16px;
   font-weight: 600;
-  color: #1e293b;
+  color: #0a1628;
   margin-bottom: 12px;
 }
 
@@ -808,18 +802,18 @@ onMounted(() => {
 }
 
 .article-tag {
-  background: linear-gradient(135deg, rgba(22, 119, 255, 0.1) 0%, rgba(67, 198, 172, 0.1) 100%);
-  color: #1677ff;
+  background: rgba(30, 58, 95, 0.05);
+  color: #1e3a5f;
   padding: 6px 12px;
   border-radius: 15px;
   font-size: 12px;
   font-weight: 500;
-  border: 1px solid rgba(22, 119, 255, 0.2);
+  border: 1px solid rgba(30, 58, 95, 0.1);
   transition: all 0.3s ease;
 }
 
 .article-tag:hover {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
   transform: translateY(-2px);
 }
@@ -841,7 +835,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #64748b;
+  color: #a1a1a6;
   font-size: 14px;
   font-weight: 500;
 }
@@ -853,7 +847,7 @@ onMounted(() => {
 }
 
 .share-label {
-  color: #64748b;
+  color: #a1a1a6;
   font-weight: 600;
 }
 
@@ -892,7 +886,7 @@ onMounted(() => {
 
 .share-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 
 .news-sidebar {
@@ -902,8 +896,8 @@ onMounted(() => {
 
 .sidebar-block {
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(22, 119, 255, 0.1);
+  border-radius: 4px;
+  box-shadow: none;
   padding: 24px;
   margin-bottom: 24px;
   border: 1px solid rgba(22, 119, 255, 0.1);
@@ -912,18 +906,14 @@ onMounted(() => {
 
 .sidebar-block:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(22, 119, 255, 0.15);
+  box-shadow: none;
 }
 
 .sidebar-title {
   font-size: 16px;
-  color: #1e293b;
+  color: #0a1628;
   margin-bottom: 20px;
   font-weight: 700;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .related-news {
@@ -940,7 +930,7 @@ onMounted(() => {
   gap: 12px;
   padding: 12px;
   background: rgba(22, 119, 255, 0.02);
-  border-radius: 12px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
   border-left: 3px solid transparent;
@@ -967,7 +957,7 @@ onMounted(() => {
 
 .related-news-title {
   font-size: 13px;
-  color: #1e293b;
+  color: #0a1628;
   font-weight: 600;
   margin-bottom: 6px;
   line-height: 1.4;
@@ -981,7 +971,7 @@ onMounted(() => {
 
 .related-news-date {
   font-size: 11px;
-  color: #94a3b8;
+  color: #a1a1a6;
   font-weight: 500;
 }
 
@@ -1015,26 +1005,26 @@ onMounted(() => {
 .hot-news-rank {
   width: 24px;
   height: 24px;
-  background: #f1f5f9;
+  background: #fbfbfd;
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   font-weight: 600;
-  color: #64748b;
+  color: #a1a1a6;
   flex-shrink: 0;
 }
 
 .hot-news-rank.top-rank {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: #ffffff;
 }
 
 .hot-news-title {
   flex: 1;
   font-size: 13px;
-  color: #1e293b;
+  color: #0a1628;
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;

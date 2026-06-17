@@ -334,7 +334,7 @@ const handleConsult = () => {
         'div',
         {
           style:
-            'padding: 12px; background: #f8fafc; border-radius: 8px; border-left: 4px solid #1677ff; color: #64748b; font-size: 14px;'
+            'padding: 12px; background: #f8fafc; border-radius: 8px; border-left: 4px solid #1e3a5f; color: #64748b; font-size: 14px;'
         },
         '请通过以上方式联系我们获取详细产品信息和技术支持。'
       )
@@ -422,15 +422,15 @@ onBeforeUnmount(() => {
 
 /* 突出显示数值和单位 - 专业版 */
 .detail-content em {
-  background: rgba(22, 119, 255, 0.1);
-  color: #1677ff;
+  background: rgba(30, 58, 95, 0.1);
+  color: #1e3a5f;
   padding: 2px 6px;
   border-radius: 4px;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
   margin: 0 2px;
-  border: 1px solid rgba(22, 119, 255, 0.2);
+  border: 1px solid rgba(30, 58, 95, 0.2);
 }
 
 /* 突出显示重要关键词 - 专业版 */
@@ -516,10 +516,10 @@ onBeforeUnmount(() => {
   margin: 24px 0 16px 0;
   font-weight: 700;
   padding: 12px 16px;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   color: white;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(22, 119, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(30, 58, 95, 0.2);
 }
 
 .detail-content h2::before {
@@ -535,15 +535,15 @@ onBeforeUnmount(() => {
   margin: 20px 0 12px 0;
   font-weight: 700;
   padding: 8px 12px;
-  background: rgba(22, 119, 255, 0.05);
-  border-left: 3px solid #1677ff;
+  background: rgba(30, 58, 95, 0.05);
+  border-left: 3px solid #1e3a5f;
   border-radius: 0 4px 4px 0;
 }
 
 .detail-content h3::before {
   content: '▶';
   margin-right: 6px;
-  color: #1677ff;
+  color: #1e3a5f;
   font-size: 12px;
 }
 
@@ -557,31 +557,33 @@ onBeforeUnmount(() => {
   margin-bottom: 12px;
   color: #374151;
   padding: 10px 16px;
-  background: rgba(22, 119, 255, 0.02);
+  background: rgba(30, 58, 95, 0.02);
   border-radius: 6px;
-  border-left: 3px solid #43c6ac;
+  border-left: 3px solid #1e3a5f;
   position: relative;
   transition: all 0.3s ease;
   line-height: 1.6;
 }
 
 .detail-content li:hover {
-  background: rgba(22, 119, 255, 0.05);
+  background: rgba(30, 58, 95, 0.05);
   transform: translateX(4px);
-  border-left-color: #1677ff;
+  border-left-color: #1e3a5f;
 }
 
 .detail-content li::before {
   content: '•';
-  color: #43c6ac;
+  color: #1e3a5f;
   font-weight: 700;
   margin-right: 8px;
   font-size: 14px;
 }
 
 .detail-content p {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   text-align: justify;
+  line-height: 1.9;
+  letter-spacing: 0.5px;
 }
 .product-detail-layout {
   min-height: 100vh;
@@ -596,9 +598,9 @@ onBeforeUnmount(() => {
   max-width: 1200px;
   background: #ffffff;
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.1);
   padding: 40px;
-  border: 1px solid rgba(22, 119, 255, 0.1);
+  border: 1px solid rgba(30, 58, 95, 0.1);
   animation: slideInUp 0.6s ease-out;
 }
 
@@ -634,13 +636,13 @@ onBeforeUnmount(() => {
   border-radius: 20px;
   overflow: hidden;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border: 2px solid rgba(22, 119, 255, 0.1);
+  border: 2px solid rgba(30, 58, 95, 0.1);
   transition: all 0.3s ease;
 }
 
 .main-image-container:hover {
-  border-color: rgba(22, 119, 255, 0.3);
-  box-shadow: 0 8px 30px rgba(22, 119, 255, 0.15);
+  border-color: rgba(30, 58, 95, 0.3);
+  box-shadow: 0 8px 30px rgba(30, 58, 95, 0.15);
   transform: translateY(-2px);
 }
 
@@ -699,7 +701,7 @@ onBeforeUnmount(() => {
 
 .thumb-img.active,
 .thumb-img:hover {
-  border-color: #1677ff;
+  border-color: #1e3a5f;
   transform: translateY(-2px);
 }
 
@@ -716,22 +718,19 @@ onBeforeUnmount(() => {
   margin-bottom: 16px;
   letter-spacing: 1px;
   line-height: 1.3;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #0a1628;
 }
 
 .product-code {
   display: inline-block;
-  background: rgba(22, 119, 255, 0.1);
-  color: #1677ff;
+  background: rgba(30, 58, 95, 0.1);
+  color: #1e3a5f;
   font-size: 13px;
   padding: 6px 12px;
   border-radius: 20px;
   margin-bottom: 20px;
   font-weight: 500;
-  border: 1px solid rgba(22, 119, 255, 0.2);
+  border: 1px solid rgba(30, 58, 95, 0.2);
 }
 
 .product-features {
@@ -748,19 +747,19 @@ onBeforeUnmount(() => {
   align-items: center;
   margin-bottom: 12px;
   padding: 8px 12px;
-  background: rgba(22, 119, 255, 0.02);
+  background: rgba(30, 58, 95, 0.02);
   border-radius: 8px;
-  border-left: 3px solid #1677ff;
+  border-left: 3px solid #1e3a5f;
   transition: all 0.3s ease;
 }
 
 .product-features li:hover {
-  background: rgba(22, 119, 255, 0.05);
+  background: rgba(30, 58, 95, 0.05);
   transform: translateX(4px);
 }
 
 .feature-icon {
-  color: #1677ff;
+  color: #1e3a5f;
   margin-right: 12px;
   font-size: 16px;
   font-weight: bold;
@@ -771,8 +770,8 @@ onBeforeUnmount(() => {
   padding: 24px;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   border-radius: 16px;
-  border: 1px solid rgba(22, 119, 255, 0.1);
-  box-shadow: 0 2px 12px rgba(22, 119, 255, 0.05);
+  border: 1px solid rgba(30, 58, 95, 0.1);
+  box-shadow: 0 2px 12px rgba(30, 58, 95, 0.05);
 }
 
 .product-specs h3 {
@@ -804,7 +803,7 @@ onBeforeUnmount(() => {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
   font-size: 14px;
-  border: 1px solid rgba(22, 119, 255, 0.05);
+  border: 1px solid rgba(30, 58, 95, 0.05);
 }
 
 .spec-label {
@@ -827,7 +826,7 @@ onBeforeUnmount(() => {
   color: #1e293b;
   margin-bottom: 16px;
   font-weight: 600;
-  border-bottom: 2px solid rgba(22, 119, 255, 0.1);
+  border-bottom: 2px solid rgba(30, 58, 95, 0.1);
   padding-bottom: 8px;
 }
 
@@ -841,7 +840,7 @@ onBeforeUnmount(() => {
   color: #1e293b;
   margin-bottom: 16px;
   font-weight: 600;
-  border-bottom: 2px solid rgba(22, 119, 255, 0.1);
+  border-bottom: 2px solid rgba(30, 58, 95, 0.1);
   padding-bottom: 8px;
 }
 
@@ -853,18 +852,18 @@ onBeforeUnmount(() => {
 
 .product-tag {
   display: inline-block;
-  background: rgba(22, 119, 255, 0.1);
-  color: #1677ff;
+  background: rgba(30, 58, 95, 0.1);
+  color: #1e3a5f;
   font-size: 13px;
   padding: 6px 12px;
   border-radius: 16px;
   font-weight: 500;
-  border: 1px solid rgba(22, 119, 255, 0.2);
+  border: 1px solid rgba(30, 58, 95, 0.2);
   transition: all 0.3s ease;
 }
 
 .product-tag:hover {
-  background: rgba(22, 119, 255, 0.15);
+  background: rgba(30, 58, 95, 0.15);
   transform: translateY(-1px);
 }
 
@@ -872,9 +871,9 @@ onBeforeUnmount(() => {
 .product-meta {
   margin-bottom: 28px;
   padding: 16px;
-  background: rgba(22, 119, 255, 0.02);
+  background: rgba(30, 58, 95, 0.02);
   border-radius: 8px;
-  border-left: 3px solid #1677ff;
+  border-left: 3px solid #1e3a5f;
 }
 
 .meta-item {
@@ -895,7 +894,7 @@ onBeforeUnmount(() => {
 }
 
 .meta-value {
-  color: #1677ff;
+  color: #1e3a5f;
   font-weight: 500;
 }
 
@@ -920,23 +919,23 @@ onBeforeUnmount(() => {
 }
 
 .product-btns .ant-btn-primary {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%) !important;
-  box-shadow: 0 4px 15px rgba(22, 119, 255, 0.3) !important;
+  background: #1e3a5f !important;
+  box-shadow: 0 4px 15px rgba(30, 58, 95, 0.3) !important;
 }
 
 .product-btns .ant-btn-primary:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(22, 119, 255, 0.4) !important;
+  box-shadow: 0 6px 20px rgba(30, 58, 95, 0.4) !important;
 }
 
 .product-btns .ant-btn-default {
-  background: rgba(22, 119, 255, 0.1) !important;
-  color: #1677ff !important;
-  border: 1px solid rgba(22, 119, 255, 0.2) !important;
+  background: rgba(30, 58, 95, 0.1) !important;
+  color: #1e3a5f !important;
+  border: 1px solid rgba(30, 58, 95, 0.2) !important;
 }
 
 .product-btns .ant-btn-default:hover {
-  background: rgba(22, 119, 255, 0.2) !important;
+  background: rgba(30, 58, 95, 0.2) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -951,8 +950,8 @@ onBeforeUnmount(() => {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.1);
-  border: 1px solid rgba(22, 119, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.1);
+  border: 1px solid rgba(30, 58, 95, 0.1);
   animation: slideInUp 0.6s ease-out;
 }
 
@@ -966,10 +965,7 @@ onBeforeUnmount(() => {
   color: #1e293b;
   margin-bottom: 8px;
   font-weight: 700;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #0a1628;
 }
 
 .contact-header p {
@@ -990,16 +986,16 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 16px;
   padding: 20px;
-  background: rgba(22, 119, 255, 0.02);
+  background: rgba(30, 58, 95, 0.02);
   border-radius: 12px;
-  border-left: 4px solid #1677ff;
+  border-left: 4px solid #1e3a5f;
   transition: all 0.3s ease;
 }
 
 .contact-item:hover {
-  background: rgba(22, 119, 255, 0.05);
+  background: rgba(30, 58, 95, 0.05);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(22, 119, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(30, 58, 95, 0.1);
 }
 
 .contact-icon {
@@ -1009,7 +1005,7 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   border-radius: 12px;
   color: white;
   flex-shrink: 0;
@@ -1054,23 +1050,23 @@ onBeforeUnmount(() => {
 }
 
 .contact-actions .ant-btn-primary {
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%) !important;
-  box-shadow: 0 4px 15px rgba(22, 119, 255, 0.3) !important;
+  background: #1e3a5f !important;
+  box-shadow: 0 4px 15px rgba(30, 58, 95, 0.3) !important;
 }
 
 .contact-actions .ant-btn-primary:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(22, 119, 255, 0.4) !important;
+  box-shadow: 0 6px 20px rgba(30, 58, 95, 0.4) !important;
 }
 
 .contact-actions .ant-btn-default {
-  background: rgba(22, 119, 255, 0.1) !important;
-  color: #1677ff !important;
-  border: 1px solid rgba(22, 119, 255, 0.2) !important;
+  background: rgba(30, 58, 95, 0.1) !important;
+  color: #1e3a5f !important;
+  border: 1px solid rgba(30, 58, 95, 0.2) !important;
 }
 
 .contact-actions .ant-btn-default:hover {
-  background: rgba(22, 119, 255, 0.2) !important;
+  background: rgba(30, 58, 95, 0.2) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -1235,8 +1231,8 @@ onBeforeUnmount(() => {
   padding: 20px;
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border-radius: 16px;
-  border: 1px solid rgba(22, 119, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.08);
+  border: 1px solid rgba(30, 58, 95, 0.1);
+  box-shadow: 0 4px 20px rgba(30, 58, 95, 0.08);
 }
 
 .stats-grid {
@@ -1251,16 +1247,16 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 12px;
   padding: 16px;
-  background: rgba(22, 119, 255, 0.02);
+  background: rgba(30, 58, 95, 0.02);
   border-radius: 12px;
-  border-left: 4px solid #1677ff;
+  border-left: 4px solid #1e3a5f;
   transition: all 0.3s ease;
 }
 
 .stat-card:hover {
-  background: rgba(22, 119, 255, 0.05);
+  background: rgba(30, 58, 95, 0.05);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(22, 119, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(30, 58, 95, 0.1);
 }
 
 .stat-icon {
@@ -1269,7 +1265,7 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1677ff 0%, #43c6ac 100%);
+  background: #1e3a5f;
   border-radius: 10px;
   color: white;
   font-size: 18px;
@@ -1299,15 +1295,15 @@ onBeforeUnmount(() => {
   justify-content: center;
   gap: 8px;
   padding: 12px;
-  background: rgba(22, 119, 255, 0.02);
+  background: rgba(30, 58, 95, 0.02);
   border-radius: 8px;
   font-size: 13px;
   color: #64748b;
-  border: 1px solid rgba(22, 119, 255, 0.05);
+  border: 1px solid rgba(30, 58, 95, 0.05);
 }
 
 .update-info .anticon {
-  color: #1677ff;
+  color: #1e3a5f;
   font-size: 14px;
 }
 
@@ -1338,7 +1334,7 @@ onBeforeUnmount(() => {
   padding: 4px;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: #1677ff #f0f0f0;
+  scrollbar-color: #1e3a5f #f0f0f0;
   justify-content: flex-start;
 }
 
@@ -1361,7 +1357,7 @@ onBeforeUnmount(() => {
 }
 
 .thumbs-row::-webkit-scrollbar-thumb {
-  background: #1677ff;
+  background: #1e3a5f;
   border-radius: 3px;
 }
 
@@ -1375,7 +1371,7 @@ onBeforeUnmount(() => {
 }
 
 .thumb-img.active {
-  border-color: #1677ff;
+  border-color: #1e3a5f;
   transform: scale(1.05);
 }
 
